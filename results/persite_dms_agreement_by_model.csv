@@ -1,0 +1,98 @@
+model,model_type,persite_corr_with_DMS
+AIDO.Protein-RAG-16B,Structure & MSA,0.35409428184026365
+VenusREM,Structure & MSA,0.34055818937421123
+ProSST-2048,Single sequence & Structure,0.3400666394349112
+ESM3,"Single sequence, Structure & Function annotations",0.32723146325761765
+S3F,Single sequence & Structure,0.32633458540778554
+S3F_MSA,Structure & MSA,0.3250702559498145
+S2F_MSA,Structure & MSA,0.319861981712075
+ProSST-1024,Single sequence & Structure,0.31927919133197835
+ProtSSN_ensemble,Single sequence & Structure,0.31880230802731646
+ProtSSN_k20_h768,Single sequence & Structure,0.31344041174256787
+S2F,Single sequence & Structure,0.31322564908493905
+ProSST-4096,Single sequence & Structure,0.3127969414304969
+ProtSSN_k20_h512,Single sequence & Structure,0.3127655591137456
+SaProt_650M_AF2,Single sequence & Structure,0.31244848731354247
+ProtSSN_k30_h512,Single sequence & Structure,0.30856773414354954
+VespaG,Single sequence,0.30672075804482485
+Protriever,MSA,0.30662186212489484
+ProtSSN_k20_h1280,Single sequence & Structure,0.3065729099399993
+ProSST-128,Single sequence & Structure,0.3064315114652106
+PoET,MSA,0.3056177817357702
+ProtSSN_k30_h768,Single sequence & Structure,0.30488837119825624
+ProSST-512,Single sequence & Structure,0.3045697688202842
+ProtSSN_k10_h768,Single sequence & Structure,0.30221068722698563
+ProtSSN_k10_h1280,Single sequence & Structure,0.30207039889789356
+ProtSSN_k10_h512,Single sequence & Structure,0.3017469928426237
+ProtSSN_k30_h1280,Single sequence & Structure,0.30047362695337987
+SaProt_35M_AF2,Single sequence & Structure,0.2933207729368511
+ESCOTT,Structure & MSA,0.2892457004399577
+TranceptEVE_L,MSA,0.2883335698949053
+GEMME,MSA,0.2858721441860454
+ProSST-20,Single sequence & Structure,0.28561510064483303
+TranceptEVE_M,MSA,0.28503110031891865
+MSA_Transformer_ensemble,MSA,0.28498700549829026
+ESM2_650M,Single sequence,0.2825424210360982
+Tranception_L,MSA,0.28227466684998725
+ESM-IF1,Structure,0.28094495141943043
+TranceptEVE_S,MSA,0.2797920163822866
+ESMC-600M,Single sequence,0.2783608908967168
+MSA_Transformer_single,MSA,0.27727526358507787
+ESMC-300M,Single sequence,0.2758708726691618
+MIFST,Single sequence & Structure,0.2749843536276712
+ESM2_3B,Single sequence,0.27467731962681896
+Tranception_M,MSA,0.27368919856188095
+VESPA,Single sequence,0.2722476201562196
+MIF,Structure,0.2710614082209213
+EVmutation,MSA,0.2698208549070542
+ESM2_15B,Single sequence,0.26885478716022376
+xTrimoPGLM-3B-MLM,Single sequence,0.26592065583673447
+Progen2_xlarge,Single sequence,0.2636349154546013
+xTrimoPGLM-10B-MLM,Single sequence,0.2630508940102781
+Tranception_S,MSA,0.2629977917297782
+Progen3_3b,Single sequence,0.26116532791053637
+ESM1v_ensemble,Single sequence,0.2602026845024036
+ESM2_150M,Single sequence,0.2590300387912657
+CARP_640M,Single sequence,0.2585546590877974
+EVE_ensemble,MSA,0.255466365958703
+Progen2_medium,Single sequence,0.2551223906470498
+DeepSequence_ensemble,MSA,0.25476554436268417
+MULAN_small,Single sequence & Structure,0.25408288140303636
+Progen2_base,Single sequence,0.25373185061183157
+Progen3_1b,Single sequence,0.253121602252442
+Progen2_large,Single sequence,0.2529769944696792
+Tranception_L_no_retrieval,Single sequence,0.25289439086391124
+ESM1b,Single sequence,0.25214102743117417
+RSALOR,Structure & MSA,0.2520801382474542
+EVE_single,MSA,0.25019482586108727
+SiteRM,MSA,0.24921401960661635
+xTrimoPGLM-1B-MLM,Single sequence,0.24562337970185694
+RITA_l,Single sequence,0.24528915552331199
+RITA_xl,Single sequence,0.24466049315783195
+DeepSequence_single,MSA,0.24459380831882147
+ESM1v_single,Single sequence,0.24380879669009825
+Unirep_evotune,MSA,0.24276622886624177
+Wavenet,MSA,0.24165307823991478
+Site_Independent,MSA,0.23722345523443047
+RITA_m,Single sequence,0.23610075804832592
+Progen3_762m,Single sequence,0.23512454237780014
+Tranception_M_no_retrieval,Single sequence,0.23312387799020418
+VESPAl,Single sequence,0.2284517457245823
+xTrimoPGLM-100B-int4,Single sequence,0.22728490455734524
+Progen3_339m,Single sequence,0.22111228628983387
+CARP_76M,Single sequence,0.22052468236224068
+Progen2_small,Single sequence,0.21895340110330466
+xTrimoPGLM-1B-CLM,Single sequence,0.21360194290256776
+RITA_s,Single sequence,0.20487950091837986
+ESM2_35M,Single sequence,0.20450087506227246
+Progen3_219m,Single sequence,0.20261788063735653
+Tranception_S_no_retrieval,Single sequence,0.19842146726928414
+CARP_38M,Single sequence,0.18447154169961505
+Progen3_112m,Single sequence,0.18213530437323341
+ESM2_8M,Single sequence,0.14102774384974343
+ProteinMPNN,Structure,0.1287476577014611
+xTrimoPGLM-3B-CLM,Single sequence,0.12546052050467665
+ProtGPT2,Single sequence,0.11956851032803148
+Unirep,Single sequence,0.11935315010105621
+CARP_600K,Single sequence,0.08454151811580982
+xTrimoPGLM-7B-CLM,Single sequence,0.04920921702823257

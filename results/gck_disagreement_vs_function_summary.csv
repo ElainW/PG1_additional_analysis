@@ -1,0 +1,7 @@
+assay,group,n_group,mean_disagree_group,mean_disagree_rest,mannwhitney_p
+activity,binding_site,28,0.43,0.388,0.0047470996626410395
+activity,disease_variant,98,0.405,0.387,0.06768627330773698
+activity,functional(any),113,0.407,0.385,0.018970961956230863
+abundance,binding_site,28,0.403,0.368,0.01774082086199654
+abundance,disease_variant,98,0.383,0.367,0.11708851826137215
+abundance,functional(any),113,0.384,0.365,0.04801419705382464

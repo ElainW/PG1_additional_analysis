@@ -1,0 +1,46 @@
+family,model_type,n_members,selected_model,selected_overall_spearman,members
+Protriever,MSA,1,Protriever,0.499,Protriever
+PoET,MSA,1,PoET,0.49,PoET
+TranceptEVE,MSA,3,TranceptEVE_L,0.474,TranceptEVE_S;TranceptEVE_M;TranceptEVE_L
+GEMME,MSA,1,GEMME,0.474,GEMME
+EVE,MSA,2,EVE_ensemble,0.46,EVE_single;EVE_ensemble
+MSA_Transformer,MSA,2,MSA_Transformer_ensemble,0.453,MSA_Transformer_single;MSA_Transformer_ensemble
+Tranception_retrieval,MSA,3,Tranception_L,0.45,Tranception_S;Tranception_M;Tranception_L
+SiteRM,MSA,1,SiteRM,0.44,SiteRM
+DeepSequence,MSA,2,DeepSequence_ensemble,0.438,DeepSequence_single;DeepSequence_ensemble
+EVmutation,MSA,1,EVmutation,0.418,EVmutation
+Wavenet,MSA,1,Wavenet,0.39,Wavenet
+Site_Independent,MSA,1,Site_Independent,0.369,Site_Independent
+Unirep_evotune,MSA,1,Unirep_evotune,0.353,Unirep_evotune
+VespaG,Single sequence,1,VespaG,0.482,VespaG
+VESPA,Single sequence,2,VESPA,0.463,VESPA;VESPAl
+ESM2,Single sequence,6,ESM2_650M,0.438,ESM2_8M;ESM2_35M;ESM2_150M;ESM2_650M;ESM2_3B;ESM2_15B
+ESMC,Single sequence,2,ESMC-600M,0.434,ESMC-300M;ESMC-600M
+ESM1v,Single sequence,2,ESM1v_ensemble,0.428,ESM1v_single;ESM1v_ensemble
+xTrimoPGLM-MLM,Single sequence,3,xTrimoPGLM-3B-MLM,0.427,xTrimoPGLM-1B-MLM;xTrimoPGLM-3B-MLM;xTrimoPGLM-10B-MLM
+ESM1b,Single sequence,1,ESM1b,0.42,ESM1b
+Progen3,Single sequence,6,Progen3_3b,0.411,Progen3_112m;Progen3_219m;Progen3_339m;Progen3_762m;Progen3_1b;Progen3_3b
+Progen2,Single sequence,5,Progen2_xlarge,0.406,Progen2_small;Progen2_medium;Progen2_base;Progen2_large;Progen2_xlarge
+CARP,Single sequence,4,CARP_640M,0.39,CARP_38M;CARP_600K;CARP_640M;CARP_76M
+Tranception_no_retrieval,Single sequence,3,Tranception_L_no_retrieval,0.385,Tranception_S_no_retrieval;Tranception_M_no_retrieval;Tranception_L_no_retrieval
+xTrimoPGLM-CLM,Single sequence,4,xTrimoPGLM-100B-int4,0.385,xTrimoPGLM-1B-CLM;xTrimoPGLM-3B-CLM;xTrimoPGLM-7B-CLM;xTrimoPGLM-100B-int4
+RITA,Single sequence,4,RITA_xl,0.384,RITA_s;RITA_m;RITA_l;RITA_xl
+ProtGPT2,Single sequence,1,ProtGPT2,0.198,ProtGPT2
+Unirep,Single sequence,1,Unirep,0.177,Unirep
+ProSST,Single sequence & Structure,6,ProSST-2048,0.523,ProSST-20;ProSST-128;ProSST-512;ProSST-1024;ProSST-2048;ProSST-4096
+S3F,Single sequence & Structure,1,S3F,0.489,S3F
+S2F,Single sequence & Structure,1,S2F,0.474,S2F
+ProtSSN,Single sequence & Structure,10,ProtSSN_ensemble,0.473,ProtSSN_k10_h512;ProtSSN_k10_h768;ProtSSN_k10_h1280;ProtSSN_k20_h512;ProtSSN_k20_h768;ProtSSN_k20_h1280;ProtSSN_k30_h512;ProtSSN_k30_h768;ProtSSN_k30_h1280;ProtSSN_ensemble
+SaProt,Single sequence & Structure,2,SaProt_650M_AF2,0.473,SaProt_650M_AF2;SaProt_35M_AF2
+MIFST,Single sequence & Structure,1,MIFST,0.415,MIFST
+MULAN_small,Single sequence & Structure,1,MULAN_small,0.304,MULAN_small
+ESM3,"Single sequence, Structure & Function annotations",1,ESM3,0.483,ESM3
+ESM-IF1,Structure,1,ESM-IF1,0.437,ESM-IF1
+MIF,Structure,1,MIF,0.388,MIF
+ProteinMPNN,Structure,1,ProteinMPNN,0.295,ProteinMPNN
+AIDO.Protein-RAG-16B,Structure & MSA,1,AIDO.Protein-RAG-16B,0.542,AIDO.Protein-RAG-16B
+VenusREM,Structure & MSA,1,VenusREM,0.536,VenusREM
+S3F_MSA,Structure & MSA,1,S3F_MSA,0.515,S3F_MSA
+S2F_MSA,Structure & MSA,1,S2F_MSA,0.508,S2F_MSA
+ESCOTT,Structure & MSA,1,ESCOTT,0.499,ESCOTT
+RSALOR,Structure & MSA,1,RSALOR,0.485,RSALOR

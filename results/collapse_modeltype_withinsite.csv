@@ -1,0 +1,97 @@
+assay,split,subset,model_type,n_models,n_variants,mean_spearman
+activity,global,all,MSA,12,8565,0.45040926345396026
+activity,global,all,Single sequence,15,8565,0.42479924973661626
+activity,global,all,Structure,3,8565,0.30583810742242884
+activity,global,all,Single sequence & Structure,7,8565,0.4694753266341443
+activity,global,all,Structure & MSA,6,8565,0.5136143109740762
+activity,global,all,"Single sequence, Structure & Function annotations",1,8565,0.47479734372670385
+activity,global,top50,MSA,12,4283,0.04332225529491488
+activity,global,top50,Single sequence,15,4283,0.030624700603368797
+activity,global,top50,Structure,3,4283,0.0931045481757145
+activity,global,top50,Single sequence & Structure,7,4283,0.08247368870786735
+activity,global,top50,Structure & MSA,6,4283,0.0630801013600399
+activity,global,top50,"Single sequence, Structure & Function annotations",1,4283,0.10737769597061993
+activity,global,top25,MSA,12,2142,-0.0697853344542117
+activity,global,top25,Single sequence,15,2142,-0.07796375929741278
+activity,global,top25,Structure,3,2142,0.04859581154539857
+activity,global,top25,Single sequence & Structure,7,2142,-0.0035015897098562873
+activity,global,top25,Structure & MSA,6,2142,-0.054579289900285356
+activity,global,top25,"Single sequence, Structure & Function annotations",1,2142,0.041458429020030316
+activity,global,top10,MSA,12,857,-0.042279172980745953
+activity,global,top10,Single sequence,15,857,-0.07643098419173894
+activity,global,top10,Structure,3,857,0.07113291358898374
+activity,global,top10,Single sequence & Structure,7,857,0.054094541212721343
+activity,global,top10,Structure & MSA,6,857,-0.024981902100528284
+activity,global,top10,"Single sequence, Structure & Function annotations",1,857,0.09174228179997689
+activity,within-site,all,MSA,12,8565,0.45040926345396026
+activity,within-site,all,Single sequence,15,8565,0.42479924973661626
+activity,within-site,all,Structure,3,8565,0.30583810742242884
+activity,within-site,all,Single sequence & Structure,7,8565,0.4694753266341443
+activity,within-site,all,Structure & MSA,6,8565,0.5136143109740762
+activity,within-site,all,"Single sequence, Structure & Function annotations",1,8565,0.47479734372670385
+activity,within-site,top50,MSA,12,4458,0.38755432623330477
+activity,within-site,top50,Single sequence,15,4458,0.3655857409788364
+activity,within-site,top50,Structure,3,4458,0.27542626881837023
+activity,within-site,top50,Single sequence & Structure,7,4458,0.419382394080658
+activity,within-site,top50,Structure & MSA,6,4458,0.46604373696588847
+activity,within-site,top50,"Single sequence, Structure & Function annotations",1,4458,0.4323514818659024
+activity,within-site,top25,MSA,12,2294,0.3061409303112486
+activity,within-site,top25,Single sequence,15,2294,0.2838541169463146
+activity,within-site,top25,Structure,3,2294,0.2355581838752151
+activity,within-site,top25,Single sequence & Structure,7,2294,0.34221859700988905
+activity,within-site,top25,Structure & MSA,6,2294,0.38284586463925213
+activity,within-site,top25,"Single sequence, Structure & Function annotations",1,2294,0.3617831906084232
+activity,within-site,top10,MSA,12,924,0.23947041707418423
+activity,within-site,top10,Single sequence,15,924,0.20984818184181322
+activity,within-site,top10,Structure,3,924,0.20206634439839047
+activity,within-site,top10,Single sequence & Structure,7,924,0.27952642061293975
+activity,within-site,top10,Structure & MSA,6,924,0.31295946694257354
+activity,within-site,top10,"Single sequence, Structure & Function annotations",1,924,0.2966813585150235
+abundance,global,all,MSA,12,8394,0.3644113382918564
+abundance,global,all,Single sequence,15,8394,0.3047931258530276
+abundance,global,all,Structure,3,8394,0.3163911106786162
+abundance,global,all,Single sequence & Structure,7,8394,0.3790433507030807
+abundance,global,all,Structure & MSA,6,8394,0.38600402640530956
+abundance,global,all,"Single sequence, Structure & Function annotations",1,8394,0.4185279773035292
+abundance,global,top50,MSA,12,4198,0.06370437528433852
+abundance,global,top50,Single sequence,15,4198,0.055665472903372586
+abundance,global,top50,Structure,3,4198,0.07773014532049563
+abundance,global,top50,Single sequence & Structure,7,4198,0.06184800969731151
+abundance,global,top50,Structure & MSA,6,4198,0.05901185065654596
+abundance,global,top50,"Single sequence, Structure & Function annotations",1,4198,0.07996610084594996
+abundance,global,top25,MSA,12,2099,0.051675881242071904
+abundance,global,top25,Single sequence,15,2099,0.03458203431286633
+abundance,global,top25,Structure,3,2099,0.02712282705483635
+abundance,global,top25,Single sequence & Structure,7,2099,0.025877178439913488
+abundance,global,top25,Structure & MSA,6,2099,0.04292042459902614
+abundance,global,top25,"Single sequence, Structure & Function annotations",1,2099,0.027944923845845453
+abundance,global,top10,MSA,12,840,0.03622610345395571
+abundance,global,top10,Single sequence,15,840,0.013785195389780703
+abundance,global,top10,Structure,3,840,0.02589637967335452
+abundance,global,top10,Single sequence & Structure,7,840,0.011028999503128778
+abundance,global,top10,Structure & MSA,6,840,0.02194789550641425
+abundance,global,top10,"Single sequence, Structure & Function annotations",1,840,0.024634661830249118
+abundance,within-site,all,MSA,12,8394,0.3644113382918564
+abundance,within-site,all,Single sequence,15,8394,0.3047931258530276
+abundance,within-site,all,Structure,3,8394,0.3163911106786162
+abundance,within-site,all,Single sequence & Structure,7,8394,0.3790433507030807
+abundance,within-site,all,Structure & MSA,6,8394,0.38600402640530956
+abundance,within-site,all,"Single sequence, Structure & Function annotations",1,8394,0.4185279773035292
+abundance,within-site,top50,MSA,12,4345,0.27247631947975764
+abundance,within-site,top50,Single sequence,15,4345,0.2132700693256445
+abundance,within-site,top50,Structure,3,4345,0.2577114728345842
+abundance,within-site,top50,Single sequence & Structure,7,4345,0.2746333671929434
+abundance,within-site,top50,Structure & MSA,6,4345,0.299798537134852
+abundance,within-site,top50,"Single sequence, Structure & Function annotations",1,4345,0.3116243531874495
+abundance,within-site,top25,MSA,12,2283,0.1736420049528591
+abundance,within-site,top25,Single sequence,15,2283,0.12095328721043414
+abundance,within-site,top25,Structure,3,2283,0.18843819789754965
+abundance,within-site,top25,Single sequence & Structure,7,2283,0.17825832002168587
+abundance,within-site,top25,Structure & MSA,6,2283,0.21304223151746374
+abundance,within-site,top25,"Single sequence, Structure & Function annotations",1,2283,0.2110888623205979
+abundance,within-site,top10,MSA,12,924,0.13949712326936617
+abundance,within-site,top10,Single sequence,15,924,0.0861860207333718
+abundance,within-site,top10,Structure,3,924,0.14210754673146664
+abundance,within-site,top10,Single sequence & Structure,7,924,0.13833456119170406
+abundance,within-site,top10,Structure & MSA,6,924,0.17897955909440208
+abundance,within-site,top10,"Single sequence, Structure & Function annotations",1,924,0.1584980580866452

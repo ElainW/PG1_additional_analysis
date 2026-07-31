@@ -1,0 +1,17 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Large binary media assets (glucokinase visualizations, not analysis output)
+*.gif
+*.mp4
+*.pse
+*.afdesign
+
+# Figures are regenerable from the scripts — keep them out of the repo
+figures/
