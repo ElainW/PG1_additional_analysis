@@ -1,91 +1,155 @@
 # ProteinGym v1 — model predictions analyzed *by position*
 
-Scripts and outputs for: (1) does each model's Spearman vs `DMS_score` differ by
-**taxon** and by **model_type**, and (2) how the **ranking of mutations at each
-mutation site** differs across models and model types.
+Scripts, results, and findings for a by-position study of the ProteinGym v1
+zero-shot substitution models: how per-model performance varies by **taxon** and
+**model_type**, how models rank mutations **within a site**, where they
+**disagree**, and whether that disagreement tracks functional/structural context.
+Deep-dive protein: **HXK4_HUMAN** (glucokinase / GCK).
 
-Data: 217 DMS substitution assays in `O2/20250613/*.csv`, 97 models (columns
-`Site_Independent … Protriever`), metadata in
-`ProteinGym/reference_files/DMS_substitutions.csv`, model config in
-`ProteinGym/config.json`.
+Data (not tracked in this repo): 217 DMS substitution assays in
+`../O2/20250613/*.csv`, 97 models (columns `Site_Independent … Protriever`),
+metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
+`../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
+cached in `data/uniprot/` (fetched by scripts 08/15).
+
+Requires `pandas, numpy, scipy, matplotlib, seaborn`. Figures are **not** tracked
+(regenerable); see `.gitignore`.
+
+## Directionality (read first)
+`config.json` lists a per-model `directionality` (+1 = higher score ⇒ higher
+fitness; −1 ⇒ lower). **The score columns in `O2/20250613/*.csv` are already
+oriented so higher = fitter for every model** — verified in `00`: all 8
+`directionality=−1` models correlate *positively* with `DMS_score` (EVE +0.46,
+RSALOR +0.48, DeepSequence +0.44…). So we never re-apply directionality, matching
+ProteinGym's own `performance_DMS_benchmarks.py`.
+
+## Model subsets used
+- **97 models** — full config list (analyses 01–03).
+- **45 family-best** (`05`) — one model per family (parameter-size / single-vs-
+  ensemble variants collapsed), keeping the highest overall-Spearman member.
+  Used for disagreement work (06, 08, 11, 15, 16).
+- **23-model subset** (`04`) — a hand-curated representative set (user-supplied
+  `model_dict`, with its own `model_type` labels). Used for within-site
+  Spearman-vs-experiment work (09, 12, 13, 14).
 
 ## How to run
 ```bash
-cd analysis/scripts
-python3 00_check_directionality.py   # directionality sanity check
-python3 01_compute_spearman.py       # per-assay Spearman -> results/spearman_long.csv
-python3 02_spearman_by_taxa.py       # Analysis 1 (taxa / model_type) + figs 1-4
-python3 03_persite_ranking.py        # Analysis 2 (within-site ranking) + figs 5-8
+cd scripts
+python3 00_check_directionality.py            # directionality verification
+python3 01_compute_spearman.py                # per-assay Spearman -> spearman_long.csv
+python3 02_spearman_by_taxa.py                # taxa / model_type + figs 1-4
+python3 03_persite_ranking.py                 # within-site agreement matrices + figs 5-8
+python3 04_subset_figs.py                     # Fig5_subset + Fig6 by selection_type (23 models)
+python3 05_fig6_familybest.py                 # Fig6 from 45 family-best models
+python3 06_hxk4_site_disagreement.py          # HXK4 per-site disagreement + overview figs
+python3 07_w99_deepdive.py                    # W99 rankings (45-model view)
+python3 08_gck_structure_map.py               # disagreement vs GCK functional map (UniProt)
+python3 09_w99_subset_figs.py                 # W99 rankings + per-model-vs-DMS stat (23 models)
+python3 10_assay_overlap.py                   # multi-assay proteins sharing coordinates
+python3 11_hxk4_lowagreement_batch.py         # 06/09 batched over all low-agreement HXK4 sites
+python3 12_abundance_physchem.py              # abundance vs hydrophobicity + charge
+python3 13_agreement_vs_accuracy.py           # among-model agreement vs accuracy-vs-experiment
+python3 14_quartile_by_agreement.py           # 'winners' collapse, high- vs low-agreement sites
+python3 15_functional_disagreement_generalization.py   # generalization across multi-assay proteins
+python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global vs within-site split
 ```
-Requires `pandas, numpy, scipy, matplotlib, seaborn`.
-
-## Directionality (important)
-`config.json` lists a per-model `directionality` (+1 = higher score ⇒ higher
-fitness; -1 = higher score ⇒ lower fitness). **The score columns in
-`O2/20250613/*.csv` are already oriented so that higher = fitter for every
-model.** Evidence (`00_check_directionality.py`, `results/directionality_check.csv`):
-all 8 `directionality=-1` models correlate *positively* with `DMS_score`
-(EVE +0.46, RSALOR +0.48, DeepSequence +0.44, Wavenet +0.39, Unirep +0.18…).
-If the columns were raw model output these would be negative. So the config
-directionality was applied upstream and we **do not** re-apply it — matching
-ProteinGym's own `performance_DMS_benchmarks.py`, which calls
-`spearmanr(DMS_score, score)` directly.
-
-## Methods
-**Analysis 1 — Spearman by taxon.** Per assay × model, Spearman of the model
-column vs `DMS_score` over all variants (`spearman_long.csv`). Aggregated to
-model×taxon and model_type×taxon means. Per-model and per-model_type
-Kruskal–Wallis tests ask whether the per-assay Spearman distribution differs
-across the four taxa; p-values BH-FDR corrected.
-
-**Analysis 2 — within-site mutation ranking.** Single substitutions only; group
-variants by residue position (the "site"); within each site (≥3 substitutions)
-convert each model's score to a normalized rank in [0,1]. Pearson correlation of
-these within-site ranks, pooled over variants and averaged across assays
-(Fisher-z), gives (a) a model×model agreement matrix and (b) each model's
-within-site agreement with the experiment's own within-site ranking. This
-removes the easy across-position signal and isolates *which* substitution a
-model prefers at a position.
 
 ## Key findings
-**Taxon.** Pooling all models, mean Spearman is similar for Human (0.42),
-Eukaryote (0.43), Prokaryote (0.41) but markedly lower for **Virus (0.35)**.
-38/97 models show a statistically significant taxon effect (BH q<0.05). Small,
-sequence-only models are the most taxon-sensitive (ESM2-35M/150M, ESMC, small
-SaProt have the largest Human↔other gaps and worst Virus performance), whereas
-MSA and Structure&MSA models are the most taxon-robust.
 
-**Model type.** Ranking by mean Spearman is stable across taxa:
-Structure&MSA (0.51) > Function-annotation/ESM3 (0.48) ≈ Single-seq&Structure
-(0.46) > MSA (0.44) > Structure (0.37) > Single-sequence (0.36). The biggest
-taxon swing is for sequence-only and single-seq&structure types on Virus.
+**Taxon & model_type (02).** Pooled over models, mean Spearman is similar for
+Human (0.42) / Eukaryote (0.43) / Prokaryote (0.41) but lower for **Virus
+(0.35)**; 38/97 models show a significant taxon effect (BH q<0.05), the most
+taxon-sensitive being small sequence-only models. Model-type ranking is stable:
+Structure&MSA (0.51) > ESM3/Function (0.48) ≈ Single-seq&Structure (0.46) >
+MSA (0.44) > Structure (0.37) > Single-sequence (0.36).
 
-**Within-site ranking.** Models agree far less on *within-site* rankings than on
-overall scores. Model types cluster: MSA↔Structure&MSA agree most (0.70–0.73),
-while pure **Structure** models are the outliers (≈0.37–0.44 agreement with
-sequence/MSA types) — they capture a different, structure-driven local
-preference. Recovering the experiment's within-site ranking is hardest overall
-(top model ≈0.35): best are structure-aware models with MSA/sequence context
-(AIDO.Protein-RAG, VenusREM, ProSST-2048, ESM3, S3F); worst are autoregressive
-single-sequence LMs (xTrimoPGLM-CLM, ProtGPT2, Unirep, CARP). Within-site DMS
-agreement is again lowest on Virus for most types.
+**Within-site ranking agreement (03–05).** Models agree far less on *within-site*
+rankings than on overall scores. Types cluster: MSA↔Structure&MSA agree most
+(0.70–0.73); pure **Structure** models are the outliers (≈0.37–0.44 with
+sequence/MSA types). Recovering the experiment's within-site order is hard (best
+model ≈0.35): best are structure-aware+context models (AIDO.Protein-RAG,
+VenusREM, ProSST-2048, ESM3, S3F); worst are autoregressive single-sequence LMs.
 
-## Outputs
-`results/`
-- `directionality_check.csv` — per-model mean Spearman + config directionality.
-- `spearman_long.csv` — per assay × model Spearman (+ taxon, model_type, n).
-- `spearman_model_by_taxon.csv`, `spearman_modeltype_by_taxon.csv` — means.
-- `kruskal_model_across_taxa.csv`, `kruskal_modeltype_across_taxa.csv` — tests.
-- `persite_model_agreement_matrix.csv` — 98×98 within-site agreement (incl. DMS).
-- `persite_modeltype_agreement_matrix.csv` — model_type×model_type agreement.
-- `persite_dms_agreement_long.csv` / `_by_model.csv` / `_by_modeltype_taxon.csv`.
+**HXK4 per-site disagreement (06–07, 11).** Sites where models most disagree on
+within-site ranking overlap heavily between the two GCK assays (17/20 of the
+top-20 shared) → disagreement is a property of the *position*, not the phenotype.
+Pure **Structure** models are the biggest dissenters. Curated low-agreement
+sites: T49, R63, W99, H156, Y214, Q287, R345, Y349, R377, V401, M402 (terminal
+tails L2/D4/R5/L460–463 excluded).
 
-`figures/`
-- `fig1_model_by_taxon_heatmap.png` — model × taxon mean Spearman.
-- `fig2_modeltype_by_taxon_box.png` — per-assay Spearman by type × taxon.
-- `fig3_modeltype_by_taxon_heatmap.png` — model_type × taxon mean.
-- `fig4_taxon_overall_box.png` — overall Spearman by taxon.
-- `fig5_persite_model_agreement_clustermap.png` — clustered model×model within-site agreement.
-- `fig6_persite_modeltype_agreement_heatmap.png` — model_type×model_type within-site agreement.
-- `fig7_persite_dms_agreement_by_model.png` — each model's within-site agreement with DMS.
-- `fig8_persite_dms_agreement_modeltype_taxon.png` — within-site DMS agreement by type × taxon.
+**Functional context on GCK (08).** Disagreement is significantly **higher at
+binding-site residues** than elsewhere (activity p=0.005, abundance p=0.018).
+
+**Multi-assay coordinate overlap (10).** Of 186 proteins, 24 have ≥2 assays; **23
+have ≥1 assay pair sharing mutated residues** (all on one identical `target_seq`).
+Exception: F7YBW8_MESOW. P53_HUMAN_Kotler_2018 dropped (different `target_seq`).
+Many pairs deliberately span selection types (abundance vs activity vs binding).
+
+**Abundance ≠ physicochemistry (12).** A hydrophobicity+charge baseline predicts
+the abundance assay only weakly (Spearman 0.22, R²=0.08); controlling for those
+features removes only ~13% of model performance (mean raw 0.37 → partial 0.32).
+Being "more physicochemical" does not make a model better.
+
+**Consensus predicts accuracy (13).** Among-model agreement at a site positively
+predicts model-vs-experiment accuracy (Spearman 0.25 activity / 0.38 abundance);
+accuracy roughly doubles from low- to high-agreement sites — but with a hard
+ceiling (~0.3–0.4) and much scatter, so consensus is a useful, imperfect
+confidence signal.
+
+**"Winners" collapse (14, 16).** Model ranking-vs-experiment collapses to ~0 on
+the top fitness quartile (the classic "poor prioritizer of winners"), in **both**
+high- and low-agreement sites — agreement doesn't rescue it. Structure-only
+models do **not** collapse worse (slightly better on the activity tail).
+Redefining "winners" as best-substitution-*within-site* rather than
+globally-most-fit roughly quadruples retained signal (top-25% ≈0.12–0.38),
+showing the collapse is largely an artifact of the global definition mixing in
+across-position signal.
+
+**Generalization of the disagreement→function link (15).** Across all multi-assay
+proteins, only the binding-site part generalizes: disagreement is elevated near
+**binding/active-site residues** in 10/13 proteins (pooled p=5×10⁻¹³). The
+**disease-variant** and **disordered-region** patterns do **not** generalize
+(disordered regions trend the *opposite* way — lower disagreement — in P53 and
+HSP82). Disease-annotation saturation (HXK4 412/465, P53 333/393 positions) makes
+a combined "functional" flag misleading; the three signals must be tested apart.
+
+**Disease-mutation anecdotes (from UniProt P35557).** W99 → **W99C / HHF3**
+(gain-of-function, activating) — the assay agrees (W99 is an activating position),
+but conservation-based models rank it backwards. R377 → **R377H / MODY2**
+(loss-of-function) — non-functional in both assays.
+
+## Caveats (carried across analyses)
+- **Range restriction** attenuates every quartile/tail Spearman; read absolute
+  tail values as "≈0", trust the *comparisons* (between splits, groups, types).
+- **"Winners" within-site metric is pooled across sites**, so it reintroduces
+  across-position ranking — an easier question than global gain-of-function.
+- **`Structure` = only 3 models** in the family-best set (ESM-IF1, MIF,
+  ProteinMPNN); those lines are noisy.
+- **"Near binding" is sequence-proximity ±2**, not 3D contact.
+- **Disease/disordered generalization** rests on few proteins (3 and 5) and on
+  UniProt annotations; GCK's "disordered" T49/R63 were user-asserted, not
+  UniProt-annotated (GCK has no UniProt disordered region).
+- Per-site disagreement uses sites with **≥5 substitutions** (06/11; ≥3 in 03).
+
+## Outputs (`results/`)
+Per-assay & taxa: `directionality_check.csv`, `spearman_long.csv`,
+`spearman_model_by_taxon.csv`, `spearman_modeltype_by_taxon.csv`,
+`kruskal_{model,modeltype}_across_taxa.csv`.
+Within-site agreement: `persite_model_agreement_matrix.csv`,
+`persite_modeltype_agreement_matrix.csv`, `persite_dms_agreement_*.csv`,
+`persite_modeltype_agreement_by_selectiontype*.csv`, `family_best_selection.csv`.
+HXK4 site work: `hxk4_*_site_disagreement.csv`, `site_W99_*_rank_matrix.csv`,
+`gck_site_functional_annotation_*.csv`, `gck_disagreement_vs_function_summary.csv`.
+Overlap: `assay_position_overlap_{proteins,pairs,selected_assays}.csv`.
+Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
+`hxk4_agreement_vs_accuracy_*.csv`, `hxk4_quartile_by_agreement*.csv`,
+`collapse_modeltype_withinsite.csv`.
+Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`.
+
+Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
+batch under `figures/site_disagreement/HXK4_HUMAN/`.
+
+## Version control
+Repo scoped to `analysis/` only; remote
+`https://github.com/ElainW/PG1_additional_analysis.git`. Figures and large
+glucokinase media assets (`*.gif/*.mp4/*.pse`) are git-ignored.
