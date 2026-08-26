@@ -12,8 +12,8 @@ metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
 `../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
 cached in `data/uniprot/` (fetched by scripts 08/15).
 
-Requires `pandas, numpy, scipy, matplotlib, seaborn`. Figures are **not** tracked
-(regenerable); see `.gitignore`.
+Requires `pandas, numpy, scipy, matplotlib, seaborn` (plus `biopython` for the
+3-D analysis `17`). Figures are **not** tracked (regenerable); see `.gitignore`.
 
 ## Directionality (read first)
 `config.json` lists a per-model `directionality` (+1 = higher score ⇒ higher
@@ -59,6 +59,7 @@ python3 13_agreement_vs_accuracy.py           # among-model agreement vs accurac
 python3 14_quartile_by_agreement.py           # 'winners' collapse, high- vs low-agreement sites
 python3 15_functional_disagreement_generalization.py   # generalization across multi-assay proteins
 python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global vs within-site split
+python3 17_gck_3d_distances.py                # GCK disagreement vs 3-D ligand distance (PDB 1V4S)
 ```
 
 ## Reproduce
@@ -91,8 +92,12 @@ Pure **Structure** models are the biggest dissenters. Curated low-agreement
 sites: T49, R63, W99, H156, Y214, Q287, R345, Y349, R377, V401, M402 (terminal
 tails L2/D4/R5/L460–463 excluded).
 
-**Functional context on GCK (08).** Disagreement is significantly **higher at
-binding-site residues** than elsewhere (activity p=0.005, abundance p=0.018).
+**Functional context on GCK (08, 17).** In 1-D, disagreement is significantly
+**higher at binding-site residues** than elsewhere (activity p=0.005, abundance
+p=0.018). But in real 3-D (PDB 1V4S, glucose + activator; `17`) high-disagreement
+residues are **not** closer to the ligand pockets (Spearman ≈ −0.04 to −0.06, n.s.)
+and **not** spatially clustered (permutation p≈0.88) — so the 1-D "binding-site"
+signal reflects sequence-annotation overlap, not a physical pocket neighbourhood.
 
 **Multi-assay coordinate overlap (10).** Of 186 proteins, 24 have ≥2 assays; **23
 have ≥1 assay pair sharing mutated residues** (all on one identical `target_seq`).
@@ -167,7 +172,8 @@ Within-site agreement: `persite_model_agreement_matrix.csv`,
 `persite_modeltype_agreement_matrix.csv`, `persite_dms_agreement_*.csv`,
 `persite_modeltype_agreement_by_selectiontype*.csv`, `family_best_selection.csv`.
 HXK4 site work: `hxk4_*_site_disagreement.csv`, `site_W99_*_rank_matrix.csv`,
-`gck_site_functional_annotation_*.csv`, `gck_disagreement_vs_function_summary.csv`.
+`gck_site_functional_annotation_*.csv`, `gck_disagreement_vs_function_summary.csv`,
+`gck_3d_residue_distances.csv`, `gck_3d_summary.csv`.
 Overlap: `assay_position_overlap_{proteins,pairs,selected_assays}.csv`.
 Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
 `hxk4_agreement_vs_accuracy_*.csv`, `hxk4_quartile_by_agreement*.csv`,

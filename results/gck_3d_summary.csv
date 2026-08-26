@@ -1,0 +1,11 @@
+assay,test,value,p_value,n,rest_median
+activity,spearman_disagree_vs_dist_glucose,-0.065,0.17130886143060156,446,
+activity,spearman_disagree_vs_dist_activator,0.016,0.7293985190251577,446,
+activity,spearman_disagree_vs_dist_nearest_ligand,-0.077,0.10499762563681558,446,
+activity,MW_top25_closer_to_ligand,12.2,0.07829890866672685,25,14.28
+activity,perm_top25_CA_clustering,29.86,0.6562,25,29.1
+abundance,spearman_disagree_vs_dist_glucose,-0.015,0.7493255052934067,446,
+abundance,spearman_disagree_vs_dist_activator,0.032,0.5050178838662036,446,
+abundance,spearman_disagree_vs_dist_nearest_ligand,-0.043,0.36936489230555375,446,
+abundance,MW_top25_closer_to_ligand,12.43,0.31309074518764723,25,14.22
+abundance,perm_top25_CA_clustering,31.16,0.8754,25,29.1

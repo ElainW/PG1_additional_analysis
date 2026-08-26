@@ -1,8 +1,8 @@
 # Regenerate every analysis output from scratch, in dependency order.
 #   make all     run scripts 00..16 (each reads the previous ones' results/)
 #   make clean   remove generated results/ and figures/ (keeps data/ cache)
-# Needs: python3 with pandas numpy scipy matplotlib seaborn, and the tracked
-# data/ UniProt cache for 08/15. No network required.
+# Needs: python3 with pandas numpy scipy matplotlib seaborn (biopython for 17),
+# and the tracked data/ cache (UniProt for 08/15; 1V4S.pdb for 17). No network.
 
 PY = python3
 SD = scripts
@@ -24,7 +24,8 @@ SCRIPTS = \
 	13_agreement_vs_accuracy \
 	14_quartile_by_agreement \
 	15_functional_disagreement_generalization \
-	16_collapse_modeltype_withinsite
+	16_collapse_modeltype_withinsite \
+	17_gck_3d_distances
 
 .PHONY: all clean
 
