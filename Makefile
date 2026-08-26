@@ -25,7 +25,8 @@ SCRIPTS = \
 	14_quartile_by_agreement \
 	15_functional_disagreement_generalization \
 	16_collapse_modeltype_withinsite \
-	17_gck_3d_distances
+	17_gck_3d_distances \
+	18_generalization_candidates
 
 .PHONY: all clean
 

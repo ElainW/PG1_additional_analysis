@@ -60,6 +60,7 @@ python3 14_quartile_by_agreement.py           # 'winners' collapse, high- vs low
 python3 15_functional_disagreement_generalization.py   # generalization across multi-assay proteins
 python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global vs within-site split
 python3 17_gck_3d_distances.py                # GCK disagreement vs 3-D ligand distance (PDB 1V4S)
+python3 18_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
 ```
 
 ## Reproduce
@@ -149,6 +150,17 @@ but conservation-based models rank it backwards. R377 → **R377H / MODY2**
   UniProt annotations; GCK's "disordered" T49/R63 were user-asserted, not
   UniProt-annotated (GCK has no UniProt disordered region).
 - Per-site disagreement uses sites with **≥5 substitutions** (06/11; ≥3 in 03).
+- **"Disagreement at functional sites" is an annotation-level, not a structural,
+  claim.** The 1-D binding-site enrichment (08, p=0.005/0.018) does **not** survive
+  in 3-D (`17`): high-disagreement residues are neither closer to the glucose/
+  activator pockets (Spearman ≈ −0.05, n.s.) nor spatially clustered (permutation
+  p≈0.88). So the signal reflects overlap with UniProt binding-site *annotations*,
+  not a physical pocket neighbourhood — interpret the functional-site result
+  cautiously and, where a structure exists, prefer a real 3-D distance test.
+- **Candidate-protein `best_pdb` (18) optimizes coverage then resolution, not
+  ligand presence.** For a ligand-distance analysis like `17`, pick a *liganded*
+  structure yourself (e.g. GCK 1V4S with glucose+activator, not the apo 4DCH the
+  heuristic returns); `top_xray_pdbs` lists alternates with coverage %.
 - **`MSA_Neff_L` is not good for some assays — both extremes hurt MSA-dependent
   models.** Effective MSA depth per length varies enormously across the 217 assays
   (median 30.5, range 0 → 12,395). **Too shallow** (36/217 are `Low` /
@@ -178,7 +190,9 @@ Overlap: `assay_position_overlap_{proteins,pairs,selected_assays}.csv`.
 Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
 `hxk4_agreement_vs_accuracy_*.csv`, `hxk4_quartile_by_agreement*.csv`,
 `collapse_modeltype_withinsite.csv`.
-Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`.
+Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`,
+`generalization_candidate_proteins.csv` (24 multi-assay proteins + RCSB PDB
+options, for choosing a protein/structure to extend the analysis — `18`).
 
 Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
 batch under `figures/site_disagreement/HXK4_HUMAN/`.
