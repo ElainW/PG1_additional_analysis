@@ -24,6 +24,13 @@ RSALOR +0.48, DeepSequence +0.44…). So we never re-apply directionality, match
 ProteinGym's own `performance_DMS_benchmarks.py`.
 
 ## Model subsets used
+Two curated subsets exist for different jobs: the **45 family-best** set
+deduplicates the 97 so redundant same-family variants don't inflate agreement
+statistics (used wherever we pool over many models), while the **23-model
+subset** is a smaller hand-picked representative panel meant to be *read* in a
+single figure (per-model bars, labelled heatmaps) without 97 rows of clutter.
+They are not nested and use slightly different `model_type` labels, so numbers
+are only comparable within the same subset.
 - **97 models** — full config list (analyses 01–03).
 - **45 family-best** (`05`) — one model per family (parameter-size / single-vs-
   ensemble variants collapsed), keeping the highest overall-Spearman member.
@@ -53,6 +60,13 @@ python3 14_quartile_by_agreement.py           # 'winners' collapse, high- vs low
 python3 15_functional_disagreement_generalization.py   # generalization across multi-assay proteins
 python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global vs within-site split
 ```
+
+## Reproduce
+`make all` runs scripts `00 → 16` in order (each reads the previous ones'
+`results/`), regenerating every CSV and figure and logging timestamps + output to
+`RUN.log`. This is how to confirm the numbers quoted below stay in sync with the
+code. Requires the `data/` UniProt cache (tracked) for `08`/`15`; no network
+needed. `make clean` removes generated `results/`/`figures/` (leaves `data/`).
 
 ## Key findings
 
@@ -130,6 +144,20 @@ but conservation-based models rank it backwards. R377 → **R377H / MODY2**
   UniProt annotations; GCK's "disordered" T49/R63 were user-asserted, not
   UniProt-annotated (GCK has no UniProt disordered region).
 - Per-site disagreement uses sites with **≥5 substitutions** (06/11; ≥3 in 03).
+- **`MSA_Neff_L` is not good for some assays — both extremes hurt MSA-dependent
+  models.** Effective MSA depth per length varies enormously across the 217 assays
+  (median 30.5, range 0 → 12,395). **Too shallow** (36/217 are `Low` /
+  `MSA_Neff_L < 1`, e.g. CAR11 0.04, P53 0.39, viral RBDs ≈1): the alignment
+  carries little position-specific signal, so MSA-based models (EVmutation, EVE,
+  GEMME, MSA-Transformer) and Structure&MSA models are starved of information.
+  **Too deep** (Neff_L in the thousands): very large/over-diverse alignments can
+  fold in distant homologs and paralogs that dilute the couplings for *this*
+  sequence, again degrading specificity — so the depth→MSA-model-quality relation
+  is non-monotonic, best at an intermediate depth. Either way, any **model_type
+  comparison involving MSA-dependent types is confounded by MSA depth** (02, 03,
+  05, 15, 16) — check per-assay `MSA_Neff_L` (both tails) before attributing an
+  MSA-model score to the model. Relevant low-Neff multi-assay proteins in `10`:
+  CAR11 0.04, P53 0.39, NPC1 0.67, SPIKE 1.06.
 
 ## Outputs (`results/`)
 Per-assay & taxa: `directionality_check.csv`, `spearman_long.csv`,

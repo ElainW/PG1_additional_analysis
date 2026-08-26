@@ -15,3 +15,6 @@ __pycache__/
 
 # Figures are regenerable from the scripts — keep them out of the repo
 figures/
+
+# Regeneration log written by `make all`
+RUN.log
