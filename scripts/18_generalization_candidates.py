@@ -86,6 +86,24 @@ TAXON_COLOR = {"Human": "#4c72b0", "Eukaryote": "#55a868",
                "Prokaryote": "#c44e52", "Virus": "#8172b3"}
 
 
+def protein_name(uni, fallback=""):
+    """Human-readable label from the cached UniProt entry: 'GENE (Full name)',
+    falling back to the reference molecule_name for sparse TrEMBL entries."""
+    p = os.path.join(UNIPROT_DIR, uni + ".json")
+    gene = name = None
+    if os.path.exists(p):
+        e = json.load(open(p))
+        genes = e.get("genes", [])
+        gene = genes[0].get("geneName", {}).get("value") if genes else None
+        pdsc = e.get("proteinDescription", {})
+        name = pdsc.get("recommendedName", {}).get("fullName", {}).get("value")
+        if not name:
+            subs = pdsc.get("submissionNames", [])
+            name = subs[0].get("fullName", {}).get("value") if subs else None
+    name = name or fallback or "?"
+    return f"{gene} ({name})" if gene else name
+
+
 def parse_coverage(chains, seq_len):
     """Union of residue ranges in a UniProt PDB 'Chains' string -> covered fraction."""
     covered = set()
@@ -145,6 +163,7 @@ def main():
                       key=lambda o: (o["coverage"] < 0.7, o.get("resolution", 99)))[:3]
         rows.append({
             "UniProt_ID": uni,
+            "protein": protein_name(uni, fallback=str(g["molecule_name"].iloc[0])),
             "n_assays": len(g),
             "taxon": g["taxon"].iloc[0],
             "seq_len": seq_len,
