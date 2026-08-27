@@ -172,10 +172,14 @@ GoF pathogenicity.
   p≈0.88). So the signal reflects overlap with UniProt binding-site *annotations*,
   not a physical pocket neighbourhood — interpret the functional-site result
   cautiously and, where a structure exists, prefer a real 3-D distance test.
-- **Candidate-protein `best_pdb` (18) optimizes coverage then resolution, not
-  ligand presence.** For a ligand-distance analysis like `17`, pick a *liganded*
-  structure yourself (e.g. GCK 1V4S with glucose+activator, not the apo 4DCH the
-  heuristic returns); `top_xray_pdbs` lists alternates with coverage %.
+- **Candidate-protein `best_pdb` (18) optimizes coverage then resolution;
+  `best_holo_pdb` is the ligand-aware pick.** `best_pdb` is blind to ligands, so
+  for a ligand-distance analysis like `17` use `best_holo_pdb` / `best_holo_ligands`
+  (e.g. GCK → 4DCH with GLC+4DC; RASK → 7ROV/GCP; CP2C9 → 1R9O/HEM+FLP; DYR →
+  8UW0/FOL+NAP). Holo status comes from RCSB nonpolymer components (cached in
+  `data/pdb_ligands_cache.json`) filtered by an additive/ion blacklist + mass ≥130
+  Da — a **heuristic**, so verify the reported `best_holo_ligands` comp IDs, and
+  note a blank `best_holo_pdb` only means "no holo among the top-40 by coverage".
 - **GoF/LoF check (19) uses a RELATIVE, protein-level classification.** Within-site
   percentile ranks a variant among substitutions at its site, not absolute
   deleteriousness — noisy at fully-conserved positions (e.g. RAS G12). GoF/LoF is

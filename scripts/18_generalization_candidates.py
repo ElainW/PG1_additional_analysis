@@ -16,6 +16,7 @@ Outputs:
 import os
 import re
 import json
+import urllib.request
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -25,6 +26,62 @@ from matplotlib.lines import Line2D
 import common as C
 
 UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
+LIGAND_CACHE = os.path.join(C.ANALYSIS, "data", "pdb_ligands_cache.json")
+
+# crystallization additives / ions / glycans to ignore when deciding "holo"
+LIGAND_BLACKLIST = {
+    "HOH", "GOL", "EDO", "PEG", "PG4", "PGE", "1PE", "2PE", "P6G", "PE4", "PE3",
+    "MPD", "TRS", "EPE", "MES", "BME", "DMS", "DMSO", "IPA", "ACT", "ACY", "FMT",
+    "CIT", "FLC", "TLA", "MLA", "MLI", "SCN", "AZI", "NO3", "CO3", "SO4", "PO4",
+    "NH4", "IMD", "BOG", "LDA", "MRD", "BU3", "BTB", "TAR", "OGA", "144",
+    "CAC", "P4G", "PGO", "PG5", "PG6", "PG0", "XPE", "7PE", "12P", "15P", "33O",
+    "DIO", "PDO", "MG8", "C8E", "DMU", "SDS", "OCT", "D10", "9FO", "AE3", "AE4",
+    "NAG", "BMA", "MAN", "FUC", "NDG", "GAL", "SIA", "GLA", "XYP", "SUC", "TRE",
+    "NA", "K", "CL", "BR", "IOD", "F", "MG", "CA", "ZN", "MN", "FE", "FE2",
+    "NI", "CO", "CU", "CU1", "CD", "HG", "SR", "CS", "RB", "LI", "BA", "PB",
+}
+LIGAND_MW_MIN = 130.0     # excludes lone ions and small buffers
+
+
+def _load_cache():
+    if os.path.exists(LIGAND_CACHE):
+        return json.load(open(LIGAND_CACHE))
+    return {}
+
+
+def qualifying_ligands(raw):
+    """Filter a cached raw [[comp_id, mw], ...] list to biologically-interesting
+    ligands (drop additives/ions/glycans and anything below the mass floor)."""
+    return [cid for cid, mw in raw
+            if cid not in LIGAND_BLACKLIST and (mw or 0) >= LIGAND_MW_MIN]
+
+
+def fetch_ligands(pdb_ids, cache):
+    """Populate cache[pdb_id] = [[comp_id, mw], ...] (RAW, so blacklist changes
+    take effect without re-fetching); batch-query RCSB GraphQL for uncached ids
+    (skips silently if offline)."""
+    need = [p for p in pdb_ids if p not in cache]
+    for i in range(0, len(need), 50):
+        chunk = need[i:i + 50]
+        q = ('{entries(entry_ids:[%s]){rcsb_id nonpolymer_entities{nonpolymer_comp'
+             '{chem_comp{id formula_weight}}}}}' % ",".join(f'"{p}"' for p in chunk))
+        try:
+            req = urllib.request.Request(
+                "https://data.rcsb.org/graphql",
+                data=json.dumps({"query": q}).encode(),
+                headers={"Content-Type": "application/json"})
+            data = json.load(urllib.request.urlopen(req, timeout=40))
+            for e in (data.get("data", {}).get("entries") or []):
+                comps = [[ent["nonpolymer_comp"]["chem_comp"]["id"],
+                          ent["nonpolymer_comp"]["chem_comp"].get("formula_weight") or 0]
+                         for ent in (e.get("nonpolymer_entities") or [])]
+                cache[e["rcsb_id"]] = comps
+            for p in chunk:                     # entries with no nonpolymer come back absent
+                cache.setdefault(p, [])
+        except Exception as ex:
+            print(f"  [ligand fetch skipped for {len(chunk)} PDBs: {ex}]")
+            break
+    return cache
 TAXON_COLOR = {"Human": "#4c72b0", "Eukaryote": "#55a868",
                "Prokaryote": "#c44e52", "Virus": "#8172b3"}
 
@@ -68,11 +125,22 @@ def best_pdb(options):
 def main():
     ref = C.load_reference()
     multi = ref.groupby("UniProt_ID").filter(lambda g: len(g) >= 2)
+    cache = _load_cache()
     rows = []
     for uni, g in multi.groupby("UniProt_ID"):
         seq_len = int(g["seq_len"].iloc[0])
         opts = pdb_options(uni, seq_len)
         bp = best_pdb(opts)
+        xray_sorted = sorted([o for o in opts if o["method"] == "X-ray"],
+                             key=lambda o: (-o["coverage"], o.get("resolution", 99)))
+        # look up ligands for the top candidates (bounded), pick the best holo one
+        cand = xray_sorted[:40]
+        fetch_ligands([o["pdb"] for o in cand], cache)
+        for o in cand:
+            o["ligands"] = qualifying_ligands(cache.get(o["pdb"], []))
+            o["holo"] = len(o["ligands"]) > 0
+        holo = next((o for o in cand if o["holo"]), None)     # first = best coverage/res holo
+        bp_holo = bool(qualifying_ligands(cache.get(bp["pdb"], []))) if bp else False
         top3 = sorted([o for o in opts if o["method"] == "X-ray"],
                       key=lambda o: (o["coverage"] < 0.7, o.get("resolution", 99)))[:3]
         rows.append({
@@ -87,14 +155,22 @@ def main():
             "best_pdb": bp["pdb"] if bp else "",
             "best_pdb_res": bp["resolution"] if bp else np.nan,
             "best_pdb_coverage": bp["coverage"] if bp else np.nan,
+            "best_pdb_has_ligand": bp_holo,
+            "best_holo_pdb": holo["pdb"] if holo else "",
+            "best_holo_res": holo["resolution"] if holo else np.nan,
+            "best_holo_coverage": holo["coverage"] if holo else np.nan,
+            "best_holo_ligands": ";".join(holo["ligands"]) if holo else "",
             "top_xray_pdbs": ", ".join(f"{o['pdb']}({o['resolution']}A,{int(o['coverage']*100)}%)" for o in top3),
             "proteingym_pdb": g["pdb_file"].iloc[0],
         })
+    os.makedirs(os.path.dirname(LIGAND_CACHE), exist_ok=True)
+    json.dump(cache, open(LIGAND_CACHE, "w"), indent=0, sort_keys=True)
     tab = pd.DataFrame(rows).sort_values(["multi_phenotype", "MSA_Neff_L"], ascending=[False, True])
     tab.to_csv(os.path.join(C.RESULTS, "generalization_candidate_proteins.csv"), index=False)
     print(f"{len(tab)} candidate proteins written.")
-    print(tab[["UniProt_ID", "n_assays", "taxon", "multi_phenotype", "MSA_Neff_L",
-               "best_pdb", "best_pdb_res", "best_pdb_coverage", "n_pdb"]].to_string(index=False))
+    with pd.option_context("display.max_colwidth", 30, "display.width", 200):
+        print(tab[["UniProt_ID", "n_assays", "multi_phenotype", "MSA_Neff_L",
+                   "best_pdb", "best_pdb_has_ligand", "best_holo_pdb", "best_holo_ligands"]].to_string(index=False))
 
     # ---------- visual selection sheet ----------
     t = tab.iloc[::-1].reset_index(drop=True)   # so highest interest ends up on top
@@ -119,9 +195,14 @@ def main():
     # annotate each bar with n_assays, selection types, best PDB
     for yi, r in zip(y, t.itertuples()):
         sel = r.selection_types.replace("OrganismalFitness", "OrgFit").replace("Expression", "Expr")
-        pdb = f"{r.best_pdb}({r.best_pdb_res}Å,{int(r.best_pdb_coverage*100)}%)" if r.best_pdb else "no PDB"
-        ax.text(1.05e5, yi, f"{r.n_assays} assays · {sel} · {r.seq_len} aa · PDB {pdb}",
-                va="center", ha="left", fontsize=7)
+        if r.best_holo_pdb:                                   # prefer a ligand-bound structure
+            pdb = f"holo {r.best_holo_pdb}({r.best_holo_ligands}) / apo-best {r.best_pdb}"
+        elif r.best_pdb:
+            pdb = f"{r.best_pdb}({r.best_pdb_res}Å,{int(r.best_pdb_coverage*100)}%) [no holo found]"
+        else:
+            pdb = "no PDB"
+        ax.text(1.05e5, yi, f"{r.n_assays} assays · {sel} · {r.seq_len} aa · {pdb}",
+                va="center", ha="left", fontsize=6.5)
     ax.set_xlim(0.02, 1e5)
     handles = [Line2D([0], [0], marker="s", color="w", markerfacecolor=c, markersize=9, label=k)
                for k, c in TAXON_COLOR.items()]
