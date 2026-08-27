@@ -28,6 +28,22 @@ import common as C
 UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
 LIGAND_CACHE = os.path.join(C.ANALYSIS, "data", "pdb_ligands_cache.json")
 
+# Structures used by Lehner-group allosteric-landscape papers. Selection logic:
+# a structure holo with the ORTHOSTERIC ligand (substrate/analog/nucleotide/effector)
+# so the functional site is defined; for conformational switches, one per state.
+LITERATURE_PDB = {
+    "HXK4_HUMAN": ("1V4S", "glucose (GLC) + activator (MRK); Liao & Lehner 2026 Nat Commun"),
+    "PTEN_HUMAN": ("1D5R", "tartrate (TLA) analog at catalytic site; Liao & Lehner 2026 Nat Commun"),
+    "SRC_HUMAN":  ("2SRC;1Y57", "inactive (2SRC, AMP-PNP) + active (1Y57) states; Beltran & Lehner 2026 Sci Adv"),
+    "RASK_HUMAN": ("6VJJ", "KRAS-RAF1 effector complex (GTP/active); interface = <5A to bound RAF1; Weng, Faure & Lehner 2024 Nature"),
+}
+
+# Name-keyword hint for proteins whose function spans distinct structural states,
+# where an allosteric analysis may want a state pair (active/inactive, GDP/GTP,
+# open/closed) rather than a single structure.
+SWITCH_KEYWORDS = ("kinase", "gtpase", "channel", "transporter", "carrier",
+                   "atp-dependent", "atpase")
+
 # crystallization additives / ions / glycans to ignore when deciding "holo"
 LIGAND_BLACKLIST = {
     "HOH", "GOL", "EDO", "PEG", "PG4", "PGE", "1PE", "2PE", "P6G", "PE4", "PE3",
@@ -161,9 +177,17 @@ def main():
         bp_holo = bool(qualifying_ligands(cache.get(bp["pdb"], []))) if bp else False
         top3 = sorted([o for o in opts if o["method"] == "X-ray"],
                       key=lambda o: (o["coverage"] < 0.7, o.get("resolution", 99)))[:3]
+        pname = protein_name(uni, fallback=str(g["molecule_name"].iloc[0]))
+        switch = any(k in pname.lower() for k in SWITCH_KEYWORDS)
+        lit_pdb, lit_note = LITERATURE_PDB.get(uni, ("", ""))
+        recommended = lit_pdb or (holo["pdb"] if holo else (bp["pdb"] if bp else ""))
         rows.append({
             "UniProt_ID": uni,
-            "protein": protein_name(uni, fallback=str(g["molecule_name"].iloc[0])),
+            "protein": pname,
+            "conformational_switch": switch,
+            "literature_pdb": lit_pdb,
+            "literature_pdb_note": lit_note,
+            "recommended_pdb": recommended,
             "n_assays": len(g),
             "taxon": g["taxon"].iloc[0],
             "seq_len": seq_len,

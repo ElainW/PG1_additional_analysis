@@ -219,7 +219,9 @@ Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
 `collapse_modeltype_withinsite.csv`.
 Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`,
 `generalization_candidate_proteins.csv` (24 multi-assay proteins + RCSB PDB
-options, for choosing a protein/structure to extend the analysis — `18`).
+options, for choosing a protein/structure to extend the analysis — `18`; includes
+`conformational_switch`, `literature_pdb`, `recommended_pdb` per the structure-
+selection framework in `papers/pdb_selection_framework.md`).
 
 Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
 batch under `figures/site_disagreement/HXK4_HUMAN/`.
