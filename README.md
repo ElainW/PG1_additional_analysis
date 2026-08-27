@@ -61,6 +61,7 @@ python3 15_functional_disagreement_generalization.py   # generalization across m
 python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global vs within-site split
 python3 17_gck_3d_distances.py                # GCK disagreement vs 3-D ligand distance (PDB 1V4S)
 python3 18_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
+python3 19_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
 ```
 
 ## Reproduce
@@ -138,6 +139,20 @@ a combined "functional" flag misleading; the three signals must be tested apart.
 but conservation-based models rank it backwards. R377 → **R377H / MODY2**
 (loss-of-function) — non-functional in both assays.
 
+**GoF vs LoF disease variants, systematic (19).** Extending those anecdotes to 223
+classified disease variants (GoF = GCK-HHF3 + RASK; LoF = GCK-MODY2/PNDM1 + PTEN +
+KCNE1 + CP2C9; SRC contributed none), the W99C pattern does **not** generalize.
+Models rank GoF variants *higher* within-site (median 0.83, only 12% in the bottom
+half) than LoF (0.67, 33% bottom half) — the **opposite** of "predict GoF as
+deleterious" (Mann-Whitney GoF<LoF p=1.0); the within-GCK contrast reproduces it
+(HHF3 0.89 vs MODY2 0.68), with W99C (0.11) a rare conserved-Trp exception.
+Corrected reading: conservation/fitness models **under-flag pathogenic variants of
+both classes** (a majority sit in the tolerated top-half) and are *most* blind to
+GoF — a GoF variant preserves/enhances molecular function, so it looks like an
+acceptable substitution. The DMS assays behave the same way (GoF 0.67 vs LoF 0.50
+median), so neither models nor these molecular assays capture dosage/physiological
+GoF pathogenicity.
+
 ## Caveats (carried across analyses)
 - **Range restriction** attenuates every quartile/tail Spearman; read absolute
   tail values as "≈0", trust the *comparisons* (between splits, groups, types).
@@ -161,6 +176,13 @@ but conservation-based models rank it backwards. R377 → **R377H / MODY2**
   ligand presence.** For a ligand-distance analysis like `17`, pick a *liganded*
   structure yourself (e.g. GCK 1V4S with glucose+activator, not the apo 4DCH the
   heuristic returns); `top_xray_pdbs` lists alternates with coverage %.
+- **GoF/LoF check (19) uses a RELATIVE, protein-level classification.** Within-site
+  percentile ranks a variant among substitutions at its site, not absolute
+  deleteriousness — noisy at fully-conserved positions (e.g. RAS G12). GoF/LoF is
+  assigned by disease phenotype at the protein level (RAS/SRC oncogene = GoF, PTEN/
+  KCNE1/CP2C9 = LoF, GCK bidirectional), so the cross-protein contrast is confounded
+  by protein identity — but the within-GCK contrast reproduces it. RAS assays measure
+  abundance/binding (not GTPase activity), so the DMS can't validate RAS GoF direction.
 - **`MSA_Neff_L` is not good for some assays — both extremes hurt MSA-dependent
   models.** Effective MSA depth per length varies enormously across the 217 assays
   (median 30.5, range 0 → 12,395). **Too shallow** (36/217 are `Low` /
@@ -185,7 +207,8 @@ Within-site agreement: `persite_model_agreement_matrix.csv`,
 `persite_modeltype_agreement_by_selectiontype*.csv`, `family_best_selection.csv`.
 HXK4 site work: `hxk4_*_site_disagreement.csv`, `site_W99_*_rank_matrix.csv`,
 `gck_site_functional_annotation_*.csv`, `gck_disagreement_vs_function_summary.csv`,
-`gck_3d_residue_distances.csv`, `gck_3d_summary.csv`.
+`gck_3d_residue_distances.csv`, `gck_3d_summary.csv`,
+`disease_gof_lof_variants.csv`, `disease_gof_lof_summary.csv`.
 Overlap: `assay_position_overlap_{proteins,pairs,selected_assays}.csv`.
 Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
 `hxk4_agreement_vs_accuracy_*.csv`, `hxk4_quartile_by_agreement*.csv`,

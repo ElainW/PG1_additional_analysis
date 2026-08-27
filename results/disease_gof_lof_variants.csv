@@ -1,0 +1,418 @@
+protein,variant,label,assay,selection,dms_pct,dms_bin,model_median_pct,model_frac_bottom_half,evidence
+HXK4_HUMAN,V16E,LoF,Gersing_2022_activity,OrganismalFitness,0.3333333333333333,1,0.16666666666666666,0.7391304347826086,in mody2
+HXK4_HUMAN,I19N,LoF,Gersing_2022_activity,OrganismalFitness,1.0,1,0.11764705882352941,0.9565217391304348,in mody2
+HXK4_HUMAN,L20P,LoF,Gersing_2022_activity,OrganismalFitness,0.16666666666666666,0,0.0,1.0,in mody2
+HXK4_HUMAN,R36W,LoF,Gersing_2022_activity,OrganismalFitness,0.5,1,0.05555555555555555,0.8695652173913043,in mody2; dbsnp:rs762263694
+HXK4_HUMAN,E40K,LoF,Gersing_2022_activity,OrganismalFitness,0.4444444444444444,0,0.5,0.30434782608695654,in pndm1; decreased stability; decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs794727236
+HXK4_HUMAN,R43C,LoF,Gersing_2022_activity,OrganismalFitness,0.7222222222222222,1,0.3333333333333333,0.6521739130434783,in pndm1; decreased stability; decreased glucokinase activity; no effect on affinity for glucose; dbsnp:rs1486280029
+HXK4_HUMAN,R43H,LoF,Gersing_2022_activity,OrganismalFitness,0.2777777777777778,0,0.6111111111111112,0.13043478260869565,in mody2; decreased enzyme stability shown by thermostability assays; no effect on kinetic parameters for glucokinase ac
+HXK4_HUMAN,R43S,LoF,Gersing_2022_activity,OrganismalFitness,0.5555555555555556,1,0.6111111111111112,0.13043478260869565,in mody2; dbsnp:rs1486280029
+HXK4_HUMAN,G44S,LoF,Gersing_2022_activity,OrganismalFitness,0.058823529411764705,0,0.9411764705882353,0.043478260869565216,in mody2; dbsnp:rs267601516
+HXK4_HUMAN,H50D,LoF,Gersing_2022_activity,OrganismalFitness,0.6470588235294118,0,0.5882352941176471,0.34782608695652173,in pndm1; loss of stability; loss of glucokinase activity; decreased affinity for glucose
+HXK4_HUMAN,A53S,LoF,Gersing_2022_activity,OrganismalFitness,0.8235294117647058,0,1.0,0.0,in mody2
+HXK4_HUMAN,Y61S,LoF,Gersing_2022_activity,OrganismalFitness,0.6666666666666666,0,0.5555555555555556,0.30434782608695654,in mody2; decreased glucokinase activity; decreased affinity for glucose; increased affinity for atp
+HXK4_HUMAN,T65I,GoF,Gersing_2022_activity,OrganismalFitness,0.17647058823529413,1,0.8823529411764706,0.08695652173913043,in hhf3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; loss o
+HXK4_HUMAN,E70K,LoF,Gersing_2022_activity,OrganismalFitness,0.4117647058823529,1,0.8235294117647058,0.30434782608695654,in mody2; decreased affinity for glucose; dbsnp:rs2128823091
+HXK4_HUMAN,G72R,LoF,Gersing_2022_activity,OrganismalFitness,0.47058823529411764,0,0.7058823529411765,0.043478260869565216,in mody2 and pndm1; decreased stability; no effect on glucokinase activity; no effect on affinity for glucose; dbsnp:rs1
+HXK4_HUMAN,L77P,LoF,Gersing_2022_activity,OrganismalFitness,0.0,0,0.3333333333333333,0.9130434782608695,in mody2; dbsnp:rs2096281827
+HXK4_HUMAN,D78E,LoF,Gersing_2022_activity,OrganismalFitness,0.3888888888888889,0,1.0,0.0,in mody2
+HXK4_HUMAN,G80A,LoF,Gersing_2022_activity,OrganismalFitness,0.5625,0,0.875,0.043478260869565216,in mody2
+HXK4_HUMAN,G80D,LoF,Gersing_2022_activity,OrganismalFitness,0.3125,0,0.75,0.08695652173913043,in mody2
+HXK4_HUMAN,G80S,LoF,Gersing_2022_activity,OrganismalFitness,0.0,0,1.0,0.0,in mody2; dbsnp:rs1554335761
+HXK4_HUMAN,V91L,GoF,Gersing_2022_activity,OrganismalFitness,1.0,1,1.0,0.0,in hhf3; increased glucokinase activity; increased affinity for glucose
+HXK4_HUMAN,W99C,GoF,Gersing_2022_activity,OrganismalFitness,0.5555555555555556,1,0.1111111111111111,0.782608695652174,in hhf3; increased glucokinase activity; increased affinity for glucose; increased affinity for atp
+HXK4_HUMAN,Y108H,LoF,Gersing_2022_activity,OrganismalFitness,0.2777777777777778,0,0.8888888888888888,0.0,in mody2; dbsnp:rs193922292
+HXK4_HUMAN,I110T,LoF,Gersing_2022_activity,OrganismalFitness,0.4444444444444444,0,0.8333333333333334,0.0,in mody2; dbsnp:rs1338970607
+HXK4_HUMAN,T116P,LoF,Gersing_2022_activity,OrganismalFitness,0.0,0,0.05555555555555555,1.0,in mody2
+HXK4_HUMAN,A119D,LoF,Gersing_2022_activity,OrganismalFitness,0.5555555555555556,0,0.4444444444444444,0.6521739130434783,in mody2; dbsnp:rs1176659689
+HXK4_HUMAN,S131P,LoF,Gersing_2022_activity,OrganismalFitness,0.0,0,0.0,0.9565217391304348,in mody2; decreased affinity for glucose; dbsnp:rs104894010
+HXK4_HUMAN,H137R,LoF,Gersing_2022_activity,OrganismalFitness,0.4444444444444444,1,0.6666666666666666,0.2608695652173913,in mody2
+HXK4_HUMAN,F150S,LoF,Gersing_2022_activity,OrganismalFitness,0.6666666666666666,0,0.6111111111111112,0.21739130434782608,in mody2; dbsnp:rs193922297
+HXK4_HUMAN,S151T,LoF,Gersing_2022_activity,OrganismalFitness,0.1111111111111111,0,0.8333333333333334,0.043478260869565216,in pndm1
+HXK4_HUMAN,F152L,LoF,Gersing_2022_activity,OrganismalFitness,0.1111111111111111,0,0.8888888888888888,0.043478260869565216,in mody2; dbsnp:rs2096280050
+HXK4_HUMAN,D160N,LoF,Gersing_2022_activity,OrganismalFitness,0.5,0,1.0,0.043478260869565216,in mody2; decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs1554335566
+HXK4_HUMAN,L164P,LoF,Gersing_2022_activity,OrganismalFitness,0.29411764705882354,0,0.47058823529411764,0.5217391304347826,in mody2 and pndm1; dbsnp:rs2096278847
+HXK4_HUMAN,T168A,LoF,Gersing_2022_activity,OrganismalFitness,0.5555555555555556,0,0.8888888888888888,0.043478260869565216,in pndm1; decreased glucokinase activity; decreased affinity for glucose
+HXK4_HUMAN,T168P,LoF,Gersing_2022_activity,OrganismalFitness,0.9444444444444444,0,0.2777777777777778,0.6086956521739131,in mody2
+HXK4_HUMAN,K169R,LoF,Gersing_2022_activity,OrganismalFitness,0.7222222222222222,0,1.0,0.08695652173913043,in pndm1
+HXK4_HUMAN,G175R,LoF,Gersing_2022_activity,OrganismalFitness,0.5555555555555556,0,0.6111111111111112,0.043478260869565216,in mody2; dbsnp:rs587780344
+HXK4_HUMAN,V182L,LoF,Gersing_2022_activity,OrganismalFitness,0.25,0,0.75,0.13043478260869565,in mody2; decreased glucokinase activity; decreased affinity for glucose; increased affinity for atp
+HXK4_HUMAN,V182M,LoF,Gersing_2022_activity,OrganismalFitness,0.375,0,0.6875,0.2608695652173913,in mody2; dbsnp:rs587780345
+HXK4_HUMAN,D187Y,LoF,Gersing_2022_activity,OrganismalFitness,0.2222222222222222,0,0.16666666666666666,1.0,in mody2
+HXK4_HUMAN,A188T,LoF,Gersing_2022_activity,OrganismalFitness,0.7647058823529411,0,0.8235294117647058,0.0,in mody2; decreased affinity for glucose; dbsnp:rs751279776
+HXK4_HUMAN,A188V,LoF,Gersing_2022_activity,OrganismalFitness,0.8823529411764706,1,0.7058823529411765,0.17391304347826086,in mody2; dbsnp:rs193922307
+HXK4_HUMAN,R191W,LoF,Gersing_2022_activity,OrganismalFitness,0.6666666666666666,0,0.05555555555555555,0.9565217391304348,in mody2; dbsnp:rs1085307455
+HXK4_HUMAN,V200L,LoF,Gersing_2022_activity,OrganismalFitness,0.9411764705882353,1,0.9411764705882353,0.08695652173913043,in mody2
+HXK4_HUMAN,M202R,LoF,Gersing_2022_activity,OrganismalFitness,0.6111111111111112,0,0.3888888888888889,0.6086956521739131,in mody2
+HXK4_HUMAN,M202T,LoF,Gersing_2022_activity,OrganismalFitness,0.6666666666666666,0,0.7777777777777778,0.043478260869565216,in mody2; dbsnp:rs193922311
+HXK4_HUMAN,V203A,LoF,Gersing_2022_activity,OrganismalFitness,0.29411764705882354,0,0.8235294117647058,0.0,in mody2; dbsnp:rs1562717053
+HXK4_HUMAN,T206M,LoF,Gersing_2022_activity,OrganismalFitness,0.0,0,0.6111111111111112,0.0,in mody2; dbsnp:rs1441649062
+HXK4_HUMAN,T209M,LoF,Gersing_2022_activity,OrganismalFitness,0.8333333333333334,1,0.5555555555555556,0.30434782608695654,in mody2; dbsnp:rs1583599303
+HXK4_HUMAN,M210T,LoF,Gersing_2022_activity,OrganismalFitness,0.0,0,0.5882352941176471,0.34782608695652173,in mody2; dbsnp:rs80356654
+HXK4_HUMAN,C213R,LoF,Gersing_2022_activity,OrganismalFitness,0.35294117647058826,0,0.7647058823529411,0.30434782608695654,in mody2
+HXK4_HUMAN,D217N,LoF,Gersing_2022_activity,OrganismalFitness,0.3888888888888889,1,1.0,0.0,in mody2; benign; dbsnp:rs147065275
+HXK4_HUMAN,E221K,LoF,Gersing_2022_activity,OrganismalFitness,0.4117647058823529,1,0.8235294117647058,0.08695652173913043,in mody2; dbsnp:rs193922317
+HXK4_HUMAN,G223S,LoF,Gersing_2022_activity,OrganismalFitness,0.8888888888888888,0,0.9444444444444444,0.0,in mody2; dbsnp:rs1360415315
+HXK4_HUMAN,I225M,LoF,Gersing_2022_activity,OrganismalFitness,1.0,1,0.8333333333333334,0.043478260869565216,in mody2; associated in cis with k-248; highly decreased glucokinase activity; loss of glucokinase activity when associa
+HXK4_HUMAN,V226M,LoF,Gersing_2022_activity,OrganismalFitness,0.8823529411764706,0,0.8235294117647058,0.043478260869565216,in mody2; no effect on stability; decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs148311934
+HXK4_HUMAN,G227C,LoF,Gersing_2022_activity,OrganismalFitness,0.7222222222222222,0,0.7777777777777778,0.08695652173913043,in mody2
+HXK4_HUMAN,G227S,LoF,Gersing_2022_activity,OrganismalFitness,0.5,0,0.9444444444444444,0.043478260869565216,in mody2
+HXK4_HUMAN,T228M,LoF,Gersing_2022_activity,OrganismalFitness,0.35294117647058826,0,0.8235294117647058,0.043478260869565216,in mody2 and pndm1; dbsnp:rs80356655
+HXK4_HUMAN,N231H,LoF,Gersing_2022_activity,OrganismalFitness,0.9444444444444444,1,0.7222222222222222,0.13043478260869565,in mody2; uncertain significance
+HXK4_HUMAN,C233R,LoF,Gersing_2022_activity,OrganismalFitness,1.0,1,0.3333333333333333,0.7391304347826086,in mody2; loss of glucokinase activity; loss of affinity for glucose; loss of affinity for atp
+HXK4_HUMAN,E248K,LoF,Gersing_2022_activity,OrganismalFitness,0.35294117647058826,1,0.8823529411764706,0.0,in mody2; associated in cis with m-225; highly decreased glucokinase activity; loss of glucokinase activity when associa
+HXK4_HUMAN,C252G,LoF,Gersing_2022_activity,OrganismalFitness,0.6111111111111112,1,0.5555555555555556,0.21739130434782608,in mody2
+HXK4_HUMAN,T255A,LoF,Gersing_2022_activity,OrganismalFitness,0.8888888888888888,1,0.7222222222222222,0.043478260869565216,in mody2; dbsnp:rs2128820605
+HXK4_HUMAN,E256K,LoF,Gersing_2022_activity,OrganismalFitness,0.23529411764705882,0,0.7058823529411765,0.2608695652173913,in mody2; dbsnp:rs769268803
+HXK4_HUMAN,W257R,LoF,Gersing_2022_activity,OrganismalFitness,0.7222222222222222,1,0.3333333333333333,0.782608695652174,in mody2; almost complete loss of glucokinase activity; dbsnp:rs1554335135
+HXK4_HUMAN,A259T,LoF,Gersing_2022_activity,OrganismalFitness,0.6666666666666666,0,0.7777777777777778,0.13043478260869565,in mody2; dbsnp:rs1375656631
+HXK4_HUMAN,G261E,LoF,Gersing_2022_activity,OrganismalFitness,0.8823529411764706,0,0.4117647058823529,0.5652173913043478,in mody2
+HXK4_HUMAN,G261R,LoF,Gersing_2022_activity,OrganismalFitness,0.4117647058823529,0,0.7647058823529411,0.043478260869565216,in mody2 and pndm1; pathogenic; highly decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs104894008
+HXK4_HUMAN,E265K,LoF,Gersing_2022_activity,OrganismalFitness,0.5,1,0.5555555555555556,0.4782608695652174,in mody2; decreased glucokinase activity; decreased affinity for glucose; no effect on affinity for atp; dbsnp:rs1048940
+HXK4_HUMAN,E279Q,LoF,Gersing_2022_activity,OrganismalFitness,0.16666666666666666,1,0.8888888888888888,0.0,in mody2; benign; dbsnp:rs104894005
+HXK4_HUMAN,M298K,LoF,Gersing_2022_activity,OrganismalFitness,0.3333333333333333,0,0.3333333333333333,0.6956521739130435,in mody2
+HXK4_HUMAN,G299R,LoF,Gersing_2022_activity,OrganismalFitness,0.6111111111111112,0,0.6111111111111112,0.13043478260869565,in mody2; dbsnp:rs104894009
+HXK4_HUMAN,E300K,LoF,Gersing_2022_activity,OrganismalFitness,0.1111111111111111,0,0.7777777777777778,0.2608695652173913,in mody2; dbsnp:rs1255911887
+HXK4_HUMAN,E300Q,LoF,Gersing_2022_activity,OrganismalFitness,0.7222222222222222,1,0.8888888888888888,0.043478260869565216,in mody2
+HXK4_HUMAN,R308W,LoF,Gersing_2022_activity,OrganismalFitness,0.5,1,0.16666666666666666,0.9130434782608695,in mody2
+HXK4_HUMAN,L309P,LoF,Gersing_2022_activity,OrganismalFitness,0.1111111111111111,0,0.05555555555555555,0.9565217391304348,in mody2; dbsnp:rs2128820009
+HXK4_HUMAN,L315F,LoF,Gersing_2022_activity,OrganismalFitness,0.7222222222222222,1,0.8333333333333334,0.043478260869565216,in mody2; uncertain significance; dbsnp:rs1583594350
+HXK4_HUMAN,S336L,LoF,Gersing_2022_activity,OrganismalFitness,0.05555555555555555,0,0.6111111111111112,0.43478260869565216,in mody2
+HXK4_HUMAN,V367M,LoF,Gersing_2022_activity,OrganismalFitness,0.5,0,0.8333333333333334,0.0,in mody2; dbsnp:rs1057521092
+HXK4_HUMAN,R377H,LoF,Gersing_2022_activity,OrganismalFitness,0.5,0,0.8888888888888888,0.043478260869565216,in mody2; dbsnp:rs193922264
+HXK4_HUMAN,A378T,LoF,Gersing_2022_activity,OrganismalFitness,0.8333333333333334,0,0.8888888888888888,0.043478260869565216,in mody2; dbsnp:rs104894016
+HXK4_HUMAN,A379V,LoF,Gersing_2022_activity,OrganismalFitness,0.6111111111111112,0,0.8333333333333334,0.13043478260869565,in mody2; decreased glucokinase activity; decreased affinity for glucose; decreased affinity for atp; dbsnp:rs193922265
+HXK4_HUMAN,C382Y,LoF,Gersing_2022_activity,OrganismalFitness,0.5,0,0.5555555555555556,0.17391304347826086,in mody2; dbsnp:rs2096271616
+HXK4_HUMAN,S383L,LoF,Gersing_2022_activity,OrganismalFitness,0.11764705882352941,0,0.47058823529411764,0.5652173913043478,in mody2; dbsnp:rs777870079
+HXK4_HUMAN,A384T,LoF,Gersing_2022_activity,OrganismalFitness,0.6666666666666666,0,0.8888888888888888,0.0,in mody2; dbsnp:rs1376620210
+HXK4_HUMAN,G385V,LoF,Gersing_2022_activity,OrganismalFitness,0.5555555555555556,0,0.7777777777777778,0.0,in mody2
+HXK4_HUMAN,R392C,LoF,Gersing_2022_activity,OrganismalFitness,0.3333333333333333,1,0.5555555555555556,0.4782608695652174,in mody2; dbsnp:rs1167124132
+HXK4_HUMAN,M393T,LoF,Gersing_2022_activity,OrganismalFitness,0.47058823529411764,1,0.8235294117647058,0.043478260869565216,in pndm1; decreased stability; increased glucokinase activity; no effect on affinity for glucose; dbsnp:rs2096271425
+HXK4_HUMAN,R397L,LoF,Gersing_2022_activity,OrganismalFitness,0.4117647058823529,1,0.47058823529411764,0.5652173913043478,in pndm1; decreased stability; increased glucokinase activity; no effect on affinity for glucose; dbsnp:rs193929375
+HXK4_HUMAN,S411F,LoF,Gersing_2022_activity,OrganismalFitness,0.35294117647058826,0,0.35294117647058826,0.782608695652174,in mody2
+HXK4_HUMAN,K414E,LoF,Gersing_2022_activity,OrganismalFitness,0.3333333333333333,1,0.7777777777777778,0.13043478260869565,in mody2; decreased affinity for glucose; dbsnp:rs193922272
+HXK4_HUMAN,H416P,LoF,Gersing_2022_activity,OrganismalFitness,0.11764705882352941,0,0.058823529411764705,0.9565217391304348,in mody2; dbsnp:rs1583591303
+HXK4_HUMAN,K420E,LoF,Gersing_2022_activity,OrganismalFitness,1.0,1,0.6666666666666666,0.2608695652173913,in mody2; no effect on glucokinase activity; decreased affinity for glucose; no effect on affinity for atp
+HXK4_HUMAN,C434F,LoF,Gersing_2022_activity,OrganismalFitness,0.2777777777777778,0,0.3888888888888889,0.6521739130434783,in mody2; uncertain significance
+HXK4_HUMAN,S441L,LoF,Gersing_2022_activity,OrganismalFitness,0.1111111111111111,0,0.5,0.391304347826087,in pndm1; uncertain significance; decreased stability; decreased glucokinase activity; no effect on affinity for glucose
+HXK4_HUMAN,S441W,LoF,Gersing_2022_activity,OrganismalFitness,0.5,1,0.0,0.9565217391304348,in mody2; decreased affinity for glucose; dbsnp:rs1286804191
+HXK4_HUMAN,E442K,GoF,Gersing_2022_activity,OrganismalFitness,0.4444444444444444,1,0.8888888888888888,0.0,in hhf3; increased affinity for glucose; dbsnp:rs758737171
+HXK4_HUMAN,R447Q,LoF,Gersing_2022_activity,OrganismalFitness,0.2222222222222222,0,0.6666666666666666,0.13043478260869565,in mody2; dbsnp:rs1131691416
+HXK4_HUMAN,A449T,LoF,Gersing_2022_activity,OrganismalFitness,0.6666666666666666,0,0.8888888888888888,0.0,in pndm1; decreased stability; increased glucokinase activity; increased affinity for glucose; dbsnp:rs193922282
+HXK4_HUMAN,V455M,GoF,Gersing_2022_activity,OrganismalFitness,0.6470588235294118,1,0.9411764705882353,0.0,in hhf3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; decrea
+HXK4_HUMAN,A456V,GoF,Gersing_2022_activity,OrganismalFitness,0.7857142857142857,1,0.9285714285714286,0.0,in hhf3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; loss o
+HXK4_HUMAN,V16E,LoF,Gersing_2023_abundance,Expression,0.8235294117647058,1,0.17647058823529413,0.782608695652174,in mody2
+HXK4_HUMAN,I19N,LoF,Gersing_2023_abundance,Expression,0.4444444444444444,1,0.16666666666666666,0.9565217391304348,in mody2
+HXK4_HUMAN,L20P,LoF,Gersing_2023_abundance,Expression,0.5555555555555556,0,0.0,0.9565217391304348,in mody2
+HXK4_HUMAN,E40K,LoF,Gersing_2023_abundance,Expression,0.47058823529411764,0,0.5294117647058824,0.391304347826087,in pndm1; decreased stability; decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs794727236
+HXK4_HUMAN,R43C,LoF,Gersing_2023_abundance,Expression,0.8823529411764706,1,0.35294117647058826,0.6956521739130435,in pndm1; decreased stability; decreased glucokinase activity; no effect on affinity for glucose; dbsnp:rs1486280029
+HXK4_HUMAN,R43H,LoF,Gersing_2023_abundance,Expression,0.23529411764705882,0,0.5882352941176471,0.13043478260869565,in mody2; decreased enzyme stability shown by thermostability assays; no effect on kinetic parameters for glucokinase ac
+HXK4_HUMAN,R43S,LoF,Gersing_2023_abundance,Expression,0.6470588235294118,1,0.6470588235294118,0.2608695652173913,in mody2; dbsnp:rs1486280029
+HXK4_HUMAN,G44S,LoF,Gersing_2023_abundance,Expression,1.0,0,0.9375,0.0,in mody2; dbsnp:rs267601516
+HXK4_HUMAN,H50D,LoF,Gersing_2023_abundance,Expression,0.3333333333333333,0,0.5,0.34782608695652173,in pndm1; loss of stability; loss of glucokinase activity; decreased affinity for glucose
+HXK4_HUMAN,A53S,LoF,Gersing_2023_abundance,Expression,0.7058823529411765,0,1.0,0.043478260869565216,in mody2
+HXK4_HUMAN,Y61S,LoF,Gersing_2023_abundance,Expression,0.8888888888888888,1,0.5555555555555556,0.2608695652173913,in mody2; decreased glucokinase activity; decreased affinity for glucose; increased affinity for atp
+HXK4_HUMAN,T65I,GoF,Gersing_2023_abundance,Expression,0.35294117647058826,1,0.8823529411764706,0.08695652173913043,in hhf3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; loss o
+HXK4_HUMAN,G68D,LoF,Gersing_2023_abundance,Expression,0.16666666666666666,1,0.6111111111111112,0.391304347826087,in mody2; likely benign; mildly increases glucokinase activity; dbsnp:rs373418736
+HXK4_HUMAN,E70K,LoF,Gersing_2023_abundance,Expression,0.8888888888888888,1,0.7777777777777778,0.30434782608695654,in mody2; decreased affinity for glucose; dbsnp:rs2128823091
+HXK4_HUMAN,G72R,LoF,Gersing_2023_abundance,Expression,0.17647058823529413,0,0.7058823529411765,0.08695652173913043,in mody2 and pndm1; decreased stability; no effect on glucokinase activity; no effect on affinity for glucose; dbsnp:rs1
+HXK4_HUMAN,L77P,LoF,Gersing_2023_abundance,Expression,0.2222222222222222,0,0.2777777777777778,0.9565217391304348,in mody2; dbsnp:rs2096281827
+HXK4_HUMAN,D78E,LoF,Gersing_2023_abundance,Expression,0.9444444444444444,1,1.0,0.0,in mody2
+HXK4_HUMAN,G80A,LoF,Gersing_2023_abundance,Expression,0.8235294117647058,1,0.8823529411764706,0.043478260869565216,in mody2
+HXK4_HUMAN,G80D,LoF,Gersing_2023_abundance,Expression,0.47058823529411764,1,0.7647058823529411,0.043478260869565216,in mody2
+HXK4_HUMAN,G80S,LoF,Gersing_2023_abundance,Expression,0.9411764705882353,1,1.0,0.0,in mody2; dbsnp:rs1554335761
+HXK4_HUMAN,T82I,LoF,Gersing_2023_abundance,Expression,0.7777777777777778,1,0.5,0.4782608695652174,in mody2
+HXK4_HUMAN,V91L,GoF,Gersing_2023_abundance,Expression,0.8888888888888888,1,1.0,0.0,in hhf3; increased glucokinase activity; increased affinity for glucose
+HXK4_HUMAN,W99C,GoF,Gersing_2023_abundance,Expression,0.1111111111111111,1,0.16666666666666666,0.782608695652174,in hhf3; increased glucokinase activity; increased affinity for glucose; increased affinity for atp
+HXK4_HUMAN,Y108H,LoF,Gersing_2023_abundance,Expression,0.6111111111111112,0,0.8888888888888888,0.0,in mody2; dbsnp:rs193922292
+HXK4_HUMAN,I110T,LoF,Gersing_2023_abundance,Expression,0.5,0,0.8333333333333334,0.0,in mody2; dbsnp:rs1338970607
+HXK4_HUMAN,T116P,LoF,Gersing_2023_abundance,Expression,0.0,0,0.058823529411764705,1.0,in mody2
+HXK4_HUMAN,A119D,LoF,Gersing_2023_abundance,Expression,0.2777777777777778,1,0.3333333333333333,0.6956521739130435,in mody2; dbsnp:rs1176659689
+HXK4_HUMAN,C129Y,LoF,Gersing_2023_abundance,Expression,0.5,1,0.4444444444444444,0.5217391304347826,in mody2; dbsnp:rs2128822108
+HXK4_HUMAN,S131P,LoF,Gersing_2023_abundance,Expression,0.0,0,0.0,0.9565217391304348,in mody2; decreased affinity for glucose; dbsnp:rs104894010
+HXK4_HUMAN,H137R,LoF,Gersing_2023_abundance,Expression,0.4444444444444444,1,0.6666666666666666,0.21739130434782608,in mody2
+HXK4_HUMAN,F150S,LoF,Gersing_2023_abundance,Expression,0.5,1,0.6111111111111112,0.17391304347826086,in mody2; dbsnp:rs193922297
+HXK4_HUMAN,S151T,LoF,Gersing_2023_abundance,Expression,0.25,1,0.8125,0.0,in pndm1
+HXK4_HUMAN,F152L,LoF,Gersing_2023_abundance,Expression,0.1875,1,0.9375,0.043478260869565216,in mody2; dbsnp:rs2096280050
+HXK4_HUMAN,D160N,LoF,Gersing_2023_abundance,Expression,1.0,1,1.0,0.0,in mody2; decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs1554335566
+HXK4_HUMAN,L164P,LoF,Gersing_2023_abundance,Expression,0.8823529411764706,1,0.35294117647058826,0.5217391304347826,in mody2 and pndm1; dbsnp:rs2096278847
+HXK4_HUMAN,T168A,LoF,Gersing_2023_abundance,Expression,0.5882352941176471,1,0.8823529411764706,0.043478260869565216,in pndm1; decreased glucokinase activity; decreased affinity for glucose
+HXK4_HUMAN,T168P,LoF,Gersing_2023_abundance,Expression,0.23529411764705882,1,0.4117647058823529,0.6956521739130435,in mody2
+HXK4_HUMAN,K169R,LoF,Gersing_2023_abundance,Expression,0.5,1,1.0,0.043478260869565216,in pndm1
+HXK4_HUMAN,G175R,LoF,Gersing_2023_abundance,Expression,0.7222222222222222,1,0.6111111111111112,0.043478260869565216,in mody2; dbsnp:rs587780344
+HXK4_HUMAN,V182L,LoF,Gersing_2023_abundance,Expression,0.4444444444444444,1,0.7777777777777778,0.043478260869565216,in mody2; decreased glucokinase activity; decreased affinity for glucose; increased affinity for atp
+HXK4_HUMAN,V182M,LoF,Gersing_2023_abundance,Expression,0.2222222222222222,1,0.6666666666666666,0.13043478260869565,in mody2; dbsnp:rs587780345
+HXK4_HUMAN,A188T,LoF,Gersing_2023_abundance,Expression,0.8823529411764706,1,0.8235294117647058,0.0,in mody2; decreased affinity for glucose; dbsnp:rs751279776
+HXK4_HUMAN,A188V,LoF,Gersing_2023_abundance,Expression,0.6470588235294118,0,0.7058823529411765,0.17391304347826086,in mody2; dbsnp:rs193922307
+HXK4_HUMAN,R191W,LoF,Gersing_2023_abundance,Expression,0.05555555555555555,0,0.05555555555555555,0.9130434782608695,in mody2; dbsnp:rs1085307455
+HXK4_HUMAN,V200L,LoF,Gersing_2023_abundance,Expression,0.4444444444444444,1,0.9444444444444444,0.08695652173913043,in mody2
+HXK4_HUMAN,M202R,LoF,Gersing_2023_abundance,Expression,0.3888888888888889,1,0.3333333333333333,0.6086956521739131,in mody2
+HXK4_HUMAN,M202T,LoF,Gersing_2023_abundance,Expression,0.1111111111111111,0,0.7777777777777778,0.08695652173913043,in mody2; dbsnp:rs193922311
+HXK4_HUMAN,V203A,LoF,Gersing_2023_abundance,Expression,0.3333333333333333,1,0.8333333333333334,0.043478260869565216,in mody2; dbsnp:rs1562717053
+HXK4_HUMAN,T206M,LoF,Gersing_2023_abundance,Expression,0.05555555555555555,0,0.6666666666666666,0.0,in mody2; dbsnp:rs1441649062
+HXK4_HUMAN,T209M,LoF,Gersing_2023_abundance,Expression,0.8235294117647058,1,0.5882352941176471,0.34782608695652173,in mody2; dbsnp:rs1583599303
+HXK4_HUMAN,M210K,LoF,Gersing_2023_abundance,Expression,0.8125,1,0.375,0.5652173913043478,in mody2 and pndm1; dbsnp:rs80356654
+HXK4_HUMAN,M210T,LoF,Gersing_2023_abundance,Expression,0.625,0,0.625,0.2608695652173913,in mody2; dbsnp:rs80356654
+HXK4_HUMAN,C213R,LoF,Gersing_2023_abundance,Expression,0.6470588235294118,1,0.7058823529411765,0.21739130434782608,in mody2
+HXK4_HUMAN,Y214C,GoF,Gersing_2023_abundance,Expression,0.6111111111111112,1,0.7777777777777778,0.08695652173913043,in hhf3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; decrea
+HXK4_HUMAN,D217N,LoF,Gersing_2023_abundance,Expression,1.0,1,1.0,0.0,in mody2; benign; dbsnp:rs147065275
+HXK4_HUMAN,E221K,LoF,Gersing_2023_abundance,Expression,0.2777777777777778,0,0.8333333333333334,0.08695652173913043,in mody2; dbsnp:rs193922317
+HXK4_HUMAN,G223S,LoF,Gersing_2023_abundance,Expression,0.9375,1,0.9375,0.043478260869565216,in mody2; dbsnp:rs1360415315
+HXK4_HUMAN,I225M,LoF,Gersing_2023_abundance,Expression,0.5555555555555556,1,0.8333333333333334,0.08695652173913043,in mody2; associated in cis with k-248; highly decreased glucokinase activity; loss of glucokinase activity when associa
+HXK4_HUMAN,V226M,LoF,Gersing_2023_abundance,Expression,0.8333333333333334,1,0.8333333333333334,0.0,in mody2; no effect on stability; decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs148311934
+HXK4_HUMAN,G227C,LoF,Gersing_2023_abundance,Expression,0.4444444444444444,0,0.7777777777777778,0.08695652173913043,in mody2
+HXK4_HUMAN,G227S,LoF,Gersing_2023_abundance,Expression,0.9444444444444444,1,0.9444444444444444,0.0,in mody2
+HXK4_HUMAN,T228M,LoF,Gersing_2023_abundance,Expression,0.5,1,0.8125,0.0,in mody2 and pndm1; dbsnp:rs80356655
+HXK4_HUMAN,N231H,LoF,Gersing_2023_abundance,Expression,1.0,1,0.7777777777777778,0.13043478260869565,in mody2; uncertain significance
+HXK4_HUMAN,C233R,LoF,Gersing_2023_abundance,Expression,0.1875,0,0.3125,0.6956521739130435,in mody2; loss of glucokinase activity; loss of affinity for glucose; loss of affinity for atp
+HXK4_HUMAN,E248K,LoF,Gersing_2023_abundance,Expression,0.625,1,0.8125,0.043478260869565216,in mody2; associated in cis with m-225; highly decreased glucokinase activity; loss of glucokinase activity when associa
+HXK4_HUMAN,C252G,LoF,Gersing_2023_abundance,Expression,0.625,0,0.5625,0.17391304347826086,in mody2
+HXK4_HUMAN,T255A,LoF,Gersing_2023_abundance,Expression,0.6666666666666666,1,0.7222222222222222,0.0,in mody2; dbsnp:rs2128820605
+HXK4_HUMAN,E256K,LoF,Gersing_2023_abundance,Expression,0.2222222222222222,1,0.7222222222222222,0.2608695652173913,in mody2; dbsnp:rs769268803
+HXK4_HUMAN,W257R,LoF,Gersing_2023_abundance,Expression,0.058823529411764705,0,0.35294117647058826,0.782608695652174,in mody2; almost complete loss of glucokinase activity; dbsnp:rs1554335135
+HXK4_HUMAN,A259T,LoF,Gersing_2023_abundance,Expression,0.7058823529411765,1,0.7647058823529411,0.08695652173913043,in mody2; dbsnp:rs1375656631
+HXK4_HUMAN,G261E,LoF,Gersing_2023_abundance,Expression,0.35294117647058826,0,0.47058823529411764,0.6086956521739131,in mody2
+HXK4_HUMAN,G261R,LoF,Gersing_2023_abundance,Expression,0.5882352941176471,0,0.7647058823529411,0.08695652173913043,in mody2 and pndm1; pathogenic; highly decreased glucokinase activity; decreased affinity for glucose; dbsnp:rs104894008
+HXK4_HUMAN,E265K,LoF,Gersing_2023_abundance,Expression,0.2777777777777778,0,0.5,0.4782608695652174,in mody2; decreased glucokinase activity; decreased affinity for glucose; no effect on affinity for atp; dbsnp:rs1048940
+HXK4_HUMAN,E279Q,LoF,Gersing_2023_abundance,Expression,0.8125,1,0.875,0.0,in mody2; benign; dbsnp:rs104894005
+HXK4_HUMAN,G299R,LoF,Gersing_2023_abundance,Expression,0.16666666666666666,0,0.6111111111111112,0.21739130434782608,in mody2; dbsnp:rs104894009
+HXK4_HUMAN,E300K,LoF,Gersing_2023_abundance,Expression,0.5555555555555556,0,0.7777777777777778,0.2608695652173913,in mody2; dbsnp:rs1255911887
+HXK4_HUMAN,E300Q,LoF,Gersing_2023_abundance,Expression,0.8888888888888888,0,0.8888888888888888,0.0,in mody2
+HXK4_HUMAN,R308W,LoF,Gersing_2023_abundance,Expression,0.2,0,0.13333333333333333,0.8695652173913043,in mody2
+HXK4_HUMAN,L309P,LoF,Gersing_2023_abundance,Expression,0.0,0,0.05555555555555555,0.9565217391304348,in mody2; dbsnp:rs2128820009
+HXK4_HUMAN,L315F,LoF,Gersing_2023_abundance,Expression,0.2777777777777778,0,0.8333333333333334,0.0,in mody2; uncertain significance; dbsnp:rs1583594350
+HXK4_HUMAN,S336L,LoF,Gersing_2023_abundance,Expression,0.05555555555555555,0,0.5555555555555556,0.391304347826087,in mody2
+HXK4_HUMAN,V367M,LoF,Gersing_2023_abundance,Expression,0.7058823529411765,0,0.8235294117647058,0.0,in mody2; dbsnp:rs1057521092
+HXK4_HUMAN,R377H,LoF,Gersing_2023_abundance,Expression,0.5,0,0.8888888888888888,0.08695652173913043,in mody2; dbsnp:rs193922264
+HXK4_HUMAN,A378T,LoF,Gersing_2023_abundance,Expression,0.4117647058823529,0,0.8823529411764706,0.043478260869565216,in mody2; dbsnp:rs104894016
+HXK4_HUMAN,A379V,LoF,Gersing_2023_abundance,Expression,0.7058823529411765,1,0.8823529411764706,0.08695652173913043,in mody2; decreased glucokinase activity; decreased affinity for glucose; decreased affinity for atp; dbsnp:rs193922265
+HXK4_HUMAN,C382Y,LoF,Gersing_2023_abundance,Expression,0.3888888888888889,0,0.5,0.21739130434782608,in mody2; dbsnp:rs2096271616
+HXK4_HUMAN,S383L,LoF,Gersing_2023_abundance,Expression,0.3125,0,0.4375,0.5652173913043478,in mody2; dbsnp:rs777870079
+HXK4_HUMAN,A384T,LoF,Gersing_2023_abundance,Expression,0.8823529411764706,1,0.8235294117647058,0.0,in mody2; dbsnp:rs1376620210
+HXK4_HUMAN,G385V,LoF,Gersing_2023_abundance,Expression,0.9333333333333333,1,0.7333333333333333,0.0,in mody2
+HXK4_HUMAN,R392C,LoF,Gersing_2023_abundance,Expression,0.4444444444444444,0,0.4444444444444444,0.5217391304347826,in mody2; dbsnp:rs1167124132
+HXK4_HUMAN,M393T,LoF,Gersing_2023_abundance,Expression,0.17647058823529413,0,0.7647058823529411,0.0,in pndm1; decreased stability; increased glucokinase activity; no effect on affinity for glucose; dbsnp:rs2096271425
+HXK4_HUMAN,R397L,LoF,Gersing_2023_abundance,Expression,0.058823529411764705,0,0.47058823529411764,0.5217391304347826,in pndm1; decreased stability; increased glucokinase activity; no effect on affinity for glucose; dbsnp:rs193929375
+HXK4_HUMAN,S411F,LoF,Gersing_2023_abundance,Expression,0.7222222222222222,1,0.2777777777777778,0.8260869565217391,in mody2
+HXK4_HUMAN,K414E,LoF,Gersing_2023_abundance,Expression,0.3888888888888889,0,0.7777777777777778,0.08695652173913043,in mody2; decreased affinity for glucose; dbsnp:rs193922272
+HXK4_HUMAN,H416P,LoF,Gersing_2023_abundance,Expression,0.29411764705882354,0,0.058823529411764705,0.9565217391304348,in mody2; dbsnp:rs1583591303
+HXK4_HUMAN,K420E,LoF,Gersing_2023_abundance,Expression,0.1111111111111111,0,0.6666666666666666,0.21739130434782608,in mody2; no effect on glucokinase activity; decreased affinity for glucose; no effect on affinity for atp
+HXK4_HUMAN,S441L,LoF,Gersing_2023_abundance,Expression,0.875,1,0.4375,0.5652173913043478,in pndm1; uncertain significance; decreased stability; decreased glucokinase activity; no effect on affinity for glucose
+HXK4_HUMAN,S441W,LoF,Gersing_2023_abundance,Expression,0.0625,0,0.0,1.0,in mody2; decreased affinity for glucose; dbsnp:rs1286804191
+HXK4_HUMAN,E442K,GoF,Gersing_2023_abundance,Expression,0.8888888888888888,1,0.8888888888888888,0.0,in hhf3; increased affinity for glucose; dbsnp:rs758737171
+HXK4_HUMAN,R447Q,LoF,Gersing_2023_abundance,Expression,0.7222222222222222,1,0.7222222222222222,0.13043478260869565,in mody2; dbsnp:rs1131691416
+HXK4_HUMAN,A449T,LoF,Gersing_2023_abundance,Expression,0.9444444444444444,1,0.9444444444444444,0.043478260869565216,in pndm1; decreased stability; increased glucokinase activity; increased affinity for glucose; dbsnp:rs193922282
+HXK4_HUMAN,V455M,GoF,Gersing_2023_abundance,Expression,1.0,1,0.8888888888888888,0.0,in hhf3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; decrea
+HXK4_HUMAN,A456V,GoF,Gersing_2023_abundance,Expression,0.7333333333333333,1,0.9333333333333333,0.08695652173913043,in hhf3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; loss o
+KCNE1_HUMAN,T7I,LoF,Muhammad_2023_expression,Expression,0.23529411764705882,1,0.47058823529411764,0.5217391304347826,in jlns2; impairs glycosylation at n-5; dbsnp:rs28933384
+KCNE1_HUMAN,A8V,LoF,Muhammad_2023_expression,Expression,0.17647058823529413,1,0.7058823529411765,0.08695652173913043,in lqt5; uncertain significance; dbsnp:rs199473348
+KCNE1_HUMAN,T10M,LoF,Muhammad_2023_expression,Expression,0.9444444444444444,1,0.4444444444444444,0.5217391304347826,in lqt5; uncertain significance; dbsnp:rs144917638
+KCNE1_HUMAN,S28L,LoF,Muhammad_2023_expression,Expression,0.1111111111111111,1,0.6111111111111112,0.391304347826087,in lqt5; uncertain significance; dbsnp:rs199473350
+KCNE1_HUMAN,R32H,LoF,Muhammad_2023_expression,Expression,0.7777777777777778,1,0.6111111111111112,0.391304347826087,in lqt5; uncertain significance; dbsnp:rs17857111
+KCNE1_HUMAN,R36H,LoF,Muhammad_2023_expression,Expression,0.5,1,0.5,0.4782608695652174,in lqt5; uncertain significance; dbsnp:rs199473351
+KCNE1_HUMAN,V47F,LoF,Muhammad_2023_expression,Expression,0.3888888888888889,1,0.7777777777777778,0.2608695652173913,in jlns2; dbsnp:rs199473353
+KCNE1_HUMAN,L51H,LoF,Muhammad_2023_expression,Expression,0.0,0,0.2222222222222222,0.9130434782608695,in jlns2
+KCNE1_HUMAN,F53S,LoF,Muhammad_2023_expression,Expression,0.2777777777777778,0,0.6111111111111112,0.13043478260869565,in lqt5; uncertain significance; dbsnp:rs199473355
+KCNE1_HUMAN,G55S,LoF,Muhammad_2023_expression,Expression,0.5555555555555556,1,1.0,0.043478260869565216,in lqt5; uncertain significance; dbsnp:rs199473644
+KCNE1_HUMAN,T58P,LoF,Muhammad_2023_expression,Expression,0.0,0,0.16666666666666666,0.9130434782608695,in lqt5; uncertain significance; dbsnp:rs147187721
+KCNE1_HUMAN,L59P,LoF,Muhammad_2023_expression,Expression,0.1111111111111111,0,0.19444444444444445,0.9565217391304348,in lqt5; uncertain significance; dbsnp:rs141813529
+KCNE1_HUMAN,R67C,LoF,Muhammad_2023_expression,Expression,0.5,1,0.6666666666666666,0.2608695652173913,in lqt5; uncertain significance; dbsnp:rs199473645
+KCNE1_HUMAN,R67H,LoF,Muhammad_2023_expression,Expression,0.6111111111111112,1,0.7222222222222222,0.13043478260869565,in lqt5; uncertain significance; dbsnp:rs79654911
+KCNE1_HUMAN,K70M,LoF,Muhammad_2023_expression,Expression,0.2222222222222222,1,0.4166666666666667,0.6956521739130435,in lqt5; uncertain significance; dbsnp:rs199473646
+KCNE1_HUMAN,S74L,LoF,Muhammad_2023_expression,Expression,0.16666666666666666,1,0.6666666666666666,0.2608695652173913,in lqt5; dbsnp:rs74315446
+KCNE1_HUMAN,D76N,LoF,Muhammad_2023_expression,Expression,0.5555555555555556,1,1.0,0.0,in lqt5 and jlns2; suppresses kcnq1 currents markedly; dbsnp:rs74315445
+KCNE1_HUMAN,E83K,LoF,Muhammad_2023_expression,Expression,0.8333333333333334,1,0.6666666666666666,0.13043478260869565,in lqt5; uncertain significance; dbsnp:rs199473360
+KCNE1_HUMAN,D85N,LoF,Muhammad_2023_expression,Expression,0.8888888888888888,1,0.9444444444444444,0.0,predisposes to acquired lqt5 susceptibility; shows a significant difference in current density and midpoint potential co
+KCNE1_HUMAN,W87R,LoF,Muhammad_2023_expression,Expression,0.1111111111111111,1,0.7222222222222222,0.21739130434782608,in lqt5; dbsnp:rs199473361
+KCNE1_HUMAN,R98W,LoF,Muhammad_2023_expression,Expression,0.05555555555555555,0,0.08333333333333333,0.9130434782608695,in lqt5; dbsnp:rs199473362
+KCNE1_HUMAN,V109I,LoF,Muhammad_2023_expression,Expression,0.2222222222222222,1,1.0,0.08695652173913043,in lqt5; uncertain significance; no effect on kcnq1 c-terminus interaction; increases camp-mediated up-regulation of the
+KCNE1_HUMAN,T125M,LoF,Muhammad_2023_expression,Expression,0.6111111111111112,1,0.7222222222222222,0.34782608695652173,in lqt5; uncertain significance; dbsnp:rs142511345
+KCNE1_HUMAN,P127T,LoF,Muhammad_2023_expression,Expression,0.6666666666666666,1,0.7777777777777778,0.0,in lqt5; moderately reduces i(ks) current density; no change of the voltage dependence of channel activation; markedly r
+KCNE1_HUMAN,T7I,LoF,Muhammad_2023_function,Activity,0.35294117647058826,0,0.47058823529411764,0.5217391304347826,in jlns2; impairs glycosylation at n-5; dbsnp:rs28933384
+KCNE1_HUMAN,A8V,LoF,Muhammad_2023_function,Activity,0.11764705882352941,0,0.7058823529411765,0.08695652173913043,in lqt5; uncertain significance; dbsnp:rs199473348
+KCNE1_HUMAN,T10M,LoF,Muhammad_2023_function,Activity,0.0,0,0.5,0.4782608695652174,in lqt5; uncertain significance; dbsnp:rs144917638
+KCNE1_HUMAN,S28L,LoF,Muhammad_2023_function,Activity,0.13333333333333333,1,0.6,0.391304347826087,in lqt5; uncertain significance; dbsnp:rs199473350
+KCNE1_HUMAN,R32H,LoF,Muhammad_2023_function,Activity,0.8333333333333334,1,0.6111111111111112,0.391304347826087,in lqt5; uncertain significance; dbsnp:rs17857111
+KCNE1_HUMAN,R36H,LoF,Muhammad_2023_function,Activity,0.0,0,0.5,0.43478260869565216,in lqt5; uncertain significance; dbsnp:rs199473351
+KCNE1_HUMAN,V47F,LoF,Muhammad_2023_function,Activity,0.16666666666666666,0,0.7777777777777778,0.2608695652173913,in jlns2; dbsnp:rs199473353
+KCNE1_HUMAN,L51H,LoF,Muhammad_2023_function,Activity,0.2777777777777778,0,0.2222222222222222,0.9565217391304348,in jlns2
+KCNE1_HUMAN,F53S,LoF,Muhammad_2023_function,Activity,0.2222222222222222,0,0.6111111111111112,0.17391304347826086,in lqt5; uncertain significance; dbsnp:rs199473355
+KCNE1_HUMAN,G55S,LoF,Muhammad_2023_function,Activity,1.0,1,1.0,0.0,in lqt5; uncertain significance; dbsnp:rs199473644
+KCNE1_HUMAN,T58P,LoF,Muhammad_2023_function,Activity,0.05555555555555555,0,0.19444444444444445,0.9130434782608695,in lqt5; uncertain significance; dbsnp:rs147187721
+KCNE1_HUMAN,L59P,LoF,Muhammad_2023_function,Activity,0.4444444444444444,0,0.16666666666666666,0.9565217391304348,in lqt5; uncertain significance; dbsnp:rs141813529
+KCNE1_HUMAN,R67C,LoF,Muhammad_2023_function,Activity,0.5882352941176471,0,0.6470588235294118,0.2608695652173913,in lqt5; uncertain significance; dbsnp:rs199473645
+KCNE1_HUMAN,R67H,LoF,Muhammad_2023_function,Activity,0.35294117647058826,0,0.8235294117647058,0.17391304347826086,in lqt5; uncertain significance; dbsnp:rs79654911
+KCNE1_HUMAN,K70M,LoF,Muhammad_2023_function,Activity,0.7222222222222222,0,0.4444444444444444,0.6521739130434783,in lqt5; uncertain significance; dbsnp:rs199473646
+KCNE1_HUMAN,S74L,LoF,Muhammad_2023_function,Activity,0.05555555555555555,0,0.6666666666666666,0.2608695652173913,in lqt5; dbsnp:rs74315446
+KCNE1_HUMAN,D76N,LoF,Muhammad_2023_function,Activity,0.1111111111111111,0,1.0,0.043478260869565216,in lqt5 and jlns2; suppresses kcnq1 currents markedly; dbsnp:rs74315445
+KCNE1_HUMAN,E83K,LoF,Muhammad_2023_function,Activity,0.2222222222222222,0,0.6666666666666666,0.13043478260869565,in lqt5; uncertain significance; dbsnp:rs199473360
+KCNE1_HUMAN,D85N,LoF,Muhammad_2023_function,Activity,1.0,1,0.9444444444444444,0.0,predisposes to acquired lqt5 susceptibility; shows a significant difference in current density and midpoint potential co
+KCNE1_HUMAN,W87R,LoF,Muhammad_2023_function,Activity,0.5,0,0.7222222222222222,0.21739130434782608,in lqt5; dbsnp:rs199473361
+KCNE1_HUMAN,R98W,LoF,Muhammad_2023_function,Activity,0.7058823529411765,0,0.08823529411764706,0.9565217391304348,in lqt5; dbsnp:rs199473362
+KCNE1_HUMAN,V109I,LoF,Muhammad_2023_function,Activity,0.5,1,1.0,0.13043478260869565,in lqt5; uncertain significance; no effect on kcnq1 c-terminus interaction; increases camp-mediated up-regulation of the
+KCNE1_HUMAN,T125M,LoF,Muhammad_2023_function,Activity,0.4444444444444444,1,0.7222222222222222,0.391304347826087,in lqt5; uncertain significance; dbsnp:rs142511345
+KCNE1_HUMAN,P127T,LoF,Muhammad_2023_function,Activity,0.7058823529411765,1,0.7647058823529411,0.043478260869565216,in lqt5; moderately reduces i(ks) current density; no change of the voltage dependence of channel activation; markedly r
+PTEN_HUMAN,R15S,LoF,Matreyek_2021,Expression,0.2777777777777778,1,0.7777777777777778,0.08695652173913043,in cws1; also found in glioma; dbsnp:rs1064794096
+PTEN_HUMAN,Y16C,LoF,Matreyek_2021,Expression,0.3076923076923077,1,0.7692307692307693,0.08695652173913043,"loss of phosphatase activity towards ins(1,3,4,5)p4; retains the ability to bind phospholipid membranes"
+PTEN_HUMAN,G20E,LoF,Matreyek_2021,Expression,0.7222222222222222,1,0.8333333333333334,0.0,"reduced phosphatase activity towards ins(1,3,4,5)p4; retains phosphatase activity towards ptdins(3,4,5)p3; dbsnp:rs10647"
+PTEN_HUMAN,Y27S,LoF,Matreyek_2021,Expression,0.5555555555555556,0,0.3333333333333333,0.6521739130434783,"loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs886041877"
+PTEN_HUMAN,M35R,LoF,Matreyek_2021,Expression,0.0,0,0.25,0.8695652173913043,in cws1; dbsnp:rs121909225
+PTEN_HUMAN,G36R,LoF,Matreyek_2021,Expression,0.25,0,0.5,0.4782608695652174,in cws1; also found in a patient with endometrial hyperplasia; dbsnp:rs786204854
+PTEN_HUMAN,R47G,LoF,Matreyek_2021,Expression,0.4,1,0.4666666666666667,0.5217391304347826,in cws1; dbsnp:rs786204855
+PTEN_HUMAN,L57W,LoF,Matreyek_2021,Expression,0.13333333333333333,0,0.6666666666666666,0.34782608695652173,in glioma; likely pathogenic; loss of protein phosphatase activity; dbsnp:rs786202398
+PTEN_HUMAN,H61R,LoF,Matreyek_2021,Expression,0.1111111111111111,0,0.5555555555555556,0.43478260869565216,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs398123316"
+PTEN_HUMAN,I67R,LoF,Matreyek_2021,Expression,0.17647058823529413,0,0.23529411764705882,0.9565217391304348,in cws1
+PTEN_HUMAN,D107Y,LoF,Matreyek_2021,Expression,0.16666666666666666,0,0.16666666666666666,0.8260869565217391,"in cws1; also found in glioblastoma; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs57374291"
+PTEN_HUMAN,L112P,LoF,Matreyek_2021,Expression,0.07692307692307693,0,0.3076923076923077,0.9565217391304348,"in cws1 and ldd; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121909230"
+PTEN_HUMAN,L112R,LoF,Matreyek_2021,Expression,0.6153846153846154,0,0.46153846153846156,0.6086956521739131,"loss of phosphatase activity towards ins(1,3,4,5)p4"
+PTEN_HUMAN,V119L,LoF,Matreyek_2021,Expression,0.8333333333333334,0,0.8333333333333334,0.043478260869565216,in multiple cancers; dbsnp:rs139767111
+PTEN_HUMAN,A121P,LoF,Matreyek_2021,Expression,0.0,0,0.2857142857142857,0.9130434782608695,"in glioblastoma; loss of phosphatase activity towards ins(1,3,4,5)p4"
+PTEN_HUMAN,H123R,LoF,Matreyek_2021,Expression,0.0,0,0.5,0.4782608695652174,in cws1; dbsnp:rs121909222
+PTEN_HUMAN,C124R,LoF,Matreyek_2021,Expression,0.07142857142857142,0,0.35714285714285715,0.6521739130434783,in cws1; dbsnp:rs121909223
+PTEN_HUMAN,C124S,LoF,Matreyek_2021,Expression,0.9285714285714286,1,1.0,0.0,"in cws1; phosphatase-dead protein with neither lipid nor protein phosphatase activity; loss of phosphatidylinositol-3,4,"
+PTEN_HUMAN,A126G,LoF,Matreyek_2021,Expression,0.8888888888888888,1,1.0,0.08695652173913043,"in a patient with prostate cancer; reduced phosphatase activity towards ptdins(3,4,5); shifts its activity from phosphat"
+PTEN_HUMAN,G129R,LoF,Matreyek_2021,Expression,0.16666666666666666,0,0.5,0.30434782608695654,"in glioblastoma; severely reduced protein phosphatase activity; loss of phosphatase activity towards ins(1,3,4,5)p4; dbs"
+PTEN_HUMAN,R130G,LoF,Matreyek_2021,Expression,0.75,1,0.3333333333333333,0.6086956521739131,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4 and ptdins(3,4,5)p3; dbsnp:rs121909224"
+PTEN_HUMAN,R130L,LoF,Matreyek_2021,Expression,0.9166666666666666,1,0.6666666666666666,0.17391304347826086,"in cws1; also found in endometrial hyperplasia; loss of phosphatase activity towards ins(1,3,4,5)p4; retains ability to "
+PTEN_HUMAN,R130Q,LoF,Matreyek_2021,Expression,1.0,1,1.0,0.0,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes; dbsnp:rs12"
+PTEN_HUMAN,V133I,LoF,Matreyek_2021,Expression,1.0,1,0.9,0.0,"loss of phosphatase activity towards ins(1,3,4,5)p3"
+PTEN_HUMAN,V158L,LoF,Matreyek_2021,Expression,0.5555555555555556,1,0.4444444444444444,0.5652173913043478,in multiple cancers
+PTEN_HUMAN,G165E,LoF,Matreyek_2021,Expression,0.11764705882352941,0,0.5882352941176471,0.391304347826087,in cws1
+PTEN_HUMAN,G165R,LoF,Matreyek_2021,Expression,0.47058823529411764,0,0.6470588235294118,0.30434782608695654,in cws1; also found in glioblastoma; severely reduced protein phosphatase activity; loss of phosphatase activity towards
+PTEN_HUMAN,G165V,LoF,Matreyek_2021,Expression,0.7058823529411765,1,0.5294117647058824,0.4782608695652174,in cws1; dbsnp:rs786204863
+PTEN_HUMAN,T167P,LoF,Matreyek_2021,Expression,0.0,0,0.46153846153846156,0.5652173913043478,in breast cancer; severely reduced protein phosphatase activity
+PTEN_HUMAN,S170R,LoF,Matreyek_2021,Expression,0.6666666666666666,0,0.4444444444444444,0.6086956521739131,"in cws1; severely reduced protein phosphatase activity; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121"
+PTEN_HUMAN,R173C,LoF,Matreyek_2021,Expression,0.16666666666666666,0,0.3333333333333333,0.6086956521739131,"in cws1; also found in endometrial hyperplasia; loss of phosphatase activity towards ins(1,3,4,5)p4 and ptdins(3,4,5)p3;"
+PTEN_HUMAN,R173H,LoF,Matreyek_2021,Expression,0.6666666666666666,0,0.8333333333333334,0.13043478260869565,"loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121913294"
+PTEN_HUMAN,R173P,LoF,Matreyek_2021,Expression,0.1111111111111111,0,0.1111111111111111,0.9130434782608695,"loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121913294"
+PTEN_HUMAN,V191A,LoF,Matreyek_2021,Expression,0.14285714285714285,0,0.5714285714285714,0.34782608695652173,in endometrial hyperplasia
+PTEN_HUMAN,S227F,LoF,Matreyek_2021,Expression,0.7777777777777778,1,0.4444444444444444,0.5652173913043478,"reduced phosphatase activity towards ins(1,3,4,5)p4; retains ptdins(3,4,5)p3 phosphatase activity; dbsnp:rs905615413"
+PTEN_HUMAN,P246L,LoF,Matreyek_2021,Expression,0.3,0,0.3,0.5652173913043478,in cws1; dbsnp:rs587782350
+PTEN_HUMAN,G251C,LoF,Matreyek_2021,Expression,0.0,0,0.5625,0.391304347826087,"loss of phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes"
+PTEN_HUMAN,D252G,LoF,Matreyek_2021,Expression,0.8125,0,0.6875,0.17391304347826086,in mcephas and cws1; dbsnp:rs121909239
+PTEN_HUMAN,K289E,LoF,Matreyek_2021,Expression,0.5555555555555556,1,0.8888888888888888,0.17391304347826086,"in cws1; reduced phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes; predominan"
+PTEN_HUMAN,D331G,LoF,Matreyek_2021,Expression,0.38461538461538464,0,0.7692307692307693,0.17391304347826086,"in cws1; reduced phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes"
+PTEN_HUMAN,F341V,LoF,Matreyek_2021,Expression,1.0,1,0.7,0.08695652173913043,in cws1; loss of interaction with nop53; decreased phosphorylation at s-380; decreased stability; loss of phosphatase ac
+PTEN_HUMAN,K342N,LoF,Matreyek_2021,Expression,0.7777777777777778,1,0.5555555555555556,0.43478260869565216,"in cws1; reduced phosphatase activity towards ins(1,3,4,5)p4 but ptdins(3,4,5)p3 phosphatase activity is similar to wild"
+PTEN_HUMAN,V343E,LoF,Matreyek_2021,Expression,0.5294117647058824,0,0.23529411764705882,0.8695652173913043,in cws1; loss of interaction with nop53; decreased phosphorylation at s-380; decreased stability; loss of phosphatase ac
+PTEN_HUMAN,F347L,LoF,Matreyek_2021,Expression,0.9375,0,1.0,0.0,"in cws1; reduced phosphatase activity towards ins(1,3,4,5)p4"
+PTEN_HUMAN,T348I,LoF,Matreyek_2021,Expression,0.9,1,0.4,0.6521739130434783,"in endometrial hyperplasia; reduced phosphatase activity towards ptdins(3,4,5)p3; mildly reduced tumor suppressor activi"
+PTEN_HUMAN,R15S,LoF,Mighell_2018,Activity,0.6666666666666666,0,0.7222222222222222,0.13043478260869565,in cws1; also found in glioma; dbsnp:rs1064794096
+PTEN_HUMAN,Y16C,LoF,Mighell_2018,Activity,0.47058823529411764,1,0.5882352941176471,0.17391304347826086,"loss of phosphatase activity towards ins(1,3,4,5)p4; retains the ability to bind phospholipid membranes"
+PTEN_HUMAN,G20E,LoF,Mighell_2018,Activity,0.7222222222222222,1,0.8333333333333334,0.0,"reduced phosphatase activity towards ins(1,3,4,5)p4; retains phosphatase activity towards ptdins(3,4,5)p3; dbsnp:rs10647"
+PTEN_HUMAN,Y27S,LoF,Mighell_2018,Activity,1.0,1,0.5,0.4782608695652174,"loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs886041877"
+PTEN_HUMAN,A34D,LoF,Mighell_2018,Activity,0.36363636363636365,0,0.36363636363636365,0.7391304347826086,in cws1
+PTEN_HUMAN,M35R,LoF,Mighell_2018,Activity,0.625,0,0.3125,0.8695652173913043,in cws1; dbsnp:rs121909225
+PTEN_HUMAN,G36E,LoF,Mighell_2018,Activity,0.6111111111111112,0,0.6111111111111112,0.13043478260869565,in endmc; also found in glioma; dbsnp:rs1554893792
+PTEN_HUMAN,G36R,LoF,Mighell_2018,Activity,0.5,0,0.5555555555555556,0.34782608695652173,in cws1; also found in a patient with endometrial hyperplasia; dbsnp:rs786204854
+PTEN_HUMAN,R47G,LoF,Mighell_2018,Activity,0.5294117647058824,0,0.6176470588235294,0.391304347826087,in cws1; dbsnp:rs786204855
+PTEN_HUMAN,L57W,LoF,Mighell_2018,Activity,0.1111111111111111,0,0.6666666666666666,0.30434782608695654,in glioma; likely pathogenic; loss of protein phosphatase activity; dbsnp:rs786202398
+PTEN_HUMAN,H61R,LoF,Mighell_2018,Activity,0.3888888888888889,0,0.5555555555555556,0.391304347826087,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs398123316"
+PTEN_HUMAN,I67R,LoF,Mighell_2018,Activity,0.4444444444444444,0,0.2222222222222222,1.0,in cws1
+PTEN_HUMAN,Y68H,LoF,Mighell_2018,Activity,0.5555555555555556,0,0.7222222222222222,0.043478260869565216,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4 and ptdins(3,4,5)p3; retains the ability to bind phospholip"
+PTEN_HUMAN,L70P,LoF,Mighell_2018,Activity,0.16666666666666666,0,0.2222222222222222,0.7391304347826086,in cws1; dbsnp:rs121909226
+PTEN_HUMAN,C71Y,LoF,Mighell_2018,Activity,0.4444444444444444,0,0.2777777777777778,0.6521739130434783,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4"
+PTEN_HUMAN,H93Y,LoF,Mighell_2018,Activity,0.5555555555555556,0,0.8888888888888888,0.13043478260869565,in cws1; dbsnp:rs786204927
+PTEN_HUMAN,C105F,LoF,Mighell_2018,Activity,0.3333333333333333,0,0.6111111111111112,0.21739130434782608,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4"
+PTEN_HUMAN,C105Y,LoF,Mighell_2018,Activity,0.7222222222222222,0,0.4722222222222222,0.5217391304347826,in cws1; dbsnp:rs587782343
+PTEN_HUMAN,D107Y,LoF,Mighell_2018,Activity,0.0,0,0.2777777777777778,0.8695652173913043,"in cws1; also found in glioblastoma; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs57374291"
+PTEN_HUMAN,L112P,LoF,Mighell_2018,Activity,0.2777777777777778,0,0.2777777777777778,1.0,"in cws1 and ldd; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121909230"
+PTEN_HUMAN,L112R,LoF,Mighell_2018,Activity,0.1111111111111111,0,0.4444444444444444,0.6086956521739131,"loss of phosphatase activity towards ins(1,3,4,5)p4"
+PTEN_HUMAN,V119L,LoF,Mighell_2018,Activity,0.8333333333333334,1,0.8888888888888888,0.043478260869565216,in multiple cancers; dbsnp:rs139767111
+PTEN_HUMAN,A121P,LoF,Mighell_2018,Activity,0.6111111111111112,0,0.3333333333333333,0.6956521739130435,"in glioblastoma; loss of phosphatase activity towards ins(1,3,4,5)p4"
+PTEN_HUMAN,H123R,LoF,Mighell_2018,Activity,0.3333333333333333,0,0.4722222222222222,0.5217391304347826,in cws1; dbsnp:rs121909222
+PTEN_HUMAN,H123Y,LoF,Mighell_2018,Activity,0.0,0,0.8888888888888888,0.043478260869565216,in endometrial cancer; loss of protein phosphatase activity; dbsnp:rs786204931
+PTEN_HUMAN,C124R,LoF,Mighell_2018,Activity,0.1111111111111111,0,0.3333333333333333,0.6521739130434783,in cws1; dbsnp:rs121909223
+PTEN_HUMAN,C124S,LoF,Mighell_2018,Activity,0.0,0,1.0,0.043478260869565216,"in cws1; phosphatase-dead protein with neither lipid nor protein phosphatase activity; loss of phosphatidylinositol-3,4,"
+PTEN_HUMAN,A126G,LoF,Mighell_2018,Activity,0.9444444444444444,1,1.0,0.13043478260869565,"in a patient with prostate cancer; reduced phosphatase activity towards ptdins(3,4,5); shifts its activity from phosphat"
+PTEN_HUMAN,G129R,LoF,Mighell_2018,Activity,0.8888888888888888,1,0.6111111111111112,0.34782608695652173,"in glioblastoma; severely reduced protein phosphatase activity; loss of phosphatase activity towards ins(1,3,4,5)p4; dbs"
+PTEN_HUMAN,R130G,LoF,Mighell_2018,Activity,0.9444444444444444,0,0.2777777777777778,0.6956521739130435,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4 and ptdins(3,4,5)p3; dbsnp:rs121909224"
+PTEN_HUMAN,R130L,LoF,Mighell_2018,Activity,0.7777777777777778,0,0.6666666666666666,0.17391304347826086,"in cws1; also found in endometrial hyperplasia; loss of phosphatase activity towards ins(1,3,4,5)p4; retains ability to "
+PTEN_HUMAN,R130Q,LoF,Mighell_2018,Activity,1.0,0,0.9444444444444444,0.0,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes; dbsnp:rs12"
+PTEN_HUMAN,G132V,LoF,Mighell_2018,Activity,0.5,0,0.7777777777777778,0.17391304347826086,in one patient with clinical findings suggesting hamartoma tumor syndrome; dbsnp:rs121909241
+PTEN_HUMAN,V133I,LoF,Mighell_2018,Activity,0.5555555555555556,1,0.8888888888888888,0.0,"loss of phosphatase activity towards ins(1,3,4,5)p3"
+PTEN_HUMAN,M134L,LoF,Mighell_2018,Activity,1.0,1,1.0,0.043478260869565216,"in prostate cancer; no effect on protein phosphatase activity; reduced phosphatase activity towards ins(1,3,4,5)p3 but r"
+PTEN_HUMAN,I135V,LoF,Mighell_2018,Activity,0.9444444444444444,1,1.0,0.0,in cws1; dbsnp:rs587782360
+PTEN_HUMAN,C136Y,LoF,Mighell_2018,Activity,0.6666666666666666,0,0.5,0.391304347826087,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p3; dbsnp:rs786204859"
+PTEN_HUMAN,Y155C,LoF,Mighell_2018,Activity,0.8333333333333334,0,0.6666666666666666,0.08695652173913043,"in cws1; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs1060500126"
+PTEN_HUMAN,V158L,LoF,Mighell_2018,Activity,0.8333333333333334,1,0.6666666666666666,0.13043478260869565,in multiple cancers
+PTEN_HUMAN,G165E,LoF,Mighell_2018,Activity,0.16666666666666666,0,0.6111111111111112,0.43478260869565216,in cws1
+PTEN_HUMAN,G165R,LoF,Mighell_2018,Activity,0.2222222222222222,0,0.6666666666666666,0.21739130434782608,in cws1; also found in glioblastoma; severely reduced protein phosphatase activity; loss of phosphatase activity towards
+PTEN_HUMAN,G165V,LoF,Mighell_2018,Activity,0.7777777777777778,0,0.5555555555555556,0.4782608695652174,in cws1; dbsnp:rs786204863
+PTEN_HUMAN,T167P,LoF,Mighell_2018,Activity,0.0,0,0.5,0.4782608695652174,in breast cancer; severely reduced protein phosphatase activity
+PTEN_HUMAN,S170N,LoF,Mighell_2018,Activity,0.8333333333333334,1,0.7222222222222222,0.13043478260869565,"loss of phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes"
+PTEN_HUMAN,S170R,LoF,Mighell_2018,Activity,0.6111111111111112,0,0.5555555555555556,0.4782608695652174,"in cws1; severely reduced protein phosphatase activity; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121"
+PTEN_HUMAN,R173C,LoF,Mighell_2018,Activity,0.6666666666666666,1,0.4444444444444444,0.5652173913043478,"in cws1; also found in endometrial hyperplasia; loss of phosphatase activity towards ins(1,3,4,5)p4 and ptdins(3,4,5)p3;"
+PTEN_HUMAN,R173H,LoF,Mighell_2018,Activity,0.6111111111111112,1,0.8333333333333334,0.08695652173913043,"loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121913294"
+PTEN_HUMAN,R173P,LoF,Mighell_2018,Activity,0.05555555555555555,0,0.1111111111111111,0.9565217391304348,"loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs121913294"
+PTEN_HUMAN,Y174N,LoF,Mighell_2018,Activity,0.2222222222222222,0,0.2777777777777778,0.8260869565217391,"found in a thyroid tumor; somatic variant; loss of phosphatase activity towards ins(1,3,4,5)p4; dbsnp:rs587782316"
+PTEN_HUMAN,V191A,LoF,Mighell_2018,Activity,0.3333333333333333,1,0.6666666666666666,0.2608695652173913,in endometrial hyperplasia
+PTEN_HUMAN,S227F,LoF,Mighell_2018,Activity,0.8333333333333334,1,0.5,0.4782608695652174,"reduced phosphatase activity towards ins(1,3,4,5)p4; retains ptdins(3,4,5)p3 phosphatase activity; dbsnp:rs905615413"
+PTEN_HUMAN,P246L,LoF,Mighell_2018,Activity,0.2777777777777778,0,0.5555555555555556,0.43478260869565216,in cws1; dbsnp:rs587782350
+PTEN_HUMAN,G251C,LoF,Mighell_2018,Activity,0.05555555555555555,0,0.5555555555555556,0.34782608695652173,"loss of phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes"
+PTEN_HUMAN,D252G,LoF,Mighell_2018,Activity,0.6666666666666666,0,0.6666666666666666,0.13043478260869565,in mcephas and cws1; dbsnp:rs121909239
+PTEN_HUMAN,K289E,LoF,Mighell_2018,Activity,0.5,1,0.8888888888888888,0.08695652173913043,"in cws1; reduced phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes; predominan"
+PTEN_HUMAN,D331G,LoF,Mighell_2018,Activity,0.2777777777777778,1,0.7222222222222222,0.21739130434782608,"in cws1; reduced phosphatase activity towards ins(1,3,4,5)p4; retains ability to bind phospholipid membranes"
+PTEN_HUMAN,F341V,LoF,Mighell_2018,Activity,1.0,1,0.5,0.4782608695652174,in cws1; loss of interaction with nop53; decreased phosphorylation at s-380; decreased stability; loss of phosphatase ac
+PTEN_HUMAN,K342N,LoF,Mighell_2018,Activity,0.375,0,0.625,0.13043478260869565,"in cws1; reduced phosphatase activity towards ins(1,3,4,5)p4 but ptdins(3,4,5)p3 phosphatase activity is similar to wild"
+RASK_HUMAN,K5E,GoF,Weng_2022_abundance,Expression,0.5,0,0.6666666666666666,0.0,in ns3; dbsnp:rs193929331
+RASK_HUMAN,K5N,GoF,Weng_2022_abundance,Expression,1.0,1,0.9444444444444444,0.0,in gasc; found also in a patient with costello syndrome; exhibits only minor alterations in its in vitro biochemical beh
+RASK_HUMAN,G12A,GoF,Weng_2022_abundance,Expression,0.8888888888888888,1,0.9444444444444444,0.0,in colorectal cancer samples; somatic mutation; dbsnp:rs121913529
+RASK_HUMAN,G12C,GoF,Weng_2022_abundance,Expression,0.7222222222222222,1,0.7777777777777778,0.13043478260869565,in lung carcinoma; somatic mutation; also found in metastatic colorectal cancer; dbsnp:rs121913530
+RASK_HUMAN,G12D,GoF,Weng_2022_abundance,Expression,0.8333333333333334,1,0.6666666666666666,0.13043478260869565,"in gasc, jmml and sfm; somatic mutation; also found in pancreatic carcinoma and lung carcinoma; also found in metastatic"
+RASK_HUMAN,G12R,GoF,Weng_2022_abundance,Expression,0.6666666666666666,1,0.6666666666666666,0.13043478260869565,in lung cancer and bladder cancer; somatic mutation; dbsnp:rs121913530
+RASK_HUMAN,G12S,GoF,Weng_2022_abundance,Expression,0.7777777777777778,1,0.9444444444444444,0.0,in gasc and jmml; also found in lung carcinoma; somatic mutation; dbsnp:rs121913530
+RASK_HUMAN,G12V,GoF,Weng_2022_abundance,Expression,0.4444444444444444,1,0.6111111111111112,0.30434782608695654,"in gasc; also found in lung carcinoma, pancreatic carcinoma and colon cancer; also found in metastatic colorectal cancer"
+RASK_HUMAN,G13D,GoF,Weng_2022_abundance,Expression,0.9444444444444444,1,0.7222222222222222,0.0,"in gasc, jmml and oes; also found in a breast carcinoma cell line; somatic mutation; dbsnp:rs112445441"
+RASK_HUMAN,G13R,GoF,Weng_2022_abundance,Expression,0.3888888888888889,1,0.7777777777777778,0.0,in pylocytic astrocytoma; somatic mutation; increase activation of the ras pathway; dbsnp:rs121913535
+RASK_HUMAN,V14I,GoF,Weng_2022_abundance,Expression,1.0,1,0.8333333333333334,0.0,in ns3; affects activity and impairs responsiveness to gtpase activating proteins; characterized by a strong increase of
+RASK_HUMAN,Q22E,GoF,Weng_2022_abundance,Expression,0.7222222222222222,1,0.5555555555555556,0.34782608695652173,in cfc2; exhibits an increase in intrinsic and guanine nucleotide exchange factor catalyzed nucleotide exchange in combi
+RASK_HUMAN,Q22R,GoF,Weng_2022_abundance,Expression,0.6111111111111112,1,1.0,0.0,in ns3; impairs gtpase-activating protein stimulated gtp hydrolysis with unaffected intrinsic functions and a virtually 
+RASK_HUMAN,P34L,GoF,Weng_2022_abundance,Expression,0.3333333333333333,1,0.7222222222222222,0.13043478260869565,in ns3; characterized by a defective gtpase-activating protein sensitivity and a strongly reduced interaction with effec
+RASK_HUMAN,P34Q,GoF,Weng_2022_abundance,Expression,0.9444444444444444,1,0.7777777777777778,0.13043478260869565,in ns3; dbsnp:rs104894366
+RASK_HUMAN,P34R,GoF,Weng_2022_abundance,Expression,0.5,1,0.7222222222222222,0.2608695652173913,in cfc2; characterized by a defective gtpase-activating protein sensitivity and a strongly reduced interaction with effe
+RASK_HUMAN,I36M,GoF,Weng_2022_abundance,Expression,0.3888888888888889,1,0.7777777777777778,0.043478260869565216,in ns3; dbsnp:rs727503109
+RASK_HUMAN,T58I,GoF,Weng_2022_abundance,Expression,0.6111111111111112,1,0.8888888888888888,0.043478260869565216,in ns3; affects activity and impairs responsiveness to gtpase activating proteins; exhibits only minor alterations in it
+RASK_HUMAN,A59T,GoF,Weng_2022_abundance,Expression,0.8333333333333334,1,0.8888888888888888,0.043478260869565216,in gasc; also found in bladder cancer; somatic mutation; dbsnp:rs121913528
+RASK_HUMAN,G60R,GoF,Weng_2022_abundance,Expression,0.5555555555555556,1,0.7222222222222222,0.08695652173913043,in cfc2; characterized by a defective gtpase-activating protein sensitivity and a strongly reduced interaction with effe
+RASK_HUMAN,G60S,GoF,Weng_2022_abundance,Expression,0.6666666666666666,1,0.9444444444444444,0.0,in ns3; dbsnp:rs104894359
+RASK_HUMAN,Q61H,GoF,Weng_2022_abundance,Expression,0.5555555555555556,1,0.8888888888888888,0.13043478260869565,in lung carcinoma; dbsnp:rs17851045
+RASK_HUMAN,Q61R,GoF,Weng_2022_abundance,Expression,0.5,1,0.7777777777777778,0.17391304347826086,in a colorectal cancer sample; somatic mutation; promotes interaction with shoc2 and pp1c; dbsnp:rs121913240
+RASK_HUMAN,Y71H,GoF,Weng_2022_abundance,Expression,0.16666666666666666,1,0.8888888888888888,0.08695652173913043,in cfc2; dbsnp:rs387907205
+RASK_HUMAN,K117N,GoF,Weng_2022_abundance,Expression,0.3888888888888889,1,0.8333333333333334,0.0,in colorectal cancer samples; somatic mutation; dbsnp:rs770248150
+RASK_HUMAN,V152G,GoF,Weng_2022_abundance,Expression,0.2222222222222222,1,0.3888888888888889,0.6521739130434783,in ns3; dbsnp:rs104894367
+RASK_HUMAN,D153V,GoF,Weng_2022_abundance,Expression,0.7222222222222222,1,0.5,0.30434782608695654,in cfc2 and ns3; exhibits only minor alterations in its in vitro biochemical behavior compared to wild-type protein; dbs
+RASK_HUMAN,F156I,GoF,Weng_2022_abundance,Expression,0.8333333333333334,1,0.8888888888888888,0.0,in ns3; the patient also has features of cardiofaciocutaneous syndrome; dbsnp:rs397517042
+RASK_HUMAN,F156L,GoF,Weng_2022_abundance,Expression,0.8888888888888888,1,0.9444444444444444,0.043478260869565216,found in a patient with costello syndrome; exhibits an increase in intrinsic and guanine nucleotide exchange factor cata
+RASK_HUMAN,K5E,GoF,Weng_2022_binding-DARPin_K55,Binding,0.6111111111111112,1,0.6666666666666666,0.043478260869565216,in ns3; dbsnp:rs193929331
+RASK_HUMAN,K5N,GoF,Weng_2022_binding-DARPin_K55,Binding,0.9444444444444444,1,0.8888888888888888,0.0,in gasc; found also in a patient with costello syndrome; exhibits only minor alterations in its in vitro biochemical beh
+RASK_HUMAN,G12A,GoF,Weng_2022_binding-DARPin_K55,Binding,0.8888888888888888,1,0.9444444444444444,0.043478260869565216,in colorectal cancer samples; somatic mutation; dbsnp:rs121913529
+RASK_HUMAN,G12C,GoF,Weng_2022_binding-DARPin_K55,Binding,0.5,1,0.7777777777777778,0.13043478260869565,in lung carcinoma; somatic mutation; also found in metastatic colorectal cancer; dbsnp:rs121913530
+RASK_HUMAN,G12D,GoF,Weng_2022_binding-DARPin_K55,Binding,0.9444444444444444,1,0.6666666666666666,0.08695652173913043,"in gasc, jmml and sfm; somatic mutation; also found in pancreatic carcinoma and lung carcinoma; also found in metastatic"
+RASK_HUMAN,G12R,GoF,Weng_2022_binding-DARPin_K55,Binding,0.05555555555555555,1,0.7222222222222222,0.08695652173913043,in lung cancer and bladder cancer; somatic mutation; dbsnp:rs121913530
+RASK_HUMAN,G12S,GoF,Weng_2022_binding-DARPin_K55,Binding,0.8333333333333334,1,0.9444444444444444,0.0,in gasc and jmml; also found in lung carcinoma; somatic mutation; dbsnp:rs121913530
+RASK_HUMAN,G12V,GoF,Weng_2022_binding-DARPin_K55,Binding,0.3333333333333333,1,0.5555555555555556,0.34782608695652173,"in gasc; also found in lung carcinoma, pancreatic carcinoma and colon cancer; also found in metastatic colorectal cancer"
+RASK_HUMAN,G13D,GoF,Weng_2022_binding-DARPin_K55,Binding,0.7777777777777778,1,0.7222222222222222,0.043478260869565216,"in gasc, jmml and oes; also found in a breast carcinoma cell line; somatic mutation; dbsnp:rs112445441"
+RASK_HUMAN,G13R,GoF,Weng_2022_binding-DARPin_K55,Binding,0.1111111111111111,1,0.7222222222222222,0.043478260869565216,in pylocytic astrocytoma; somatic mutation; increase activation of the ras pathway; dbsnp:rs121913535
+RASK_HUMAN,V14I,GoF,Weng_2022_binding-DARPin_K55,Binding,1.0,1,0.8333333333333334,0.0,in ns3; affects activity and impairs responsiveness to gtpase activating proteins; characterized by a strong increase of
+RASK_HUMAN,Q22E,GoF,Weng_2022_binding-DARPin_K55,Binding,0.8888888888888888,1,0.5555555555555556,0.34782608695652173,in cfc2; exhibits an increase in intrinsic and guanine nucleotide exchange factor catalyzed nucleotide exchange in combi
+RASK_HUMAN,Q22R,GoF,Weng_2022_binding-DARPin_K55,Binding,0.7777777777777778,1,1.0,0.0,in ns3; impairs gtpase-activating protein stimulated gtp hydrolysis with unaffected intrinsic functions and a virtually 
+RASK_HUMAN,P34L,GoF,Weng_2022_binding-DARPin_K55,Binding,0.2777777777777778,1,0.7222222222222222,0.13043478260869565,in ns3; characterized by a defective gtpase-activating protein sensitivity and a strongly reduced interaction with effec
+RASK_HUMAN,P34Q,GoF,Weng_2022_binding-DARPin_K55,Binding,0.4444444444444444,1,0.7222222222222222,0.17391304347826086,in ns3; dbsnp:rs104894366
+RASK_HUMAN,P34R,GoF,Weng_2022_binding-DARPin_K55,Binding,0.0,0,0.7222222222222222,0.2608695652173913,in cfc2; characterized by a defective gtpase-activating protein sensitivity and a strongly reduced interaction with effe
+RASK_HUMAN,I36M,GoF,Weng_2022_binding-DARPin_K55,Binding,0.7777777777777778,1,0.7777777777777778,0.043478260869565216,in ns3; dbsnp:rs727503109
+RASK_HUMAN,T58I,GoF,Weng_2022_binding-DARPin_K55,Binding,0.5555555555555556,0,0.8333333333333334,0.043478260869565216,in ns3; affects activity and impairs responsiveness to gtpase activating proteins; exhibits only minor alterations in it
+RASK_HUMAN,A59T,GoF,Weng_2022_binding-DARPin_K55,Binding,0.8888888888888888,1,0.8888888888888888,0.043478260869565216,in gasc; also found in bladder cancer; somatic mutation; dbsnp:rs121913528
+RASK_HUMAN,G60R,GoF,Weng_2022_binding-DARPin_K55,Binding,0.6666666666666666,0,0.7222222222222222,0.08695652173913043,in cfc2; characterized by a defective gtpase-activating protein sensitivity and a strongly reduced interaction with effe
+RASK_HUMAN,G60S,GoF,Weng_2022_binding-DARPin_K55,Binding,1.0,0,0.9444444444444444,0.0,in ns3; dbsnp:rs104894359
+RASK_HUMAN,Q61H,GoF,Weng_2022_binding-DARPin_K55,Binding,0.7777777777777778,1,0.8888888888888888,0.13043478260869565,in lung carcinoma; dbsnp:rs17851045
+RASK_HUMAN,Q61R,GoF,Weng_2022_binding-DARPin_K55,Binding,0.16666666666666666,1,0.7222222222222222,0.17391304347826086,in a colorectal cancer sample; somatic mutation; promotes interaction with shoc2 and pp1c; dbsnp:rs121913240
+RASK_HUMAN,Y71H,GoF,Weng_2022_binding-DARPin_K55,Binding,0.2222222222222222,0,0.8888888888888888,0.08695652173913043,in cfc2; dbsnp:rs387907205
+RASK_HUMAN,K117N,GoF,Weng_2022_binding-DARPin_K55,Binding,0.4444444444444444,1,0.8333333333333334,0.0,in colorectal cancer samples; somatic mutation; dbsnp:rs770248150
+RASK_HUMAN,V152G,GoF,Weng_2022_binding-DARPin_K55,Binding,0.2222222222222222,1,0.3888888888888889,0.6521739130434783,in ns3; dbsnp:rs104894367
+RASK_HUMAN,D153V,GoF,Weng_2022_binding-DARPin_K55,Binding,0.6666666666666666,1,0.5,0.30434782608695654,in cfc2 and ns3; exhibits only minor alterations in its in vitro biochemical behavior compared to wild-type protein; dbs
+RASK_HUMAN,F156I,GoF,Weng_2022_binding-DARPin_K55,Binding,1.0,1,0.8888888888888888,0.043478260869565216,in ns3; the patient also has features of cardiofaciocutaneous syndrome; dbsnp:rs397517042
+RASK_HUMAN,F156L,GoF,Weng_2022_binding-DARPin_K55,Binding,0.8333333333333334,1,0.9444444444444444,0.0,found in a patient with costello syndrome; exhibits an increase in intrinsic and guanine nucleotide exchange factor cata
+CP2C9_HUMAN,I359L,LoF,Amorosi_2021_abundance,Expression,0.6666666666666666,1,0.8333333333333334,0.0,in allele cyp2c9*3; responsible for the tolbutamide poor metabolizer phenotype; dbsnp:rs1057910
+CP2C9_HUMAN,I359L,LoF,Amorosi_2021_activity,Binding,0.3333333333333333,0,0.8666666666666667,0.0,in allele cyp2c9*3; responsible for the tolbutamide poor metabolizer phenotype; dbsnp:rs1057910
+CP2C9_HUMAN,I434F,LoF,Amorosi_2021_activity,Binding,0.7647058823529411,1,0.35294117647058826,0.782608695652174,in allele cyp2c9*59; produces warfarin hypersensitivity; increases affinity but highly decreases enzymatic activity for 

@@ -26,7 +26,8 @@ SCRIPTS = \
 	15_functional_disagreement_generalization \
 	16_collapse_modeltype_withinsite \
 	17_gck_3d_distances \
-	18_generalization_candidates
+	18_generalization_candidates \
+	19_disease_gof_lof
 
 .PHONY: all clean
 
