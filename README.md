@@ -60,9 +60,10 @@ python3 14_quartile_by_agreement.py           # 'winners' collapse, high- vs low
 python3 15_functional_disagreement_generalization.py   # generalization across multi-assay proteins
 python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global vs within-site split
 python3 17_gck_3d_distances.py                # GCK disagreement vs 3-D ligand distance (PDB 1V4S)
-python3 18_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
-python3 19_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
+python3 21_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
+python3 22_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
 ```
+(Scripts 18-20 are separate GCK 3VEV-vs-1V4S structure-comparison work.)
 
 ## Reproduce
 `make all` runs scripts `00 → 16` in order (each reads the previous ones'
@@ -139,7 +140,7 @@ a combined "functional" flag misleading; the three signals must be tested apart.
 but conservation-based models rank it backwards. R377 → **R377H / MODY2**
 (loss-of-function) — non-functional in both assays.
 
-**GoF vs LoF disease variants, systematic (19).** Extending those anecdotes to 223
+**GoF vs LoF disease variants, systematic (22).** Extending those anecdotes to 223
 classified disease variants (GoF = GCK-HHF3 + RASK; LoF = GCK-MODY2/PNDM1 + PTEN +
 KCNE1 + CP2C9; SRC contributed none), the W99C pattern does **not** generalize.
 Models rank GoF variants *higher* within-site (median 0.83, only 12% in the bottom
@@ -172,7 +173,7 @@ GoF pathogenicity.
   p≈0.88). So the signal reflects overlap with UniProt binding-site *annotations*,
   not a physical pocket neighbourhood — interpret the functional-site result
   cautiously and, where a structure exists, prefer a real 3-D distance test.
-- **Candidate-protein `best_pdb` (18) optimizes coverage then resolution;
+- **Candidate-protein `best_pdb` (21) optimizes coverage then resolution;
   `best_holo_pdb` is the ligand-aware pick.** `best_pdb` is blind to ligands, so
   for a ligand-distance analysis like `17` use `best_holo_pdb` / `best_holo_ligands`
   (e.g. GCK → 4DCH with GLC+4DC; RASK → 7ROV/GCP; CP2C9 → 1R9O/HEM+FLP; DYR →
@@ -180,7 +181,7 @@ GoF pathogenicity.
   `data/pdb_ligands_cache.json`) filtered by an additive/ion blacklist + mass ≥130
   Da — a **heuristic**, so verify the reported `best_holo_ligands` comp IDs, and
   note a blank `best_holo_pdb` only means "no holo among the top-40 by coverage".
-- **GoF/LoF check (19) uses a RELATIVE, protein-level classification.** Within-site
+- **GoF/LoF check (22) uses a RELATIVE, protein-level classification.** Within-site
   percentile ranks a variant among substitutions at its site, not absolute
   deleteriousness — noisy at fully-conserved positions (e.g. RAS G12). GoF/LoF is
   assigned by disease phenotype at the protein level (RAS/SRC oncogene = GoF, PTEN/
@@ -219,7 +220,7 @@ Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
 `collapse_modeltype_withinsite.csv`.
 Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`,
 `generalization_candidate_proteins.csv` (24 multi-assay proteins + RCSB PDB
-options, for choosing a protein/structure to extend the analysis — `18`; includes
+options, for choosing a protein/structure to extend the analysis — `21`; includes
 `conformational_switch`, `literature_pdb`, `recommended_pdb` per the structure-
 selection framework in `papers/pdb_selection_framework.md`).
 

@@ -3,7 +3,7 @@
 How the Lehner group selected structures in three allosteric-landscape papers, and
 a procedure to extrapolate that choice to other proteins with many PDBs. This is
 the rationale behind the `literature_pdb` / `recommended_pdb` / `conformational_switch`
-columns in `results/generalization_candidate_proteins.csv` (script `18`).
+columns in `results/generalization_candidate_proteins.csv` (script `21`).
 
 ## What the papers did
 
@@ -61,7 +61,7 @@ K27 specifically recognizes **inactive GDP-bound KRAS**" (Fig 5b panels `KRAS-GT
 Distance metric follows the site type: **min side-chain heavy-atom distance to the ligand**
 (enzymes) or **distance/contact to the bound partner** (binding phenotypes).
 
-## Applying it to the candidate set (`18`)
+## Applying it to the candidate set (`21`)
 
 The CSV encodes this as: `conformational_switch` (name-keyword hint: kinase/GTPase/channel/
 transporter/ATPase), `literature_pdb` (the four paper choices, ground truth), and
