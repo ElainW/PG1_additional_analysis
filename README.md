@@ -98,9 +98,15 @@ tails L2/D4/R5/L460–463 excluded).
 **Functional context on GCK (08, 17).** In 1-D, disagreement is significantly
 **higher at binding-site residues** than elsewhere (activity p=0.005, abundance
 p=0.018). But in real 3-D (PDB 1V4S, glucose + activator; `17`) high-disagreement
-residues are **not** closer to the ligand pockets (Spearman ≈ −0.04 to −0.06, n.s.)
-and **not** spatially clustered (permutation p≈0.88) — so the 1-D "binding-site"
+residues are **not** closer to the ligand pockets (Spearman −0.04 to −0.08, n.s.)
+and **not** spatially clustered (permutation p≈0.66–0.88) — so the 1-D "binding-site"
 signal reflects sequence-annotation overlap, not a physical pocket neighbourhood.
+A *subset* of hotspots does line the pockets, though — **R63** (2.7 Å) and **Y214**
+(3.0 Å) contact the allosteric activator and **Q287** (3.5 Å) contacts glucose —
+which is what drove the 1-D annotation signal. Structure choice is immaterial:
+1V4S vs 3VEV (each with its own native ligands) give per-residue nearest-ligand
+distances at Pearson 0.996 (`18`/`20`); 1V4S is used for the published-literature
+convention and to avoid 3VEV's N-terminal construct/isoform mismatch (res 4–11).
 
 **Multi-assay coordinate overlap (10).** Of 186 proteins, 24 have ≥2 assays; **23
 have ≥1 assay pair sharing mutated residues** (all on one identical `target_seq`).
@@ -140,13 +146,15 @@ a combined "functional" flag misleading; the three signals must be tested apart.
 but conservation-based models rank it backwards. R377 → **R377H / MODY2**
 (loss-of-function) — non-functional in both assays.
 
-**GoF vs LoF disease variants, systematic (22).** Extending those anecdotes to 223
-classified disease variants (GoF = GCK-HHF3 + RASK; LoF = GCK-MODY2/PNDM1 + PTEN +
-KCNE1 + CP2C9; SRC contributed none), the W99C pattern does **not** generalize.
+**GoF vs LoF disease variants, systematic (22).** Extending those anecdotes to 204
+classified disease variants (benign/likely-benign/uncertain-significance variants
+lacking any functional-effect annotation are dropped; GoF = GCK-HHF3 + RASK; LoF =
+GCK-MODY2/PNDM1 + PTEN + KCNE1 + CP2C9; SRC contributed none), the W99C pattern
+does **not** generalize.
 Models rank GoF variants *higher* within-site (median 0.83, only 12% in the bottom
 half) than LoF (0.67, 33% bottom half) — the **opposite** of "predict GoF as
 deleterious" (Mann-Whitney GoF<LoF p=1.0); the within-GCK contrast reproduces it
-(HHF3 0.89 vs MODY2 0.68), with W99C (0.11) a rare conserved-Trp exception.
+(HHF3 0.89 vs MODY2 0.67), with W99C (0.11) a rare conserved-Trp exception.
 Corrected reading: conservation/fitness models **under-flag pathogenic variants of
 both classes** (a majority sit in the tolerated top-half) and are *most* blind to
 GoF — a GoF variant preserves/enhances molecular function, so it looks like an
@@ -169,10 +177,14 @@ GoF pathogenicity.
 - **"Disagreement at functional sites" is an annotation-level, not a structural,
   claim.** The 1-D binding-site enrichment (08, p=0.005/0.018) does **not** survive
   in 3-D (`17`): high-disagreement residues are neither closer to the glucose/
-  activator pockets (Spearman ≈ −0.05, n.s.) nor spatially clustered (permutation
-  p≈0.88). So the signal reflects overlap with UniProt binding-site *annotations*,
-  not a physical pocket neighbourhood — interpret the functional-site result
-  cautiously and, where a structure exists, prefer a real 3-D distance test.
+  activator pockets (Spearman −0.04 to −0.08, n.s.) nor spatially clustered
+  (permutation p≈0.66–0.88). So the signal reflects overlap with UniProt
+  binding-site *annotations*, not a physical pocket neighbourhood — interpret the
+  functional-site result cautiously and, where a structure exists, prefer a real
+  3-D distance test. (A few hotspots — R63, Y214, Q287 — do contact a ligand,
+  which is what the annotation test picks up.) The 3-D result is robust to
+  structure choice: 1V4S vs 3VEV give per-residue distances at Pearson 0.996
+  (`18`/`20`).
 - **Candidate-protein `best_pdb` (21) optimizes coverage then resolution;
   `best_holo_pdb` is the ligand-aware pick.** `best_pdb` is blind to ligands, so
   for a ligand-distance analysis like `17` use `best_holo_pdb` / `best_holo_ligands`

@@ -37,13 +37,25 @@ PROTEINS = ["HXK4_HUMAN", "KCNE1_HUMAN", "PTEN_HUMAN", "RASK_HUMAN", "SRC_HUMAN"
 UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
 
 
+# Drop variants annotated benign / likely benign / uncertain significance UNLESS
+# they also carry an explicit functional-effect characterization (a change in
+# stability / activity / catalytic efficiency / binding, or an activating mechanism).
+BENIGN_TERMS = ("benign", "uncertain significance")
+FUNC_CHANGE_TERMS = ("increas", "decreas", "reduc", "loss of", "abolish", "impair",
+                     "diminish", "constitutively activ", "hyperactiv", "destabil",
+                     "thermostab", "gain-of-function", "gain of function", "activates",
+                     "activation of the", "nucleotide exchange", "transform", "oncogen")
+
+
 def classify(desc, protein):
     """Direction by CLINICAL disease phenotype (protein-aware), which is the axis
     that matters for flagging pathogenicity. Cancer = GoF for the RAS oncogene but
     LoF for the PTEN tumor-suppressor; GCK is the only bidirectional case
     (HHF3 hyperinsulinism = GoF; MODY2/PNDM1 diabetes = LoF)."""
     d = (desc or "").lower()
-    ev = d[:120]
+    ev = desc or ""                          # full description (not truncated)
+    if any(t in d for t in BENIGN_TERMS) and not any(t in d for t in FUNC_CHANGE_TERMS):
+        return "benign_no_function", ev      # benign/uncertain with no functional evidence
     if protein == "HXK4_HUMAN":
         if any(k in d for k in ["hhf", "hyperinsulin", "phhi"]):
             return "GoF", ev
