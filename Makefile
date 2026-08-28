@@ -27,7 +27,8 @@ SCRIPTS = \
 	16_collapse_modeltype_withinsite \
 	17_gck_3d_distances \
 	21_generalization_candidates \
-	22_disease_gof_lof
+	22_disease_gof_lof \
+	23_structure_maps_all
 
 .PHONY: all clean
 

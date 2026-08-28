@@ -62,8 +62,10 @@ python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global v
 python3 17_gck_3d_distances.py                # GCK disagreement vs 3-D ligand distance (PDB 1V4S)
 python3 21_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
 python3 22_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
+python3 23_structure_maps_all.py              # per-protein disagreement structure maps (all multi-assay proteins)
 ```
 (Scripts 18-20 are separate GCK 3VEV-vs-1V4S structure-comparison work.)
+Planned analyses are tracked in `NEXT_STEPS.md`.
 
 ## Reproduce
 `make all` runs scripts `00 → 16` in order (each reads the previous ones'
@@ -237,7 +239,9 @@ options, for choosing a protein/structure to extend the analysis — `21`; inclu
 selection framework in `papers/pdb_selection_framework.md`).
 
 Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
-batch under `figures/site_disagreement/HXK4_HUMAN/`.
+batch under `figures/site_disagreement/HXK4_HUMAN/` and the per-protein disagreement
+structure maps (`23`, one `fig_<gene>_structure_map.png` per multi-assay protein)
+under `figures/site_disagreement/`.
 
 ## Version control
 Repo scoped to `analysis/` only; remote
