@@ -6,7 +6,8 @@ Generalizes 08_gck_structure_map.py to all proteins: for each protein, one panel
 per assay showing the disagreement profile (1 - mean pairwise within-site Spearman,
 45 family-best models) along the UniProt sequence, with binding/active-site
 residues (blue lines), disordered regions (shaded), disease-variant positions
-(orange rug), and the top-12 disagreement sites labelled.
+(orange rug; ClinVar pathogenic/LP for GCK via data/clinvar/, UniProt natural-
+variant flag elsewhere), and the top-12 disagreement sites labelled.
 
 Output (one per protein, named by common/gene name):
   figures/site_disagreement/fig_<common>_structure_map.png
@@ -27,10 +28,37 @@ SITES = os.path.join(C.RESULTS, "generalization_functional_disagreement_sites.cs
 CANDID = os.path.join(C.RESULTS, "generalization_candidate_proteins.csv")
 OUTDIR = os.path.join(C.FIGURES, "site_disagreement")
 UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
+CLINVAR_DIR = os.path.join(C.ANALYSIS, "data", "clinvar")
 
 # clean filename stems where the bare gene symbol is ambiguous/absent
 NAME_OVERRIDE = {"SPIKE_SARS2": "spike", "P53_HUMAN": "p53",
                  "A0A2Z5U3Z0_9INFA": "flu_ha", "F7YBW8_MESOW": "f7ybw8"}
+
+# proteins for which disease positions come from a curated ClinVar export
+# (pathogenic + likely pathogenic, missense, SNV, expert-panel/practice-guideline;
+# see README for the download recipe) instead of the UniProt natural-variant flag.
+CLINVAR_TSV = {"HXK4_HUMAN": "GCK.tsv"}
+_AA3 = {"Ala": "A", "Arg": "R", "Asn": "N", "Asp": "D", "Cys": "C", "Gln": "Q",
+        "Glu": "E", "Gly": "G", "His": "H", "Ile": "I", "Leu": "L", "Lys": "K",
+        "Met": "M", "Phe": "F", "Pro": "P", "Ser": "S", "Thr": "T", "Trp": "W",
+        "Tyr": "Y", "Val": "V"}
+_PCHANGE = re.compile(r"p\.([A-Za-z]{3})(\d+)([A-Za-z]{3})")
+
+
+def clinvar_positions(uni):
+    """Residue positions of ClinVar pathogenic/LP missense variants, parsed from
+    the canonical p.(3-letter) change in the Name column. Returns None if the
+    protein has no ClinVar export configured."""
+    fn = CLINVAR_TSV.get(uni)
+    if not fn:
+        return None
+    df = pd.read_csv(os.path.join(CLINVAR_DIR, fn), sep="\t", index_col=False)
+    pos = set()
+    for nm in df["Name"]:
+        m = _PCHANGE.search(str(nm))
+        if m:
+            pos.add(int(m.group(2)))
+    return pos
 
 
 def common_name(uni, protein):
@@ -71,6 +99,9 @@ def main():
     for uni, g in sites.groupby("UniProt_ID"):
         cname = common_name(uni, names.get(uni, uni))
         seq = uniprot_seq(uni)
+        cv = clinvar_positions(uni)                     # None unless a ClinVar export exists
+        dz_set = cv if cv is not None else set(g.loc[g["disease"], "up_pos"])
+        dz_src = "ClinVar P/LP" if cv is not None else "UniProt"
         assays = sorted(g["DMS_id"].unique())
         fig, axes = plt.subplots(len(assays), 1, figsize=(16, 2.9 * len(assays) + 1.4),
                                  sharex=True, squeeze=False)
@@ -86,8 +117,8 @@ def main():
             # binding / active-site residues -> blue lines
             for p in r.loc[r["near_binding"], "up_pos"]:
                 ax.axvline(p, color="#1f77b4", lw=0.6, alpha=0.4, zorder=1)
-            # disease positions -> orange rug at bottom
-            dz = r.loc[r["disease"], "up_pos"]
+            # disease positions -> orange rug at bottom (ClinVar where available)
+            dz = r.loc[r["up_pos"].isin(dz_set), "up_pos"]
             if len(dz):
                 ax.plot(dz, np.full(len(dz), 0.012 * ymax), "|", color="#e08214",
                         markersize=5, mew=0.8, zorder=4)
@@ -98,7 +129,7 @@ def main():
                 pos = int(row["up_pos"])
                 wt = seq[pos - 1] if seq and 1 <= pos <= len(seq) else ""
                 tags = [t for t, on in [("bind", row["near_binding"]),
-                                        ("dz", row["disease"]),
+                                        ("dz", pos in dz_set),
                                         ("dis", row["disordered"])] if on]
                 lab = f"{wt}{pos}" + (f"\n({'/'.join(tags)})" if tags else "")
                 ax.annotate(lab, (pos, row["disagreement"]), fontsize=6, ha="center",
@@ -109,7 +140,7 @@ def main():
         legend = [
             Patch(color="#1f77b4", label="binding / active-site residue (±2)"),
             Patch(color="#8172b3", alpha=0.3, label="disordered region"),
-            plt.Line2D([0], [0], marker="|", color="#e08214", lw=0, label="disease variant"),
+            plt.Line2D([0], [0], marker="|", color="#e08214", lw=0, label=f"disease variant ({dz_src})"),
             plt.Line2D([0], [0], marker="o", color="black", lw=0, label="top-12 disagreed sites"),
         ]
         axes[0].legend(handles=legend, fontsize=7.5, ncol=4, loc="upper center",

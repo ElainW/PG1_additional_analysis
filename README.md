@@ -12,6 +12,20 @@ metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
 `../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
 cached in `data/uniprot/` (fetched by scripts 08/15).
 
+**ClinVar disease variants** for GCK are in `data/clinvar/GCK.tsv` and drive the
+disease annotation on the GCK structure map (`23`). Download recipe (for
+reproducing/updating): ClinVar website, **28 Aug 2026**, search `GCK`, then filter
+**Germline classification** = Pathogenic + Likely pathogenic, **Molecular
+consequence** = missense, **Variant type** = single nucleotide, **Review status** =
+practice guideline + expert panel; export as TSV. Script `23` parses the residue
+position from the canonical `NM_000162.5 … (p.Xxx###Yyy)` change in the `Name`
+column (numbering matches UniProt P35557 / the assays — verified 100% WT match).
+ClinVar vs the old UniProt keyword flag for GCK: **123** ClinVar P/LP positions
+(expert-panel reviewed) vs **411** UniProt-flagged (heavily over-inclusive) — 112
+overlap, 11 ClinVar-only, 299 UniProt-only. R377 (MODY2) is in ClinVar; W99 is not
+(W99C is HHF3 hyperinsulinism/GoF, a different condition than the diabetes-
+pathogenic set), so W99 loses its `dz` tag under the ClinVar annotation.
+
 Requires `pandas, numpy, scipy, matplotlib, seaborn` (plus `biopython` for the
 3-D analysis `17`). Figures are **not** tracked (regenerable); see `.gitignore`.
 
