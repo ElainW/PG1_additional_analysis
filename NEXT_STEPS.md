@@ -15,16 +15,25 @@ the activity–abundance residual map, and located away from the orthosteric sit
 whereas the LoF variants models *do* catch are stability-disrupting / near the
 active site.
 
-**Allostery map source.** The activity–abundance residual (Liao & Lehner 2026):
-activity below its LOESS expectation given abundance = function loss independent of
-stability. We can reproduce it directly from the two GCK assays we already have
-(Gersing_2022 activity + Gersing_2023 abundance; ~8,255 variants), or use the
-paper's map if available. Pair with 1V4S distances (orthosteric glucose/ATP sites)
-from script `17`.
+**Allostery map source (corrected).** The activity–abundance residual (Liao &
+Lehner 2026): activity below its LOESS expectation given abundance = function loss
+independent of stability. **Their GCK residue map is from DIFFERENT DMS assays than
+our pipeline** — the paper used ~8,255 GCK variants (abundance from VAMP-seq, one of
+their nine VAMP-seq proteins; activity from a yeast-based functional assay), whereas
+`O2/20250613` has Gersing_2022_activity (8,570) + Gersing_2023_abundance (8,396).
+The differing counts show these are not the same processed datasets. So do NOT
+assume our two Gersing assays reproduce their map. Options: (a) obtain the paper's
+GCK residual map / source data (Supplementary Table 2 + their code), or (b) if we
+want a map on OUR data, re-derive the activity–abundance residual from the two
+Gersing assays ourselves and treat it as an independent map (label it as such, not
+"the Liao & Lehner map"), first checking assay/variant overlap. Pair either with
+1V4S orthosteric glucose/ATP distances from script `17`.
 
 **Steps.**
-1. Compute per-variant activity–abundance residual for GCK (LOESS of activity vs
-   abundance; residual = vertical deviation), reproducing the paper's method.
+1. Either (a) obtain the paper's GCK residual map, or (b) compute our own
+   per-variant activity–abundance residual from the two Gersing assays (LOESS of
+   activity vs abundance; residual = vertical deviation) — reproducing the paper's
+   *method*, on *our* data, and labelling it as an independent map.
 2. For each model-undercalled MODY2/LoF variant (from `22`), record: activity–
    abundance residual, min side-chain heavy-atom distance to glucose/ATP (1V4S),
    model within-site percentile, and abundance effect.
