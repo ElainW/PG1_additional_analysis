@@ -19,5 +19,6 @@ figures/
 # Regeneration log written by `make all`
 RUN.log
 
-# Copyrighted PDFs of reference papers (keep the write-up, not the PDFs)
-papers/*.pdf
+# Copyrighted papers + supplementary (keep only our write-up .md files)
+papers/*
+!papers/*.md

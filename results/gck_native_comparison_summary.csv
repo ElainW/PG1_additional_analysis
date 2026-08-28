@@ -1,0 +1,15 @@
+metric,value
+shared_residues,440
+nearest_dist_Pearson,0.996
+nearest_dist_Spearman,0.993
+median_abs_diff_nearest_A,0.21
+glucose_dist_Pearson,0.998
+activator_dist_Pearson,0.998
+activity_spearman_disagree_vs_dist_1V4S,-0.083 (p=0.08)
+activity_1V4S_top25_within8A_vs_base,24% vs 19%
+activity_spearman_disagree_vs_dist_3VEV,-0.086 (p=0.07)
+activity_3VEV_top25_within8A_vs_base,28% vs 21%
+abundance_spearman_disagree_vs_dist_1V4S,-0.048 (p=0.31)
+abundance_1V4S_top25_within8A_vs_base,16% vs 19%
+abundance_spearman_disagree_vs_dist_3VEV,-0.051 (p=0.29)
+abundance_3VEV_top25_within8A_vs_base,20% vs 21%

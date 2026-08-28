@@ -1,0 +1,14 @@
+metric,value,n
+global_CA_RMSD_A,1.7,448
+small_subdomain_RMSD_A(67-203),2.51,137
+large_subdomain_RMSD_A(204-443),0.65,240
+dist_measurement_Spearman_1V4S_vs_3VEV,0.981,448
+dist_measurement_Pearson_1V4S_vs_3VEV,0.987,448
+median_abs_dist_diff_A,0.32,448
+max_abs_dist_diff_A,11.89,448
+activity_Spearman_disagree_vs_dist_1V4S,-0.077,446
+activity_Spearman_disagree_vs_dist_3VEV,-0.108,446
+abundance_Spearman_disagree_vs_dist_1V4S,-0.043,446
+abundance_Spearman_disagree_vs_dist_3VEV,-0.068,446
+hotspot_pairwiseCA_Spearman_1V4S_vs_3VEV,0.99,55
+hotspot_pairwiseCA_median_abs_diff_A,0.37,55

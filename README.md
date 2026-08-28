@@ -60,11 +60,13 @@ python3 14_quartile_by_agreement.py           # 'winners' collapse, high- vs low
 python3 15_functional_disagreement_generalization.py   # generalization across multi-assay proteins
 python3 16_collapse_modeltype_withinsite.py   # collapse by model_type; global vs within-site split
 python3 17_gck_3d_distances.py                # GCK disagreement vs 3-D ligand distance (PDB 1V4S)
+python3 18_compare_3vev_1v4s.py               # GCK 3-D robustness: AF model vs 1V4S (superpose + ligand transfer)
+python3 19_gck_3d_view.py                     # GCK 3-D view coloured by disagreement + B-factor PDB export
+python3 20_native_3vev_vs_1v4s.py             # GCK 3-D robustness: 1V4S vs 3VEV, each with native ligands
 python3 21_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
 python3 22_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
 python3 23_structure_maps_all.py              # per-protein disagreement structure maps (all multi-assay proteins)
 ```
-(Scripts 18-20 are separate GCK 3VEV-vs-1V4S structure-comparison work.)
 Planned analyses are tracked in `NEXT_STEPS.md`.
 
 ## Reproduce

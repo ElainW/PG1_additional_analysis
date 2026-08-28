@@ -2,8 +2,13 @@
 GCK (HXK4_HUMAN) 3-D distance analysis of per-site model disagreement.
 
 Structure: PDB 1V4S chain A (human glucokinase, closed form) with glucose (GLC)
-and the allosteric activator (MRK) bound. Numbering matches UniProt P35557 /
-the assays (verified: T49,R63,W99,... all match). Covers residues 14-461.
+and the allosteric activator (MRK) bound. We use 1V4S (not 3VEV) because it is
+the structure used in the published GCK literature, and because 3VEV's crystal
+construct differs from the assay isoform at the N-terminus (residues 4-11),
+adding avoidable wt/PDB mismatches. The two give near-identical distances anyway
+(1V4S<->3VEV per-residue nearest-ligand Pearson 0.996; see 18/20). Numbering
+matches UniProt P35557 / the assays (verified: T49,R63,W99,... all match).
+Covers residues 14-461.
 
 We test, in real 3-D space, two questions raised by the 1-D finding that
 disagreement is elevated at binding-site residues:
@@ -41,6 +46,7 @@ import common as C
 
 warnings.simplefilter("ignore")
 PDB = os.path.join(C.ANALYSIS, "data", "1V4S.pdb")
+ACTIVATOR = "MRK"   # 1V4S's allosteric activator (3VEV uses 0H4)
 ASSAYS = {
     "activity": "HXK4_HUMAN_Gersing_2022_activity",
     "abundance": "HXK4_HUMAN_Gersing_2023_abundance",
@@ -71,7 +77,7 @@ def load_structure():
             heavy[n] = coords
         elif r.resname == "GLC":
             glc.append(coords)
-        elif r.resname == "MRK":
+        elif r.resname == ACTIVATOR:
             mrk.append(coords)
     glc = np.vstack(glc) if glc else np.empty((0, 3))
     mrk = np.vstack(mrk) if mrk else np.empty((0, 3))
