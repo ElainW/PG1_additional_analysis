@@ -1,17 +1,21 @@
 """
-Does the structure choice (3VEV vs 1V4S) change the GCK 3-D distance measurements?
+Does the structure choice (AF model vs 1V4S) change the GCK 3-D distance measurements?
 
-3VEV = data/HXK4_HUMAN.pdb : full-length model (res 1-465), chain A, NO ligands.
-1V4S = data/1V4S.pdb       : res 14-461, glucose (GLC) + activator (MRK) bound.
+AFmodel = data/HXK4_HUMAN.pdb : apo AlphaFold model of P35557 (res 1-465), chain A,
+          NO ligands (its B-factor column is pLDDT, r=0.98 vs the AlphaFold DB).
+1V4S    = data/1V4S.pdb       : res 14-461, glucose (GLC) + activator (MRK) bound.
+NOTE: for historical reasons the variables/outputs below tag the AF model "3VEV"
+(e.g. dist_3VEV, fig_gck_3vev_vs_1v4s.png). It is NOT the 3VEV crystal -- the real
+3VEV crystal (with native glucose + activator 0H4) is used separately in script 20.
 
 Both are closed/active-like (global Calpha RMSD 1.70 A over 448 shared residues).
-Because 3VEV has no ligands, we superpose 1V4S onto 3VEV on shared Calpha and
-transform the two ligands into the 3VEV frame, then recompute per-residue minimum
+Because the AF model has no ligands, we superpose 1V4S onto it on shared Calpha and
+transform the two ligands into the AF-model frame, then recompute per-residue minimum
 heavy-atom distance to the nearest ligand exactly as script 17 did for 1V4S.
 
 We report:
   * global and per-subdomain Calpha RMSD (is there a hidden domain rotation?)
-  * per-residue distance-to-ligand: 3VEV-frame vs 1V4S-native (corr, mean abs diff)
+  * per-residue distance-to-ligand: AF-model-frame vs 1V4S-native (corr, mean abs diff)
   * do the disagreement<->distance correlations change?
   * per-hotspot distances side by side
   * a LIGAND-FREE check: pairwise Calpha distances among curated hotspots in each
@@ -37,7 +41,7 @@ from Bio.PDB.Polypeptide import three_to_index, index_to_one
 import common as C
 
 warnings.simplefilter("ignore")
-VEV = os.path.join(C.ANALYSIS, "data", "HXK4_HUMAN.pdb")   # 3VEV
+VEV = os.path.join(C.ANALYSIS, "data", "HXK4_HUMAN.pdb")   # apo AF model (tagged "3VEV" in outputs)
 V4S = os.path.join(C.ANALYSIS, "data", "1V4S.pdb")
 SMALL = range(67, 204)     # hexokinase small subdomain
 LARGE = range(204, 444)    # hexokinase large subdomain
