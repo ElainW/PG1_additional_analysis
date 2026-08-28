@@ -38,6 +38,11 @@ NAME_OVERRIDE = {"SPIKE_SARS2": "spike", "P53_HUMAN": "p53",
 # (pathogenic + likely pathogenic, missense, SNV, expert-panel/practice-guideline;
 # see README for the download recipe) instead of the UniProt natural-variant flag.
 CLINVAR_TSV = {"HXK4_HUMAN": "GCK.tsv"}
+# The GCK ClinVar query is for diabetes (MODY/PNDM, loss-of-function); it cannot
+# contain the hyperinsulinism gain-of-function variants (e.g. W99C/HHF3, whose only
+# ClinVar entry is the non-missense Trp99Ter). Supplement with those GoF variants
+# from UniProt natural-variant annotations, matched by keyword (as in script 08).
+CLINVAR_SUPPLEMENT_KW = {"HXK4_HUMAN": ("hhf", "hyperinsulin", "phhi")}
 _AA3 = {"Ala": "A", "Arg": "R", "Asn": "N", "Asp": "D", "Cys": "C", "Gln": "Q",
         "Glu": "E", "Gly": "G", "His": "H", "Ile": "I", "Leu": "L", "Lys": "K",
         "Met": "M", "Phe": "F", "Pro": "P", "Ser": "S", "Thr": "T", "Trp": "W",
@@ -58,6 +63,23 @@ def clinvar_positions(uni):
         m = _PCHANGE.search(str(nm))
         if m:
             pos.add(int(m.group(2)))
+    return pos
+
+
+def uniprot_disease_supplement(uni):
+    """Positions of UniProt natural-variant disease annotations matching the
+    supplement keywords (the GoF/hyperinsulinism variants a diabetes-only ClinVar
+    query misses). Empty if none configured."""
+    kws = CLINVAR_SUPPLEMENT_KW.get(uni)
+    if not kws:
+        return set()
+    e = json.load(open(os.path.join(UNIPROT_DIR, uni + ".json")))
+    pos = set()
+    for f in e.get("features", []):
+        if f["type"] == "Natural variant":
+            d = (f.get("description", "") or "").lower()
+            if any(k in d for k in kws):
+                pos.add(f["location"]["start"]["value"])
     return pos
 
 
@@ -100,8 +122,13 @@ def main():
         cname = common_name(uni, names.get(uni, uni))
         seq = uniprot_seq(uni)
         cv = clinvar_positions(uni)                     # None unless a ClinVar export exists
-        dz_set = cv if cv is not None else set(g.loc[g["disease"], "up_pos"])
-        dz_src = "ClinVar P/LP" if cv is not None else "UniProt"
+        if cv is not None:
+            supp = uniprot_disease_supplement(uni)      # GoF variants ClinVar diabetes query misses
+            dz_set = cv | supp
+            dz_src = "ClinVar P/LP + UniProt GoF" if supp else "ClinVar P/LP"
+        else:
+            dz_set = set(g.loc[g["disease"], "up_pos"])
+            dz_src = "UniProt"
         assays = sorted(g["DMS_id"].unique())
         fig, axes = plt.subplots(len(assays), 1, figsize=(16, 2.9 * len(assays) + 1.4),
                                  sharex=True, squeeze=False)

@@ -20,11 +20,15 @@ consequence** = missense, **Variant type** = single nucleotide, **Review status*
 practice guideline + expert panel; export as TSV. Script `23` parses the residue
 position from the canonical `NM_000162.5 … (p.Xxx###Yyy)` change in the `Name`
 column (numbering matches UniProt P35557 / the assays — verified 100% WT match).
-ClinVar vs the old UniProt keyword flag for GCK: **123** ClinVar P/LP positions
-(expert-panel reviewed) vs **411** UniProt-flagged (heavily over-inclusive) — 112
-overlap, 11 ClinVar-only, 299 UniProt-only. R377 (MODY2) is in ClinVar; W99 is not
-(W99C is HHF3 hyperinsulinism/GoF, a different condition than the diabetes-
-pathogenic set), so W99 loses its `dz` tag under the ClinVar annotation.
+The ClinVar query targets **diabetes** (MODY/PNDM, loss-of-function), so it cannot
+contain the hyperinsulinism **gain-of-function** variants (e.g. W99C/HHF3 — W99's
+only ClinVar entry is the non-missense Trp99Ter, a single submitter). We therefore
+**supplement** ClinVar with the UniProt hyperinsulinism/HHF GoF positions (65, 91,
+99, 214, 442, 455, 456), giving **129** GCK disease positions total. This is far
+cleaner than the old UniProt keyword flag (**411** positions — heavily
+over-inclusive, catching benign/VUS natural variants): 123 curated ClinVar P/LP +
+6 GoF, vs 411. So R377 (MODY2, LoF) comes from ClinVar and W99C (HHF3, GoF) from
+the supplement — both retain their `dz` tag.
 
 Requires `pandas, numpy, scipy, matplotlib, seaborn` (plus `biopython` for the
 3-D analysis `17`). Figures are **not** tracked (regenerable); see `.gitignore`.
