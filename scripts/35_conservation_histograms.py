@@ -193,7 +193,9 @@ def _kde(ax, name, vals, clip=None):
                     linewidth=1.8, bw_adjust=0.9, clip=clip, cut=0,
                     label=f"{name} (n={len(vals)})")
     elif len(vals):
-        ax.plot(vals, np.zeros_like(vals), "|", color=COLORS[name],
+        # too few points for a KDE: draw a tall, visible marker line
+        ax.plot(vals, np.zeros_like(vals), marker="|", linestyle="none",
+                color=COLORS[name], markersize=26, markeredgewidth=2.6,
                 label=f"{name} (n={len(vals)})")
 
 
@@ -201,14 +203,13 @@ def plot_assay(d, df, dms, shared_high, shared_low):
     catpos = _cat_positions(df, shared_high, shared_low)
     fig, (axc, axd) = plt.subplots(1, 2, figsize=(12, 4.4))
 
-    # left: conservation-percentile/100 density (one value per residue)
+    # left: conservation percentile (0-100) density (one value per residue)
     for name in CATS:
-        sub = df[df.up_pos.isin(catpos[name])]["relfrac_cons"].values
-        _kde(axc, name, sub, clip=(0, 1))
-    axc.set_xlabel("relative fraction of conservation  (percentile/100; 0 if NaN)")
+        sub = df[df.up_pos.isin(catpos[name])]["relfrac_cons"].values * 100.0
+        _kde(axc, name, sub, clip=(0, 100))
+    axc.set_xlabel("conservation percentile  (0 if NaN)")
     axc.set_ylabel("density")
-    axc.set_xlim(0, 1)
-    axc.legend(fontsize=8, frameon=False)
+    axc.set_xlim(0, 100)
 
     # right: DMS-score density (all substitutions at each category's residues)
     for name in CATS:
@@ -222,7 +223,13 @@ def plot_assay(d, df, dms, shared_high, shared_low):
            else "lower is more fit" if direction == -1 else None)
     axd.set_xlabel(f"DMS score ({fit})" if fit else "DMS score")
     axd.set_ylabel("density")
-    axd.legend(fontsize=8, frameon=False)
+
+    for ax, title in ((axc, "categories (number of positions)"),
+                      (axd, "categories (number of mutations)")):
+        ax.grid(False)
+        leg = ax.legend(fontsize=8, title=title, title_fontsize=8, frameon=True,
+                        facecolor="white", edgecolor="0.3", framealpha=1.0)
+        leg.get_frame().set_boxstyle("square")
 
     fig.suptitle(d, y=1.02, fontsize=11)
     fig.tight_layout()
