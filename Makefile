@@ -32,7 +32,10 @@ SCRIPTS = \
 	21_generalization_candidates \
 	22_disease_gof_lof \
 	23_structure_maps_all \
-	24_gof_supplement_tables
+	24_gof_supplement_tables \
+	25_export_structural_annotations \
+	26_src_allosteric_sites \
+	27_export_high_disagreement_sites
 
 .PHONY: all clean
 

@@ -10,7 +10,12 @@ Data (not tracked in this repo): 217 DMS substitution assays in
 `../O2/20250613/*.csv`, 97 models (columns `Site_Independent … Protriever`),
 metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
 `../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
-cached in `data/uniprot/raw_json/` (raw entries; fetched by scripts 08/15). Derived UniProt GoF-supplement tables (script `24`) are in `data/uniprot/additional_annotations/`.
+cached in `data/uniprot/raw_json/` (raw entries; fetched by scripts 08/15). Derived
+UniProt annotation tables live in `data/uniprot/additional_annotations/`: GoF-supplement
+tables (script `24`) and per-protein structural/functional annotations — binding
+residues per ligand, subdomains, disordered regions, disease variants (script `25`,
+mirrors what `23` overlays). Allosteric-site atlases parsed from primary papers are in
+`results/allosteric_map/` (script `26`; SRC_HUMAN first).
 Structure files (used by the 3-D scripts `17`–`20`) live in `data/structures/pdb/`
 (crystal PDBs 1V4S, 3VEV) and `data/structures/af2/` (AlphaFold model HXK4_HUMAN).
 
@@ -111,11 +116,14 @@ python3 21_generalization_candidates.py       # multi-assay candidate proteins +
 python3 22_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
 python3 23_structure_maps_all.py              # per-protein disagreement structure maps (all multi-assay proteins)
 python3 24_gof_supplement_tables.py           # write UniProt GoF-supplement tables -> data/uniprot/additional_annotations/
+python3 25_export_structural_annotations.py   # per-protein binding/subdomain/disorder/disease annotations (md+csv)
+python3 26_src_allosteric_sites.py            # parse SRC allosteric sites from Beltran 2026 -> results/allosteric_map/SRC_HUMAN.tsv
+python3 27_export_high_disagreement_sites.py  # per-protein tables of 23's labelled high-disagreement sites
 ```
 Planned analyses are tracked in `NEXT_STEPS.md`.
 
 ## Reproduce
-`make all` runs scripts `00 → 24` in order (each reads the previous ones'
+`make all` runs scripts `00 → 27` in order (each reads the previous ones'
 `results/`), regenerating every CSV and figure and logging timestamps + output to
 `RUN.log`. This is how to confirm the numbers quoted below stay in sync with the
 code. Requires the `data/` UniProt cache (tracked) for `08`/`15`; no network
@@ -373,6 +381,9 @@ Overlap: `assay_position_overlap_{proteins,pairs,selected_assays}.csv`.
 Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
 `hxk4_agreement_vs_accuracy_*.csv`, `hxk4_quartile_by_agreement*.csv`,
 `collapse_modeltype_withinsite.csv`.
+Allosteric maps: `allosteric_map/SRC_HUMAN.tsv` (per-residue Src allosteric-site
+atlas parsed from Beltran 2026 — site class, inhibitory/activating direction,
+region, druggable pocket, evidence; `26`).
 Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`,
 `generalization_candidate_proteins.csv` (24 multi-assay proteins + RCSB PDB
 options, for choosing a protein/structure to extend the analysis — `21`; includes
@@ -382,7 +393,9 @@ selection framework in `papers/pdb_selection_framework.md`).
 Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
 batch under `figures/site_disagreement/HXK4_HUMAN/` and the per-protein disagreement
 structure maps (`23`, one `fig_<gene>_structure_map.png` per multi-assay protein)
-under `figures/site_disagreement/`.
+under `figures/site_disagreement/`. The exact labelled high-disagreement sites behind
+those maps are tabulated per protein (`27`) under
+`figures/site_disagreement/high_disagreement_sites/`.
 
 ## Version control
 Repo scoped to `analysis/` only; remote

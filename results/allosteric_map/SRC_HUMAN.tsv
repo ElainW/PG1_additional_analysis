@@ -1,0 +1,114 @@
+# Src allosteric-site atlas parsed from Beltran, Naqvi, Faure & Lehner 2026,
+# 'The allosteric landscape of the Src kinase', Sci Adv 12, eaea2726.
+# Numbering: SRC_HUMAN / UniProt P12931. site_class from Fig3 stars
+# (active_site=red, allosteric_second_shell=salmon, allosteric=yellow).
+# direction: inhibitory (loss of activity, ddGa>0) vs activating (ddGa<0).
+UniProt_ID	position	wt_aa	residue	site_class	direction	region	pockets	evidence	notes
+SRC_HUMAN	280	C	C280		inhibitory		P2	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	284	V	V284	active_site	inhibitory	C-spine (catalytic spine); direct ATP contact	P13(ATP)	Fig3I_Cspine;Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	285	W	W285		inhibitory		P13(ATP)	Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	296	A	A296	active_site	inhibitory	C-spine (catalytic spine); direct ATP contact	P13(ATP)	Fig3I_Cspine;Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	297	I	I297		inhibitory		P13(ATP)	Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	298	K	K298	active_site	inhibitory	ATP-substrate allosteric network (ref 52) | electrostatic switch network	P13(ATP)	Fig3F;Fig5C;p8_dynamic_contacts	orthosteric ATP-binding pocket (competitive-inhibitor site) | switch: D407-K298 (inactive) -> E313-K298 (active)
+SRC_HUMAN	310	F	F310		inhibitory	helix alphaC		p6_inhibitory	helix alphaC inhibitory cluster; E313 salt bridge with K298 in active state
+SRC_HUMAN	313	E	E313	allosteric	inhibitory	ATP-substrate allosteric network (ref 52) | electrostatic switch network | helix alphaC		Fig3F;p6_inhibitory;p8_dynamic_contacts	helix alphaC inhibitory cluster; E313 salt bridge with K298 in active state | switch: E313-R412 (inactive) -> E313-K298 (active)
+SRC_HUMAN	314	A	A314		inhibitory	helix alphaC		p6_inhibitory	helix alphaC inhibitory cluster; E313 salt bridge with K298 in active state
+SRC_HUMAN	316	V	V316		inhibitory		P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	317	M	M317	allosteric	inhibitory	ATP-substrate allosteric network (ref 52) | R-spine (regulatory spine) | helix alphaC	P1;P4	Fig3F;Fig3I_Rspine;Fig5E;p6_inhibitory	helix alphaC inhibitory cluster; E313 salt bridge with K298 in active state | novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	319	K	K319		inhibitory		P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	320	L	L320		inhibitory	helix alphaC	P1;P4	Fig5E;p6_inhibitory	helix alphaC inhibitory cluster; E313 salt bridge with K298 in active state | novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	321	R	R321		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	322	H	H322		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	323	E	E323		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	324	K	K324		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	325	L	L325		inhibitory		P1;P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	326	V	V326		inhibitory		P1;P13(ATP)	Fig5C;Fig5E	novel allosteric pocket enriched for inhibitory mutations | orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	328	L	L328	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52) | R-spine (regulatory spine)		Fig3F;Fig3I_Rspine	
+SRC_HUMAN	339	I	I339		inhibitory		P13(ATP)	Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	340	V	V340		inhibitory		P13(ATP)	Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	341	T	T341		inhibitory		P13(ATP)	Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	342	E	E342		inhibitory		P13(ATP)	Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	349	L	L349			C-spine (catalytic spine)		Fig3I_Cspine	C-spine; small ddGa, effect on activity ~ explained by fold stability
+SRC_HUMAN	368	D	D368	allosteric	activating	C-lobe (major activating allosteric site)		FigS4	
+SRC_HUMAN	375	S	S375		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	376	G	G376		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	377	M	M377		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	378	A	A378	allosteric	activating	C-lobe (major activating allosteric site)		FigS4	
+SRC_HUMAN	379	Y	Y379		inhibitory		P1;P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	380	V	V380		inhibitory		P1;P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	381	E	E381	allosteric	inhibitory;activating	C-lobe (major activating allosteric site) | alphaF pocket (activating hotspot)	P4	Fig5E;FigS4;p6_activating	alphaF pocket, previously defined activating hotspot (ref 44) | novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	383	M	M383		inhibitory		P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	384	N	N384		inhibitory		P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	385	Y	Y385		inhibitory		P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	386	V	V386		inhibitory		P4	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	387	H	H387	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52) | R-spine (regulatory spine)	P4	Fig3F;Fig3I_Rspine;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	389	D	D389		inhibitory	electrostatic switch network		p8_dynamic_contacts	inactive D389-Y419 (catalytic Asp of HRD)
+SRC_HUMAN	391	R	R391	active_site	inhibitory	ATP-substrate allosteric network (ref 52)	P2	Fig3F;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	395	I	I395	allosteric	activating	C-spine (catalytic spine)		p10_FL_cluster	C-spine I395/V397; part of C-lobe cluster more activating in full-length Src
+SRC_HUMAN	396	L	L396	active_site	inhibitory	C-spine (catalytic spine); direct ATP contact	P13(ATP)	Fig3I_Cspine;Fig5C	orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	397	V	V397	allosteric	activating	C-spine (catalytic spine)		p10_FL_cluster	C-spine I395/V397; part of C-lobe cluster more activating in full-length Src
+SRC_HUMAN	403	C	C403		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	404	K	K404		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	405	V	V405		inhibitory		P1	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	406	A	A406	allosteric_second_shell	inhibitory	activation loop	P1;P13(ATP)	Fig3H;Fig5C;Fig5E	novel allosteric pocket enriched for inhibitory mutations | orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	407	D	D407	active_site	inhibitory	ATP-substrate allosteric network (ref 52) | activation loop | electrostatic switch network	P13(ATP)	Fig3F;Fig3H;Fig5C;p8_dynamic_contacts	inactive D407-K298 -> breaks on activation | orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	408	F	F408	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52) | R-spine (regulatory spine) | activation loop	P1;P13(ATP);P4	Fig3F;Fig3H;Fig3I_Rspine;Fig5C;Fig5E	novel allosteric pocket enriched for inhibitory mutations | orthosteric ATP-binding pocket (competitive-inhibitor site)
+SRC_HUMAN	409	G	G409	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52) | activation loop		Fig3F;Fig3H	
+SRC_HUMAN	410	L	L410	allosteric_second_shell	inhibitory	activation loop		Fig3H	
+SRC_HUMAN	411	A	A411	allosteric_second_shell	inhibitory	activation loop	P4	Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	412	R	R412	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52) | activation loop | electrostatic switch network		Fig3F;Fig3H;p8_dynamic_contacts	switch: E313-R412 (inactive) -> R412-Y419 (active)
+SRC_HUMAN	419	Y	Y419	allosteric_second_shell	inhibitory	activation loop | electrostatic switch network	P2	Fig3H;Fig5E;p6_inhibitory;p8_dynamic_contacts	Y419 autophosphorylation site; locks Src active when phosphorylated | novel allosteric pocket enriched for inhibitory mutations | switch: D389-Y419 (inactive) -> R412-Y419 (active)
+SRC_HUMAN	421	A	A421	allosteric	inhibitory	activation loop	P15	Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	422	R	R422		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	423	Q	Q423		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	424	G	G424	allosteric	inhibitory	activation loop	P15	Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	425	A	A425		inhibitory		P15;P2	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	426	K	K426		inhibitory		P15;P2	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	427	F	F427	allosteric_second_shell	inhibitory	activation loop	P15;P2	Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	428	P	P428	active_site	inhibitory	activation loop	P15;P2	Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	429	I	I429	allosteric_second_shell	inhibitory	activation loop	P15;P2	Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	430	K	K430	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52) | activation loop	P2	Fig3F;Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	431	W	W431	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52) | activation loop	P2	Fig3F;Fig3H;Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	432	T	T432	allosteric_second_shell	inhibitory	activation loop		Fig3H	
+SRC_HUMAN	433	A	A433	allosteric	inhibitory	activation loop		Fig3H	
+SRC_HUMAN	435	E	E435	allosteric	inhibitory	activation loop		Fig3H	
+SRC_HUMAN	443	T	T443	allosteric	activating	C-lobe (major activating allosteric site) | alphaF pocket (activating hotspot)		FigS4;p6_activating	alphaF pocket, previously defined activating hotspot (ref 44)
+SRC_HUMAN	444	I	I444	allosteric	activating	C-lobe (major activating allosteric site) | alphaF pocket (activating hotspot)		FigS4;p6_activating	alphaF pocket, previously defined activating hotspot (ref 44)
+SRC_HUMAN	445	K	K445	allosteric	activating	C-lobe (major activating allosteric site) | alphaF pocket (activating hotspot)		FigS4;p6_activating	alphaF pocket, previously defined activating hotspot (ref 44)
+SRC_HUMAN	446	S	S446	allosteric	activating	C-lobe (major activating allosteric site)		FigS4	
+SRC_HUMAN	453	I	I453		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	454	L	L454			C-spine (catalytic spine)		Fig3I_Cspine	C-spine; small ddGa, effect on activity ~ explained by fold stability
+SRC_HUMAN	456	T	T456		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	457	E	E457	allosteric_second_shell	inhibitory	ATP-substrate allosteric network (ref 52)	P7(G-loop)	Fig3F;Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	458	L	L458	allosteric	activating	C-lobe (major activating allosteric site)		FigS4	
+SRC_HUMAN	460	T	T460		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	462	G	G462		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	463	R	R463		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	464	V	V464		inhibitory		P2;P7(G-loop)	Fig5C;Fig5E	P7 G-loop pocket, targeted by small-molecule inhibitors | novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	465	P	P465	allosteric	inhibitory	ATP-substrate allosteric network (ref 52)	P2;P7(G-loop)	Fig3F;Fig5C;Fig5E	P7 G-loop pocket, targeted by small-molecule inhibitors | novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	466	Y	Y466		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	467	P	P467		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	470	V	V470		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	471	N	N471		inhibitory		P15;P2	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	472	R	R472		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	473	E	E473		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	474	V	V474		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	475	L	L475		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	476	D	D476		inhibitory		P15	Fig5E	novel allosteric pocket enriched for inhibitory mutations
+SRC_HUMAN	484	M	M484		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	485	P	P485		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	486	C	C486		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	487	P	P487		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	488	P	P488		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	495	H	H495		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	498	M	M498		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	502	W	W502		inhibitory		P7(G-loop)	Fig5C	P7 G-loop pocket, targeted by small-molecule inhibitors
+SRC_HUMAN	506	P	P506	allosteric	activating	C-lobe (major activating allosteric site) | alphaF pocket (activating hotspot)		FigS4;p6_activating	alphaF pocket, previously defined activating hotspot (ref 44)
+SRC_HUMAN	527	E	E527	allosteric	activating	C-terminal regulatory tail		p10_Cterm_tail	adjacent to Y530; stronger activating effects in full-length Src
+SRC_HUMAN	528	P	P528	allosteric	activating	C-lobe (major activating allosteric site) | C-terminal regulatory tail		FigS4;p10_Cterm_tail	adjacent to Y530; stronger activating effects in full-length Src
+SRC_HUMAN	529	Q	Q529	allosteric	inhibitory	C-terminal regulatory tail		p10_Cterm_tail	stronger inhibitory effects in full-length Src (autoinhibitory tail motif)
+SRC_HUMAN	530	Y	Y530	allosteric	activating	C-lobe (major activating allosteric site) | C-terminal regulatory tail		FigS4;p10_Cterm_tail	inhibitory phosphosite; mutations more activating in full-length Src (SH2 release)
+SRC_HUMAN	531	Q	Q531	allosteric	activating	C-terminal regulatory tail		p10_Cterm_tail	adjacent to Y530; stronger activating effects in full-length Src
+SRC_HUMAN	532	P	P532	allosteric	inhibitory	C-terminal regulatory tail		p10_Cterm_tail	stronger inhibitory effects in full-length Src (autoinhibitory tail motif)
+SRC_HUMAN	533	G	G533	allosteric	inhibitory	C-terminal regulatory tail		p10_Cterm_tail	stronger inhibitory effects in full-length Src (autoinhibitory tail motif)
+SRC_HUMAN	535	N	N535	allosteric	inhibitory	C-terminal regulatory tail		p10_Cterm_tail	stronger inhibitory effects in full-length Src (autoinhibitory tail motif)

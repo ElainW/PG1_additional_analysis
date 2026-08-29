@@ -1,0 +1,116 @@
+UniProt_ID,gene,category,name,n_residues,residues
+SPIKE_SARS2,S,subdomain,BetaCoV S1-NTD,290,14-303
+SPIKE_SARS2,S,subdomain,BetaCoV S1-CTD,194,334-527
+SPIKE_SARS2,S,subdomain,Putative superantigen; may bind T-cell receptor alpha/TRAC,22,280-301
+SPIKE_SARS2,S,subdomain,Receptor-binding domain (RBD),223,319-541
+SPIKE_SARS2,S,subdomain,Receptor-binding motif; binding to human ACE2,72,437-508
+SPIKE_SARS2,S,subdomain,Fusion peptide 1,22,816-837
+SPIKE_SARS2,S,subdomain,Fusion peptide 2,21,835-855
+SPIKE_SARS2,S,subdomain,Heptad repeat 1,51,920-970
+SPIKE_SARS2,S,subdomain,Heptad repeat 2,40,1163-1202
+SPIKE_SARS2,S,disordered,Disordered,26,1-26
+SPIKE_SARS2,S,disordered,Disordered,14,67-80
+SPIKE_SARS2,S,disordered,Disordered,23,142-164
+SPIKE_SARS2,S,disordered,Disordered,13,173-185
+SPIKE_SARS2,S,disordered,Disordered,17,246-262
+SPIKE_SARS2,S,disordered,Disordered,17,319-335
+SPIKE_SARS2,S,disordered,Disordered,36,455-490
+SPIKE_SARS2,S,disordered,Disordered,23,519-541
+SPIKE_SARS2,S,disordered,Disordered,20,621-640
+SPIKE_SARS2,S,disordered,Disordered,15,673-687
+SPIKE_SARS2,S,disordered,Disordered,26,828-853
+SPIKE_SARS2,S,disease,UniProt natural-variant,0,
+KCNE1_HUMAN,KCNE1,subdomain,interaction with KCNQ1 C-terminus,21,109-129
+KCNE1_HUMAN,KCNE1,disease,ClinVar P/LP,6,"1, 7, 52, 70, 73, 87"
+SRC_HUMAN,SRC,binding,ATP,10,"276-284, 298"
+SRC_HUMAN,SRC,active_site,Active site,1,389
+SRC_HUMAN,SRC,subdomain,SH3,62,84-145
+SRC_HUMAN,SRC,subdomain,SH2,98,151-248
+SRC_HUMAN,SRC,subdomain,Protein kinase,254,270-523
+SRC_HUMAN,SRC,disordered,Disordered,53,1-53
+SRC_HUMAN,SRC,disease,ClinVar P/LP,2,"527, 531"
+PTEN_HUMAN,PTEN,active_site,Active site,1,124
+PTEN_HUMAN,PTEN,subdomain,Phosphatase tensin-type,172,14-185
+PTEN_HUMAN,PTEN,subdomain,C2 tensin-type,161,190-350
+PTEN_HUMAN,PTEN,disordered,Disordered,52,352-403
+PTEN_HUMAN,PTEN,disease,ClinVar P/LP,72,"1, 6, 15, 20, 22-24, 27, 31, 34-36, 38-39, 44, 47, 50, 53, 57, 61, 65-66, 70-71, 92-93, 95-96, 105, 107, 111-112, 119, 123-125, 127, 130-132, 134, 136, 141, 155, 157, 159, 165, 167, 170-171, 173-174, 177, 181, 188, 200, 204, 211, 241, 246-247, 251-252, 256, 267, 277, 298, 316, 320, 322, 335, 345"
+HXK4_HUMAN,GCK,binding,ATP,19,"78-83, 228, 295-296, 332-336, 411-415"
+HXK4_HUMAN,GCK,binding,substrate,9,"151-152, 168-169, 204-205, 231, 256, 290"
+HXK4_HUMAN,GCK,subdomain,Hexokinase small subdomain,137,67-203
+HXK4_HUMAN,GCK,subdomain,Hexokinase large subdomain,240,204-443
+HXK4_HUMAN,GCK,disease,ClinVar P/LP + UniProt GoF,129,"19, 30, 33, 36-38, 40, 43, 49, 53-54, 56-57, 60, 62, 65, 72, 77-78, 91, 99, 108, 117, 122, 124, 130, 137, 146, 150-157, 160, 168, 174-175, 177-178, 182, 187-189, 191, 197, 201-203, 208-210, 214, 220-221, 224, 226-228, 230, 235, 246, 250, 255, 258-259, 261, 263-264, 268, 271, 274-275, 277, 294-295, 300, 304, 314, 317-318, 326, 337, 339-340, 344, 348, 352, 360, 363, 367, 371, 373-375, 377-389, 392, 394, 397, 410, 412, 414, 416, 419, 423-424, 436-437, 441-442, 449-450, 454-456"
+KCNJ2_MOUSE,Kcnj2,subdomain,Polyphosphoinositide (PIP2)-binding,28,181-208
+KCNJ2_MOUSE,Kcnj2,disordered,Disordered,46,383-428
+KCNJ2_MOUSE,Kcnj2,disease,UniProt natural-variant,0,
+Q53Z42_HUMAN,HLA-A,binding,Zn(2+),2,221-222
+Q53Z42_HUMAN,HLA-A,subdomain,Ig-like,87,209-295
+Q53Z42_HUMAN,HLA-A,disordered,Disordered,28,338-365
+Q53Z42_HUMAN,HLA-A,disease,UniProt natural-variant,0,
+VKOR1_HUMAN,VKORC1,binding,(S)-warfarin,2,"80, 139"
+VKOR1_HUMAN,VKORC1,binding,phylloquinone,2,"135, 139"
+VKOR1_HUMAN,VKORC1,disease,ClinVar P/LP,5,"29, 45, 58, 77, 98"
+RL40A_YEAST,RPL40A,binding,Zn(2+),4,"96, 99, 110, 115"
+RL40A_YEAST,RPL40A,subdomain,Ubiquitin-like,76,1-76
+RL40A_YEAST,RPL40A,disease,UniProt natural-variant,0,
+S22A1_HUMAN,SLC22A1,disease,UniProt natural-variant,0,
+RASK_HUMAN,KRAS,binding,GTP,15,"13-18, 28-30, 116-117, 119, 145-147"
+RASK_HUMAN,KRAS,binding,Mg(2+),2,"17, 57"
+RASK_HUMAN,KRAS,subdomain,Hypervariable region,20,166-185
+RASK_HUMAN,KRAS,disease,ClinVar P/LP + UniProt GoF,9,"5, 12, 14, 22, 34, 58, 60, 65, 156"
+CP2C9_HUMAN,CYP2C9,binding,heme,1,435
+CP2C9_HUMAN,CYP2C9,disease,ClinVar P/LP,1,208
+CCDB_ECOLI,ccdB,disease,UniProt natural-variant,0,
+OXDA_RHOTO,DAO1,binding,(R)-lactate,4,"223, 238, 285, 335"
+OXDA_RHOTO,DAO1,binding,FAD,15,"12, 15, 35-36, 47-48, 52, 54, 162, 285, 334-335, 337-339"
+OXDA_RHOTO,DAO1,binding,anthranilate,5,"58, 223, 238, 285, 335"
+OXDA_RHOTO,DAO1,disease,UniProt natural-variant,0,
+SPG1_STRSG,spg,subdomain,2 X 37 AA repeats,112,104-215
+SPG1_STRSG,spg,subdomain,2 X 55 AA repeats,125,228-352
+SPG1_STRSG,spg,subdomain,5 X 5 AA repeats of [DE]-D-A-K-K,25,386-410
+SPG1_STRSG,spg,disordered,Disordered,65,358-422
+SPG1_STRSG,spg,disease,UniProt natural-variant,0,
+CAR11_HUMAN,CARD11,subdomain,CARD,93,18-110
+CAR11_HUMAN,CARD11,subdomain,PDZ,89,667-755
+CAR11_HUMAN,CARD11,subdomain,Guanylate kinase-like,168,973-1140
+CAR11_HUMAN,CARD11,subdomain,Linker,18,111-128
+CAR11_HUMAN,CARD11,subdomain,Inhibitory domain (ID),217,450-666
+CAR11_HUMAN,CARD11,disordered,Disordered,167,460-626
+CAR11_HUMAN,CARD11,disease,ClinVar P/LP + UniProt GoF,13,"30, 40, 43, 47-49, 72, 80, 123, 126, 134, 775, 833"
+P53_HUMAN,TP53,binding,Zn(2+),4,"176, 179, 238, 242"
+P53_HUMAN,TP53,subdomain,Interaction with CCAR2,320,1-320
+P53_HUMAN,TP53,subdomain,Interaction with HRMT1L2,83,1-83
+P53_HUMAN,TP53,subdomain,Transcription activation (acidic),44,1-44
+P53_HUMAN,TP53,subdomain,Interaction with WWOX,45,66-110
+P53_HUMAN,TP53,subdomain,Interaction with HIPK1,271,100-370
+P53_HUMAN,TP53,subdomain,Required for interaction with ZNF385A,201,100-300
+P53_HUMAN,TP53,subdomain,Required for interaction with FBXO42,124,113-236
+P53_HUMAN,TP53,subdomain,Interaction with AXIN1,177,116-292
+P53_HUMAN,TP53,subdomain,Interaction with E4F1,39,256-294
+P53_HUMAN,TP53,subdomain,Interaction with CARM1,94,300-393
+P53_HUMAN,TP53,subdomain,Interaction with HIPK2,42,319-360
+P53_HUMAN,TP53,subdomain,Oligomerization,32,325-356
+P53_HUMAN,TP53,subdomain,Basic (repression of DNA-binding),20,368-387
+P53_HUMAN,TP53,subdomain,Interaction with MORN3,20,374-393
+P53_HUMAN,TP53,disordered,Disordered,47,50-96
+P53_HUMAN,TP53,disordered,Disordered,44,282-325
+P53_HUMAN,TP53,disordered,Disordered,43,351-393
+P53_HUMAN,TP53,disease,ClinVar P/LP,37,"106, 110-111, 127, 132, 135, 138, 143, 152, 158, 163-164, 173, 175, 178-181, 190, 193-194, 197, 214, 220, 237, 245, 248, 254, 272-273, 277, 280, 283, 337, 342, 344, 347"
+NPC1_HUMAN,NPC1,binding,cholesterol,2,"41, 79"
+NPC1_HUMAN,NPC1,subdomain,SSD,166,620-785
+NPC1_HUMAN,NPC1,subdomain,Important for cholesterol binding and cholesterol transfer from NPC1 to liposomes,31,175-205
+NPC1_HUMAN,NPC1,disease,ClinVar P/LP,82,"1, 63, 90, 92, 113, 169, 177, 248, 372, 375, 378, 404, 434, 471, 474, 501, 509, 512, 518, 543, 558, 612, 615, 634, 640, 652, 664, 667, 691, 703, 712, 724, 734, 764, 775, 789, 825, 842, 865, 874, 887, 910, 926-927, 934, 940, 944-945, 948, 950, 954, 958, 968, 978, 992, 1001, 1007, 1015, 1019, 1034-1036, 1054, 1061, 1087-1089, 1141-1142, 1145, 1151, 1156, 1167-1168, 1186, 1189, 1197, 1205, 1212-1213, 1240, 1244"
+HSP82_YEAST,HSP82,binding,ATP,16,"33, 37, 79, 84, 92, 98-100, 119-124, 171, 380"
+HSP82_YEAST,HSP82,subdomain,5 X 5 AA repeats of [DE]-[DE]-[DE]-K-K; highly charged region,43,221-263
+HSP82_YEAST,HSP82,disordered,Disordered,44,219-262
+HSP82_YEAST,HSP82,disordered,Disordered,31,679-709
+HSP82_YEAST,HSP82,disease,UniProt natural-variant,0,
+A0A2Z5U3Z0_9INFA,Influenza hemagglutinin,disease,UniProt natural-variant,0,
+RPC1_LAMBD,cI,subdomain,HTH cro/C1-type,59,19-77
+RPC1_LAMBD,cI,disease,UniProt natural-variant,0,
+F7YBW8_MESOW,"Addiction module antidote protein, CopG/Arc/MetJ family",disease,UniProt natural-variant,0,
+BLAT_ECOLX,bla,binding,substrate,3,232-234
+BLAT_ECOLX,bla,active_site,Active site,4,"68, 71, 128, 164"
+BLAT_ECOLX,bla,disease,UniProt natural-variant,0,
+DYR_ECOLI,folA,binding,NADP(+),21,"7, 13-19, 45-46, 63-64, 76, 95-102"
+DYR_ECOLI,folA,binding,substrate,5,"5, 27, 52, 57, 113"
+DYR_ECOLI,folA,disease,UniProt natural-variant,0,
