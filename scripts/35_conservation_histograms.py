@@ -2,9 +2,10 @@
 H1 follow-up (P53 for now): per-assay distribution of conservation across four
 residue categories, plus the underlying table.
 
-"Relative fraction of conservation" for a residue = its weighted conservation
-value (`conservation`, = 1 - H/log2(20), in [0,1]), with NaN (gappy / insertion
-column, no match-state value) mapped to 0. This is the histogram x-axis.
+"Relative fraction of conservation" for a residue = `conservation_percentile` / 100
+(its conservation rank among the assay's match columns, in [0,1]), with NaN (gappy /
+insertion column, no match-state value) mapped to 0. This is one density x-axis; the
+second panel uses the raw per-substitution DMS score.
 
 Conservation category (per assay, from `conservation_percentile`, script 28):
     high = percentile >= 80 ,  low = percentile <= 20 or NaN ,  mid = between.
@@ -37,6 +38,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import seaborn as sns
 import common as C
 
 PROTEINS = ["P53_HUMAN"]          # H1 scope for now
@@ -65,6 +67,15 @@ def clabel(pct):
     return "mid"
 
 
+# wild-type DMS score to mark on the DMS-score panel (dashed line), per assay family
+WT_DMS = {
+    "P53_HUMAN_Giacomelli_2018_Null_Etoposide": 0.0,
+    "P53_HUMAN_Giacomelli_2018_Null_Nutlin": 0.0,
+    "P53_HUMAN_Giacomelli_2018_WT_Nutlin": 0.0,
+    "P53_HUMAN_Kotler_2018": -2.4,
+}
+
+
 def assay_positions(dms_id):
     """All assayed up_pos for a DMS (from single-substitution mutants)."""
     off = (S15.features_for(REF.loc[dms_id].UniProt_ID, REF.loc[dms_id].target_seq) or [0])[0]
@@ -74,6 +85,16 @@ def assay_positions(dms_id):
     pos = df.mutant.str.extract(r'^([A-Z])(\d+)[A-Z]$')
     wt = dict(zip(pos[1].astype(int) + off, pos[0]))          # up_pos -> wt aa
     return wt
+
+
+def assay_dms(dms_id):
+    """DataFrame(up_pos, DMS_score) over single-substitution variants."""
+    off = (S15.features_for(REF.loc[dms_id].UniProt_ID, REF.loc[dms_id].target_seq) or [0])[0]
+    df = pd.read_csv(os.path.join(C.SCORES_DIR, dms_id + ".csv"),
+                     usecols=["mutant", "DMS_score"])
+    df = df[df.mutant.str.match(r'^[A-Z]\d+[A-Z]$')].copy()
+    df["up_pos"] = df.mutant.str.extract(r'^[A-Z](\d+)[A-Z]$')[0].astype(int) + off
+    return df[["up_pos", "DMS_score"]]
 
 
 def tail_positions(gene, tag):
@@ -105,12 +126,11 @@ def build_protein(uni, gene):
         ck = CONS[CONS.DMS_id == d].set_index("up_pos")
         rows = []
         for up, aa in wt.items():
-            cons = ck.conservation.get(up, np.nan)
             pct = ck.conservation_percentile.get(up, np.nan)
             dis = ("high" if up in hi_tail.get(d, set())
                    else "low" if up in lo_tail.get(d, set()) else "mid")
             rows.append({"DMS_id": d, "up_pos": up, "residue": f"{aa}{up}",
-                         "relfrac_cons": 0.0 if pd.isna(cons) else float(cons),
+                         "relfrac_cons": 0.0 if pd.isna(pct) else float(pct) / 100.0,
                          "cons_pct": pct, "cons_category": clabel(pct),
                          "disagreement": dis})
         per_assay[d] = pd.DataFrame(rows)
@@ -149,33 +169,63 @@ def highcons_middis_range(assays, per_assay):
     return pd.DataFrame(rows)
 
 
-def plot_assay(d, df, shared_high, shared_low):
-    cats = {
-        "shared high-disagreement": df[df.up_pos.isin(shared_high)]["relfrac_cons"].values,
-        "shared low-disagreement":  df[df.up_pos.isin(shared_low)]["relfrac_cons"].values,
-        "highly conserved":         df[df.cons_category == "high"]["relfrac_cons"].values,
-        "all residues":             df["relfrac_cons"].values,
+CATS = ["shared high-disagreement", "shared low-disagreement",
+        "highly conserved", "all residues"]
+COLORS = {"shared high-disagreement": "#c1121f", "shared low-disagreement": "#457b9d",
+          "highly conserved": "#2a9d8f", "all residues": "#888888"}
+
+
+def _cat_positions(df, shared_high, shared_low):
+    return {
+        "shared high-disagreement": set(df.loc[df.up_pos.isin(shared_high), "up_pos"]),
+        "shared low-disagreement":  set(df.loc[df.up_pos.isin(shared_low), "up_pos"]),
+        "highly conserved":         set(df.loc[df.cons_category == "high", "up_pos"]),
+        "all residues":             set(df.up_pos),
     }
-    colors = {"shared high-disagreement": "#c1121f", "shared low-disagreement": "#457b9d",
-              "highly conserved": "#2a9d8f", "all residues": "#888888"}
-    bins = np.linspace(0, 1, 21)
-    fig, ax = plt.subplots(figsize=(7, 4.3))
-    for name, vals in cats.items():
-        if len(vals) == 0:
-            continue
-        ax.hist(vals, bins=bins, density=True, histtype="stepfilled",
-                alpha=0.30 if name == "all residues" else 0.45,
-                color=colors[name], edgecolor=colors[name], linewidth=1.6,
+
+
+def _kde(ax, name, vals, clip=None):
+    """Smooth density; fall back to a rug if too few points for a KDE."""
+    vals = np.asarray(vals, float)
+    vals = vals[~np.isnan(vals)]
+    if len(vals) >= 2 and np.ptp(vals) > 0:
+        sns.kdeplot(x=vals, ax=ax, color=COLORS[name], fill=True, alpha=0.25,
+                    linewidth=1.8, bw_adjust=0.9, clip=clip, cut=0,
+                    label=f"{name} (n={len(vals)})")
+    elif len(vals):
+        ax.plot(vals, np.zeros_like(vals), "|", color=COLORS[name],
                 label=f"{name} (n={len(vals)})")
-    ax.set_xlabel("relative fraction of conservation  (conservation value; 0 if NaN)")
-    ax.set_ylabel("density")
-    ax.set_title(d)
-    ax.set_xlim(0, 1)
-    ax.legend(fontsize=8, frameon=False)
+
+
+def plot_assay(d, df, dms, shared_high, shared_low):
+    catpos = _cat_positions(df, shared_high, shared_low)
+    fig, (axc, axd) = plt.subplots(1, 2, figsize=(12, 4.4))
+
+    # left: conservation-percentile/100 density (one value per residue)
+    for name in CATS:
+        sub = df[df.up_pos.isin(catpos[name])]["relfrac_cons"].values
+        _kde(axc, name, sub, clip=(0, 1))
+    axc.set_xlabel("relative fraction of conservation  (percentile/100; 0 if NaN)")
+    axc.set_ylabel("density")
+    axc.set_xlim(0, 1)
+    axc.legend(fontsize=8, frameon=False)
+
+    # right: DMS-score density (all substitutions at each category's residues)
+    for name in CATS:
+        sub = dms[dms.up_pos.isin(catpos[name])]["DMS_score"].values
+        _kde(axd, name, sub)
+    wt = WT_DMS.get(d)
+    if wt is not None:
+        axd.axvline(wt, ls="--", color="black", lw=1.3, label=f"wild-type = {wt:g}")
+    axd.set_xlabel("DMS score")
+    axd.set_ylabel("density")
+    axd.legend(fontsize=8, frameon=False)
+
+    fig.suptitle(d, y=1.02, fontsize=11)
     fig.tight_layout()
     os.makedirs(FIGDIR, exist_ok=True)
     p = os.path.join(FIGDIR, f"{d}.png")
-    fig.savefig(p, dpi=140)
+    fig.savefig(p, dpi=140, bbox_inches="tight")
     plt.close(fig)
     return p
 
@@ -189,7 +239,7 @@ def main():
         tables.append(make_table(assays, per_assay, sh_hi, sh_lo))
         ranges.append(highcons_middis_range(assays, per_assay))
         for d in assays:
-            p = plot_assay(d, per_assay[d], sh_hi, sh_lo)
+            p = plot_assay(d, per_assay[d], assay_dms(d), sh_hi, sh_lo)
             print("  wrote", p)
     tab = pd.concat(tables, ignore_index=True)
     tab.to_csv(os.path.join(OUT, "H1_P53_conservation_by_category.csv"), index=False)
