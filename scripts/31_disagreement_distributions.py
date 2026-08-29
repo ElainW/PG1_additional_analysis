@@ -39,27 +39,30 @@ def main():
     for uni, g in sites.groupby("UniProt_ID"):
         cname = S.common_name(uni, names.get(uni, uni))
         assays = sorted(g["DMS_id"].unique())
-        fig, ax = plt.subplots(figsize=(8.5, 5))
-        # high-disagreement region + boundary shared by 27/30
-        ax.axvspan(S.DISAGREE_FLOOR, 1.0, color="#999", alpha=0.07, zorder=0)
-        ax.axvline(S.DISAGREE_FLOOR, color="#555", lw=0.9, ls="--", zorder=1,
-                   label="high/low boundary (0.5)")
-        for i, dms_id in enumerate(assays):
+        xmax = max(0.6, g["disagreement"].max() + 0.03)
+        # one panel per assay, stacked, shared x
+        fig, axes = plt.subplots(len(assays), 1, sharex=True, squeeze=False,
+                                 figsize=(8.5, 1.9 * len(assays) + 1.0))
+        axes = axes[:, 0]
+        for i, (ax, dms_id) in enumerate(zip(axes, assays)):
             d = g.loc[g["DMS_id"] == dms_id, "disagreement"].dropna()
             col = COLORS[i % len(COLORS)]
             short = dms_id.replace(uni + "_", "")
-            ax.hist(d, bins=BINS, density=True, histtype="step", lw=1.8,
-                    color=col, zorder=3, label=f"{short}  (n={len(d)}, med={d.median():.2f})")
-            ax.hist(d, bins=BINS, density=True, histtype="stepfilled", lw=0,
-                    color=col, alpha=0.12, zorder=2)
-            ax.axvline(d.median(), color=col, lw=1.1, ls=":", alpha=0.8, zorder=3)
-        ax.set_xlim(0, max(0.6, g["disagreement"].max() + 0.03))
-        ax.set_xlabel("within-site disagreement  (1 - mean pairwise within-site Spearman)")
-        ax.set_ylabel("density")
-        ax.set_title(f"{names.get(uni, uni)} [{uni}] — per-site disagreement distribution\n"
-                     f"{len(assays)} assay(s), {g['up_pos'].nunique()} sites "
-                     "(dotted = per-assay median)", fontsize=11)
-        ax.legend(fontsize=8, title="assay")
+            # high-disagreement region + boundary shared by 27/30
+            ax.axvspan(S.DISAGREE_FLOOR, 1.0, color="#999", alpha=0.07, zorder=0)
+            ax.axvline(S.DISAGREE_FLOOR, color="#555", lw=0.9, ls="--", zorder=1)
+            ax.hist(d, bins=BINS, density=True, histtype="stepfilled", lw=1.5,
+                    edgecolor=col, facecolor=col, alpha=0.35, zorder=2)
+            ax.axvline(d.median(), color=col, lw=1.3, ls=":", alpha=0.9, zorder=3)
+            ax.set_ylabel("density", fontsize=8)
+            ax.text(0.99, 0.92, f"{short}\nn={len(d)}, median={d.median():.2f}",
+                    transform=ax.transAxes, ha="right", va="top", fontsize=8.5,
+                    color=col, fontweight="bold")
+        axes[-1].set_xlim(0, xmax)
+        axes[-1].set_xlabel("within-site disagreement  (1 - mean pairwise within-site Spearman)")
+        axes[0].set_title(f"{names.get(uni, uni)} [{uni}] — per-site disagreement distribution\n"
+                          f"{len(assays)} assay(s), {g['up_pos'].nunique()} sites  "
+                          "(dashed = 0.5 high/low boundary; dotted = median)", fontsize=11)
         plt.tight_layout()
         out = os.path.join(OUTDIR, f"{cname}_disagreement_dist.png")
         plt.savefig(out, dpi=150, bbox_inches="tight")
