@@ -85,7 +85,7 @@ WT_DMS = {
 # per-assay display overrides
 DMS_XMAX = {"PTEN_HUMAN_Matreyek_2021": 2.25}         # cap DMS-panel x upper limit
 # legend location per assay as (conservation-panel, DMS-panel); else matplotlib "best"
-LEGEND_LOC = {"PTEN_HUMAN_Matreyek_2021": ("center", "upper right")}
+LEGEND_LOC = {"PTEN_HUMAN_Matreyek_2021": ("upper center", "upper right")}
 
 
 def assay_positions(dms_id):
