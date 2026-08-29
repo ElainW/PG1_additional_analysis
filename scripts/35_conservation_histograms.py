@@ -82,6 +82,10 @@ WT_DMS = {
     "HXK4_HUMAN_Gersing_2023_abundance": 1.0,
 }
 
+# per-assay display overrides
+DMS_XMAX = {"PTEN_HUMAN_Matreyek_2021": 2.0}          # cap DMS-panel x upper limit
+LEGEND_LOC = {"PTEN_HUMAN_Matreyek_2021": "upper right"}  # else matplotlib "best"
+
 
 def assay_positions(dms_id):
     """All assayed up_pos for a DMS (from single-substitution mutants)."""
@@ -230,12 +234,15 @@ def plot_assay(d, df, dms, shared_high, shared_low):
            else "lower is more fit" if direction == -1 else None)
     axd.set_xlabel(f"DMS score ({fit})" if fit else "DMS score")
     axd.set_ylabel("density")
+    if d in DMS_XMAX:
+        axd.set_xlim(right=DMS_XMAX[d])
 
+    loc = LEGEND_LOC.get(d, "best")
     for ax, title in ((axc, "categories (number of positions)"),
                       (axd, "categories (number of mutations)")):
         ax.grid(False)
         leg = ax.legend(fontsize=8, title=title, title_fontsize=8, frameon=True,
-                        facecolor="white", edgecolor="0.3", framealpha=1.0)
+                        facecolor="white", edgecolor="0.3", framealpha=1.0, loc=loc)
         leg.get_frame().set_boxstyle("square")
         # shrink the tall rug-marker handle in the legend only (keeps plot tick tall)
         for h in getattr(leg, "legend_handles", getattr(leg, "legendHandles", [])):
