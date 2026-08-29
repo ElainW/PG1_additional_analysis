@@ -49,3 +49,51 @@ Gersing assays ourselves and treat it as an independent map (label it as such, n
 **Ties to:** `22_disease_gof_lof.py` (undercalled LoF set), `17_gck_3d_distances.py`
 (1V4S distances), `papers/pdb_selection_framework.md` (1V4S = orthosteric-ligand
 structure), Liao & Lehner 2026 (activity–abundance residual method).
+
+## Conservation vs allosteric / active sites (Src)
+
+**Motivation.** We now have redundancy-reduced per-column conservation (`28`,
+theta-reweighted) and a curated Src allosteric-site atlas
+(`results/allosteric_map/SRC_HUMAN.tsv`, from Beltran, Naqvi, Faure & Lehner 2026).
+Test whether evolutionary conservation distinguishes **active-site** from
+**allosteric** positions, and whether within-site model disagreement relates to
+conservation *differently* across these mechanistic classes — i.e. whether
+conservation captures orthosteric/active-site importance but misses allosteric,
+distal function (a candidate explanation for where MSA-based models fail).
+
+**Data / join.** The atlas `position` is UniProt P12931 numbering = our `up_pos`
+for `SRC_HUMAN`. Join to `results/MSA_conservation/msa_conservation_by_site.csv`
+on (`UniProt_ID=SRC_HUMAN`, `up_pos`) for the three Src assays (Ahler_2019,
+Nguyen_2022, Chakraborty_2023_binding-DAS_25uM). Atlas fields: `site_class`
+(active_site=7, allosteric=26, allosteric_second_shell=15, other/blank),
+`direction` (inhibitory / activating), `pockets`, `region`.
+
+**Hypotheses.**
+1. Active-site residues are the most conserved (highest weighted `conservation`
+   and within-assay `conservation_percentile`); allosteric second-shell
+   intermediate; bare allosteric sites *less* conserved despite being functional.
+2. Activating (GoF, ddGa<0) sites are less conserved than inhibitory (LoF) sites.
+3. High-disagreement Src sites (`26`, `27`; `src_high_disagreement_conservation.tsv`)
+   are enriched for **allosteric** rather than active-site class, and tend to be
+   conserved-but-allosteric or variable — where sequence/MSA models lack the signal.
+
+**Steps.**
+1. Join the Src atlas to per-assay conservation and to the disagreement sites.
+2. Compare `conservation` / `conservation_percentile` across `site_class`
+   (Kruskal–Wallis + pairwise Mann–Whitney; active_site vs allosteric the key test).
+3. Split by `direction` (inhibitory vs activating) and test conservation difference.
+4. Cross with per-site disagreement: does Spearman(disagreement, conservation)
+   differ by `site_class`? Are the labelled high-disagreement Src sites allosteric,
+   and are they high- or low-conservation?
+5. If a signal holds, frame it as: conservation encodes active-site constraint but
+   under-represents allosteric/distal function → mechanistic account of MSA-model
+   blind spots. Extend to other proteins if/when more allosteric maps are curated.
+
+**Caveat.** Only Src has an allosteric atlas so far (~48 annotated positions, one
+protein) — treat as a case study, not a generalization; small per-class n limits
+power (7 active-site residues).
+
+**Ties to:** `28_msa_conservation.py` (conservation),
+`26_src_allosteric_sites.py` + `results/allosteric_map/SRC_HUMAN.tsv` (atlas),
+`results/MSA_conservation/src_high_disagreement_conservation.tsv` (labelled sites),
+Beltran, Naqvi, Faure & Lehner 2026 (Src allosteric landscape).
