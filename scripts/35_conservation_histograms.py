@@ -18,11 +18,13 @@ Shared residues (across a protein's assays):
     shared LOW   = positions flagged low-disagreement in >=2 of the protein's assays
                    (computed here; no precomputed file).
 
+Scope: P53_HUMAN, PTEN_HUMAN, HXK4_HUMAN (GCK).
+
 Outputs:
-  results/MSA_conservation/H1_P53_conservation_by_category.csv
+  results/MSA_conservation/H1_conservation_by_category.csv
       one row per (assay, shared high/low-disagreement residue): up_pos, residue,
       disagreement, relative_fraction_of_conservation, cons_category.
-  results/MSA_conservation/H1_P53_highcons_middisagreement_range.csv
+  results/MSA_conservation/H1_highcons_middisagreement_range.csv
       per assay: n and min/max relative-fraction for highly-conserved (cons high)
       residues with MID disagreement.
   figures/conservation_hist/<DMS_id>.png
@@ -41,7 +43,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import common as C
 
-PROTEINS = ["P53_HUMAN"]          # H1 scope for now
+PROTEINS = ["P53_HUMAN", "PTEN_HUMAN", "HXK4_HUMAN"]
+GENE = {"P53_HUMAN": "p53", "PTEN_HUMAN": "pten", "HXK4_HUMAN": "gck"}  # tsv/fig basename
 HI_PCT, LO_PCT = 80, 20
 
 OUT = C.rp("MSA_conservation")
@@ -73,6 +76,10 @@ WT_DMS = {
     "P53_HUMAN_Giacomelli_2018_Null_Nutlin": 0.0,
     "P53_HUMAN_Giacomelli_2018_WT_Nutlin": 0.0,
     "P53_HUMAN_Kotler_2018": -2.4,
+    "PTEN_HUMAN_Matreyek_2021": 1.0,
+    "PTEN_HUMAN_Mighell_2018": 0.0,
+    "HXK4_HUMAN_Gersing_2022_activity": 1.0,
+    "HXK4_HUMAN_Gersing_2023_abundance": 1.0,
 }
 
 
@@ -247,7 +254,7 @@ def plot_assay(d, df, dms, shared_high, shared_low):
 def main():
     tables, ranges = [], []
     for uni in PROTEINS:
-        gene = "p53"   # figure/file basename convention for P53
+        gene = GENE[uni]
         assays, per_assay, sh_hi, sh_lo = build_protein(uni, gene)
         print(f"{uni}: {len(assays)} assays; shared_high={len(sh_hi)} shared_low={len(sh_lo)}")
         tables.append(make_table(assays, per_assay, sh_hi, sh_lo))
@@ -256,11 +263,11 @@ def main():
             p = plot_assay(d, per_assay[d], assay_dms(d), sh_hi, sh_lo)
             print("  wrote", p)
     tab = pd.concat(tables, ignore_index=True)
-    tab.to_csv(os.path.join(OUT, "H1_P53_conservation_by_category.csv"), index=False)
+    tab.to_csv(os.path.join(OUT, "H1_conservation_by_category.csv"), index=False)
     rng = pd.concat(ranges, ignore_index=True)
-    rng.to_csv(os.path.join(OUT, "H1_P53_highcons_middisagreement_range.csv"), index=False)
-    print("\nwrote H1_P53_conservation_by_category.csv (%d rows)" % len(tab))
-    print("wrote H1_P53_highcons_middisagreement_range.csv")
+    rng.to_csv(os.path.join(OUT, "H1_highcons_middisagreement_range.csv"), index=False)
+    print("\nwrote H1_conservation_by_category.csv (%d rows)" % len(tab))
+    print("wrote H1_highcons_middisagreement_range.csv")
     print("\nhighly-conserved + mid-disagreement relfrac range per assay:")
     print(rng.to_string(index=False))
 

@@ -306,6 +306,7 @@ def main():
     uni = dict(zip(cons["DMS_id"], cons["UniProt_ID"]))
     cmp.insert(0, "UniProt_ID", [uni.get(d, "") for d in cmp.index])
     cmp["delta_high_minus_low"] = (cmp["mean_cons_high"] - cmp["mean_cons_low"]).round(4)
+    cmp["delta_pct_high_minus_low"] = (cmp["mean_pct_high"] - cmp["mean_pct_low"]).round(2)
     for c in ("mean_cons_high", "mean_cons_low", "mean_pct_high", "mean_pct_low"):
         cmp[c] = cmp[c].round(4)
     cmp = cmp.reset_index().sort_values("DMS_id")
