@@ -111,36 +111,40 @@ score range (more functional signal), which could drive within-site disagreement
 *Status: tested, rejected — and the true pattern is the opposite.* Within-assay
 Spearman(conservation, per-position DMS-score std) = **+0.20** (positive in 41/48
 assays) — the assay-wide premise holds — but Spearman(disagreement, DMS-spread) =
-**−0.08** (positive in only 12/48). Zoomed into P53's three Giacomelli assays
-(`results/MSA_conservation/H1_P53_dms_relfrac_by_site.csv`), with each site's DMS
-*relative fraction* = max−min of its substitutions' DMS-percentiles within the
-assay: the high-disagreement conserved sites are **compressed**, mean relfrac ≈49
-vs ≈68 for *all* high-conservation match sites and ≈60–66 for the low-disagreement
-sites. Mechanism: at a critical conserved residue nearly every substitution is
-similarly deleterious → narrow within-site DMS range → the fine within-site order
-is noise → models disagree. Disagreement tracks *compressed* within-site signal,
-not the larger spread H1 posited. (ProteinGym assays are pre-selected for a decent
-overall DMS range, so this is a per-site, not per-assay, compression.)
+**−0.08** (positive in only 12/48). Zoomed into P53's three Giacomelli assays under the strict split (script `34`;
+high = percentile ≥80, low = ≤20 or NaN;
+`results/MSA_conservation/H1_P53_dms_relfrac_by_site_p80_20.csv`), with each site's
+DMS *relative fraction* = max−min of its substitutions' DMS-percentiles within the
+assay: the **high-disagreement** selected sites are **compressed** (mean relfrac
+≈47) vs the **low-disagreement** sites (≈60–63) and the assay-wide high-conservation
+baseline (≈59–62); robust at 90/10 (≈45 vs ≈60). Mechanism: at a critical conserved
+residue nearly every substitution is similarly deleterious → narrow within-site DMS
+range → the fine within-site order is noise → models disagree. Disagreement tracks
+*compressed* within-site signal, not the larger spread H1 posited. (ProteinGym
+assays are pre-selected for a decent overall DMS range, so this is a per-site, not
+per-assay, compression.)
 
 **H2 — model-class performance.** Models disagree most at conserved sites *when the
 MSA / Structure&MSA classes do much better there than sequence/structure-only
 models* (a real accuracy gap → divergent rankings), and disagree most at
 low-conservation sites *when all classes do poorly* (little information). Classes
 per `results/qc_directionality/directionality_check.csv:model_type`.
-*Status: first-pass.* Per-site Spearman (each model's scores vs DMS across a
-position's substitutions), grouped into sequence+MSA vs structure-only classes
-(`results/MSA_conservation/H2_persite_spearman_by_class.csv`):
-- **Low-conservation high-disagreement sites — all classes lose together.** At
-  PTEN's shared high-disagreement sites (up_pos 220/230/231/379, all
-  conservation-percentile <20; 2 assays) mean per-site Spearman is **0.055**
-  (sequence+MSA) vs **0.029** (structure-only) — both ≈0, 75–88% below 0.2. HXK4
-  W99 (percentile 13.8, top-ranked disagreement in both Gersing assays) is the
-  same: seq+MSA 0.06/0.20, structure 0.18/0.20. So "disagree-at-variable" is a
-  low-information regime — no class is informative — not a class-specific gap;
-  sequence/MSA models are **not** better here.
-- This is the mirror of the P53 (H1) case: "disagree-at-conserved" = compressed
-  within-site signal at a residue every model calls deleterious, "disagree-at-
-  variable" = no within-site signal for anyone.
+*Status: supported under the strict conservation split (script `34`; high =
+percentile ≥80, low = ≤20 or NaN; stable at 90/10). Per-site Spearman by class,
+`results/MSA_conservation/H2_persite_spearman_by_class_p80_20.csv`.*
+- **Disagree-at-conserved (P53), high-conservation shared sites — a real class
+  gap.** sequence+MSA per-site Spearman **0.144** vs structure-only **0.040**
+  (seq+MSA > structure in 18/27 site-assay pairs). Conserved high-disagreement
+  sites carry signal that sequence/MSA models partly read and structure-only
+  models don't → the classes genuinely diverge.
+- **Disagree-at-variable (PTEN, HXK4), low-conservation shared sites — everyone
+  loses.** sequence+MSA **0.069** vs structure-only **0.035**, ~78% of sites below
+  0.2 (HXK4 W99, percentile 13.8, the archetype). No class is informative.
+- So the two regimes are mechanistically distinct: disagree-at-conserved =
+  compressed within-site signal that sequence/MSA models exploit unevenly vs
+  structure-only; disagree-at-variable = a low-information regime for every class.
+  Threshold sensitivity (80/20 vs 90/10) and the full per-assay generalization
+  (beyond P53/PTEN/HXK4) remain to complete.
 
 **Steps.**
 1. Compute per-site, per-model within-site rank accuracy for all assays; summarise

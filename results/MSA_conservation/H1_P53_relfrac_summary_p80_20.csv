@@ -1,0 +1,4 @@
+assay,threshold,all_high_n,all_high_relfrac,all_low_n,all_low_relfrac
+Null_Etoposide,p80_20,67,59.1,67,61.3
+Null_Nutlin,p80_20,67,62.4,67,66.9
+WT_Nutlin,p80_20,67,42.1,67,49.5
