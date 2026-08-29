@@ -6,8 +6,9 @@ Generalizes 08_gck_structure_map.py to all proteins: for each protein, one panel
 per assay showing the disagreement profile (1 - mean pairwise within-site Spearman,
 45 family-best models) along the UniProt sequence, with binding/active-site
 residues (blue lines), disordered regions (shaded), disease-variant positions
-(orange rug; ClinVar pathogenic/LP for GCK via data/clinvar/, UniProt natural-
-variant flag elsewhere), and the top-12 disagreement sites labelled.
+(orange rug; ClinVar pathogenic/LP + a UniProt gain-of-function supplement for the
+10 human proteins with a data/clinvar/ export, UniProt natural-variant flag for the
+rest), and the top-12 disagreement sites labelled.
 
 Output (one per protein, named by common/gene name):
   figures/site_disagreement/fig_<common>_structure_map.png
@@ -34,15 +35,22 @@ CLINVAR_DIR = os.path.join(C.ANALYSIS, "data", "clinvar")
 NAME_OVERRIDE = {"SPIKE_SARS2": "spike", "P53_HUMAN": "p53",
                  "A0A2Z5U3Z0_9INFA": "flu_ha", "F7YBW8_MESOW": "f7ybw8"}
 
-# proteins for which disease positions come from a curated ClinVar export
-# (pathogenic + likely pathogenic, missense, SNV, expert-panel/practice-guideline;
-# see README for the download recipe) instead of the UniProt natural-variant flag.
-CLINVAR_TSV = {"HXK4_HUMAN": "GCK.tsv"}
-# The GCK ClinVar query is for diabetes (MODY/PNDM, loss-of-function); it cannot
-# contain the hyperinsulinism gain-of-function variants (e.g. W99C/HHF3, whose only
-# ClinVar entry is the non-missense Trp99Ter). Supplement with those GoF variants
-# from UniProt natural-variant annotations, matched by keyword (as in script 08).
-CLINVAR_SUPPLEMENT_KW = {"HXK4_HUMAN": ("hhf", "hyperinsulin", "phhi")}
+# Human proteins with a curated ClinVar export in data/clinvar/ (pathogenic +
+# likely pathogenic missense SNVs; per-protein review-status filter documented in
+# data/clinvar/README.md). Used instead of the UniProt natural-variant flag.
+CLINVAR_TSV = {
+    "HXK4_HUMAN": "GCK.tsv",   "PTEN_HUMAN": "PTEN.tsv",  "P53_HUMAN": "TP53.tsv",
+    "SRC_HUMAN": "SRC.tsv",    "CP2C9_HUMAN": "CYP2C9.tsv", "KCNE1_HUMAN": "KCNE1.tsv",
+    "CAR11_HUMAN": "CARD11.tsv", "VKOR1_HUMAN": "VKORC1.tsv", "RASK_HUMAN": "KRAS.tsv",
+    "NPC1_HUMAN": "NPC1.tsv",
+}
+# ClinVar pathogenic queries are usually dominated by loss-of-function conditions
+# and can miss gain-of-function disease variants (e.g. GCK hyperinsulinism/HHF3,
+# CARD11 BENTA, KRAS activating). Supplement with UniProt natural-variant positions
+# whose disease description carries GoF language.
+GOF_KW = ("gain-of-function", "gain of function", "constitutively activ", "activating",
+          "increased activ", "hyperactiv", "increases activ", "increase in activ",
+          "hhf", "hyperinsulin", "phhi", "benta")
 _AA3 = {"Ala": "A", "Arg": "R", "Asn": "N", "Asp": "D", "Cys": "C", "Gln": "Q",
         "Glu": "E", "Gly": "G", "His": "H", "Ile": "I", "Leu": "L", "Lys": "K",
         "Met": "M", "Phe": "F", "Pro": "P", "Ser": "S", "Thr": "T", "Trp": "W",
@@ -50,10 +58,11 @@ _AA3 = {"Ala": "A", "Arg": "R", "Asn": "N", "Asp": "D", "Cys": "C", "Gln": "Q",
 _PCHANGE = re.compile(r"p\.([A-Za-z]{3})(\d+)([A-Za-z]{3})")
 
 
-def clinvar_positions(uni):
+def clinvar_positions(uni, seq):
     """Residue positions of ClinVar pathogenic/LP missense variants, parsed from
-    the canonical p.(3-letter) change in the Name column. Returns None if the
-    protein has no ClinVar export configured."""
+    the canonical p.(3-letter) change in the Name column and kept only when the
+    wild-type matches our assay-isoform sequence (drops splice-isoform mismatches,
+    e.g. KRAS D153V). Returns None if the protein has no ClinVar export."""
     fn = CLINVAR_TSV.get(uni)
     if not fn:
         return None
@@ -61,24 +70,26 @@ def clinvar_positions(uni):
     pos = set()
     for nm in df["Name"]:
         m = _PCHANGE.search(str(nm))
-        if m:
-            pos.add(int(m.group(2)))
+        if not m:
+            continue
+        wt, p = _AA3.get(m.group(1), "?"), int(m.group(2))
+        if seq and 1 <= p <= len(seq) and seq[p - 1] == wt:
+            pos.add(p)
     return pos
 
 
 def uniprot_disease_supplement(uni):
-    """Positions of UniProt natural-variant disease annotations matching the
-    supplement keywords (the GoF/hyperinsulinism variants a diabetes-only ClinVar
-    query misses). Empty if none configured."""
-    kws = CLINVAR_SUPPLEMENT_KW.get(uni)
-    if not kws:
+    """Positions of UniProt natural-variant disease annotations whose description
+    carries gain-of-function language (variants a LoF-dominated ClinVar query misses)."""
+    path = os.path.join(UNIPROT_DIR, uni + ".json")
+    if not os.path.exists(path):
         return set()
-    e = json.load(open(os.path.join(UNIPROT_DIR, uni + ".json")))
+    e = json.load(open(path))
     pos = set()
     for f in e.get("features", []):
         if f["type"] == "Natural variant":
             d = (f.get("description", "") or "").lower()
-            if any(k in d for k in kws):
+            if any(k in d for k in GOF_KW):
                 pos.add(f["location"]["start"]["value"])
     return pos
 
@@ -121,7 +132,7 @@ def main():
     for uni, g in sites.groupby("UniProt_ID"):
         cname = common_name(uni, names.get(uni, uni))
         seq = uniprot_seq(uni)
-        cv = clinvar_positions(uni)                     # None unless a ClinVar export exists
+        cv = clinvar_positions(uni, seq)                # None unless a ClinVar export exists
         if cv is not None:
             supp = uniprot_disease_supplement(uni)      # GoF variants ClinVar diabetes query misses
             dz_set = cv | supp

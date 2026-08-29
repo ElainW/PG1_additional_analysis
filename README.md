@@ -12,19 +12,25 @@ metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
 `../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
 cached in `data/uniprot/` (fetched by scripts 08/15).
 
-**ClinVar disease variants** for GCK are in `data/clinvar/GCK.tsv` and drive the
-disease annotation on the GCK structure map (`23`). Download recipe (for
-reproducing/updating): ClinVar website, **28 Aug 2026**, search `GCK`, then filter
-**Germline classification** = Pathogenic + Likely pathogenic, **Molecular
-consequence** = missense, **Variant type** = single nucleotide, **Review status** =
-practice guideline + expert panel; export as TSV. Script `23` parses the residue
-position from the canonical `NM_000162.5 … (p.Xxx###Yyy)` change in the `Name`
-column (numbering matches UniProt P35557 / the assays — verified 100% WT match).
-The ClinVar query targets **diabetes** (MODY/PNDM, loss-of-function), so it cannot
-contain the hyperinsulinism **gain-of-function** variants (e.g. W99C/HHF3 — W99's
-only ClinVar entry is the non-missense Trp99Ter, a single submitter). We therefore
-**supplement** ClinVar with the UniProt hyperinsulinism/HHF GoF positions (65, 91,
-99, 214, 442, 455, 456), giving **129** GCK disease positions total. This is far
+**ClinVar disease variants** for **10 human multi-assay proteins** are in
+`data/clinvar/*.tsv` (GCK, PTEN, TP53, SRC, CYP2C9, KCNE1, CARD11, VKORC1, KRAS,
+NPC1) and drive the disease annotation on those proteins' structure maps (`23`);
+HLA-A and SLC22A1 have no qualifying entry, and non-human proteins keep the UniProt
+flag. **Download recipe and the per-protein review-status filters are documented in
+`data/clinvar/README.md`** (base query: ClinVar, 28 Aug 2026, gene symbol, Germline
+= Pathogenic + Likely pathogenic, missense, single-nucleotide; review-status filter
+varies by protein). Script `23` parses the position from the canonical `p.(Xxx###Yyy)`
+change in the `Name` column and keeps only variants whose wild-type matches our
+assay-isoform sequence (drops splice-isoform mismatches, e.g. KRAS D153V on KRAS4A).
+Because ClinVar pathogenic queries are LoF-dominated, `23` also **supplements** every
+ClinVar set with UniProt natural-variant positions whose disease description carries
+gain-of-function language (the full `GOF_KW` keyword list is in `data/clinvar/README.md`;
+matches: GCK 7, CARD11 2, KRAS 7, others 0). GCK is the clearest case: its ClinVar
+query targets **diabetes** (MODY/PNDM, LoF) and cannot contain the hyperinsulinism
+**gain-of-function** variants (e.g. W99C/HHF3 — W99's only ClinVar entry is the
+non-missense Trp99Ter, a single submitter), so the supplement adds the UniProt
+hyperinsulinism/HHF positions (65, 91, 99, 214, 442, 455, 456), giving **129** GCK
+disease positions total. This is far
 cleaner than the old UniProt keyword flag (**411** positions — heavily
 over-inclusive, catching benign/VUS natural variants): 123 curated ClinVar P/LP +
 6 GoF, vs 411. So R377 (MODY2, LoF) comes from ClinVar and W99C (HHF3, GoF) from
