@@ -217,7 +217,10 @@ def plot_assay(d, df, dms, shared_high, shared_low):
     wt = WT_DMS.get(d)
     if wt is not None:
         axd.axvline(wt, ls="--", color="black", lw=1.3, label=f"wild-type = {wt:g}")
-    axd.set_xlabel("DMS score")
+    direction = REF.loc[d, "raw_DMS_directionality"] if "raw_DMS_directionality" in REF.columns else None
+    fit = ("higher is more fit" if direction == 1
+           else "lower is more fit" if direction == -1 else None)
+    axd.set_xlabel(f"DMS score ({fit})" if fit else "DMS score")
     axd.set_ylabel("density")
     axd.legend(fontsize=8, frameon=False)
 
