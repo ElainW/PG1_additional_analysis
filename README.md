@@ -10,7 +10,7 @@ Data (not tracked in this repo): 217 DMS substitution assays in
 `../O2/20250613/*.csv`, 97 models (columns `Site_Independent … Protriever`),
 metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
 `../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
-cached in `data/uniprot/raw_json/` (raw entries; fetched by scripts 08/15). Derived UniProt GoF-supplement tables (script `24`) are in `data/uniprot/additional annotations/`.
+cached in `data/uniprot/raw_json/` (raw entries; fetched by scripts 08/15). Derived UniProt GoF-supplement tables (script `24`) are in `data/uniprot/additional_annotations/`.
 
 **ClinVar disease variants** for **10 human multi-assay proteins** are in
 `data/clinvar/*.tsv` (GCK, PTEN, TP53, SRC, CYP2C9, KCNE1, CARD11, VKORC1, KRAS,
@@ -108,7 +108,7 @@ python3 20_native_3vev_vs_1v4s.py             # GCK 3-D robustness: 1V4S vs 3VEV
 python3 21_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
 python3 22_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
 python3 23_structure_maps_all.py              # per-protein disagreement structure maps (all multi-assay proteins)
-python3 24_gof_supplement_tables.py           # write UniProt GoF-supplement tables -> data/uniprot/additional annotations/
+python3 24_gof_supplement_tables.py           # write UniProt GoF-supplement tables -> data/uniprot/additional_annotations/
 ```
 Planned analyses are tracked in `NEXT_STEPS.md`.
 
@@ -151,6 +151,8 @@ flowchart TD
 Legend: 🟧 inputs / prep · 🟪 per-site computation · 🟩 result. (The green box is
 labelled *disagreement* — matching the code and the rest of this README — i.e.
 `1 − mean pairwise Spearman`; the paired quantity *agreement* is the mean itself.)
+A static vector export of this diagram is produced by
+`scripts/render_within_site_flow.py` → `figures/within_site_disagreement_flow.pdf`.
 
 **Two thresholds worth remembering:** the **≥5 substitutions per site** cutoff is
 used in the HXK4 analysis (`06`) and the per-protein maps (`23`); the assay-level

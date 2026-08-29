@@ -8,7 +8,7 @@ These are the variants a loss-of-function-dominated ClinVar query misses (GCK
 hyperinsulinism/HHF3, CARD11 BENTA, KRAS activating), added back to the disease
 annotation. Source: data/uniprot/raw_json/<UniProt_ID>.json.
 
-Outputs (in data/uniprot/additional annotations/):
+Outputs (in data/uniprot/additional_annotations/):
   gof_supplement_<UniProt_ID>.csv   one per protein that has >=1 GoF match
   gof_supplement_summary.csv        all ClinVar proteins (n matches + positions)
 """
@@ -19,7 +19,7 @@ import common as C
 from importlib import import_module
 
 sm = import_module("23_structure_maps_all")   # reuse GOF_KW, CLINVAR_TSV, UNIPROT_DIR
-OUTDIR = os.path.join(C.ANALYSIS, "data", "uniprot", "additional annotations")
+OUTDIR = os.path.join(C.ANALYSIS, "data", "uniprot", "additional_annotations")
 
 
 def gene_name(uni):
