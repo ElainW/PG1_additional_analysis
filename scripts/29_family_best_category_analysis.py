@@ -238,7 +238,7 @@ def _panel(ax, ws, rank_col, tiers, cats, cat_label):
         vals = [v.mean() for v in sub]
         errs = [v.std(ddof=1) / np.sqrt(v.count()) for v in sub]   # SE across contributing sites
         ax.bar(x + i * width, vals, width, yerr=errs, label=cat_label.get(cat, cat),
-               error_kw=dict(elinewidth=0.7, capsize=2, alpha=0.6))
+               color=C.CATEGORY_COLORS.get(cat), error_kw=dict(elinewidth=0.7, capsize=2, alpha=0.6))
     ax.set_xticks(x + width * (len(cats) - 1) / 2)
     ax.set_xticklabels([t for t, _ in tiers])
     ax.axhline(0, color="0.6", lw=0.8)

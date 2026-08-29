@@ -28,13 +28,14 @@ _spec.loader.exec_module(S)
 
 OUTDIR = os.path.join(C.FIGURES, "site_disagreement", "distribution")
 BINS = np.linspace(0.0, 1.0, 41)
-COLORS = plt.get_cmap("tab10").colors
 
 
 def main():
     os.makedirs(OUTDIR, exist_ok=True)
     sites = pd.read_csv(S.SITES)
     names = dict(zip(pd.read_csv(S.CANDID)["UniProt_ID"], pd.read_csv(S.CANDID)["protein"]))
+    ref = C.load_reference()
+    cst = dict(zip(ref["DMS_id"], ref["coarse_selection_type"]))   # assay -> category (fig9 colours)
 
     for uni, g in sites.groupby("UniProt_ID"):
         cname = S.common_name(uni, names.get(uni, uni))
@@ -44,9 +45,10 @@ def main():
         fig, axes = plt.subplots(len(assays), 1, sharex=True, squeeze=False,
                                  figsize=(8.5, 1.9 * len(assays) + 1.0))
         axes = axes[:, 0]
-        for i, (ax, dms_id) in enumerate(zip(axes, assays)):
+        for ax, dms_id in zip(axes, assays):
             d = g.loc[g["DMS_id"] == dms_id, "disagreement"].dropna()
-            col = COLORS[i % len(COLORS)]
+            cat = cst.get(dms_id, "")
+            col = C.CATEGORY_COLORS.get(cat, "#555555")   # colour by assay category (matches fig9)
             short = dms_id.replace(uni + "_", "")
             # high-disagreement region + boundary shared by 27/30
             ax.axvspan(S.DISAGREE_FLOOR, 1.0, color="#999", alpha=0.07, zorder=0)
@@ -55,7 +57,7 @@ def main():
                     edgecolor=col, facecolor=col, alpha=0.35, zorder=2)
             ax.axvline(d.median(), color=col, lw=1.3, ls=":", alpha=0.9, zorder=3)
             ax.set_ylabel("density", fontsize=8)
-            ax.text(0.99, 0.92, f"{short}\nn={len(d)}, median={d.median():.2f}",
+            ax.text(0.99, 0.92, f"{short}\n{cat} · n={len(d)}, median={d.median():.2f}",
                     transform=ax.transAxes, ha="right", va="top", fontsize=8.5,
                     color=col, fontweight="bold")
         axes[-1].set_xlim(0, xmax)

@@ -40,6 +40,17 @@ NON_MODEL_COLS = {"mutant", "mutated_sequence", "DMS_score", "DMS_score_bin"}
 # Stable display order for the taxa
 TAXA = ["Human", "Eukaryote", "Prokaryote", "Virus"]
 
+# Canonical colour per assay category (coarse_selection_type). Matches the fig9
+# barplot's default-cycle order (categories sorted: Activity, Binding, Expression,
+# OrganismalFitness, Stability -> tab10 C0..C4) so every by-category figure agrees.
+CATEGORY_COLORS = {
+    "Activity":          "#1f77b4",   # C0 blue
+    "Binding":           "#ff7f0e",   # C1 orange
+    "Expression":        "#2ca02c",   # C2 green
+    "OrganismalFitness": "#d62728",   # C3 red
+    "Stability":         "#9467bd",   # C4 purple
+}
+
 # Stable display order for model types (most -> least represented)
 MODEL_TYPE_ORDER = [
     "MSA",
