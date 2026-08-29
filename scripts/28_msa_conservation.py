@@ -60,8 +60,12 @@ Outputs (results/MSA_conservation/)
       the sites table + conservation columns (left join on DMS_id, up_pos).
   conservation_disagreement_spearman_by_assay.csv
       per-assay Spearman(disagreement, conservation) with p-value.
-  <name>_high_disagreement_conservation.tsv
-      each script-27 table + conservation columns (does not clobber the original).
+  <name>_{high,low}_disagreement_conservation.tsv
+      each per-protein high-/low-disagreement site table (27 / low-tail selection)
+      + conservation columns (does not clobber the originals).
+  conservation_high_vs_low_by_assay.csv
+      per-assay mean conservation (+percentile) at the high- vs low-disagreement
+      tails and their difference (delta_high_minus_low).
 """
 import os
 import glob
@@ -74,7 +78,8 @@ import common as C
 MSADIR = os.path.join(C.ANALYSIS, "data", "msa", "DMS_msa_files")
 WDIR = os.path.join(C.ANALYSIS, "data", "msa", "DMS_msa_weights")
 SITES = C.rp("generalization_functional_disagreement_sites.csv")
-HIDIR = C.rp("high_disagreement_sites")   # 27's inputs
+HIDIR = C.rp("high_disagreement_sites")   # 27's high-disagreement inputs
+LODIR = C.rp("low_disagreement_sites")    # low-disagreement tail inputs
 OUTDIR = C.rp("MSA_conservation")          # 28's per-assay outputs
 
 AA = "ACDEFGHIKLMNPQRSTVWY"
@@ -268,20 +273,45 @@ def main():
     spear.to_csv(out3, index=False)
     print(f"wrote {out3}  ({len(spear)} assays)")
 
-    n_tsv = 0
-    for tsv in sorted(glob.glob(os.path.join(HIDIR, "*_high_disagreement.tsv"))):
-        try:
-            h = pd.read_csv(tsv, sep="\t")
-        except pd.errors.EmptyDataError:
-            continue
-        if h.empty or "up_pos" not in h.columns:
-            continue
-        hm = h.merge(cons[keep].drop(columns=["wt_target"]),
-                     on=["DMS_id", "up_pos"], how="left")
-        base = os.path.basename(tsv).replace(".tsv", "_conservation.tsv")
-        hm.to_csv(os.path.join(OUTDIR, base), sep="\t", index=False)
-        n_tsv += 1
-    print(f"wrote {n_tsv} augmented high_disagreement *_conservation.tsv files")
+    # augment per-protein high- and low-disagreement site tables with conservation
+    tails = {}
+    for indir, pattern in ((HIDIR, "*_high_disagreement.tsv"),
+                           (LODIR, "*_low_disagreement.tsv")):
+        tail = pattern.split("_")[1]   # 'high' or 'low'
+        frames, n_tsv = [], 0
+        for tsv in sorted(glob.glob(os.path.join(indir, pattern))):
+            try:
+                h = pd.read_csv(tsv, sep="\t")
+            except pd.errors.EmptyDataError:
+                continue
+            if h.empty or "up_pos" not in h.columns:
+                continue
+            hm = h.merge(cons[keep].drop(columns=["wt_target"]),
+                         on=["DMS_id", "up_pos"], how="left")
+            base = os.path.basename(tsv).replace(".tsv", "_conservation.tsv")
+            hm.to_csv(os.path.join(OUTDIR, base), sep="\t", index=False)
+            frames.append(hm)
+            n_tsv += 1
+        tails[tail] = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+        print(f"wrote {n_tsv} augmented {tail}-disagreement *_conservation.tsv files")
+
+    # per-assay comparison of conservation at the two disagreement tails
+    def _assay_means(df):
+        g = df.dropna(subset=["conservation"]).groupby("DMS_id")
+        return g.agg(n=("conservation", "size"),
+                     mean_cons=("conservation", "mean"),
+                     mean_pct=("conservation_percentile", "mean"))
+    mh, ml = _assay_means(tails["high"]), _assay_means(tails["low"])
+    cmp = mh.join(ml, lsuffix="_high", rsuffix="_low", how="outer")
+    uni = dict(zip(cons["DMS_id"], cons["UniProt_ID"]))
+    cmp.insert(0, "UniProt_ID", [uni.get(d, "") for d in cmp.index])
+    cmp["delta_high_minus_low"] = (cmp["mean_cons_high"] - cmp["mean_cons_low"]).round(4)
+    for c in ("mean_cons_high", "mean_cons_low", "mean_pct_high", "mean_pct_low"):
+        cmp[c] = cmp[c].round(4)
+    cmp = cmp.reset_index().sort_values("DMS_id")
+    out4 = os.path.join(OUTDIR, "conservation_high_vs_low_by_assay.csv")
+    cmp.to_csv(out4, index=False)
+    print(f"wrote {out4}  ({len(cmp)} assays)")
 
 
 if __name__ == "__main__":

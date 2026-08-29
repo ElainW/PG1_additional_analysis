@@ -1,0 +1,5 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease	occupancy	entropy_bits	conservation	conservation_percentile	top_aa	top_aa_freq
+SPG1_STRSG	SPG1_STRSG_Olson_2014	274	A	A274	0.3528	1	0.3528	0.3528	3.64	False	False	False	1.0	-0.0	1.0	77.38	A	1.0
+SPG1_STRSG	SPG1_STRSG_Olson_2014	273	D	D273	0.3528	2	0.3528	0.3528	3.64	False	False	False	1.0	0.9928	0.7703	33.25	D	0.5499
+SPG1_STRSG	SPG1_STRSG_Wu_2016	266	D	D266	0.3077	1	0.3962	0.3962	50.0	False	False	False	0.8967	2.6249	0.3927	75.45	D	0.4167
+SPG1_STRSG	SPG1_STRSG_Wu_2016	265	V	V265	0.3962	2	0.3962	0.3962	50.0	False	False	False	0.9313	1.9744	0.5432	87.72	L	0.6055

@@ -1,0 +1,8 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease	occupancy	entropy_bits	conservation	conservation_percentile	top_aa	top_aa_freq
+CCDB_ECOLI	CCDB_ECOLI_Adkar_2012	78	E	E78	0.2061	1	0.2195	0.2195	5.05	False	False	False	0.9955	3.4366	0.2048	44.19	R	0.2157
+CCDB_ECOLI	CCDB_ECOLI_Adkar_2012	23	D	D23	0.2068	2	0.2195	0.2195	5.05	False	False	False	0.9908	3.1668	0.2673	56.98	D	0.3936
+CCDB_ECOLI	CCDB_ECOLI_Adkar_2012	65	T	T65	0.2108	3	0.2195	0.2195	5.05	False	False	False	0.9974	3.1084	0.2808	59.3	L	0.1933
+CCDB_ECOLI	CCDB_ECOLI_Adkar_2012	44	D	D44	0.214	4	0.2195	0.2195	5.05	False	False	False	0.7208	4.0097	0.0722	1.16	P	0.1228
+CCDB_ECOLI	CCDB_ECOLI_Adkar_2012	71	V	V71	0.2195	5	0.2195	0.2195	5.05	False	False	False	1.0	2.1377	0.5054	84.88	V	0.341
+CCDB_ECOLI	CCDB_ECOLI_Tripathi_2016	71	V	V71	0.1722	1	0.222	0.222	2.0	False	False	False	1.0	2.1377	0.5054	84.88	V	0.341
+CCDB_ECOLI	CCDB_ECOLI_Tripathi_2016	58	D	D58	0.222	2	0.222	0.222	2.0	False	False	False	0.9921	3.5479	0.1791	36.05	G	0.2032

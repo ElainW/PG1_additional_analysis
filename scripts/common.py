@@ -74,7 +74,7 @@ _RESULTS_SUBDIR_RULES = [
     ("persite_",             "persite_analysis"),
     ("family_best",          "persite_analysis"),
     ("hxk4_",                "hxk4_pilot_analysis"),
-    ("site_",                "w99_deepdive"),
+    ("site_",                "HXK4_HUMAN_w99_deepdive"),
     ("gck_",                 "gck_3d"),
     ("assay_position_",      "assay_selection"),
     ("abundance_physchem",   "abundance_physchem"),

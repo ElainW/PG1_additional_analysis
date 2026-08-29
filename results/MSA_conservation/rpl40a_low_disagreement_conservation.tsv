@@ -1,0 +1,6 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease	occupancy	entropy_bits	conservation	conservation_percentile	top_aa	top_aa_freq
+RL40A_YEAST	RL40A_YEAST_Mavor_2016	26	V	V26	0.1738	1	0.199	0.199	4.0	False	False	False	0.9926	1.8755	0.5661	95.51	L	0.5637
+RL40A_YEAST	RL40A_YEAST_Mavor_2016	5	V	V5	0.1972	2	0.199	0.199	4.0	False	False	False						
+RL40A_YEAST	RL40A_YEAST_Mavor_2016	11	K	K11	0.199	3	0.199	0.199	4.0	False	False	False	0.7803	3.3338	0.2286	65.17	K	0.2374
+RL40A_YEAST	RL40A_YEAST_Roscoe_2013	3	I	I3	0.1881	1	0.1881	0.1881	1.35	False	False	False						
+RL40A_YEAST	RL40A_YEAST_Roscoe_2014	11	K	K11	0.1987	1	0.1987	0.1987	1.33	False	False	False	0.7803	3.3338	0.2286	65.17	K	0.2374
