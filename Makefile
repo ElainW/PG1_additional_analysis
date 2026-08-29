@@ -36,7 +36,13 @@ SCRIPTS = \
 	25_export_structural_annotations \
 	26_src_allosteric_sites \
 	27_export_high_disagreement_sites \
-	28_msa_conservation
+	30_export_low_disagreement_sites \
+	28_msa_conservation \
+	29_family_best_category_analysis \
+	31_disagreement_distributions \
+	32_high_disagreement_colocalization \
+	33_colocalization_forest \
+	34_conservation_disagreement_mechanism
 
 .PHONY: all clean
 
