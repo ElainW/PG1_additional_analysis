@@ -222,10 +222,23 @@ def plot_assay(d, df, dms, shared_high, shared_low):
     catpos = _cat_positions(df, shared_high, shared_low)
     fig, (axc, axd) = plt.subplots(1, 2, figsize=(12, 4.4))
 
-    # left: conservation percentile (0-100) density (one value per residue)
+    # left: conservation percentile (0-100) density (one value per residue).
+    # For the low-agreement category, separate residues with an actual percentile
+    # from those with NaN conservation (gappy column, no match-state value).
     for name in CATS:
-        sub = df[df.up_pos.isin(catpos[name])]["relfrac_cons"].values * 100.0
-        _kde(axc, name, sub, clip=(0, 100), label=LABELS[name])
+        sdf = df[df.up_pos.isin(catpos[name])]
+        if name == "shared high-disagreement":     # = "shared low-agreement"
+            real = sdf.loc[sdf.cons_pct.notna(), "cons_pct"].values
+            n_nan = int(sdf.cons_pct.isna().sum())
+            _kde(axc, name, real, clip=(0, 100),
+                 label=f"{LABELS[name]} · ranked")
+            if n_nan:
+                axc.plot([0], [0], marker="x", linestyle="none", color=COLORS[name],
+                         markersize=13, markeredgewidth=2.4,
+                         label=f"{LABELS[name]} · NaN cons (n={n_nan})")
+        else:
+            sub = sdf["relfrac_cons"].values * 100.0
+            _kde(axc, name, sub, clip=(0, 100), label=LABELS[name])
     axc.set_xlabel("conservation percentile  (0 if NaN)")
     axc.set_ylabel("density")
     axc.set_xlim(0, 100)
