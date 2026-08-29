@@ -234,8 +234,11 @@ def make_figure(ws):
         x = np.arange(len(tiers))
         for i, cat in enumerate(cats):
             g = ws[ws["coarse_selection_type"] == cat]
-            vals = [g.loc[g[rank_col] <= thr, "within_site_spearman"].mean() for _, thr in tiers]
-            ax.bar(x + i * width, vals, width, label=cat_label[cat])
+            sub = [g.loc[g[rank_col] <= thr, "within_site_spearman"] for _, thr in tiers]
+            vals = [v.mean() for v in sub]
+            errs = [v.std(ddof=1) for v in sub]   # SD across contributing sites
+            ax.bar(x + i * width, vals, width, yerr=errs, label=cat_label[cat],
+                   error_kw=dict(elinewidth=0.7, capsize=2, alpha=0.6))
         ax.set_xticks(x + width * (len(cats) - 1) / 2)
         ax.set_xticklabels([t for t, _ in tiers])
         ax.axhline(0, color="0.6", lw=0.8)
