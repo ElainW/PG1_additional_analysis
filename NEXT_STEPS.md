@@ -108,28 +108,39 @@ RL40A, RPC1, CCDB) at the **least-conserved**. Why? Two hypotheses.
 **H1 — experimental (DMS-score spread).** At more-conserved positions the DMS
 scores of the ~19 substitutions are spread over a larger fraction of the assay's
 score range (more functional signal), which could drive within-site disagreement.
-*Status: tested, largely rejected.* Within-assay Spearman(conservation, per-position
-DMS-score spread) = **+0.20** (positive in 41/48 assays) — the premise holds — but
-Spearman(disagreement, DMS-spread) = **−0.08** (positive in only 12/48), so spread
-does not explain the disagreement pattern, in either direction. (See
-`/tmp`-style scratch in `28`'s spread check; can be promoted to a script if worth
-keeping.)
+*Status: tested, rejected — and the true pattern is the opposite.* Within-assay
+Spearman(conservation, per-position DMS-score std) = **+0.20** (positive in 41/48
+assays) — the assay-wide premise holds — but Spearman(disagreement, DMS-spread) =
+**−0.08** (positive in only 12/48). Zoomed into P53's three Giacomelli assays
+(`results/MSA_conservation/H1_P53_dms_relfrac_by_site.csv`), with each site's DMS
+*relative fraction* = max−min of its substitutions' DMS-percentiles within the
+assay: the high-disagreement conserved sites are **compressed**, mean relfrac ≈49
+vs ≈68 for *all* high-conservation match sites and ≈60–66 for the low-disagreement
+sites. Mechanism: at a critical conserved residue nearly every substitution is
+similarly deleterious → narrow within-site DMS range → the fine within-site order
+is noise → models disagree. Disagreement tracks *compressed* within-site signal,
+not the larger spread H1 posited. (ProteinGym assays are pre-selected for a decent
+overall DMS range, so this is a per-site, not per-assay, compression.)
 
 **H2 — model-class performance.** Models disagree most at conserved sites *when the
 MSA / Structure&MSA classes do much better there than sequence/structure-only
 models* (a real accuracy gap → divergent rankings), and disagree most at
 low-conservation sites *when all classes do poorly* (little information). Classes
 per `results/qc_directionality/directionality_check.csv:model_type`.
-*Status: first-pass, unsettled.* Per-position within-site accuracy (Spearman of each
-model's scores vs DMS across a position's substitutions), coarsely pooled to
-MSA-vs-single-sequence classes, on the clearest opposite cases: the MSA−single-seq
-gap is small and *larger* in PTEN (the negative-sign protein) than in P53, so the
-simple "MSA wins bigger at conserved sites" story is not supported as stated.
-A striking sub-pattern: **P53's variable sites have collapsed within-site accuracy
-for every class** (≈−0.06 vs +0.21 at conserved sites), i.e. at low-conservation
-P53 positions all models are ~random and happen to agree (low disagreement),
-whereas conserved sites carry signal that classes exploit unevenly (high
-disagreement). PTEN retains positive accuracy everywhere.
+*Status: first-pass.* Per-site Spearman (each model's scores vs DMS across a
+position's substitutions), grouped into sequence+MSA vs structure-only classes
+(`results/MSA_conservation/H2_persite_spearman_by_class.csv`):
+- **Low-conservation high-disagreement sites — all classes lose together.** At
+  PTEN's shared high-disagreement sites (up_pos 220/230/231/379, all
+  conservation-percentile <20; 2 assays) mean per-site Spearman is **0.055**
+  (sequence+MSA) vs **0.029** (structure-only) — both ≈0, 75–88% below 0.2. HXK4
+  W99 (percentile 13.8, top-ranked disagreement in both Gersing assays) is the
+  same: seq+MSA 0.06/0.20, structure 0.18/0.20. So "disagree-at-variable" is a
+  low-information regime — no class is informative — not a class-specific gap;
+  sequence/MSA models are **not** better here.
+- This is the mirror of the P53 (H1) case: "disagree-at-conserved" = compressed
+  within-site signal at a residue every model calls deleterious, "disagree-at-
+  variable" = no within-site signal for anyone.
 
 **Steps.**
 1. Compute per-site, per-model within-site rank accuracy for all assays; summarise
