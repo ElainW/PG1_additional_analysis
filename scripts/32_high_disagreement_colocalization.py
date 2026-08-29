@@ -31,6 +31,7 @@ Outputs -> results/high_disagreement_colocalization/
   colocalization_pooled_ci.csv    one row: pooled co-localized fraction + cluster-bootstrap 95% CI
 """
 import os
+import sys
 import glob
 from collections import Counter
 import numpy as np
@@ -41,8 +42,14 @@ N_PERM = 20000
 N_BOOT = 10000          # cluster-bootstrap resamples for the pooled-fraction CI
 RNG = np.random.default_rng(0)
 
-INDIR = C.rp("high_disagreement_sites")
-OUTDIR = C.rp("high_disagreement_colocalization")
+# Which disagreement tail to test: "high" (default, from 27) or "low" (from 30).
+# The permutation null is identical -- only the flagged site set differs; the
+# testable-position pool (generalization_functional_disagreement_sites.csv) is shared.
+MODE = sys.argv[1] if len(sys.argv) > 1 else "high"
+assert MODE in ("high", "low"), "usage: 32_high_disagreement_colocalization.py [high|low]"
+
+INDIR = C.rp(f"{MODE}_disagreement_sites")
+OUTDIR = C.rp(f"{MODE}_disagreement_colocalization")
 META = C.REF_PATH
 
 EXCLUDE = {"SPG1_STRSG", "F7YBW8_MESOW", "NPC1_HUMAN"}

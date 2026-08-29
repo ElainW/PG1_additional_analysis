@@ -255,6 +255,21 @@ whisker for the **95% null band**, and a diamond marks the **observed** overlap 
 `q_perm < 0.05` after BH across all 47 assays, grey otherwise). Output:
 `figures/fig_colocalization_forest.png`.
 
+**High vs low tail (control).** Both `32` and `33` take a `high`/`low` argument (default
+`high`); `python 32... low && python 33... low` reruns the *identical* test on the
+**low-disagreement** (high-agreement) sites from `30` — same testable-position pools, same
+permutation null — writing `results/low_disagreement_colocalization/` and
+`figures/fig_colocalization_forest_low.png`. **The easy tail co-localizes too, but less:**
+pooled **110/263 (42%)**, cluster-bootstrap 95% CI **33–51%**, median per-protein fraction
+**0.46**, **16/20** proteins significant at BH q<0.05 — vs **54%**, CI **41–68%**, **0.67**,
+**18/20** for the high tail (the two CIs only partly overlap). So recurrence of the *same
+positions* across a protein's assays is a **general property of the per-site disagreement
+metric** — both tails are largely site-intrinsic, not an artefact specific to hard sites —
+but high-disagreement sites recur **more** than low-disagreement ones, so the effect is not
+merely "any extreme of the metric repeats." (VKOR1 flips to significant on the low tail,
+RPC1/RASK/RL40A/CCDB drop to n.s.; the per-protein heterogeneity mirrors the conservation
+and ρ analyses.)
+
 ## Category leaderboard + rank-vs-accuracy at these sites (`29`)
 For the **45 family-best** models, `29` builds a per-`coarse_selection_type`
 leaderboard by mean **Spearman** and mean **NDCG@10** (ProteinGym's `calc_ndcg`,

@@ -18,10 +18,16 @@ Input  -> results/high_disagreement_colocalization/colocalization_per_assay.csv
 Output -> figures/fig_colocalization_forest.png
 """
 import os
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import common as C
+
+# "high" (default) or "low" -- picks the matching colocalization result dir from 32.
+MODE = sys.argv[1] if len(sys.argv) > 1 else "high"
+assert MODE in ("high", "low"), "usage: 33_colocalization_forest.py [high|low]"
+LABEL = f"{MODE}-disagreement"
 
 SIG = 0.05
 EXP_COLOR = "#4C72B0"     # expected dot + null band
@@ -36,7 +42,7 @@ def short_assay(dms, uni):
 
 
 def main():
-    indir = C.rp("high_disagreement_colocalization")   # folder name -> its dir
+    indir = C.rp(f"{MODE}_disagreement_colocalization")   # folder name -> its dir
     per = pd.read_csv(os.path.join(indir, "colocalization_per_assay.csv"))
     # order proteins by their co-localized fraction (same as the summary table)
     summ = pd.read_csv(os.path.join(indir, "colocalization_summary.csv"))
@@ -90,13 +96,14 @@ def main():
     ]
     fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=8,
                frameon=False, bbox_to_anchor=(0.5, 0.0))
-    fig.suptitle("High-disagreement site co-localization per assay: observed vs "
+    fig.suptitle(f"{LABEL.capitalize()} site co-localization per assay: observed vs "
                  "permutation-null expectation", fontsize=12, y=0.995)
-    fig.supxlabel("number of high-disagreement sites shared with the protein's other assays",
+    fig.supxlabel(f"number of {LABEL} sites shared with the protein's other assays",
                   fontsize=9, y=0.035)
     fig.tight_layout(rect=[0, 0.05, 1, 0.98])
 
-    out = os.path.join(C.FIGURES, "fig_colocalization_forest.png")
+    suffix = "" if MODE == "high" else f"_{MODE}"
+    out = os.path.join(C.FIGURES, f"fig_colocalization_forest{suffix}.png")
     os.makedirs(C.FIGURES, exist_ok=True)
     fig.savefig(out, dpi=150, bbox_inches="tight")
     print(f"-> wrote {out}  ({len(order)} proteins, {len(per)} assays)")
