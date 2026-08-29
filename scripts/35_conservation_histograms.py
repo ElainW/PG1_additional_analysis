@@ -185,6 +185,12 @@ CATS = ["shared high-disagreement", "shared low-disagreement",
         "highly conserved", "all residues"]
 COLORS = {"shared high-disagreement": "#c1121f", "shared low-disagreement": "#457b9d",
           "highly conserved": "#2a9d8f", "all residues": "#888888"}
+# legend display names (internal category keys unchanged); high-disagreement reads
+# as low-AGREEMENT and vice versa. "all residues" -> "all mutations" on the DMS panel.
+LABELS = {"shared high-disagreement": "shared low-agreement",
+          "shared low-disagreement": "shared high-agreement",
+          "highly conserved": "highly conserved",
+          "all residues": "all residues"}
 
 
 def _cat_positions(df, shared_high, shared_low):
@@ -196,19 +202,20 @@ def _cat_positions(df, shared_high, shared_low):
     }
 
 
-def _kde(ax, name, vals, clip=None):
+def _kde(ax, name, vals, clip=None, label=None):
     """Smooth density; fall back to a rug if too few points for a KDE."""
+    disp = label if label is not None else name
     vals = np.asarray(vals, float)
     vals = vals[~np.isnan(vals)]
     if len(vals) >= 2 and np.ptp(vals) > 0:
         sns.kdeplot(x=vals, ax=ax, color=COLORS[name], fill=True, alpha=0.25,
                     linewidth=1.8, bw_adjust=0.9, clip=clip, cut=0,
-                    label=f"{name} (n={len(vals)})")
+                    label=f"{disp} (n={len(vals)})")
     elif len(vals):
         # too few points for a KDE: draw a tall, visible marker line
         ax.plot(vals, np.zeros_like(vals), marker="|", linestyle="none",
                 color=COLORS[name], markersize=26, markeredgewidth=2.6,
-                label=f"{name} (n={len(vals)})")
+                label=f"{disp} (n={len(vals)})")
 
 
 def plot_assay(d, df, dms, shared_high, shared_low):
@@ -218,7 +225,7 @@ def plot_assay(d, df, dms, shared_high, shared_low):
     # left: conservation percentile (0-100) density (one value per residue)
     for name in CATS:
         sub = df[df.up_pos.isin(catpos[name])]["relfrac_cons"].values * 100.0
-        _kde(axc, name, sub, clip=(0, 100))
+        _kde(axc, name, sub, clip=(0, 100), label=LABELS[name])
     axc.set_xlabel("conservation percentile  (0 if NaN)")
     axc.set_ylabel("density")
     axc.set_xlim(0, 100)
@@ -226,7 +233,8 @@ def plot_assay(d, df, dms, shared_high, shared_low):
     # right: DMS-score density (all substitutions at each category's residues)
     for name in CATS:
         sub = dms[dms.up_pos.isin(catpos[name])]["DMS_score"].values
-        _kde(axd, name, sub)
+        disp = "all mutations" if name == "all residues" else LABELS[name]
+        _kde(axd, name, sub, label=disp)
     wt = WT_DMS.get(d)
     if wt is not None:
         axd.axvline(wt, ls="--", color="black", lw=1.3, label=f"wild-type = {wt:g}")
