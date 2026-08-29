@@ -28,7 +28,7 @@ import common as C
 SITES = os.path.join(C.RESULTS, "generalization_functional_disagreement_sites.csv")
 CANDID = os.path.join(C.RESULTS, "generalization_candidate_proteins.csv")
 OUTDIR = os.path.join(C.FIGURES, "site_disagreement")
-UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
+UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot", "raw_json")
 CLINVAR_DIR = os.path.join(C.ANALYSIS, "data", "clinvar")
 
 # clean filename stems where the bare gene symbol is ambiguous/absent

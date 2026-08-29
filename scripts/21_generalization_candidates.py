@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import common as C
 
-UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
+UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot", "raw_json")
 LIGAND_CACHE = os.path.join(C.ANALYSIS, "data", "pdb_ligands_cache.json")
 
 # Structures used by Lehner-group allosteric-landscape papers. Selection logic:

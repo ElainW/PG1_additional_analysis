@@ -34,7 +34,7 @@ from importlib import import_module
 sub = import_module("04_subset_figs")
 
 PROTEINS = ["HXK4_HUMAN", "KCNE1_HUMAN", "PTEN_HUMAN", "RASK_HUMAN", "SRC_HUMAN", "CP2C9_HUMAN"]
-UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
+UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot", "raw_json")
 
 
 # Drop variants annotated benign / likely benign / uncertain significance UNLESS

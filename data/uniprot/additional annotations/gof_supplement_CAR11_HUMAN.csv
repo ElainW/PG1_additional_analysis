@@ -1,0 +1,3 @@
+UniProt_ID,gene,position,wt,alt,variant,matched_keywords,description
+CAR11_HUMAN,CARD11,123,G,S,G123S,benta,in BENTA; results in protein aggregation; constitutive activation of NF-kappa-B signaling; dbSNP:rs387907352
+CAR11_HUMAN,CARD11,134,E,G,E134G,benta,in BENTA; results in protein aggregation; constitutive activation of NF-kappa-B signaling; dbSNP:rs387907351

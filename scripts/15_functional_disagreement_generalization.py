@@ -39,7 +39,7 @@ DIS_KW = ["mody", "hyperinsulin", "diabetes", "cancer", "carcinoma", "syndrome",
           "deafness", "disease", "phhi", "hhf", "encephalopath", "arrhythmi",
           "lqt", "myopathy", "anemia", "epilep", "lethal", "pathogenic",
           "susceptibility", "hypertension"]
-UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot")
+UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot", "raw_json")
 
 
 def features_for(uni, target_seq):

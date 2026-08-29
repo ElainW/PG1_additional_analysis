@@ -10,7 +10,7 @@ Data (not tracked in this repo): 217 DMS substitution assays in
 `../O2/20250613/*.csv`, 97 models (columns `Site_Independent … Protriever`),
 metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
 `../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
-cached in `data/uniprot/` (fetched by scripts 08/15).
+cached in `data/uniprot/raw_json/` (raw entries; fetched by scripts 08/15). Derived UniProt GoF-supplement tables (script `24`) are in `data/uniprot/additional annotations/`.
 
 **ClinVar disease variants** for **10 human multi-assay proteins** are in
 `data/clinvar/*.tsv` (GCK, PTEN, TP53, SRC, CYP2C9, KCNE1, CARD11, VKORC1, KRAS,
@@ -90,11 +90,12 @@ python3 20_native_3vev_vs_1v4s.py             # GCK 3-D robustness: 1V4S vs 3VEV
 python3 21_generalization_candidates.py       # multi-assay candidate proteins + RCSB PDB options
 python3 22_disease_gof_lof.py                 # GoF vs LoF disease-variant systematic check
 python3 23_structure_maps_all.py              # per-protein disagreement structure maps (all multi-assay proteins)
+python3 24_gof_supplement_tables.py           # write UniProt GoF-supplement tables -> data/uniprot/additional annotations/
 ```
 Planned analyses are tracked in `NEXT_STEPS.md`.
 
 ## Reproduce
-`make all` runs scripts `00 → 16` in order (each reads the previous ones'
+`make all` runs scripts `00 → 24` in order (each reads the previous ones'
 `results/`), regenerating every CSV and figure and logging timestamps + output to
 `RUN.log`. This is how to confirm the numbers quoted below stay in sync with the
 code. Requires the `data/` UniProt cache (tracked) for `08`/`15`; no network

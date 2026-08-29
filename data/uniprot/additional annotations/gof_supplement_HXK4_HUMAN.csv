@@ -1,0 +1,8 @@
+UniProt_ID,gene,position,wt,alt,variant,matched_keywords,description
+HXK4_HUMAN,GCK,65,T,I,T65I,hhf,in HHF3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; loss of inhibition by GCKR; unchanged affinity for ATP
+HXK4_HUMAN,GCK,91,V,L,V91L,hhf,in HHF3; increased glucokinase activity; increased affinity for glucose
+HXK4_HUMAN,GCK,99,W,C,W99C,hhf,in HHF3; increased glucokinase activity; increased affinity for glucose; increased affinity for ATP
+HXK4_HUMAN,GCK,214,Y,C,Y214C,hhf,in HHF3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; decreased inhibition by GCKR; dbSNP:rs104894015
+HXK4_HUMAN,GCK,442,E,K,E442K,hhf,in HHF3; increased affinity for glucose; dbSNP:rs758737171
+HXK4_HUMAN,GCK,455,V,M,V455M,hhf,in HHF3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; decreased inhibition by GCKR; no effect on affinity for ATP; dbSNP:rs104894012
+HXK4_HUMAN,GCK,456,A,V,A456V,hhf,in HHF3; increased glucokinase activity based on measure of catalytic efficiency; increased affinity for glucose; loss of inhibition by GCKR; no effect on affinity for ATP; dbSNP:rs104894014
