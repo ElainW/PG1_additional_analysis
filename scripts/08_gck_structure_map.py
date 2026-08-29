@@ -1,6 +1,6 @@
 """
 Map the HXK4_HUMAN (GCK / glucokinase) per-site model-disagreement onto known
-functional regions from UniProt P35557 (data/uniprot_P35557_HXK4_HUMAN.json).
+functional regions from UniProt P35557 (data/uniprot/raw_json/HXK4_HUMAN.json).
 
 Functional annotations used:
   * Hexokinase small subdomain (67-203) / large subdomain (204-443)
@@ -33,7 +33,7 @@ ASSAYS = {
     "activity": "HXK4_HUMAN_Gersing_2022_activity",
     "abundance": "HXK4_HUMAN_Gersing_2023_abundance",
 }
-UNIPROT = os.path.join(C.ANALYSIS, "data", "uniprot_P35557_HXK4_HUMAN.json")
+UNIPROT = os.path.join(C.ANALYSIS, "data", "uniprot", "raw_json", "HXK4_HUMAN.json")
 
 
 def load_features():
