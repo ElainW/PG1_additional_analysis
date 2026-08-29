@@ -199,6 +199,7 @@ def summarize(ws):
         oracle = g.groupby(["DMS_id", "up_pos"])["within_site_spearman"].max().mean()
         out.append({
             "coarse_selection_type": cat,
+            "n_models": g["model"].nunique(),
             "n_assays": g["DMS_id"].nunique(),
             "n_uniprot": g["UniProt_ID"].nunique(),
             "n_sites": n_sites,
@@ -236,7 +237,7 @@ def make_figure(ws):
             g = ws[ws["coarse_selection_type"] == cat]
             sub = [g.loc[g[rank_col] <= thr, "within_site_spearman"] for _, thr in tiers]
             vals = [v.mean() for v in sub]
-            errs = [v.std(ddof=1) for v in sub]   # SD across contributing sites
+            errs = [v.std(ddof=1) / np.sqrt(v.count()) for v in sub]  # SE across contributing sites
             ax.bar(x + i * width, vals, width, yerr=errs, label=cat_label[cat],
                    error_kw=dict(elinewidth=0.7, capsize=2, alpha=0.6))
         ax.set_xticks(x + width * (len(cats) - 1) / 2)
@@ -244,9 +245,11 @@ def make_figure(ws):
         ax.axhline(0, color="0.6", lw=0.8)
         ax.set_title(f"High-disagreement sites (>= {MIN_SITE_SUBS} subs)\n{title}", fontsize=11)
         ax.set_xlabel("models kept (by category rank)")
-    axes[0].set_ylabel("mean within-site Spearman with DMS")
+    n_models = ws["model"].nunique()
+    axes[0].set_ylabel("mean within-site Spearman with DMS\n(error bars = SE across sites)")
     axes[1].legend(title="assay category", fontsize=8)
-    fig.suptitle("Do better-ranked models win at high-disagreement sites?", y=1.02, fontsize=13)
+    fig.suptitle(f"Do better-ranked models win at high-disagreement sites?\n"
+                 f"family-best subset: {n_models} models (one per family)", y=1.03, fontsize=13)
     plt.tight_layout()
     os.makedirs(C.FIGURES, exist_ok=True)
     out = os.path.join(C.FIGURES, "fig9_highdisagreement_rank_vs_within_site.png")
