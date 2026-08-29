@@ -9,7 +9,12 @@ Deep-dive protein: **HXK4_HUMAN** (glucokinase / GCK).
 Data (not tracked in this repo): 217 DMS substitution assays in
 `../O2/20250613/*.csv`, 97 models (columns `Site_Independent … Protriever`),
 metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
-`../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
+`../ProteinGym/config.json`. The reference-metadata table (per-assay
+`UniProt_ID`, `coarse_selection_type`, and MSA depth `MSA_Neff_L` /
+`MSA_Neff_L_category`) lives at, relative to this `analysis/` dir,
+`../ProteinGym/reference_files/DMS_substitutions.csv`
+(absolute: `/Users/yilanwang/Desktop/MarksLab/PG2/ProteinGym/reference_files/DMS_substitutions.csv`);
+in scripts it is `common.REF_PATH`. UniProt entries for the multi-assay proteins are
 cached in `data/uniprot/raw_json/` (raw entries; fetched by scripts 08/15). Derived
 UniProt annotation tables live in `data/uniprot/additional_annotations/`: GoF-supplement
 tables (script `24`) and per-protein structural/functional annotations — binding
