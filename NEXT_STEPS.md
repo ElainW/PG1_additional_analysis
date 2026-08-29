@@ -97,3 +97,54 @@ power (7 active-site residues).
 `26_src_allosteric_sites.py` + `results/allosteric_map/SRC_HUMAN.tsv` (atlas),
 `results/MSA_conservation/src_high_disagreement_conservation.tsv` (labelled sites),
 Beltran, Naqvi, Faure & Lehner 2026 (Src allosteric landscape).
+
+## Mechanism of the per-assay disagreement ↔ conservation sign
+
+**Motivation.** Script `28` shows the sign of Spearman(within-site disagreement,
+conservation) is protein-specific (−0.59 to +0.42): in some proteins (P53, HSP82,
+VKOR1) models disagree most at the **most-conserved** sites, in others (NPC1, PTEN,
+RL40A, RPC1, CCDB) at the **least-conserved**. Why? Two hypotheses.
+
+**H1 — experimental (DMS-score spread).** At more-conserved positions the DMS
+scores of the ~19 substitutions are spread over a larger fraction of the assay's
+score range (more functional signal), which could drive within-site disagreement.
+*Status: tested, largely rejected.* Within-assay Spearman(conservation, per-position
+DMS-score spread) = **+0.20** (positive in 41/48 assays) — the premise holds — but
+Spearman(disagreement, DMS-spread) = **−0.08** (positive in only 12/48), so spread
+does not explain the disagreement pattern, in either direction. (See
+`/tmp`-style scratch in `28`'s spread check; can be promoted to a script if worth
+keeping.)
+
+**H2 — model-class performance.** Models disagree most at conserved sites *when the
+MSA / Structure&MSA classes do much better there than sequence/structure-only
+models* (a real accuracy gap → divergent rankings), and disagree most at
+low-conservation sites *when all classes do poorly* (little information). Classes
+per `results/qc_directionality/directionality_check.csv:model_type`.
+*Status: first-pass, unsettled.* Per-position within-site accuracy (Spearman of each
+model's scores vs DMS across a position's substitutions), coarsely pooled to
+MSA-vs-single-sequence classes, on the clearest opposite cases: the MSA−single-seq
+gap is small and *larger* in PTEN (the negative-sign protein) than in P53, so the
+simple "MSA wins bigger at conserved sites" story is not supported as stated.
+A striking sub-pattern: **P53's variable sites have collapsed within-site accuracy
+for every class** (≈−0.06 vs +0.21 at conserved sites), i.e. at low-conservation
+P53 positions all models are ~random and happen to agree (low disagreement),
+whereas conserved sites carry signal that classes exploit unevenly (high
+disagreement). PTEN retains positive accuracy everywhere.
+
+**Steps.**
+1. Compute per-site, per-model within-site rank accuracy for all assays; summarise
+   by `model_type` and by conservation tertile (extend the P53/PTEN probe to all 53).
+2. Decompose the disagreement metric itself: is high disagreement driven by
+   *between-class* divergence (MSA vs single-seq vs structure) or *within-class*
+   spread? Correlate the between-class component with conservation per assay.
+3. Test H2 directly: per assay, does (mean MSA-class accuracy − mean single-seq
+   accuracy) *increase with conservation* more in positive-sign proteins than
+   negative-sign ones? And is disagreement at low-conservation sites explained by
+   uniformly low accuracy (all classes near 0)?
+4. Relate the per-assay sign to MSA depth (`MSA_Neff_L`) and taxon — is
+   "disagree-at-variable" the low-information / shallow-MSA regime?
+
+**Ties to:** `28_msa_conservation.py` (conservation, per-assay ρ, high/low tails),
+`results/qc_directionality/directionality_check.csv` (model_type classes),
+`O2/20250613/*.csv` (per-model scores + `DMS_score`), `16_collapse_modeltype_withinsite.py`
+(model-type within-site structure).
