@@ -230,6 +230,10 @@ def plot_assay(d, df, dms, shared_high, shared_low):
         leg = ax.legend(fontsize=8, title=title, title_fontsize=8, frameon=True,
                         facecolor="white", edgecolor="0.3", framealpha=1.0)
         leg.get_frame().set_boxstyle("square")
+        # shrink the tall rug-marker handle in the legend only (keeps plot tick tall)
+        for h in getattr(leg, "legend_handles", getattr(leg, "legendHandles", [])):
+            if hasattr(h, "get_marker") and h.get_marker() == "|":
+                h.set_markersize(9)
 
     fig.suptitle(d, y=1.02, fontsize=11)
     fig.tight_layout()
