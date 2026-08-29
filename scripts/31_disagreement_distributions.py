@@ -50,11 +50,18 @@ def main():
             cat = cst.get(dms_id, "")
             col = C.CATEGORY_COLORS.get(cat, "#555555")   # colour by assay category (matches fig9)
             short = dms_id.replace(uni + "_", "")
-            # high-disagreement region + boundary shared by 27/30
-            ax.axvspan(S.DISAGREE_FLOOR, 1.0, color="#999", alpha=0.07, zorder=0)
+            # per-assay high/low selection cuts (same as 27/30)
+            hi_thr = max(S.elbow_tail_threshold(d.values)[0], S.DISAGREE_FLOOR)
+            lo_thr = min(S.elbow_low_tail_threshold(d.values)[0], S.DISAGREE_CEIL)
+            # boundary line shared by 27/30
             ax.axvline(S.DISAGREE_FLOOR, color="#555", lw=0.9, ls="--", zorder=1)
-            ax.hist(d, bins=BINS, density=True, histtype="stepfilled", lw=1.5,
-                    edgecolor=col, facecolor=col, alpha=0.35, zorder=2)
+            # histogram: opaque in the selected high/low tails, faded in the bulk
+            _, edges, patches = ax.hist(d, bins=BINS, density=True, color=col,
+                                        edgecolor=col, linewidth=0.4, zorder=2)
+            half = (edges[1] - edges[0]) / 2
+            for patch, left in zip(patches, edges[:-1]):
+                c = left + half
+                patch.set_alpha(0.85 if (c >= hi_thr or c <= lo_thr) else 0.15)
             ax.axvline(d.median(), color=col, lw=1.3, ls=":", alpha=0.9, zorder=3)
             ax.set_ylabel("density", fontsize=8)
             ax.text(0.99, 0.92, f"{short}\n{cat} · n={len(d)}, median={d.median():.2f}",
@@ -64,7 +71,8 @@ def main():
         axes[-1].set_xlabel("within-site disagreement  (1 - mean pairwise within-site Spearman)")
         axes[0].set_title(f"{names.get(uni, uni)} [{uni}] — per-site disagreement distribution\n"
                           f"{len(assays)} assay(s), {g['up_pos'].nunique()} sites  "
-                          "(dashed = 0.5 high/low boundary; dotted = median)", fontsize=11)
+                          "(opaque = selected high/low-disagreement tails, 27/30; "
+                          "dashed = 0.5 boundary; dotted = median)", fontsize=10)
         plt.tight_layout()
         out = os.path.join(OUTDIR, f"{cname}_disagreement_dist.png")
         plt.savefig(out, dpi=150, bbox_inches="tight")
