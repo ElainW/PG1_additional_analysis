@@ -196,6 +196,60 @@ context. This yields **405 high-** and **401 low-disagreement** sites over the s
 assays). `31` overlays each protein's per-assay disagreement distribution (one
 figure per UniProt, both tails marked) in `figures/site_disagreement/distribution/`.
 
+## Do high-disagreement sites co-localize across a protein's assays? (`32`)
+`32_high_disagreement_colocalization.py` (→ `results/high_disagreement_colocalization/`)
+takes each protein's high-disagreement sites from `27` and asks whether the **same
+positions** are flagged across that protein's different assays. Per UniProt_ID it forms
+the **union** of high-disagreement positions over all assays and counts those flagged in
+**≥2 assays** (for >2-assay proteins, any position shared by any two assays counts).
+**Excluded** per the analysis brief: `SPG1_STRSG` (2nd assay too few sites),
+`F7YBW8_MESOW` (too few positions total), `NPC1_HUMAN` (assays barely overlap).
+Each assay gets a **permutation test** (`N=20000`): redraw that assay's *k* flagged
+sites uniformly from its testable-position pool (its `up_pos` in the sites file), holding
+the other assays' real flagged sets fixed, and score the overlap (`obs_overlap_with_others`)
+against the resulting null. We report, per assay, the null **95% band** (2.5/97.5 pct of
+the permutation null), the **fold-enrichment** (`obs/exp`), and the p-value
+`p = (1 + #{perm ≥ obs}) / (N+1)`. Per-assay p's are combined per protein by Fisher's
+method, and the resulting protein-level p's are corrected across the 20 proteins by
+**Benjamini–Hochberg** (`q_colocalization`); BH is valid on permutation p's, which are
+themselves floored at `1/(N+1) ≈ 5e-5`. Each protein also carries a rollup of the effect:
+pooled co-occurrence count `obs_overlap_total` (Σ over assays; a shared pair is counted
+from both sides), its `exp_overlap_total`, a protein-level null band from **convolving**
+the per-assay permutation nulls, and `fold_enrichment = obs_overlap_total/exp_overlap_total`.
+For the headline pooled fraction we give a **cluster-bootstrap 95% CI** (`N=10000`,
+resampling *proteins* not sites, so within-protein site correlation is respected). Neff/L
+is carried per assay from `common.REF_PATH`.
+**Finding:** co-localization is the rule — **131/241 (54%)** of union sites are shared by
+≥2 assays (cluster-bootstrap 95% CI **41%–68%**), median per-protein fraction **0.67**, and
+**18/20** proteins are significant at **BH q<0.05** (only `RL40A_YEAST` q≈0.09 and
+`VKOR1_HUMAN` q≈0.16 are not; `RPC1_LAMBD` is significant but trivial — union **n=1**, that
+one site agreeing across both assays). Effect sizes are large where significant — observed
+overlap sits well above the null band (e.g. `P53_HUMAN` obs **40** vs null 95% [0, 5], ~17×;
+`S22A1_HUMAN` obs **34** vs [0, 4], ~27×) — which is the robust way to read magnitude, since
+the `p_perm` floor pins every strong assay at 5e-5. Crucially this holds at the **lowest
+Neff/L**: `CAR11_HUMAN` (Neff/L **0.04**, gof vs lof) and `P53_HUMAN` (Neff/L **0.37**, 4
+assays) still co-localize strongly — so the disagreement is a property of the **site**, not
+an artefact of a shallow alignment. *Caveat:* Fisher assumes the per-assay p's are
+independent; within a protein they are not (each shared pair is scored from both assays),
+so the absolute protein-level p/q magnitudes are likely anti-conservative — the conclusions
+rest on the FDR-controlled significance **together with** the fold-enrichment, null bands,
+and bootstrap CI, and the protein ranking is robust to this.
+Outputs: `colocalization_summary.csv` (per protein: rollup obs/exp totals, null band,
+fold-enrichment, Fisher p + BH `q_colocalization`), `colocalization_per_assay.csv` (per-assay
+`obs_overlap_with_others`, null band, `fold_enrichment`, `p_perm` + BH `q_perm` across all
+assays), `colocalization_shared_sites.csv` (each shared position + which assays flag it),
+`colocalization_pooled_ci.csv` (pooled fraction + 95% CI).
+**Two separate BH families:** `q_colocalization` corrects across the 20 protein-level
+(Fisher-combined) p's — "is this *protein* significant?" — while `q_perm` corrects across
+the 47 per-assay p's — "is this *assay* significant?"; they are distinct hypothesis sets,
+so the two q-columns are not comparable and neither is a correction of the other.
+
+`33_colocalization_forest.py` turns the per-assay table into a forest plot — one small-
+multiple panel per protein, each row an assay: a dot marks the **expected** overlap with a
+whisker for the **95% null band**, and a diamond marks the **observed** overlap (red where
+`q_perm < 0.05` after BH across all 47 assays, grey otherwise). Output:
+`figures/fig_colocalization_forest.png`.
+
 ## Category leaderboard + rank-vs-accuracy at these sites (`29`)
 For the **45 family-best** models, `29` builds a per-`coarse_selection_type`
 leaderboard by mean **Spearman** and mean **NDCG@10** (ProteinGym's `calc_ndcg`,
