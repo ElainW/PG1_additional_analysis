@@ -1,9 +1,9 @@
 """
 Does the structure choice (AF model vs 1V4S) change the GCK 3-D distance measurements?
 
-AFmodel = data/HXK4_HUMAN.pdb : apo AlphaFold model of P35557 (res 1-465), chain A,
+AFmodel = data/structures/af2/HXK4_HUMAN.pdb : apo AlphaFold model of P35557 (res 1-465), chain A,
           NO ligands (its B-factor column is pLDDT, r=0.98 vs the AlphaFold DB).
-1V4S    = data/1V4S.pdb       : res 14-461, glucose (GLC) + activator (MRK) bound.
+1V4S    = data/structures/pdb/1V4S.pdb       : res 14-461, glucose (GLC) + activator (MRK) bound.
 NOTE: for historical reasons the variables/outputs below tag the AF model "3VEV"
 (e.g. dist_3VEV, fig_gck_3vev_vs_1v4s.png). It is NOT the 3VEV crystal -- the real
 3VEV crystal (with native glucose + activator 0H4) is used separately in script 20.
@@ -41,8 +41,8 @@ from Bio.PDB.Polypeptide import three_to_index, index_to_one
 import common as C
 
 warnings.simplefilter("ignore")
-VEV = os.path.join(C.ANALYSIS, "data", "HXK4_HUMAN.pdb")   # apo AF model (tagged "3VEV" in outputs)
-V4S = os.path.join(C.ANALYSIS, "data", "1V4S.pdb")
+VEV = os.path.join(C.ANALYSIS, "data", "structures", "af2", "HXK4_HUMAN.pdb")   # apo AF model (tagged "3VEV" in outputs)
+V4S = os.path.join(C.ANALYSIS, "data", "structures", "pdb", "1V4S.pdb")
 SMALL = range(67, 204)     # hexokinase small subdomain
 LARGE = range(204, 444)    # hexokinase large subdomain
 CURATED = [49, 63, 99, 156, 214, 287, 345, 349, 377, 401, 402]

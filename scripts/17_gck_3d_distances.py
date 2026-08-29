@@ -45,7 +45,7 @@ from Bio.PDB.Polypeptide import three_to_index, index_to_one
 import common as C
 
 warnings.simplefilter("ignore")
-PDB = os.path.join(C.ANALYSIS, "data", "1V4S.pdb")
+PDB = os.path.join(C.ANALYSIS, "data", "structures", "pdb", "1V4S.pdb")
 ACTIVATOR = "MRK"   # 1V4S's allosteric activator (3VEV uses 0H4)
 ASSAYS = {
     "activity": "HXK4_HUMAN_Gersing_2022_activity",

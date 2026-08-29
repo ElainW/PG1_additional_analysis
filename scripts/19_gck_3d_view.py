@@ -28,7 +28,7 @@ from Bio.PDB import PDBParser, PDBIO, Select
 import common as C
 
 warnings.simplefilter("ignore")
-V4S = os.path.join(C.ANALYSIS, "data", "1V4S.pdb")   # published GCK reference entry
+V4S = os.path.join(C.ANALYSIS, "data", "structures", "pdb", "1V4S.pdb")   # published GCK reference entry
 ACTIVATOR = "MRK"
 ASSAYS = {"activity": "HXK4_HUMAN_Gersing_2022_activity",
           "abundance": "HXK4_HUMAN_Gersing_2023_abundance"}

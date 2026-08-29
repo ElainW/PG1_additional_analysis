@@ -29,8 +29,8 @@ import common as C
 
 warnings.simplefilter("ignore")
 STRUCTS = {
-    "1V4S": (os.path.join(C.ANALYSIS, "data", "1V4S.pdb"), "GLC", "MRK"),
-    "3VEV": (os.path.join(C.ANALYSIS, "data", "3VEV.pdb"), "GLC", "0H4"),
+    "1V4S": (os.path.join(C.ANALYSIS, "data", "structures", "pdb", "1V4S.pdb"), "GLC", "MRK"),
+    "3VEV": (os.path.join(C.ANALYSIS, "data", "structures", "pdb", "3VEV.pdb"), "GLC", "0H4"),
 }
 CURATED = [49, 63, 99, 156, 214, 287, 345, 349, 377, 401, 402]
 

@@ -11,6 +11,8 @@ Data (not tracked in this repo): 217 DMS substitution assays in
 metadata `../ProteinGym/reference_files/DMS_substitutions.csv`, config
 `../ProteinGym/config.json`. UniProt entries for the multi-assay proteins are
 cached in `data/uniprot/raw_json/` (raw entries; fetched by scripts 08/15). Derived UniProt GoF-supplement tables (script `24`) are in `data/uniprot/additional_annotations/`.
+Structure files (used by the 3-D scripts `17`–`20`) live in `data/structures/pdb/`
+(crystal PDBs 1V4S, 3VEV) and `data/structures/af2/` (AlphaFold model HXK4_HUMAN).
 
 **ClinVar disease variants** for **10 human multi-assay proteins** are in
 `data/clinvar/*.tsv` (GCK, PTEN, TP53, SRC, CYP2C9, KCNE1, CARD11, VKORC1, KRAS,
