@@ -137,11 +137,18 @@ def build_leaderboard(chosen, fam_of, cst):
 
 
 # ---------------------------------------------------------------------------
-# Part B: within-site accuracy at high-disagreement sites vs category rank
+# Part B: within-site accuracy at high/low-disagreement sites vs category rank
 # ---------------------------------------------------------------------------
-def load_high_disagreement_sites():
+# Each site class points at its per-protein tables (27 = high, 30 = low).
+SITE_CLASSES = {
+    "high": ("high_disagreement_sites", "*_high_disagreement.tsv"),
+    "low":  ("low_disagreement_sites",  "*_low_disagreement.tsv"),
+}
+
+
+def load_disagreement_sites(subdir, pattern):
     hd = []
-    for f in sorted(glob.glob(os.path.join(C.rp("high_disagreement_sites"), "*_high_disagreement.tsv"))):
+    for f in sorted(glob.glob(os.path.join(C.rp(subdir), pattern))):
         try:
             d = pd.read_csv(f, sep="\t")
         except pd.errors.EmptyDataError:
@@ -151,8 +158,9 @@ def load_high_disagreement_sites():
     return pd.concat(hd, ignore_index=True).drop_duplicates()
 
 
-def build_within_site(chosen, fam_of, cst, lead):
-    hd = load_high_disagreement_sites()
+def build_within_site(chosen, fam_of, cst, lead, site_class):
+    subdir, pattern = SITE_CLASSES[site_class]
+    hd = load_disagreement_sites(subdir, pattern)
     rows = []
     for dms, grp in hd.groupby("DMS_id"):
         cat = cst.get(dms)
@@ -187,11 +195,12 @@ def build_within_site(chosen, fam_of, cst, lead):
               "mean_spearman", "mean_ndcg10"]],
         on=["coarse_selection_type", "model"], how="left")
     ws = ws.dropna(subset=["within_site_spearman"])
-    ws.to_csv(C.rp("family_best_highdisagreement_within_site.csv"), index=False)
+    ws["site_class"] = site_class
+    ws.to_csv(C.rp(f"family_best_{site_class}disagreement_within_site.csv"), index=False)
     return ws
 
 
-def summarize(ws):
+def summarize(ws, site_class):
     """Per category: does a better category rank => higher within-site correlation?"""
     out = []
     for cat, g in ws.groupby("coarse_selection_type"):
@@ -215,42 +224,50 @@ def summarize(ws):
             "mean_withinsite_oracle_persite": oracle,
         })
     summ = pd.DataFrame(out).sort_values("coarse_selection_type").reset_index(drop=True)
-    summ.to_csv(C.rp("family_best_highdisagreement_rank_vs_accuracy.csv"), index=False)
+    summ.insert(0, "site_class", site_class)
+    summ.to_csv(C.rp(f"family_best_{site_class}disagreement_rank_vs_accuracy.csv"), index=False)
     return summ
 
 
-def make_figure(ws):
-    """Mean within-site Spearman by category-rank tier, per category, for both metrics."""
+def _panel(ax, ws, rank_col, tiers, cats, cat_label):
+    width = 0.8 / len(cats)
+    x = np.arange(len(tiers))
+    for i, cat in enumerate(cats):
+        g = ws[ws["coarse_selection_type"] == cat]
+        sub = [g.loc[g[rank_col] <= thr, "within_site_spearman"] for _, thr in tiers]
+        vals = [v.mean() for v in sub]
+        errs = [v.std(ddof=1) / np.sqrt(v.count()) for v in sub]   # SE across contributing sites
+        ax.bar(x + i * width, vals, width, yerr=errs, label=cat_label.get(cat, cat),
+               error_kw=dict(elinewidth=0.7, capsize=2, alpha=0.6))
+    ax.set_xticks(x + width * (len(cats) - 1) / 2)
+    ax.set_xticklabels([t for t, _ in tiers])
+    ax.axhline(0, color="0.6", lw=0.8)
+
+
+def make_figure(ws_high, ws_low):
+    """2x2: rows = high / low disagreement sites; cols = category Spearman / NDCG rank."""
     tiers = [("Top 1", 1), ("Top 3", 3), ("Top 5", 5), ("Top 10", 10), ("All", 10**9)]
-    cats = sorted(ws["coarse_selection_type"].unique())
-    # per-category assay / UniProt counts for the legend labels
-    counts = {c: (ws.loc[ws["coarse_selection_type"] == c, "DMS_id"].nunique(),
-                  ws.loc[ws["coarse_selection_type"] == c, "UniProt_ID"].nunique())
-              for c in cats}
-    cat_label = {c: f"{c}  ({counts[c][0]} assays, {counts[c][1]} UniProt)" for c in cats}
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5.2), sharey=True)
-    for ax, rank_col, title in [(axes[0], "spearman_rank", "ranked by category Spearman"),
-                                (axes[1], "ndcg_rank", "ranked by category NDCG@10")]:
-        width = 0.8 / len(cats)
-        x = np.arange(len(tiers))
-        for i, cat in enumerate(cats):
-            g = ws[ws["coarse_selection_type"] == cat]
-            sub = [g.loc[g[rank_col] <= thr, "within_site_spearman"] for _, thr in tiers]
-            vals = [v.mean() for v in sub]
-            errs = [v.std(ddof=1) / np.sqrt(v.count()) for v in sub]  # SE across contributing sites
-            ax.bar(x + i * width, vals, width, yerr=errs, label=cat_label[cat],
-                   error_kw=dict(elinewidth=0.7, capsize=2, alpha=0.6))
-        ax.set_xticks(x + width * (len(cats) - 1) / 2)
-        ax.set_xticklabels([t for t, _ in tiers])
-        ax.axhline(0, color="0.6", lw=0.8)
-        ax.set_title(f"High-disagreement sites (>= {MIN_SITE_SUBS} subs)\n{title}", fontsize=11)
-        ax.set_xlabel("models kept (by category rank)")
-    n_models = ws["model"].nunique()
-    axes[0].set_ylabel("mean within-site Spearman with DMS\n(error bars = SE across sites)")
-    axes[1].legend(title="assay category", fontsize=8)
-    fig.suptitle(f"Do better-ranked models win at high-disagreement sites?\n"
-                 f"family-best subset: {n_models} models (one per family)", y=1.03, fontsize=13)
-    plt.tight_layout()
+    cats = sorted(set(ws_high["coarse_selection_type"]) | set(ws_low["coarse_selection_type"]))
+    n_models = max(ws_high["model"].nunique(), ws_low["model"].nunique())
+    fig, axes = plt.subplots(2, 2, figsize=(13, 10), sharey=True)
+    rows = [("High-disagreement sites", ws_high), ("Low-disagreement sites", ws_low)]
+    for r, (row_title, ws) in enumerate(rows):
+        # per-row legend labels carry that row's per-category assay / UniProt counts
+        cat_label = {c: f"{c}  ({ws.loc[ws['coarse_selection_type'] == c, 'DMS_id'].nunique()} "
+                        f"assays, {ws.loc[ws['coarse_selection_type'] == c, 'UniProt_ID'].nunique()} UniProt)"
+                     for c in cats}
+        for col, (rank_col, metric) in enumerate([("spearman_rank", "category Spearman"),
+                                                  ("ndcg_rank", "category NDCG@10")]):
+            ax = axes[r, col]
+            _panel(ax, ws, rank_col, tiers, cats, cat_label)
+            ax.set_title(f"{row_title} (>= {MIN_SITE_SUBS} subs)\nranked by {metric}", fontsize=11)
+            if r == 1:
+                ax.set_xlabel("models kept (by category rank)")
+        axes[r, 0].set_ylabel("mean within-site Spearman with DMS\n(error bars = SE across sites)")
+        axes[r, 1].legend(title="assay category", fontsize=8)
+    fig.suptitle(f"Do better-ranked models win at high- vs low-disagreement sites?\n"
+                 f"family-best subset: {n_models} models (one per family)", y=1.0, fontsize=13)
+    plt.tight_layout(rect=[0, 0, 1, 0.98])
     os.makedirs(C.FIGURES, exist_ok=True)
     out = os.path.join(C.FIGURES, "fig9_highdisagreement_rank_vs_within_site.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
@@ -273,15 +290,17 @@ def main():
             ["model", "n_assays", "mean_spearman", "spearman_rank", "mean_ndcg10", "ndcg_rank"]
         ].to_string(index=False))
 
-    ws = build_within_site(chosen, fam_of, cst, lead)
-    summ = summarize(ws)
-    print("\n=== hypothesis summary (high-disagreement sites, >= "
-          f"{MIN_SITE_SUBS} subs) ===")
-    print(summ.round(3).to_string(index=False))
+    ws = {}
+    for site_class in ("high", "low"):
+        ws[site_class] = build_within_site(chosen, fam_of, cst, lead, site_class)
+        summ = summarize(ws[site_class], site_class)
+        print(f"\n=== hypothesis summary ({site_class}-disagreement sites, >= "
+              f"{MIN_SITE_SUBS} subs) ===")
+        print(summ.round(3).to_string(index=False))
     print("\nInterpretation: rho_*rank_vs_withinsite < 0 means better-ranked "
           "models (lower rank #) tend to have higher within-site Spearman.")
 
-    out = make_figure(ws)
+    out = make_figure(ws["high"], ws["low"])
     print(f"\nSaved {out}")
 
 

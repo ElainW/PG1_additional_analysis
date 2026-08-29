@@ -1,0 +1,5 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease
+SPG1_STRSG	SPG1_STRSG_Olson_2014	274	A	A274	0.3528	1	0.3528	0.3528	3.64	False	False	False
+SPG1_STRSG	SPG1_STRSG_Olson_2014	273	D	D273	0.3528	2	0.3528	0.3528	3.64	False	False	False
+SPG1_STRSG	SPG1_STRSG_Wu_2016	266	D	D266	0.3077	1	0.3962	0.3962	50.0	False	False	False
+SPG1_STRSG	SPG1_STRSG_Wu_2016	265	V	V265	0.3962	2	0.3962	0.3962	50.0	False	False	False

@@ -53,6 +53,7 @@ NAME_OVERRIDE = {"SPIKE_SARS2": "spike", "P53_HUMAN": "p53",
 # extreme tail of its assay: an elbow located within the top [TAIL_LO, TAIL_HI]
 # fraction of the disagreement distribution (largest sudden drop in that band).
 DISAGREE_FLOOR = 0.50
+DISAGREE_CEIL = 0.50                     # low-disagreement mirror: site must be BELOW this
 TAIL_LO, TAIL_HI = 0.025, 0.05          # top 2.5%..5%
 MAX_LABELS = 30                          # legibility guard for very large proteins
 
@@ -201,6 +202,27 @@ def elbow_tail_threshold(vals, lo=TAIL_LO, hi=TAIL_HI):
         if drop > best_drop:
             best_drop, best_i = drop, i
     return float(v[best_i - 1]), 100.0 * best_i / n      # keep ranks 0..best_i-1
+
+
+def elbow_low_tail_threshold(vals, lo=TAIL_LO, hi=TAIL_HI):
+    """Mirror of elbow_tail_threshold for the LOW-disagreement extreme tail. Sort
+    ascending (lowest disagreement first) and, within the lowest [lo, hi] fraction
+    -- the 95-97.5 percentile band when 100 = lowest disagreement -- cut just below
+    the largest sudden RISE in disagreement; with no pronounced rise default to the
+    wider (hi) end = lowest 5% (the 95-100 percentile band). Returns
+    (ceiling_threshold, percentile_kept); keep sites with disagreement <= threshold."""
+    v = np.sort(np.asarray(vals, dtype=float))           # ascending (lowest first)
+    n = len(v)
+    if n < 3:
+        return (float(v.max()) if n else -np.inf), (100.0 if n else 0.0)
+    i_lo = max(1, int(np.floor(lo * n)))
+    i_hi = min(max(i_lo + 1, int(np.ceil(hi * n))), n - 1)
+    best_i, best_rise = i_hi, -1.0                        # default: wider (5%) end
+    for i in range(i_lo, i_hi + 1):
+        rise = v[i] - v[i - 1]
+        if rise > best_rise:
+            best_rise, best_i = rise, i
+    return float(v[best_i - 1]), 100.0 * best_i / n       # keep ranks 0..best_i-1 (lowest)
 
 
 def contiguous(positions):

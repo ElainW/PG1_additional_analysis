@@ -1,0 +1,4 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease
+F7YBW8_MESOW	F7YBW8_MESOW_Aakre_2015	61	D	D61	0.1992	1	0.1992	0.1992	25.0	False	False	False
+F7YBW8_MESOW	F7YBW8_MESOW_Ding_2023	78	R	R78	0.1808	1	0.1821	0.1821	25.0	False	False	False
+F7YBW8_MESOW	F7YBW8_MESOW_Ding_2023	82	R	R82	0.1821	2	0.1821	0.1821	25.0	False	False	False

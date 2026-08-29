@@ -119,6 +119,10 @@ python3 24_gof_supplement_tables.py           # write UniProt GoF-supplement tab
 python3 25_export_structural_annotations.py   # per-protein binding/subdomain/disorder/disease annotations (md+csv)
 python3 26_src_allosteric_sites.py            # parse SRC allosteric sites from Beltran 2026 -> results/allosteric_map/SRC_HUMAN.tsv
 python3 27_export_high_disagreement_sites.py  # per-protein tables of 23's labelled high-disagreement sites
+python3 28_msa_conservation.py                # per-column MSA conservation vs disagreement -> results/MSA_conservation/
+python3 29_family_best_category_analysis.py   # per-category leaderboard (Spearman + NDCG@10) + high/low-disagreement rank-vs-accuracy (fig9)
+python3 30_export_low_disagreement_sites.py   # per-protein tables of low-disagreement sites (mirror of 27)
+python3 31_disagreement_distributions.py      # per-UniProt disagreement distribution plots -> figures/site_disagreement/distribution/
 ```
 Planned analyses are tracked in `NEXT_STEPS.md`.
 
@@ -168,6 +172,43 @@ A static vector export of this diagram is produced by
 used in the HXK4 analysis (`06`) and the per-protein maps (`23`); the assay-level
 agreement matrices in `03` use **≥3** instead, and then pool across sites and
 **Fisher-z average across assays**.
+
+## High- vs low-disagreement site selection (`27` = high, `30` = low)
+Both operate **per assay** on the per-site disagreement in
+`generalization_functional_disagreement_sites.csv` (53 assays across the 23
+multi-assay proteins), keep an extreme tail via an elbow rule, and write one
+table per protein. They are exact mirror images (helpers live in `23`):
+
+- **High-disagreement (`27`, `elbow_tail_threshold`, → `results/high_disagreement_sites/`):**
+  a site is kept iff disagreement is **> 0.5** *and* it sits in the top **2.5–5%**
+  tail — the elbow is the largest sudden **drop** in disagreement within that rank
+  band (no pronounced drop → default to the 5% end).
+- **Low-disagreement (`30`, `elbow_low_tail_threshold`, → `results/low_disagreement_sites/`):**
+  the reverse — disagreement is **< 0.5** *and* in the bottom **2.5–5%** tail (the
+  **95–97.5 percentile** when 100 = lowest disagreement); the elbow is the largest
+  sudden **rise** in disagreement within that band (no pronounced rise → default to
+  the **95–100 percentile**, i.e. the lowest 5%).
+
+Both cap at **30 sites/assay** (`MAX_LABELS`) and record each site's disagreement,
+in-assay rank, elbow threshold, tail percentile, and binding/disordered/disease
+context. This yields **405 high-** and **401 low-disagreement** sites over the same
+53 assays (**no Stability** — none of the multi-assay candidates are Stability
+assays). `31` overlays each protein's per-assay disagreement distribution (one
+figure per UniProt, both tails marked) in `figures/site_disagreement/distribution/`.
+
+## Category leaderboard + rank-vs-accuracy at these sites (`29`)
+For the **45 family-best** models, `29` builds a per-`coarse_selection_type`
+leaderboard by mean **Spearman** and mean **NDCG@10** (ProteinGym's `calc_ndcg`,
+top-10%), then tests whether a model's category rank predicts its **within-site**
+Spearman-with-DMS at the high- **and** low-disagreement sites above (≥5 subs).
+Outputs `family_best_category_leaderboard.csv`,
+`family_best_{high,low}disagreement_within_site.csv`,
+`family_best_{high,low}disagreement_rank_vs_accuracy.csv`, and the 2×2
+`fig9_highdisagreement_rank_vs_within_site.png`. Finding: better-ranked models do
+win at high-disagreement sites but weakly (ρ(rank, within-site) ≈ −0.05…−0.15);
+low-disagreement sites sit 2–4× higher in within-site Spearman (except
+OrganismalFitness, ≈unchanged), and the per-site oracle (0.56–0.73) dwarfs every
+tier — site-specific model choice would help far more than category-level choice.
 
 ## Site conservation vs disagreement — how it's computed (28)
 

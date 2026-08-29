@@ -1,0 +1,8 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	118	V	V118	0.1357	1	0.1701	0.1701	3.73	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	86	I	I86	0.1527	2	0.1701	0.1701	3.73	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	105	L	L105	0.1599	3	0.1701	0.1701	3.73	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	108	L	L108	0.165	4	0.1701	0.1701	3.73	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	147	W	W147	0.1679	5	0.1701	0.1701	3.73	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	115	A	A115	0.1701	6	0.1701	0.1701	3.73	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_activity	115	A	A115	0.1318	1	0.1318	0.1318	1.39	False	False	False

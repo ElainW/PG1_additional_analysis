@@ -1,0 +1,11 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	138	G	G138	0.1616	1	0.2098	0.2098	2.22	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	132	D	D132	0.1926	2	0.2098	0.2098	2.22	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	174	E	E174	0.1976	3	0.2098	0.2098	2.22	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	165	Q	Q165	0.2098	4	0.2098	0.2098	2.22	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	142	I	I142	0.1834	1	0.2161	0.2161	3.37	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	93	I	I93	0.1974	2	0.2161	0.2161	3.37	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	132	D	D132	0.1999	3	0.2161	0.2161	3.37	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	48	G	G48	0.2144	4	0.2161	0.2161	3.37	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	126	D	D126	0.2146	5	0.2161	0.2161	3.37	False	False	False
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	24	I	I24	0.2161	6	0.2161	0.2161	3.37	False	False	False

@@ -1,0 +1,10 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	135	V	V135	0.31	1	0.3405	0.3405	4.29	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	143	K	K143	0.3116	2	0.3405	0.3405	4.29	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	92	L	L92	0.3324	3	0.3405	0.3405	4.29	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	140	Q	Q140	0.3338	4	0.3405	0.3405	4.29	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	26	V	V26	0.3359	5	0.3405	0.3405	4.29	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	106	V	V106	0.3405	6	0.3405	0.3405	4.29	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	135	V	V135	0.295	1	0.3338	0.3338	2.16	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	143	K	K143	0.3276	2	0.3338	0.3338	2.16	False	False	False
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	26	V	V26	0.3338	3	0.3338	0.3338	2.16	False	False	False

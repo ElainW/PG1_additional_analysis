@@ -1,0 +1,4 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_ceiling	tail_percentile	near_binding	disordered	disease
+RPC1_LAMBD	RPC1_LAMBD_Li_2019_high-expression	37	V	V37	0.0841	1	0.0842	0.0842	3.64	False	False	False
+RPC1_LAMBD	RPC1_LAMBD_Li_2019_high-expression	52	F	F52	0.0842	2	0.0842	0.0842	3.64	False	False	False
+RPC1_LAMBD	RPC1_LAMBD_Li_2019_low-expression	41	M	M41	0.0848	1	0.0848	0.0848	1.82	False	False	False
