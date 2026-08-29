@@ -115,7 +115,7 @@ def main():
         rows.append({"position": n, "dist_1V4S": d_s, "dist_3VEV": d_v})
     per = pd.DataFrame(rows)
     per["abs_diff"] = (per["dist_1V4S"] - per["dist_3VEV"]).abs()
-    per.to_csv(os.path.join(C.RESULTS, "gck_3vev_vs_1v4s_perresidue.csv"), index=False)
+    per.to_csv(C.rp("gck_3vev_vs_1v4s_perresidue.csv"), index=False)
 
     # ---- correlation of the two distance measurements ----
     rho_dist, _ = spearmanr(per["dist_1V4S"], per["dist_3VEV"])
@@ -132,7 +132,7 @@ def main():
 
     for key, dms_id in [("activity", "HXK4_HUMAN_Gersing_2022_activity"),
                         ("abundance", "HXK4_HUMAN_Gersing_2023_abundance")]:
-        dis = pd.read_csv(os.path.join(C.RESULTS, f"hxk4_{dms_id}_site_disagreement.csv"))
+        dis = pd.read_csv(C.rp(f"hxk4_{dms_id}_site_disagreement.csv"))
         mm = per.merge(dis[["position", "disagreement"]], on="position")
         r_s, p_s = spearmanr(mm["disagreement"], mm["dist_1V4S"])
         r_v, p_v = spearmanr(mm["disagreement"], mm["dist_3VEV"])
@@ -150,7 +150,7 @@ def main():
                  "value": round(float(np.median(np.abs(Ds[iu] - Dv[iu]))), 2), "n": len(iu[0])})
 
     S = pd.DataFrame(summ)
-    S.to_csv(os.path.join(C.RESULTS, "gck_structure_comparison_summary.csv"), index=False)
+    S.to_csv(C.rp("gck_structure_comparison_summary.csv"), index=False)
     print("=== 3VEV vs 1V4S comparison ===")
     print(S.to_string(index=False))
 

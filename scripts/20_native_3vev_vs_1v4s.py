@@ -63,7 +63,7 @@ def main():
                             residue_ligand_dist(*STRUCTS["3VEV"]))
     m = d1.merge(d3, on="position", suffixes=("_1V4S", "_3VEV"))
     m["abs_diff_nearest"] = (m["dist_nearest_1V4S"] - m["dist_nearest_3VEV"]).abs()
-    m.to_csv(os.path.join(C.RESULTS, "gck_native_3vev_vs_1v4s_perresidue.csv"), index=False)
+    m.to_csv(C.rp("gck_native_3vev_vs_1v4s_perresidue.csv"), index=False)
 
     rho, _ = spearmanr(m["dist_nearest_1V4S"], m["dist_nearest_3VEV"])
     pear = np.corrcoef(m["dist_nearest_1V4S"], m["dist_nearest_3VEV"])[0, 1]
@@ -81,7 +81,7 @@ def main():
     # re-check disagreement <-> distance and pocket enrichment, per structure
     for key, dms_id in [("activity", "HXK4_HUMAN_Gersing_2022_activity"),
                         ("abundance", "HXK4_HUMAN_Gersing_2023_abundance")]:
-        dis = pd.read_csv(os.path.join(C.RESULTS, f"hxk4_{dms_id}_site_disagreement.csv"))
+        dis = pd.read_csv(C.rp(f"hxk4_{dms_id}_site_disagreement.csv"))
         mm = m.merge(dis[["position", "disagreement"]], on="position")
         for st in ["1V4S", "3VEV"]:
             r_, p_ = spearmanr(mm["disagreement"], mm[f"dist_nearest_{st}"])
@@ -94,7 +94,7 @@ def main():
                          "value": f"{frac:.0%} vs {base:.0%}"})
 
     S = pd.DataFrame(summ)
-    S.to_csv(os.path.join(C.RESULTS, "gck_native_comparison_summary.csv"), index=False)
+    S.to_csv(C.rp("gck_native_comparison_summary.csv"), index=False)
     print("=== native 3VEV vs 1V4S (each with its own ligands) ===")
     print(S.to_string(index=False))
 

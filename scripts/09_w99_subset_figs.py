@@ -33,7 +33,7 @@ SITE = 99
 ASSAYS = ["HXK4_HUMAN_Gersing_2022_activity", "HXK4_HUMAN_Gersing_2023_abundance"]
 
 
-def build(dms_id, site=SITE, results_dir=C.RESULTS):
+def build(dms_id, site=SITE, results_dir=None):
     df = pd.read_csv(os.path.join(C.SCORES_DIR, dms_id + ".csv"))
     present_cols = [c for c in sub.COLS if c in df.columns]
     rows = df[df["mutant"].str.match(rf"^[A-Z]{site}[A-Z]$")].copy()
@@ -60,7 +60,8 @@ def build(dms_id, site=SITE, results_dir=C.RESULTS):
     M = norm[["DMS_score"] + model_order].T[col_order]
     disp_index = ["DMS (experiment)"] + [sub.COL2DISP[c] for c in model_order]
     M.index = disp_index
-    M.to_csv(os.path.join(results_dir, f"site_{wt}{site}_{dms_id}_subset_rank_matrix.csv"))
+    fname = f"site_{wt}{site}_{dms_id}_subset_rank_matrix.csv"
+    M.to_csv(C.rp(fname) if results_dir is None else os.path.join(results_dir, fname))
 
     stat = pd.Series({sub.COL2DISP[c]: spear[c] for c in model_order})
     row_type = {"DMS (experiment)": "DMS"}

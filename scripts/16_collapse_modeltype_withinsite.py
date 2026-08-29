@@ -74,7 +74,7 @@ def main():
                                      "n_variants": int(mask.sum()),
                                      "mean_spearman": float(np.nanmean(by_type[t]))})
     res = pd.DataFrame(rows)
-    res.to_csv(os.path.join(C.RESULTS, "collapse_modeltype_withinsite.csv"), index=False)
+    res.to_csv(C.rp("collapse_modeltype_withinsite.csv"), index=False)
 
     # ---- console: structure vs rest collapse ----
     print("mean Spearman vs experiment by model_type, subset, split:")

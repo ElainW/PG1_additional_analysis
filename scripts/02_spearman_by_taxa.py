@@ -27,7 +27,7 @@ sns.set_style("whitegrid")
 
 
 def main():
-    df = pd.read_csv(os.path.join(C.RESULTS, "spearman_long.csv"))
+    df = pd.read_csv(C.rp("spearman_long.csv"))
     df = df.dropna(subset=["spearman"])
     taxa = [t for t in C.TAXA if t in df["taxon"].unique()]
     mtypes = [t for t in C.MODEL_TYPE_ORDER if t in df["model_type"].unique()]
@@ -41,13 +41,13 @@ def main():
     mtype_map = dict(zip(df["model"], df["model_type"]))
     mbt.insert(0, "model_type", [mtype_map[m] for m in mbt.index])
     mbt.insert(1, "overall_mean", overall.reindex(mbt.index).values)
-    mbt.to_csv(os.path.join(C.RESULTS, "spearman_model_by_taxon.csv"))
+    mbt.to_csv(C.rp("spearman_model_by_taxon.csv"))
 
     # ---- model_type x taxon mean Spearman (assay-model level mean) ----
     tbt = (df.groupby(["model_type", "taxon"])["spearman"].mean()
              .unstack("taxon").reindex(index=mtypes, columns=taxa))
     tbt["overall_mean"] = df.groupby("model_type")["spearman"].mean().reindex(mtypes).values
-    tbt.to_csv(os.path.join(C.RESULTS, "spearman_modeltype_by_taxon.csv"))
+    tbt.to_csv(C.rp("spearman_modeltype_by_taxon.csv"))
 
     # ---- Kruskal-Wallis: does a model's per-assay Spearman differ across taxa? ----
     def kw_table(group_col, out_name):
@@ -81,7 +81,7 @@ def main():
         qtmp[order] = qv
         q[ok] = np.clip(qtmp, 0, 1)
         out["q_value_BH"] = q
-        out.to_csv(os.path.join(C.RESULTS, out_name), index=False)
+        out.to_csv(C.rp(out_name), index=False)
         return out
 
     kw_model = kw_table("model", "kruskal_model_across_taxa.csv")

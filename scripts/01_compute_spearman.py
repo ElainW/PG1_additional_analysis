@@ -38,7 +38,7 @@ def main():
 
     out = pd.DataFrame(records)
     os.makedirs(C.RESULTS, exist_ok=True)
-    out_path = os.path.join(C.RESULTS, "spearman_long.csv")
+    out_path = C.rp("spearman_long.csv")
     out.to_csv(out_path, index=False)
     print(f"\nSaved {out_path}  ({len(out)} rows = {out['DMS_id'].nunique()} assays x {out['model'].nunique()} models)")
 

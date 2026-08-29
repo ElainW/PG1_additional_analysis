@@ -37,7 +37,7 @@ def main():
         })
     res = pd.DataFrame(rows)
     os.makedirs(C.RESULTS, exist_ok=True)
-    res.to_csv(os.path.join(C.RESULTS, "directionality_check.csv"), index=False)
+    res.to_csv(C.rp("directionality_check.csv"), index=False)
 
     neg = res[res["config_directionality"] == -1]
     print("directionality=-1 models (raw config), mean Spearman vs DMS_score:")
@@ -48,7 +48,7 @@ def main():
         print("VERDICT: columns are ALREADY oriented higher=fitter -> do NOT re-apply directionality.")
     else:
         print("VERDICT: some directionality=-1 models are negative -> columns may be RAW; re-apply directionality.")
-    print(f"\nSaved {os.path.join(C.RESULTS, 'directionality_check.csv')}")
+    print(f"\nSaved {C.rp('directionality_check.csv')}")
 
 
 if __name__ == "__main__":

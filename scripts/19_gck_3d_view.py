@@ -59,7 +59,7 @@ def write_bfactor_pdb(dms_id, key, dis):
             for a in r:
                 a.set_bfactor(val)
     io = PDBIO(); io.set_structure(struct)
-    out = os.path.join(C.RESULTS, f"gck_1V4S_bfactor_{key}.pdb")
+    out = C.rp(f"gck_1V4S_bfactor_{key}.pdb")
     io.save(out)
     return out
 
@@ -83,7 +83,7 @@ def main():
     views = [(20, -60), (20, 120)]
 
     for i, (key, dms_id) in enumerate(ASSAYS.items()):
-        dis = pd.read_csv(os.path.join(C.RESULTS, f"hxk4_{dms_id}_site_disagreement.csv"))
+        dis = pd.read_csv(C.rp(f"hxk4_{dms_id}_site_disagreement.csv"))
         dmap = dict(zip(dis["position"], dis["disagreement"]))
         wtmap = dict(zip(dis["position"], dis["wt_aa"]))
         pdb_path = write_bfactor_pdb(dms_id, key, dis)

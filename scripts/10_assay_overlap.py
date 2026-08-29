@@ -94,9 +94,9 @@ def main():
     prot = pd.DataFrame(prot_rows).sort_values("UniProt_ID")
     pairs = pd.DataFrame(pair_rows).sort_values(["UniProt_ID", "DMS_index_A", "DMS_index_B"])
     assays = pd.DataFrame(assay_rows).sort_values(["UniProt_ID", "DMS_index"])
-    prot.to_csv(os.path.join(C.RESULTS, "assay_position_overlap_proteins.csv"), index=False)
-    pairs.to_csv(os.path.join(C.RESULTS, "assay_position_overlap_pairs.csv"), index=False)
-    assays.to_csv(os.path.join(C.RESULTS, "assay_position_overlap_selected_assays.csv"), index=False)
+    prot.to_csv(C.rp("assay_position_overlap_proteins.csv"), index=False)
+    pairs.to_csv(C.rp("assay_position_overlap_pairs.csv"), index=False)
+    assays.to_csv(C.rp("assay_position_overlap_selected_assays.csv"), index=False)
 
     print(f"Proteins with >=2 assays: {len(multi)}")
     print(f"Proteins with >=1 same-target_seq overlapping pair (selected): {len(prot)}")

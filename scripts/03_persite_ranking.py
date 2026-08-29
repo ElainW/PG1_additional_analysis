@@ -114,7 +114,7 @@ def main():
         z_mean = np.where(z_cnt > 0, z_sum / np.maximum(z_cnt, 1), np.nan)
     corr = np.tanh(z_mean)
     cmat = pd.DataFrame(corr, index=cols_target, columns=cols_target)
-    cmat.to_csv(os.path.join(C.RESULTS, "persite_model_agreement_matrix.csv"))
+    cmat.to_csv(C.rp("persite_model_agreement_matrix.csv"))
 
     # ---- model_type x model_type agreement ----
     mm = cmat.drop(index="DMS_score", columns="DMS_score")
@@ -132,20 +132,20 @@ def main():
             else:
                 vals = block.ravel()
             tt.at[ta, tb] = np.nanmean(vals)
-    tt.to_csv(os.path.join(C.RESULTS, "persite_modeltype_agreement_matrix.csv"))
+    tt.to_csv(C.rp("persite_modeltype_agreement_matrix.csv"))
 
     # ---- per-model within-site DMS agreement (long + aggregates) ----
     dms = pd.DataFrame(dms_records)
-    dms.to_csv(os.path.join(C.RESULTS, "persite_dms_agreement_long.csv"), index=False)
+    dms.to_csv(C.rp("persite_dms_agreement_long.csv"), index=False)
     taxa = [t for t in C.TAXA if t in dms["taxon"].unique()]
     by_mt_tax = (dms.groupby(["model_type", "taxon"])["persite_corr_with_DMS"].mean()
                    .unstack("taxon").reindex(index=mtypes, columns=taxa))
     by_mt_tax["overall"] = dms.groupby("model_type")["persite_corr_with_DMS"].mean().reindex(mtypes)
-    by_mt_tax.to_csv(os.path.join(C.RESULTS, "persite_dms_agreement_by_modeltype_taxon.csv"))
+    by_mt_tax.to_csv(C.rp("persite_dms_agreement_by_modeltype_taxon.csv"))
 
     model_dms = (dms.groupby(["model", "model_type"])["persite_corr_with_DMS"]
                    .mean().reset_index().sort_values("persite_corr_with_DMS", ascending=False))
-    model_dms.to_csv(os.path.join(C.RESULTS, "persite_dms_agreement_by_model.csv"), index=False)
+    model_dms.to_csv(C.rp("persite_dms_agreement_by_model.csv"), index=False)
 
     # =================== FIGURES ===================
     os.makedirs(C.FIGURES, exist_ok=True)

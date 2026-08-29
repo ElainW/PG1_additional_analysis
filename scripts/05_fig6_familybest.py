@@ -55,7 +55,7 @@ FAMILIES = {
 
 def build_family_best():
     models, mtype, _ = C.model_meta()
-    overall = (pd.read_csv(os.path.join(C.RESULTS, "spearman_model_by_taxon.csv"), index_col=0)
+    overall = (pd.read_csv(C.rp("spearman_model_by_taxon.csv"), index_col=0)
                  ["overall_mean"])
     fam_of = {}
     for fam, members in FAMILIES.items():
@@ -78,7 +78,7 @@ def build_family_best():
                      "members": ";".join(members)})
     sel = pd.DataFrame(rows).sort_values(["model_type", "selected_overall_spearman"],
                                          ascending=[True, False])
-    sel.to_csv(os.path.join(C.RESULTS, "family_best_selection.csv"), index=False)
+    sel.to_csv(C.rp("family_best_selection.csv"), index=False)
     return chosen, {m: mtype[m] for m in chosen}, sel
 
 
@@ -171,7 +171,7 @@ def main():
     plt.close()
     print(f"\nSaved {out}")
     big = pd.concat({s: tables[s] for s in order}, names=["selection_type", "model_type"])
-    big.to_csv(os.path.join(C.RESULTS, "persite_modeltype_agreement_by_selectiontype_familybest.csv"))
+    big.to_csv(C.rp("persite_modeltype_agreement_by_selectiontype_familybest.csv"))
     print("assay counts per selection type:", {s: assay_n[s] for s in order})
 
 

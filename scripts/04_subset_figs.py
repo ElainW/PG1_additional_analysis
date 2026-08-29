@@ -64,7 +64,7 @@ PALETTE = dict(zip(C.MODEL_TYPE_ORDER, sns.color_palette("tab10", len(C.MODEL_TY
 
 
 def fig5_subset():
-    mat = pd.read_csv(os.path.join(C.RESULTS, "persite_model_agreement_matrix.csv"), index_col=0)
+    mat = pd.read_csv(C.rp("persite_model_agreement_matrix.csv"), index_col=0)
     sub = mat.loc[COLS, COLS].copy()
     sub.index = [COL2DISP[c] for c in sub.index]
     sub.columns = [COL2DISP[c] for c in sub.columns]
@@ -177,7 +177,7 @@ def fig6_by_selection_type():
 
     # also persist the per-selection-type tables
     big = pd.concat({s: saved_tables[s] for s in order}, names=["selection_type", "model_type"])
-    big.to_csv(os.path.join(C.RESULTS, "persite_modeltype_agreement_by_selectiontype.csv"))
+    big.to_csv(C.rp("persite_modeltype_agreement_by_selectiontype.csv"))
     print("assay counts per selection type:", {s: assay_n[s] for s in order})
 
 

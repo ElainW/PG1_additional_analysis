@@ -38,8 +38,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 import common as C
 
-SITES = os.path.join(C.RESULTS, "generalization_functional_disagreement_sites.csv")
-CANDID = os.path.join(C.RESULTS, "generalization_candidate_proteins.csv")
+SITES = C.rp("generalization_functional_disagreement_sites.csv")
+CANDID = C.rp("generalization_candidate_proteins.csv")
 OUTDIR = os.path.join(C.FIGURES, "site_disagreement")
 UNIPROT_DIR = os.path.join(C.ANALYSIS, "data", "uniprot", "raw_json")
 CLINVAR_DIR = os.path.join(C.ANALYSIS, "data", "clinvar")

@@ -111,7 +111,7 @@ def main():
             "model_corr_abs_d_charge": spearmanr(df[c], df["abs_d_charge"]).statistic,
         })
     tab = pd.DataFrame(rows).sort_values("spearman_raw", ascending=False).reset_index(drop=True)
-    tab.to_csv(os.path.join(C.RESULTS, "abundance_physchem_model_table.csv"), index=False)
+    tab.to_csv(C.rp("abundance_physchem_model_table.csv"), index=False)
 
     print("\nper-model raw vs partial Spearman (controlling hydrophobicity + charge):")
     print(tab[["model", "spearman_raw", "spearman_partial",

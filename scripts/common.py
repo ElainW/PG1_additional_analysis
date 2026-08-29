@@ -51,6 +51,44 @@ MODEL_TYPE_ORDER = [
 ]
 
 
+# ---------------------------------------------------------------------------
+# Results layout. Outputs are foldered by analysis under results/. rp() maps a
+# base filename to its subfolder so writers and readers stay in sync; files with
+# no rule (generalization_*, and the high_disagreement_sites/ & MSA_conservation/
+# subdirs) resolve to results/ root, where they already live.
+# ---------------------------------------------------------------------------
+_RESULTS_SUBDIR_RULES = [
+    ("spearman_",            "spearman_taxa"),
+    ("kruskal_",             "spearman_taxa"),
+    ("persite_",             "persite_analysis"),
+    ("family_best",          "persite_analysis"),
+    ("hxk4_",                "hxk4_pilot_analysis"),
+    ("site_",                "w99_deepdive"),
+    ("gck_",                 "gck_3d"),
+    ("assay_position_",      "assay_selection"),
+    ("abundance_physchem",   "abundance_physchem"),
+    ("collapse_",            "collapse_withinsite"),
+    ("disease_gof_lof",      "disease_gof_lof"),
+    ("directionality_check", "qc_directionality"),
+]
+
+
+def results_subdir(name):
+    """Subfolder (under results/) an output filename belongs to, '' for root."""
+    for prefix, sub in _RESULTS_SUBDIR_RULES:
+        if name.startswith(prefix):
+            return sub
+    return ""
+
+
+def rp(name):
+    """Resolve an output filename to its full path under results/, creating the
+    subfolder if needed. Filenames with no folder rule resolve to results/ root."""
+    folder = os.path.join(RESULTS, results_subdir(name))
+    os.makedirs(folder, exist_ok=True)
+    return os.path.join(folder, name)
+
+
 def load_config():
     with open(CONFIG_PATH) as f:
         cfg = json.load(f)

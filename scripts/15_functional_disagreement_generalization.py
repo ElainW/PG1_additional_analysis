@@ -133,7 +133,7 @@ def main():
         print(f"{uni:16s} binding+-2:{len(binding_prox):4d} disease:{len(disease):4d} disorder_int:{len(disordered):4d}")
 
     sites = pd.concat(site_rows, ignore_index=True)
-    sites.to_csv(os.path.join(C.RESULTS, "generalization_functional_disagreement_sites.csv"), index=False)
+    sites.to_csv(C.rp("generalization_functional_disagreement_sites.csv"), index=False)
 
     def per_protein(flag):
         rows = []
@@ -150,7 +150,7 @@ def main():
     func_tab = per_protein("functional")
     dis_tab = per_protein("disordered")
     per_prot = pd.concat([func_tab, dis_tab], ignore_index=True)
-    per_prot.to_csv(os.path.join(C.RESULTS, "generalization_functional_disagreement_per_protein.csv"), index=False)
+    per_prot.to_csv(C.rp("generalization_functional_disagreement_per_protein.csv"), index=False)
 
     def summarize(tab, label):
         n = len(tab)

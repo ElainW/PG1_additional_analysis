@@ -23,7 +23,7 @@ _spec = importlib.util.spec_from_file_location("structure_maps_all", _S23)
 S = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(S)
 
-OUTDIR = os.path.join(C.RESULTS, "high_disagreement_sites")
+OUTDIR = C.rp("high_disagreement_sites")
 
 
 def disease_set(uni, seq, g):

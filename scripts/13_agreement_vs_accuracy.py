@@ -77,7 +77,7 @@ def main():
     headline = []
     for key, dms_id in ASSAYS.items():
         sites, pm, models = per_site(dms_id)
-        sites.to_csv(os.path.join(C.RESULTS, f"hxk4_agreement_vs_accuracy_sites_{key}.csv"), index=False)
+        sites.to_csv(C.rp(f"hxk4_agreement_vs_accuracy_sites_{key}.csv"), index=False)
         all_sites[key] = sites
 
         rho = spearmanr(sites["among_model_agreement"], sites["mean_model_vs_dms"]).statistic
@@ -95,7 +95,7 @@ def main():
             bymodel_rows.append(row)
 
     bym = pd.DataFrame(bymodel_rows)
-    bym.to_csv(os.path.join(C.RESULTS, "hxk4_agreement_vs_accuracy_bymodel.csv"), index=False)
+    bym.to_csv(C.rp("hxk4_agreement_vs_accuracy_bymodel.csv"), index=False)
 
     print("=== headline: does among-model agreement predict accuracy vs experiment? ===")
     print(f"{'assay':10s} {'n_sites':>7s} {'rho(agree,acc)':>15s} {'acc@LOW':>9s} {'acc@HIGH':>9s}")

@@ -209,7 +209,7 @@ def main():
     os.makedirs(os.path.dirname(LIGAND_CACHE), exist_ok=True)
     json.dump(cache, open(LIGAND_CACHE, "w"), indent=0, sort_keys=True)
     tab = pd.DataFrame(rows).sort_values(["multi_phenotype", "MSA_Neff_L"], ascending=[False, True])
-    tab.to_csv(os.path.join(C.RESULTS, "generalization_candidate_proteins.csv"), index=False)
+    tab.to_csv(C.rp("generalization_candidate_proteins.csv"), index=False)
     print(f"{len(tab)} candidate proteins written.")
     with pd.option_context("display.max_colwidth", 30, "display.width", 200):
         print(tab[["UniProt_ID", "n_assays", "multi_phenotype", "MSA_Neff_L",

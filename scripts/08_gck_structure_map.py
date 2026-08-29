@@ -63,14 +63,14 @@ def load_features():
 
 
 def annotate(assay_key, dms_id, atp, substrate, disease, subdomain):
-    res = pd.read_csv(os.path.join(C.RESULTS, f"hxk4_{dms_id}_site_disagreement.csv"))
+    res = pd.read_csv(C.rp(f"hxk4_{dms_id}_site_disagreement.csv"))
     res["subdomain"] = res["position"].map(subdomain).fillna("other")
     res["ATP_site"] = res["position"].isin(atp)
     res["substrate_site"] = res["position"].isin(substrate)
     res["binding_site"] = res["ATP_site"] | res["substrate_site"]
     res["disease_variant"] = res["position"].isin(disease)
     res["functional"] = res["binding_site"] | res["disease_variant"]
-    res.to_csv(os.path.join(C.RESULTS, f"gck_site_functional_annotation_{assay_key}.csv"), index=False)
+    res.to_csv(C.rp(f"gck_site_functional_annotation_{assay_key}.csv"), index=False)
     return res
 
 
@@ -116,7 +116,7 @@ def main():
               .to_string(index=False))
 
     summary = pd.DataFrame(summary_rows)
-    summary.to_csv(os.path.join(C.RESULTS, "gck_disagreement_vs_function_summary.csv"), index=False)
+    summary.to_csv(C.rp("gck_disagreement_vs_function_summary.csv"), index=False)
     print("\n=== disagreement at functional vs other residues ===")
     print(summary.to_string(index=False))
 

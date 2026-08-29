@@ -107,12 +107,12 @@ def main():
     summary = []
     fig, axes = plt.subplots(1, 2, figsize=(14, 6))
     for ax, (key, dms_id) in zip(axes, ASSAYS.items()):
-        dis = pd.read_csv(os.path.join(C.RESULTS, f"hxk4_{dms_id}_site_disagreement.csv"))
+        dis = pd.read_csv(C.rp(f"hxk4_{dms_id}_site_disagreement.csv"))
         m = dist.merge(dis[["position", "wt_aa", "disagreement", "mean_pairwise_spearman"]],
                        on="position", how="inner")
         # wt sanity
         mism = (m["pdb_aa"] != m["wt_aa"]).sum()
-        m.to_csv(os.path.join(C.RESULTS, f"gck_3d_residue_distances.csv"), index=False) if key == "activity" else None
+        m.to_csv(C.rp(f"gck_3d_residue_distances.csv"), index=False) if key == "activity" else None
 
         # ---- A. distance vs disagreement (all resolved+scored residues) ----
         for lig in ["dist_glucose", "dist_activator", "dist_nearest_ligand"]:
@@ -170,7 +170,7 @@ def main():
     plt.close()
 
     S = pd.DataFrame(summary)
-    S.to_csv(os.path.join(C.RESULTS, "gck_3d_summary.csv"), index=False)
+    S.to_csv(C.rp("gck_3d_summary.csv"), index=False)
     print("=== 3-D distance summary ===")
     print(S.to_string(index=False))
     print(f"\nSaved {out}")

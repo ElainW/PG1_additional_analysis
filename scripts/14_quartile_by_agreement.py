@@ -45,7 +45,7 @@ def main():
     rows = []
     permodel = []
     for key, dms_id in ASSAYS.items():
-        sites = pd.read_csv(os.path.join(C.RESULTS, f"hxk4_agreement_vs_accuracy_sites_{key}.csv"))
+        sites = pd.read_csv(C.rp(f"hxk4_agreement_vs_accuracy_sites_{key}.csv"))
         grp_of = dict(zip(sites["pos"], sites["agreement_group"]))
         df = pd.read_csv(os.path.join(C.SCORES_DIR, dms_id + ".csv"))
         df = df[df["mutant"].str.match(r"^[A-Z]\d+[A-Z]$")].copy()
@@ -71,9 +71,9 @@ def main():
             rows.append(row)
 
     tab = pd.DataFrame(rows)
-    tab.to_csv(os.path.join(C.RESULTS, "hxk4_quartile_by_agreement.csv"), index=False)
+    tab.to_csv(C.rp("hxk4_quartile_by_agreement.csv"), index=False)
     pd.DataFrame(permodel).to_csv(
-        os.path.join(C.RESULTS, "hxk4_quartile_by_agreement_permodel.csv"), index=False)
+        C.rp("hxk4_quartile_by_agreement_permodel.csv"), index=False)
 
     print("Mean Spearman vs experiment across 23 models, by fitness quartile subset:")
     print(tab[["assay", "agreement", "n_sites", "n_variants",

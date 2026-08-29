@@ -73,9 +73,9 @@ import common as C
 
 MSADIR = os.path.join(C.ANALYSIS, "data", "msa", "DMS_msa_files")
 WDIR = os.path.join(C.ANALYSIS, "data", "msa", "DMS_msa_weights")
-SITES = os.path.join(C.RESULTS, "generalization_functional_disagreement_sites.csv")
-HIDIR = os.path.join(C.RESULTS, "high_disagreement_sites")   # 27's inputs
-OUTDIR = os.path.join(C.RESULTS, "MSA_conservation")          # 28's per-assay outputs
+SITES = C.rp("generalization_functional_disagreement_sites.csv")
+HIDIR = C.rp("high_disagreement_sites")   # 27's inputs
+OUTDIR = C.rp("MSA_conservation")          # 28's per-assay outputs
 
 AA = "ACDEFGHIKLMNPQRSTVWY"
 LOG2_20 = np.log2(20)

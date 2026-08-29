@@ -85,7 +85,7 @@ def analyze(dms_id, chosen, type_of, mtypes):
         rows.append(row)
 
     res = pd.DataFrame(rows).sort_values("disagreement", ascending=False).reset_index(drop=True)
-    res.to_csv(os.path.join(C.RESULTS, f"hxk4_{dms_id}_site_disagreement.csv"), index=False)
+    res.to_csv(C.rp(f"hxk4_{dms_id}_site_disagreement.csv"), index=False)
     return res, members_by_type
 
 

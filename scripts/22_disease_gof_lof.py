@@ -161,7 +161,7 @@ def main():
                     "evidence": v["evidence"],
                 })
     res = pd.DataFrame(rows)
-    res.to_csv(os.path.join(C.RESULTS, "disease_gof_lof_variants.csv"), index=False)
+    res.to_csv(C.rp("disease_gof_lof_variants.csv"), index=False)
 
     # unique variants (dedup across assays for the headline counts)
     uniq = res.drop_duplicates(["protein", "variant", "label"])
@@ -174,7 +174,7 @@ def main():
                  model_median_pct=("model_median_pct", "median"),
                  model_frac_bottom_half=("model_frac_bottom_half", "mean"),
                  dms_median_pct=("dms_pct", "median")).reset_index())
-    summ.to_csv(os.path.join(C.RESULTS, "disease_gof_lof_summary.csv"), index=False)
+    summ.to_csv(C.rp("disease_gof_lof_summary.csv"), index=False)
     print("\n=== GoF vs LoF: how models rank them within-site (low = predicted deleterious) ===")
     print(summ.round(3).to_string(index=False))
     gof = res[res.label == "GoF"]["model_median_pct"]; lof = res[res.label == "LoF"]["model_median_pct"]

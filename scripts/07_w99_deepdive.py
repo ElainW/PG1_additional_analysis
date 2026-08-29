@@ -55,7 +55,7 @@ def build(dms_id, chosen, type_of, mtypes):
     M = norm[["DMS_score"] + model_order].T            # rows = DMS + models
     M = M[col_order]
     M.index = ["DMS (experiment)"] + model_order
-    M.to_csv(os.path.join(C.RESULTS, f"site_{wt}{SITE}_{dms_id}_rank_matrix.csv"))
+    M.to_csv(C.rp(f"site_{wt}{SITE}_{dms_id}_rank_matrix.csv"))
     row_type = {"DMS (experiment)": "DMS"}
     row_type.update({m: type_of[m] for m in model_order})
     return M, col_order, wt, row_type, mtypes
