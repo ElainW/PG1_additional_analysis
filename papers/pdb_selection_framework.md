@@ -12,7 +12,11 @@ The core metric is the **minimal side-chain heavy-atom distance from each residu
 bound orthosteric ligand**, and orthosteric/allosteric residues are defined by **van der
 Waals contact** with a bound substrate/modulator (ChimeraX VDW-overlap). The structure must
 therefore be **holo with the substrate (or a substrate-analog) in the active site**:
-- GCK **1V4S** — glucose (GLC, orthosteric) + allosteric activator MRK
+- GCK **1V4S** — glucose (GLC, orthosteric) + allosteric activator MRK.
+  GCK cycles through **3 conformational states**: super-open (inactive, **1V4T**),
+  open (structure uncertain), and **closed** (active, **1V4S** — the form used in
+  the Gersing et al. activity-assay paper). Liao & Lehner used the closed 1V4S; a
+  full open/closed state comparison (à la Src/KRAS) would pair 1V4T with 1V4S.
 - PTEN **1D5R** — L(+)-tartrate (TLA), a substrate-analog at the catalytic site
 - PTP1B 1PTY (phosphotyrosine), CASP1 2HBQ, CHK1 2E9N (inhibitor 76A), IDH1 6IOO (NADP)
 

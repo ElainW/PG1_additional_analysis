@@ -39,6 +39,24 @@ the supplement — both retain their `dz` tag.
 Requires `pandas, numpy, scipy, matplotlib, seaborn` (plus `biopython` for the
 3-D analysis `17`). Figures are **not** tracked (regenerable); see `.gitignore`.
 
+## Study design: pairing assays on one protein
+**Overlapping coordinates + different selection types = a controlled comparison.**
+When the same protein (same `UniProt_ID`, and we verified the same `target_seq` so
+positions are truly comparable) is measured by assays of different
+`coarse_selection_type` — e.g. abundance/Expression vs activity vs binding — you have
+the same mutations at the same residues scored under different phenotypes. That holds
+everything constant except the measured axis of fitness. This design separates two
+things that are otherwise confounded when a model predicts a DMS poorly:
+
+1. **Is the model wrong, or measuring a different phenotype than the assay?** A model
+   that ranks substitutions by, say, stability will track an abundance assay but not
+   necessarily an activity assay at the same site. Paired assays let you attribute
+   disagreement to phenotype-specificity rather than model error.
+2. **Is a "hard"/high-disagreement site intrinsic to the position, or phenotype-
+   dependent?** If models disagree at a site in *both* the activity and abundance
+   assays, the position itself is intrinsically ambiguous; if only in one, the
+   difficulty is phenotype-driven.
+
 ## Directionality (read first)
 `config.json` lists a per-model `directionality` (+1 = higher score ⇒ higher
 fitness; −1 ⇒ lower). **The score columns in `O2/20250613/*.csv` are already
@@ -101,6 +119,44 @@ Planned analyses are tracked in `NEXT_STEPS.md`.
 code. Requires the `data/` UniProt cache (tracked) for `08`/`15`; no network
 needed. `make clean` removes generated `results/`/`figures/` (leaves `data/`).
 
+## Within-site disagreement — how it's computed
+Scores are used as-is (already higher = fitter). Steps:
+1. **Select proteins** with >1 assay category (the controlled comparison above).
+2. **Select positions** ("sites") with ≥5 substitutions.
+3. For each site: **within-site rank** each model's scores over the ~19
+   substitutions (per model, over the 23-model subset).
+4. **Rank correlation** — Spearman between every pair of models' within-site rankings.
+5. **Mean pairwise Spearman** — average over all model pairs = the consensus/agreement.
+6. **within-site disagreement = 1 − mean pairwise Spearman** (high = models disagree).
+
+```mermaid
+flowchart TD
+    A["Select proteins with &gt;1 assay category<br/><i>disentangle phenotype vs position</i>"]:::prep
+    B["Select positions with ≥5 substitutions"]:::prep
+    subgraph loop["repeat for each site"]
+        direction TB
+        C["<b>within-site rank</b><br/>rank the ~19 subs, each of 23 models"]:::compute
+        D["<b>rank correlation</b><br/>Spearman, every model pair"]:::compute
+        E["<b>mean pairwise Spearman</b><br/>average over all pairs = consensus"]:::compute
+        C --> D --> E
+    end
+    F["<b>within-site disagreement</b> = 1 − mean pairwise Spearman"]:::result
+    A --> B --> C
+    E --> F
+    classDef prep fill:#FDEBD0,stroke:#E0A96D,color:#5b4636
+    classDef compute fill:#E6E0F5,stroke:#8172b3,color:#3d2f66
+    classDef result fill:#D6EBD5,stroke:#5FA05F,color:#274d27
+    style loop fill:#f7f5fc,stroke:#8172b3,stroke-dasharray:6 4
+```
+Legend: 🟧 inputs / prep · 🟪 per-site computation · 🟩 result. (The green box is
+labelled *disagreement* — matching the code and the rest of this README — i.e.
+`1 − mean pairwise Spearman`; the paired quantity *agreement* is the mean itself.)
+
+**Two thresholds worth remembering:** the **≥5 substitutions per site** cutoff is
+used in the HXK4 analysis (`06`) and the per-protein maps (`23`); the assay-level
+agreement matrices in `03` use **≥3** instead, and then pool across sites and
+**Fisher-z average across assays**.
+
 ## Key findings
 
 **Taxon & model_type (02).** Pooled over models, mean Spearman is similar for
@@ -142,10 +198,31 @@ have ≥1 assay pair sharing mutated residues** (all on one identical `target_se
 Exception: F7YBW8_MESOW. P53_HUMAN_Kotler_2018 dropped (different `target_seq`).
 Many pairs deliberately span selection types (abundance vs activity vs binding).
 
-**Abundance ≠ physicochemistry (12).** A hydrophobicity+charge baseline predicts
-the abundance assay only weakly (Spearman 0.22, R²=0.08); controlling for those
-features removes only ~13% of model performance (mean raw 0.37 → partial 0.32).
-Being "more physicochemical" does not make a model better.
+**Can model performance be explained by residue hydrophobicity + net charge? (12,
+HXK4 abundance assay).** Approach: test whether the models' per-model rank
+correlation is "just" recapitulating Δhydrophobicity and Δnet-charge by (1) building
+a features-only baseline and (2) checking how much each model's correlation survives
+after controlling for those two features (partial correlation). **Short answer: no —
+they explain only a small slice.** The abundance assay does have a physicochemical
+component, but weak: over all 8,396 single mutants, Δhydrophobicity (Kyte-Doolittle)
+correlates with the score at Spearman **+0.19** (more hydrophobic ⇒ higher
+abundance/stability) and losing hydrophobicity `|d_hydro|` at **−0.15**; net-charge
+terms are essentially flat (`d_charge` −0.06, `|d_charge|` −0.01). A combined
+features-only OLS baseline reaches **Spearman 0.22, R² = 0.08**. Models clearly beat
+that and keep almost all of it after control: every model except ProteinMPNN
+out-predicts the baseline (raw Spearman 0.32–0.42; SaProt_650M_AF2 tops at 0.42), and
+partialling out hydrophobicity + charge barely dents performance (**mean raw 0.366 →
+partial 0.319**, i.e. only **~13%** attributable to these two properties — models
+retain ~87%). And "more physicochemical" ≠ "better": how much of a model's own score
+is explained by hydro+charge (R²) does **not** track performance — the two most
+physicochemical models (ProSST-2048 R²=0.25, VenusREM R²=0.21) sit mid-pack, while
+top performers SaProt and ESM3 (R²=0.08) are among the *least* physicochemical.
+*Caveats:* this is the whole-assay (across-position) signal dominated by burial/
+context — within a single site (wild-type fixed) these features explain even less;
+a nonlinear control or adding volume/polarity would explain marginally more but not
+change the conclusion; charge assigned at physiological pH (D,E −1; K,R +1; H +0.1),
+and the near-zero charge result is robust to dropping the His partial charge.
+Outputs: `abundance_physchem_model_table.csv`, `fig_abundance_physchem.png`.
 
 **Consensus predicts accuracy (13).** Among-model agreement at a site positively
 predicts model-vs-experiment accuracy (Spearman 0.25 activity / 0.38 abundance);
@@ -190,6 +267,39 @@ GoF — a GoF variant preserves/enhances molecular function, so it looks like an
 acceptable substitution. The DMS assays behave the same way (GoF 0.67 vs LoF 0.50
 median), so neither models nor these molecular assays capture dosage/physiological
 GoF pathogenicity.
+
+## External claims we checked
+Two claims from *"Overestimating zero-shot fitness prediction"*
+(`../../Papers/interesting papers/overestimating_zeroshot_fitness_prediction.pdf`):
+
+**Claim 1 — "In every multi-phenotype study, one phenotype is just abundance, so
+apparent function prediction is often really stability/expression prediction."
+→ Overstated; directionally true, not "every."** Of the 24 multi-assay proteins, 14
+are genuinely multi-*phenotype* (>1 distinct `coarse_selection_type`; the other 10
+are same-type replicates, e.g. BLAT_ECOLX's four OrganismalFitness assays). Of those
+14, **11/14 (79%) include an Expression/abundance arm**, but **3 do not have any
+Expression or Stability phenotype**, directly falsifying "every": CCDB_ECOLI (Activity
++ OrganismalFitness), RL40A_YEAST (OrganismalFitness ×2 + Activity), SRC_HUMAN
+(Activity ×2 + OrganismalFitness). Also, most of the 217 assays are single-phenotype,
+so most "function" benchmarks aren't paired with an abundance control at all. Defensible
+version: *"when ProteinGym pairs phenotypes on one protein, ~80% of the time one arm is
+an abundance/expression readout"* — not "every study."
+
+**Claim 2 — "Models can't rank function-enhancing mutations; ρ collapses on the
+highly-fit subset (models are good filters of deleterious variants, poor prioritizers
+of winners)." → Strongly true as a phenomenon; the cytochrome example essentially
+reproduces.** The only cytochrome in the set is CP2C9; ESM3 on it collapses from
+overall ρ **0.70/0.66** (activity/abundance) → top-25% **0.13/0.10** → top-10%
+**≈−0.03**, landing on the paper's "≈0.10 on highly-fit." It generalises across all
+209 assays (≥200 single mutants): mean overall → top-25% → top-10% ρ is ESM3
+0.49→0.04→−0.01, GEMME 0.45→−0.02→−0.04, ESM1v_ensemble 0.41→0.01→−0.02,
+SaProt 0.46→0.02→−0.01 — ranking power essentially vanishes in the top fitness
+quartile. *Caveat:* restricting to a narrow high-fitness band mechanically attenuates
+ρ (range restriction), so read the tail values as "≈0" and the *comparison* as the
+signal, not a claim that models are uniquely bad versus that ceiling. See also our
+within-site "winners" analysis (`14`, `16`): the collapse is far gentler when
+"winners" are defined *within-site* (best substitution per position) rather than
+globally-most-fit.
 
 ## Caveats (carried across analyses)
 - **Range restriction** attenuates every quartile/tail Spearman; read absolute
