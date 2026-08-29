@@ -159,6 +159,7 @@ def build_within_site(chosen, fam_of, cst, lead):
         path = os.path.join(C.SCORES_DIR, dms + ".csv")
         if cat is None or not os.path.exists(path):
             continue
+        uni_id = grp["UniProt_ID"].iloc[0]
         df = pd.read_csv(path, usecols=lambda c: c in C.NON_MODEL_COLS or c in set(chosen))
         df["__pos__"] = df["mutant"].map(C.parse_position)   # NaN for multi-mutants
         present = [m for m in chosen if m in df.columns]
@@ -174,7 +175,7 @@ def build_within_site(chosen, fam_of, cst, lead):
                 if int(mask.sum()) < MIN_SITE_SUBS:
                     continue
                 rows.append({
-                    "DMS_id": dms, "coarse_selection_type": cat,
+                    "DMS_id": dms, "UniProt_ID": uni_id, "coarse_selection_type": cat,
                     "up_pos": int(pos), "residue": res_of.get(pos, ""),
                     "family": fam_of[m], "model": m,
                     "n_subs": int(mask.sum()),
@@ -198,6 +199,8 @@ def summarize(ws):
         oracle = g.groupby(["DMS_id", "up_pos"])["within_site_spearman"].max().mean()
         out.append({
             "coarse_selection_type": cat,
+            "n_assays": g["DMS_id"].nunique(),
+            "n_uniprot": g["UniProt_ID"].nunique(),
             "n_sites": n_sites,
             "n_site_model_pairs": len(g),
             # negative rho => lower rank number (better model) has higher within-site corr
@@ -219,6 +222,11 @@ def make_figure(ws):
     """Mean within-site Spearman by category-rank tier, per category, for both metrics."""
     tiers = [("Top 1", 1), ("Top 3", 3), ("Top 5", 5), ("Top 10", 10), ("All", 10**9)]
     cats = sorted(ws["coarse_selection_type"].unique())
+    # per-category assay / UniProt counts for the legend labels
+    counts = {c: (ws.loc[ws["coarse_selection_type"] == c, "DMS_id"].nunique(),
+                  ws.loc[ws["coarse_selection_type"] == c, "UniProt_ID"].nunique())
+              for c in cats}
+    cat_label = {c: f"{c}  ({counts[c][0]} assays, {counts[c][1]} UniProt)" for c in cats}
     fig, axes = plt.subplots(1, 2, figsize=(13, 5.2), sharey=True)
     for ax, rank_col, title in [(axes[0], "spearman_rank", "ranked by category Spearman"),
                                 (axes[1], "ndcg_rank", "ranked by category NDCG@10")]:
@@ -227,7 +235,7 @@ def make_figure(ws):
         for i, cat in enumerate(cats):
             g = ws[ws["coarse_selection_type"] == cat]
             vals = [g.loc[g[rank_col] <= thr, "within_site_spearman"].mean() for _, thr in tiers]
-            ax.bar(x + i * width, vals, width, label=cat)
+            ax.bar(x + i * width, vals, width, label=cat_label[cat])
         ax.set_xticks(x + width * (len(cats) - 1) / 2)
         ax.set_xticklabels([t for t, _ in tiers])
         ax.axhline(0, color="0.6", lw=0.8)
