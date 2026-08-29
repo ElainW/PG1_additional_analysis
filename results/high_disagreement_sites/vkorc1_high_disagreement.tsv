@@ -1,0 +1,13 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	51	C	C51	0.7515	1	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	7	S	S7	0.7244	2	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	12	R	R12	0.7181	3	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	132	C	C132	0.6879	4	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	80	N	N80	0.6835	5	0.6739	0.6739	5.59	True	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	163	H	H163	0.6812	6	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	62	G	G62	0.676	7	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	28	H	H28	0.6749	8	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_abundance	5	W	W5	0.6739	9	0.6739	0.6739	5.59	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_activity	5	W	W5	0.8607	1	0.828	0.828	4.17	False	False	False
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_activity	29	V	V29	0.8578	2	0.828	0.828	4.17	False	False	True
+VKOR1_HUMAN	VKOR1_HUMAN_Chiasson_2020_activity	68	H	H68	0.828	3	0.828	0.828	4.17	False	False	False

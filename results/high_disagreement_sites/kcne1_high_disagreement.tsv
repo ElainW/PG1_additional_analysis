@@ -1,0 +1,12 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_expression	30	L	L30	0.7526	1	0.7101	0.7101	3.17	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_expression	103	Y	Y103	0.7518	2	0.7101	0.7101	3.17	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_expression	1	M	M1	0.7233	3	0.7101	0.7101	3.17	False	False	True
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_expression	81	Y	Y81	0.7101	4	0.7101	0.7101	3.17	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_function	30	L	L30	0.753	1	0.6907	0.6907	5.56	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_function	103	Y	Y103	0.744	2	0.6907	0.6907	5.56	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_function	1	M	M1	0.725	3	0.6907	0.6907	5.56	False	False	True
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_function	81	Y	Y81	0.7071	4	0.6907	0.6907	5.56	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_function	42	L	L42	0.7048	5	0.6907	0.6907	5.56	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_function	106	C	C106	0.6939	6	0.6907	0.6907	5.56	False	False	False
+KCNE1_HUMAN	KCNE1_HUMAN_Muhammad_2023_function	87	W	W87	0.6907	7	0.6907	0.6907	5.56	False	False	True

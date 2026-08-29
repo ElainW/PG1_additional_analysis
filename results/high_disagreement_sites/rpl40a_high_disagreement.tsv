@@ -1,0 +1,6 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease
+RL40A_YEAST	RL40A_YEAST_Mavor_2016	74	R	R74	0.6497	1	0.6497	0.6497	1.33	False	False	False
+RL40A_YEAST	RL40A_YEAST_Roscoe_2013	49	Q	Q49	0.6087	1	0.5795	0.5795	4.05	False	False	False
+RL40A_YEAST	RL40A_YEAST_Roscoe_2013	41	Q	Q41	0.585	2	0.5795	0.5795	4.05	False	False	False
+RL40A_YEAST	RL40A_YEAST_Roscoe_2013	2	Q	Q2	0.5795	3	0.5795	0.5795	4.05	False	False	False
+RL40A_YEAST	RL40A_YEAST_Roscoe_2014	41	Q	Q41	0.5822	1	0.5822	0.5822	1.33	False	False	False

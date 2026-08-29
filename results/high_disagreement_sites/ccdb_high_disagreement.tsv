@@ -1,0 +1,5 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease
+CCDB_ECOLI	CCDB_ECOLI_Adkar_2012	8	Y	Y8	0.7226	1	0.6971	0.6971	2.02	False	False	False
+CCDB_ECOLI	CCDB_ECOLI_Adkar_2012	66	T	T66	0.6971	2	0.6971	0.6971	2.02	False	False	False
+CCDB_ECOLI	CCDB_ECOLI_Tripathi_2016	14	Y	Y14	0.7843	1	0.6809	0.6809	2.0	False	False	False
+CCDB_ECOLI	CCDB_ECOLI_Tripathi_2016	8	Y	Y8	0.6809	2	0.6809	0.6809	2.0	False	False	False

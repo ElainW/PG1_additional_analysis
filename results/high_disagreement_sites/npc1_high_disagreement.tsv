@@ -1,0 +1,5 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease
+NPC1_HUMAN	NPC1_HUMAN_Erwood_2022_HEK293T	987	K	K987	0.859	1	0.8146	0.8146	2.06	False	False	False
+NPC1_HUMAN	NPC1_HUMAN_Erwood_2022_HEK293T	982	L	L982	0.8146	2	0.8146	0.8146	2.06	False	False	False
+NPC1_HUMAN	NPC1_HUMAN_Erwood_2022_RPE1	422	P	P422	0.7614	1	0.7369	0.7369	20.0	False	False	False
+NPC1_HUMAN	NPC1_HUMAN_Erwood_2022_RPE1	421	Q	Q421	0.7369	2	0.7369	0.7369	20.0	False	False	False

@@ -1,0 +1,7 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease
+DYR_ECOLI	DYR_ECOLI_Nguyen_2023	149	H	H149	0.74	1	0.6633	0.6633	1.9	False	False	False
+DYR_ECOLI	DYR_ECOLI_Nguyen_2023	140	F	F140	0.6748	2	0.6633	0.6633	1.9	False	False	False
+DYR_ECOLI	DYR_ECOLI_Nguyen_2023	67	G	G67	0.6633	3	0.6633	0.6633	1.9	False	False	False
+DYR_ECOLI	DYR_ECOLI_Thompson_2019	149	H	H149	0.7426	1	0.6759	0.6759	2.01	False	False	False
+DYR_ECOLI	DYR_ECOLI_Thompson_2019	140	F	F140	0.6804	2	0.6759	0.6759	2.01	False	False	False
+DYR_ECOLI	DYR_ECOLI_Thompson_2019	67	G	G67	0.6759	3	0.6759	0.6759	2.01	False	False	False

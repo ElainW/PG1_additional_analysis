@@ -1,0 +1,12 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_binding-TAPBPR	121	R	R121	0.6239	1	0.5959	0.5959	2.78	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_binding-TAPBPR	156	S	S156	0.6159	2	0.5959	0.5959	2.78	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_binding-TAPBPR	41	R	R41	0.6074	3	0.5959	0.5959	2.78	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_binding-TAPBPR	116	S	S116	0.5997	4	0.5959	0.5959	2.78	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_binding-TAPBPR	154	L	L154	0.5959	5	0.5959	0.5959	2.78	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_expression	121	R	R121	0.6363	1	0.5879	0.5879	3.33	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_expression	41	R	R41	0.6142	2	0.5879	0.5879	3.33	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_expression	156	S	S156	0.6064	3	0.5879	0.5879	3.33	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_expression	116	S	S116	0.6012	4	0.5879	0.5879	3.33	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_expression	136	G	G136	0.5882	5	0.5879	0.5879	3.33	False	False	False
+Q53Z42_HUMAN	Q53Z42_HUMAN_McShan_2019_expression	154	L	L154	0.5879	6	0.5879	0.5879	3.33	False	False	False

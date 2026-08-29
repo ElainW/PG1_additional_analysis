@@ -394,8 +394,7 @@ Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreeme
 batch under `figures/site_disagreement/HXK4_HUMAN/` and the per-protein disagreement
 structure maps (`23`, one `fig_<gene>_structure_map.png` per multi-assay protein)
 under `figures/site_disagreement/`. The exact labelled high-disagreement sites behind
-those maps are tabulated per protein (`27`) under
-`figures/site_disagreement/high_disagreement_sites/`.
+those maps are tabulated per protein (`27`) in `results/high_disagreement_sites/`.
 
 ## Version control
 Repo scoped to `analysis/` only; remote

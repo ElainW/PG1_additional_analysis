@@ -9,7 +9,7 @@ labelled site with its functional context (binding/disordered/disease) and the
 per-assay threshold that admitted it.
 
 Outputs (one per protein, named like the figures) in
-figures/site_disagreement/high_disagreement_sites/:
+results/high_disagreement_sites/:
   <common>_high_disagreement.tsv     e.g. gck_high_disagreement.tsv
 """
 import os
@@ -23,7 +23,7 @@ _spec = importlib.util.spec_from_file_location("structure_maps_all", _S23)
 S = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(S)
 
-OUTDIR = os.path.join(C.FIGURES, "site_disagreement", "high_disagreement_sites")
+OUTDIR = os.path.join(C.RESULTS, "high_disagreement_sites")
 
 
 def disease_set(uni, seq, g):
