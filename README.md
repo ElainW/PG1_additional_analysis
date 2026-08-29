@@ -336,6 +336,101 @@ disagreement and the binding/disease/disorder annotations.
   viral MSAs) give unstable conservation; use `conservation_percentile` for
   within-protein comparisons and the `MSA_Neff_L` flags before trusting absolutes.
 
+**High- vs low-disagreement tails** (`conservation_high_vs_low_by_assay.csv`;
+the 405 high- / 401 low-disagreement selected sites). Pooled, the two tails are
+**indistinguishable** in conservation (Mann–Whitney p=0.70) and percentile
+(p=0.29); paired by assay, mean(high−low)=−0.006, Wilcoxon p=0.38. But per assay
+they separate strongly in **opposite** directions — the same heterogeneity as the
+per-assay ρ, sharpened: `P53` Giacomelli high-disagreement sites are far more
+conserved than its low-disagreement ones (Δ≈**+0.48…+0.50**, high≈0.84 vs
+low≈0.35; also HSP82 Mishra, VKOR1, HXK4-activity), whereas `NPC1` (−0.53),
+`RL40A`, `PTEN`, `RPC1`, `CCDB` go the other way. The pooled null is a
+Simpson's-paradox cancellation — never read the two tails pooled.
+
+**`mean occupancy`** is a per-column quantity: the (weight-weighted) fraction of
+alignment **sequences** that carry a residue rather than a gap at that column,
+`occupancy = 1 − Σ w_s[gap] / Σ w_s` — i.e. `1 − weighted gap fraction`, high when
+the position is filled in nearly every homolog. `mean occupancy` for a site set
+averages that over the sites. Pooled, high-disagreement sites sit at slightly
+thinner columns (0.906 vs 0.963), **but this is not a consistent per-MSA effect**:
+testing occupancy(high) vs occupancy(low) within each assay (Mann–Whitney), only
+**10 of 37** testable assays reach p<0.05, and the direction is mixed — 7 have
+high-disagreement sites *less* covered (PTEN, S22A1, HXK4-activity, CP2C9…), 3
+*more* covered (all three P53 Giacomelli, occ≈0.98 vs 0.89). Occupancy is
+near-saturated (median 0.99), so these are small shifts; the pooled gap is driven
+by a handful of proteins, not a general property of high-disagreement sites.
+
+Per-assay occupancy(high) vs occupancy(low), the 10 assays with Mann–Whitney
+p<0.05 (full 53-assay table in `occupancy_high_vs_low_by_assay.csv`):
+
+| assay | n_hi | n_lo | occ_high | occ_low | Δ | MWU p |
+|---|---|---|---|---|---|---|
+| P53_HUMAN_Giacomelli_2018_Null_Nutlin | 13 | 10 | 0.982 | 0.891 | +0.091 | 0.0008 |
+| P53_HUMAN_Giacomelli_2018_Null_Etoposide | 15 | 12 | 0.983 | 0.899 | +0.085 | 0.0009 |
+| PTEN_HUMAN_Matreyek_2021 | 7 | 12 | 0.890 | 0.993 | −0.103 | 0.0011 |
+| P53_HUMAN_Giacomelli_2018_WT_Nutlin | 10 | 11 | 0.977 | 0.914 | +0.063 | 0.0126 |
+| S22A1_HUMAN_Yee_2023_activity | 8 | 27 | 0.780 | 0.996 | −0.216 | 0.0194 |
+| PTEN_HUMAN_Mighell_2018 | 6 | 17 | 0.935 | 0.985 | −0.050 | 0.0227 |
+| HXK4_HUMAN_Gersing_2022_activity | 14 | 12 | 0.605 | 0.931 | −0.326 | 0.0288 |
+| CP2C9_HUMAN_Amorosi_2021_abundance | 11 | 11 | 0.926 | 0.971 | −0.045 | 0.0356 |
+| S22A1_HUMAN_Yee_2023_abundance | 9 | 14 | 0.804 | 0.996 | −0.191 | 0.0375 |
+| CAR11_HUMAN_Meitlis_2020_gof | 4 | 6 | 0.779 | 0.933 | −0.154 | 0.0397 |
+
+The sign even flips by protein: P53's high-disagreement sites are *better* covered
+than its low-disagreement ones, PTEN/S22A1/HXK4's are *worse* — the same per-assay
+heterogeneity seen for conservation itself, not a uniform occupancy effect.
+
+**Why does the conserved-vs-variable direction differ by protein? (two
+hypotheses)** Detail + tables in `NEXT_STEPS.md` "Mechanism of the per-assay
+disagreement↔conservation sign". High/low conservation are a **strict percentile
+split** (script `34`): high = `conservation_percentile` ≥ 80, low = ≤ 20 or NaN
+(gappy column); results below are stable at ≥90 / ≤10 too.
+
+*H1 — DMS-score spread.* The assay-wide premise holds (within-assay
+Spearman(conservation, per-position DMS-score std) = +0.20, positive in 41/48
+assays), but the bridge to disagreement fails (Spearman(disagreement, spread) ≈
+−0.08). Zooming into P53's selected sites (`H1_P53_dms_relfrac_by_site_p80_20.csv`),
+using each site's DMS *relative fraction* (max−min of its substitutions'
+DMS-percentiles within the assay): **high-disagreement sites are compressed**
+(mean relfrac ≈47) vs **low-disagreement sites ≈60–63** and the assay-wide
+conserved-site baseline ≈59–62 — robust at 90/10 (≈45 vs ≈60). So at a critical
+conserved residue (C238, R248…) nearly every substitution is similarly deleterious
+→ narrow within-site range → the fine ranking is experimental noise → models
+disagree. Disagreement tracks *compressed* within-site signal, the opposite of
+H1's premise.
+
+*H2 — model-class performance.* With the strict split the contrast is clean
+(`H2_persite_spearman_by_class_p80_20.csv`, per-site Spearman by class):
+- **Disagree-at-conserved (P53), high-conservation shared sites:** sequence+MSA
+  models are modestly accurate, **0.144**, while structure-only are **0.040**
+  (seq+MSA > structure in 18/27 site-assay pairs) — a real class gap ≈+0.10, so
+  these classes genuinely diverge where conservation carries signal that
+  structure-only models don't read.
+- **Disagree-at-variable (PTEN, HXK4), low-conservation shared sites:** **all
+  classes ≈0** (seq+MSA 0.069, structure 0.035; ~78% of sites below 0.2) — no
+  information for anyone (HXK4 W99, percentile 13.8, is the archetype).
+So the split is real: disagree-at-conserved = compressed within-site signal that
+sequence/MSA models partly read and structure-only don't; disagree-at-variable =
+a low-information regime where every class is uninformative.
+
+**Per-assay distributions (`35`, P53 / PTEN / HXK4).** Density panels
+(`figures/conservation_hist/<DMS_id>.png`; table `H1_conservation_by_category.csv`)
+plot four residue categories — shared low-agreement (= shared high-disagreement,
+≥2 assays), shared high-agreement (= shared low-disagreement), highly conserved
+(percentile ≥80), all residues — against (left) conservation percentile 0–100 and
+(right) DMS score (wild-type marked; axis labelled by `raw_DMS_directionality`).
+They make the split visual: **P53** low-agreement residues pile at high percentile
+(the conserved DNA-binding core: C176/C238/R248/C242/C275/C277) with DMS scores
+tight around the loss-of-function end, while its high-agreement residues are the
+poorly conserved proline-rich region (percentile ~0.1–0.35). **PTEN** is the
+mirror — low-agreement residues sit at *low* percentile. **HXK4** low-agreement is
+spread across the percentile axis (W99 among the low end). On the conservation
+panel the low-agreement category is split into residues with an actual percentile
+(KDE) vs **NaN-conservation** (gappy column, drawn at 0 with its own count), so the
+0-mass isn't ambiguous: P53 and HXK4-activity have 0 NaN low-agreement sites,
+HXK4-abundance 3, PTEN 1 per assay — i.e. P53's low-agreement conservation is
+genuinely high, not a gap artifact.
+
 ## Key findings
 
 **Taxon & model_type (02).** Pooled over models, mean Spearman is similar for
