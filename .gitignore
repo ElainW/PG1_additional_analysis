@@ -23,5 +23,6 @@ RUN.log
 papers/*
 !papers/*.md
 
-# MSA working directory (not tracked)
-data/msa/
+# MSA working directory — ignore the (large) MSA files, keep the provenance README
+data/msa/*
+!data/msa/README.md
