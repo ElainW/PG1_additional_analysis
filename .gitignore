@@ -22,3 +22,6 @@ RUN.log
 # Copyrighted papers + supplementary (keep only our write-up .md files)
 papers/*
 !papers/*.md
+
+# MSA working directory (not tracked)
+data/msa/
