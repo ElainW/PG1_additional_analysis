@@ -83,8 +83,9 @@ WT_DMS = {
 }
 
 # per-assay display overrides
-DMS_XMAX = {"PTEN_HUMAN_Matreyek_2021": 2.0}          # cap DMS-panel x upper limit
-LEGEND_LOC = {"PTEN_HUMAN_Matreyek_2021": "upper right"}  # else matplotlib "best"
+DMS_XMAX = {"PTEN_HUMAN_Matreyek_2021": 2.25}         # cap DMS-panel x upper limit
+# legend location per assay as (conservation-panel, DMS-panel); else matplotlib "best"
+LEGEND_LOC = {"PTEN_HUMAN_Matreyek_2021": ("center", "upper right")}
 
 
 def assay_positions(dms_id):
@@ -237,9 +238,9 @@ def plot_assay(d, df, dms, shared_high, shared_low):
     if d in DMS_XMAX:
         axd.set_xlim(right=DMS_XMAX[d])
 
-    loc = LEGEND_LOC.get(d, "best")
-    for ax, title in ((axc, "categories (number of positions)"),
-                      (axd, "categories (number of mutations)")):
+    locs = LEGEND_LOC.get(d, ("best", "best"))
+    for ax, title, loc in ((axc, "categories (number of positions)", locs[0]),
+                           (axd, "categories (number of mutations)", locs[1])):
         ax.grid(False)
         leg = ax.legend(fontsize=8, title=title, title_fontsize=8, frameon=True,
                         facecolor="white", edgecolor="0.3", framealpha=1.0, loc=loc)
