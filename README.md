@@ -169,6 +169,58 @@ used in the HXK4 analysis (`06`) and the per-protein maps (`23`); the assay-leve
 agreement matrices in `03` use **≥3** instead, and then pool across sites and
 **Fisher-z average across assays**.
 
+## Site conservation vs disagreement — how it's computed (28)
+
+Per-column evolutionary conservation from each assay's own ProteinGym MSA, joined
+to the per-site disagreement tables so conservation can be set against within-site
+disagreement and the binding/disease/disorder annotations.
+
+- **Alignment per assay.** Each assay uses its own MSA via
+  `DMS_substitutions.csv:MSA_filename` (`data/msa/DMS_msa_files/`).
+- **Redundancy reduction (theta reweighting).** Sequences are weighted by the
+  ProteinGym weight vectors (`data/msa/DMS_msa_weights/*.npy`, via
+  `weight_file_name`). Those vectors index the **EVE-filtered** sequence set, not
+  the raw a2m records, so `28` reproduces `MSA_processing.preprocess_msa` verbatim
+  (upper-case + `.`→`-`; keep columns where the WT/focus isn't a gap; drop
+  sequences with >50 % gaps over those columns; drop sequences with an
+  indeterminate residue). This reproduces every weight-vector length exactly (all
+  29 MSAs, diff = 0), and `sum(weights) = N_eff` equals the reference
+  `MSA_N_eff` to the decimal — the two independent checks that `weight[i]` is
+  paired with the right sequence.
+- **Metric (match columns only).** Weighted amino-acid frequencies over the 20
+  standard AAs (gaps excluded from the frequency, reported separately as
+  `occupancy`); `entropy_bits` = Shannon entropy; `conservation = 1 − H/log2 20`
+  ∈ [0,1] (1 = fully conserved). `conservation_percentile` is the per-assay rank
+  (across that assay's match columns). Insertion (lower-case) columns get no value.
+- **Coordinate mapping.** `up_pos = target_seq_index + offset`, reusing `15`'s
+  `features_for()` offset. The standardized `mutant` position equals the
+  target_seq index for all 53 assays (match = 1.000), **including** the three with
+  a non-null `raw_mut_offset` (HSP82=290, Q53Z42=25, RPC1=18) — ProteinGym has
+  already folded `raw_mut_offset` into the standardized column, so it is not
+  re-applied. Isoform/off-by-one proteins (e.g. KRAS 4A target_seq vs 4B UniProt)
+  land on the correct `up_pos` this way.
+
+**Conclusions.**
+- **Redundancy reduction changes the answer.** Pooled Spearman(disagreement,
+  conservation) falls from **0.18 (unweighted) → 0.06 (weighted)** across 10,670
+  sites — statistically nonzero (p≈8e-10 at that n) but a negligible effect size.
+  The raw correlation was largely a homolog-redundancy artifact.
+- **The relationship is assay-specific, not global.** Per-assay ρ spans **−0.59
+  to +0.42** (median −0.10); 22/53 assays are significant (p<0.05) — **17 negative,
+  5 positive**. Negative extremes (disagreement higher at *variable* sites):
+  `RPC1_LAMBD` (−0.59/−0.58), `RL40A_YEAST`, `CP2C9_HUMAN`, `OXDA_RHOTO`,
+  `S22A1_HUMAN`. Positive (disagreement higher at *conserved* sites): all three
+  `P53_HUMAN` Giacomelli assays (+0.39…+0.42), `HSP82_YEAST` Mishra (+0.29),
+  `P53_HUMAN` Kotler (+0.29). Pooling these opposing signals is what flattens the
+  global correlation — report per assay.
+- **Annotations behave correctly under weighting.** Binding/disease/functional
+  sites are more conserved (disease 0.51 vs 0.37; functional 0.51 vs 0.36;
+  near-binding 0.57 vs 0.39), and disordered sites are **less** conserved (0.32 vs
+  0.40) — the expected biology, which the unweighted counts had inverted.
+- **Depth caveat.** Shallow alignments (e.g. `SPG1_STRSG` Olson N_eff≈2.2; small
+  viral MSAs) give unstable conservation; use `conservation_percentile` for
+  within-protein comparisons and the `MSA_Neff_L` flags before trusting absolutes.
+
 ## Key findings
 
 **Taxon & model_type (02).** Pooled over models, mean Spearman is similar for
@@ -389,6 +441,15 @@ Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`
 options, for choosing a protein/structure to extend the analysis — `21`; includes
 `conformational_switch`, `literature_pdb`, `recommended_pdb` per the structure-
 selection framework in `papers/pdb_selection_framework.md`).
+MSA conservation (redundancy-reduced, `28`) — all under `results/MSA_conservation/`:
+`msa_conservation_by_site.csv` (per assay × match column: `occupancy`,
+`entropy_bits`, weighted `conservation`, `conservation_percentile`,
+`top_aa`/`top_aa_freq`), `generalization_functional_disagreement_sites_conservation.csv`
+(the sites table + conservation, joined on `up_pos`),
+`conservation_disagreement_spearman_by_assay.csv` (per-assay
+Spearman(disagreement, conservation) + p-value), and per-protein
+`<gene>_high_disagreement_conservation.tsv` (`27`'s labelled sites + conservation
+and its within-assay percentile).
 
 Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
 batch under `figures/site_disagreement/HXK4_HUMAN/` and the per-protein disagreement

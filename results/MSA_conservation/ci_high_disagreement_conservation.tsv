@@ -1,0 +1,3 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease	occupancy	entropy_bits	conservation	conservation_percentile	top_aa	top_aa_freq
+RPC1_LAMBD	RPC1_LAMBD_Li_2019_high-expression	34	Q	Q34	0.7879	1	0.7879	0.7879	1.82	False	False	False	0.9752	3.362	0.2221	46.67	Q	0.3261
+RPC1_LAMBD	RPC1_LAMBD_Li_2019_low-expression	34	Q	Q34	0.7927	1	0.7927	0.7927	1.82	False	False	False	0.9752	3.362	0.2221	46.67	Q	0.3261

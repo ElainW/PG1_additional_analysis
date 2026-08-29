@@ -1,0 +1,10 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease	occupancy	entropy_bits	conservation	conservation_percentile	top_aa	top_aa_freq
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	11	Y	Y11	0.7714	1	0.72	0.72	2.86	False	False	False	0.419	3.1893	0.2621	6.68	C	0.2987
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	57	E	E57	0.761	2	0.72	0.72	2.86	False	False	False	0.9054	0.3491	0.9192	92.19	E	0.9476
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	64	P	P64	0.7401	3	0.72	0.72	2.86	False	False	False	0.8822	2.668	0.3827	19.44	L	0.4036
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_gof	72	R	R72	0.72	4	0.72	0.72	2.86	False	False	True	0.9106	0.6549	0.8485	86.02	R	0.8695
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	11	Y	Y11	0.7807	1	0.711	0.711	3.6	False	False	False	0.419	3.1893	0.2621	6.68	C	0.2987
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	64	P	P64	0.7629	2	0.711	0.711	3.6	False	False	False	0.8822	2.668	0.3827	19.44	L	0.4036
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	57	E	E57	0.7216	3	0.711	0.711	3.6	False	False	False	0.9054	0.3491	0.9192	92.19	E	0.9476
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	72	R	R72	0.7178	4	0.711	0.711	3.6	False	False	True	0.9106	0.6549	0.8485	86.02	R	0.8695
+CAR11_HUMAN	CAR11_HUMAN_Meitlis_2020_lof	31	H	H31	0.711	5	0.711	0.711	3.6	False	False	False	0.9049	1.8322	0.5761	44.36	H	0.4284

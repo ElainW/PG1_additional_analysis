@@ -1,0 +1,16 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	residue	disagreement	rank_in_assay	elbow_threshold	effective_floor	tail_percentile	near_binding	disordered	disease	occupancy	entropy_bits	conservation	conservation_percentile	top_aa	top_aa_freq
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	168	L	L168	0.7864	1	0.5417	0.5417	4.44	False	False	False	0.5636	3.8879	0.1004	7.19	K	0.1571
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	185	K	K185	0.7016	2	0.5417	0.5417	4.44	False	False	False						
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	39	S	S39	0.5757	3	0.5417	0.5417	4.44	False	False	False	0.9905	3.3539	0.224	40.72	D	0.2738
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	2	T	T2	0.5729	4	0.5417	0.5417	4.44	False	False	False						
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	188	I	I188	0.5599	5	0.5417	0.5417	4.44	False	False	False						
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	68	R	R68	0.5514	6	0.5417	0.5417	4.44	False	False	False	0.9824	3.478	0.1953	35.93	R	0.2683
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	77	G	G77	0.5499	7	0.5417	0.5417	4.44	False	False	False	0.9987	2.2788	0.4727	81.44	G	0.4289
+RASK_HUMAN	RASK_HUMAN_Weng_2022_abundance	65	S	S65	0.5417	8	0.5417	0.5417	4.44	False	False	True	0.9836	3.4435	0.2032	37.13	R	0.3379
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	185	K	K185	0.6339	1	0.5307	0.5307	3.93	False	False	False						
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	2	T	T2	0.5744	2	0.5307	0.5307	3.93	False	False	False						
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	39	S	S39	0.562	3	0.5307	0.5307	3.93	False	False	False	0.9905	3.3539	0.224	40.72	D	0.2738
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	183	I	I183	0.5517	4	0.5307	0.5307	3.93	False	False	False						
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	65	S	S65	0.5459	5	0.5307	0.5307	3.93	False	False	True	0.9836	3.4435	0.2032	37.13	R	0.3379
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	68	R	R68	0.5421	6	0.5307	0.5307	3.93	False	False	False	0.9824	3.478	0.1953	35.93	R	0.2683
+RASK_HUMAN	RASK_HUMAN_Weng_2022_binding-DARPin_K55	77	G	G77	0.5307	7	0.5307	0.5307	3.93	False	False	False	0.9987	2.2788	0.4727	81.44	G	0.4289

@@ -35,7 +35,8 @@ SCRIPTS = \
 	24_gof_supplement_tables \
 	25_export_structural_annotations \
 	26_src_allosteric_sites \
-	27_export_high_disagreement_sites
+	27_export_high_disagreement_sites \
+	28_msa_conservation
 
 .PHONY: all clean
 
