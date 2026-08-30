@@ -21,10 +21,10 @@ Shared residues (across a protein's assays):
 Scope: P53_HUMAN, PTEN_HUMAN, HXK4_HUMAN (GCK).
 
 Outputs:
-  results/MSA_conservation/H1_conservation_by_category.csv
+  results/MSA_conservation/H1/H1_conservation_by_category.csv
       one row per (assay, shared high/low-disagreement residue): up_pos, residue,
       disagreement, relative_fraction_of_conservation, cons_category.
-  results/MSA_conservation/H1_highcons_middisagreement_range.csv
+  results/MSA_conservation/H1/H1_highcons_middisagreement_range.csv
       per assay: n and min/max relative-fraction for highly-conserved (cons high)
       residues with MID disagreement.
   figures/conservation_hist/<DMS_id>.png
@@ -48,6 +48,8 @@ GENE = {"P53_HUMAN": "p53", "PTEN_HUMAN": "pten", "HXK4_HUMAN": "gck"}  # tsv/fi
 HI_PCT, LO_PCT = 80, 20
 
 OUT = C.rp("MSA_conservation")
+H1DIR = os.path.join(OUT, "H1")     # H1 tables
+PPDIR = os.path.join(OUT, "per_protein_conservation")  # 28's per-protein tails
 FIGDIR = os.path.join(C.FIGURES, "conservation_hist")
 COLOC = os.path.join(C.rp("high_disagreement_colocalization"),
                      "colocalization_shared_sites.csv")
@@ -70,17 +72,9 @@ def clabel(pct):
     return "mid"
 
 
-# wild-type DMS score to mark on the DMS-score panel (dashed line), per assay family
-WT_DMS = {
-    "P53_HUMAN_Giacomelli_2018_Null_Etoposide": 0.0,
-    "P53_HUMAN_Giacomelli_2018_Null_Nutlin": 0.0,
-    "P53_HUMAN_Giacomelli_2018_WT_Nutlin": 0.0,
-    "P53_HUMAN_Kotler_2018": -2.4,
-    "PTEN_HUMAN_Matreyek_2021": 1.0,
-    "PTEN_HUMAN_Mighell_2018": 0.0,
-    "HXK4_HUMAN_Gersing_2022_activity": 1.0,
-    "HXK4_HUMAN_Gersing_2023_abundance": 1.0,
-}
+# wild-type DMS score to mark on the DMS-score panel (dashed line), per assay
+# family — from the version-controlled data/DMS_wt_score.csv (single source of truth).
+WT_DMS = C.load_wt_dms()
 
 # per-assay display overrides
 DMS_XMAX = {"PTEN_HUMAN_Matreyek_2021": 2.25}         # cap DMS-panel x upper limit
@@ -112,7 +106,7 @@ def assay_dms(dms_id):
 def tail_positions(gene, tag):
     """{DMS_id: set(up_pos)} for a disagreement tail."""
     out = {}
-    for f in glob.glob(os.path.join(OUT, f"{gene}_{tag}_disagreement_conservation.tsv")):
+    for f in glob.glob(os.path.join(PPDIR, f"{gene}_{tag}_disagreement_conservation.tsv")):
         t = pd.read_csv(f, sep="\t")
         for d, g in t.groupby("DMS_id"):
             out.setdefault(d, set()).update(g.up_pos.astype(int))
@@ -291,12 +285,13 @@ def main():
         for d in assays:
             p = plot_assay(d, per_assay[d], assay_dms(d), sh_hi, sh_lo)
             print("  wrote", p)
+    os.makedirs(H1DIR, exist_ok=True)
     tab = pd.concat(tables, ignore_index=True)
-    tab.to_csv(os.path.join(OUT, "H1_conservation_by_category.csv"), index=False)
+    tab.to_csv(os.path.join(H1DIR, "H1_conservation_by_category.csv"), index=False)
     rng = pd.concat(ranges, ignore_index=True)
-    rng.to_csv(os.path.join(OUT, "H1_highcons_middisagreement_range.csv"), index=False)
-    print("\nwrote H1_conservation_by_category.csv (%d rows)" % len(tab))
-    print("wrote H1_highcons_middisagreement_range.csv")
+    rng.to_csv(os.path.join(H1DIR, "H1_highcons_middisagreement_range.csv"), index=False)
+    print("\nwrote H1/H1_conservation_by_category.csv (%d rows)" % len(tab))
+    print("wrote H1/H1_highcons_middisagreement_range.csv")
     print("\nhighly-conserved + mid-disagreement relfrac range per assay:")
     print(rng.to_string(index=False))
 

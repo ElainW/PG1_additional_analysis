@@ -34,6 +34,8 @@ REF_PATH = os.path.join(PG2, "ProteinGym", "reference_files", "DMS_substitutions
 ANALYSIS = os.path.join(PG2, "analysis")
 RESULTS = os.path.join(ANALYSIS, "results")
 FIGURES = os.path.join(ANALYSIS, "figures")
+DATA_DIR = os.path.join(ANALYSIS, "data")
+WT_DMS_PATH = os.path.join(DATA_DIR, "DMS_wt_score.csv")
 
 NON_MODEL_COLS = {"mutant", "mutated_sequence", "DMS_score", "DMS_score_bin"}
 
@@ -123,6 +125,13 @@ def load_reference():
 def dms_to_taxon():
     ref = load_reference()
     return dict(zip(ref["DMS_id"], ref["taxon"]))
+
+
+def load_wt_dms():
+    """{DMS_id: wt_score} — per-assay wild-type DMS score, from the
+    version-controlled data/DMS_wt_score.csv (single source of truth)."""
+    wt = pd.read_csv(WT_DMS_PATH)
+    return dict(zip(wt["DMS_id"], wt["wt_score"].astype(float)))
 
 
 def list_score_files():
