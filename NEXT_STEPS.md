@@ -237,3 +237,37 @@ P53/PTEN/HXK4 (the Steps below).
 `results/qc_directionality/directionality_check.csv` (model_type classes),
 `O2/20250613/*.csv` (per-model scores + `DMS_score`), `16_collapse_modeltype_withinsite.py`
 (model-type within-site structure).
+
+## Synonymous-variant baseline for the DMS percentile/spread plots (script 37)
+
+**Motivation.** `37_conservation_dms_panels.py` draws, per assay (PTEN, CP2C9, HXK4,
+P53), a 2x2 figure whose bottom row is residue-level: (3) residue-mean DMS-score
+percentile and (4) per-residue percentile **spread** = max−min of the substitution-
+level DMS percentiles, across the 4 categories (shared low-agreement, shared
+high-agreement, highly conserved, all residues). The spread panel currently has **no
+neutral reference**: the WT is a single value with no spread, and the processed
+`O2/20250613/*.csv` score files are **missense-only** (0 synonymous variants,
+`X###X`), so there is nothing to anchor "how wide is a no-effect residue's spread".
+
+**Plan.** Obtain the **synonymous** variants for these assays (from the papers'
+raw/supplementary data — Amorosi 2021, Mighell 2018, Matreyek 2021, Gersing
+2022/2023, Kotler 2018, Giacomelli 2018) and use them as the neutral baseline:
+- Panel 3: mark the synonymous-variant DMS distribution (its spread, not just the
+  single WT line) on the percentile axis — the empirical "no amino-acid change" band.
+- Panel 4: compute the synonymous variants' own percentile spread as the reference
+  for how much per-residue divergence is expected under no functional effect
+  (measurement noise), and overlay it.
+- **Do NOT plot the "highly conserved" category on these synonymous-baseline plots**
+  — synonymous (silent) variants have no amino-acid change, so a conservation-based
+  residue category is not meaningful for them; restrict to shared low-agreement,
+  shared high-agreement, and all residues (plus the synonymous baseline series).
+
+**Implementation notes.** Keep synonymous variants **out** of the missense residue
+means / percentile ranking (exclude `wt==mut`) so they don't skew the categories;
+carry them as a separate baseline series. Decide encoding once the data is in
+(`X###X` rows appended to the score CSVs vs a separate synonymous file).
+
+**Ties to:** `37_conservation_dms_panels.py` (the merged 4-panel plots +
+`dms_percentile_summary.csv`), `O2/20250613/*.csv` (current missense-only scores),
+the "H1 (DMS-score spread)" subsection above (same residue-level DMS-spread question,
+per-category).

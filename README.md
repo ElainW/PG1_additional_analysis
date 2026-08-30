@@ -424,12 +424,16 @@ So the split is real: disagree-at-conserved = compressed within-site signal that
 sequence/MSA models partly read and structure-only don't; disagree-at-variable =
 a low-information regime where every class is uninformative.
 
-**Per-assay distributions (`35`, P53 / PTEN / HXK4).** Density panels
-(`figures/conservation_hist/<DMS_id>.png`; table `H1/H1_conservation_by_category.csv`)
-plot four residue categories — shared low-agreement (= shared high-disagreement,
-≥2 assays), shared high-agreement (= shared low-disagreement), highly conserved
-(percentile ≥80), all residues — against (left) conservation percentile 0–100 and
-(right) DMS score (wild-type marked; axis labelled by `raw_DMS_directionality`).
+**Per-assay distributions (`37`, PTEN / CP2C9 / HXK4 / P53).** A 2x2 density figure
+per assay (`figures/conservation_dms_panels/<DMS_id>.png`; H1 tables from `35`,
+`H1/H1_conservation_by_category*.csv`; residue summary
+`results/conservation_dms_panels/dms_percentile_summary.csv`) plots four residue
+categories — shared low-agreement (= shared high-disagreement, ≥2 assays), shared
+high-agreement (= shared low-disagreement), highly conserved (percentile ≥80), all
+residues — across four panels: (1) conservation percentile 0–100, (2) DMS score
+(wild-type marked; axis labelled by `raw_DMS_directionality`), (3) residue-level
+DMS-score percentile (residue mean, ranked), and (4) per-residue percentile spread
+(max−min over substitutions).
 They make the split visual: **P53** low-agreement residues pile at high percentile
 (the conserved DNA-binding core: C176/C238/R248/C242/C275/C277) with DMS scores
 tight around the loss-of-function end, while its high-agreement residues are the
