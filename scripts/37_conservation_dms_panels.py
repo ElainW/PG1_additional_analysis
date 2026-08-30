@@ -232,8 +232,8 @@ def plot_assay(d, df, dms_sub, dms_res, shared_high, shared_low):
     if wt is not None:
         ax2.axvline(wt, ls="--", color="black", lw=1.3, label=f"wild-type = {wt:g}")
     direction = REF.loc[d, "raw_DMS_directionality"] if "raw_DMS_directionality" in REF.columns else None
-    fit = ("higher is more fit" if direction == 1
-           else "lower is more fit" if direction == -1 else None)
+    fit = ("higher is higher fitness" if direction == 1
+           else "lower is higher fitness" if direction == -1 else None)
     ax2.set_xlabel(f"DMS score ({fit})" if fit else "DMS score")
     ax2.set_ylabel("density")
     if d in DMS_XMAX:
