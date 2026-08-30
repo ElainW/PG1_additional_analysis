@@ -12,7 +12,7 @@ B-factor for full interactive exploration:
   spectrum b, blue_white_red        # PyMOL example
 
 Outputs:
-  figures/fig_gck_3d_view.png
+  figures/GCK_3d/fig_gck_3d_view.png
   results/gck_1V4S_bfactor_<assay>.pdb
 """
 import os
@@ -123,7 +123,9 @@ def main():
     fig.suptitle("GCK (1V4S) Cα trace colored by per-site model disagreement\n"
                  "green = glucose, blue ▲ = allosteric activator (MRK)", fontsize=13, y=0.98)
     plt.tight_layout(rect=[0, 0.09, 1, 0.95])
-    out = os.path.join(C.FIGURES, "fig_gck_3d_view.png")
+    figdir = os.path.join(C.FIGURES, "GCK_3d")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "fig_gck_3d_view.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"Saved {out}")

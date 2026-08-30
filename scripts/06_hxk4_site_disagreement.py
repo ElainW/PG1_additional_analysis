@@ -22,7 +22,7 @@ Models: the 45-model family-best subset (one model per family) from
 
 Outputs (per assay):
   results/hxk4_<assay>_site_disagreement.csv
-  figures/fig_hxk4_<assay>_disagreement.png
+  figures/site_disagreement/HXK4_HUMAN/fig_hxk4_<assay>_disagreement.png
 """
 import os
 import numpy as np
@@ -89,7 +89,9 @@ def analyze(dms_id, chosen, type_of, mtypes):
     return res, members_by_type
 
 
-def make_figure(dms_id, res, mtypes, members_by_type, outdir=C.FIGURES, disordered=frozenset()):
+def make_figure(dms_id, res, mtypes, members_by_type,
+                outdir=os.path.join(C.FIGURES, "site_disagreement", "HXK4_HUMAN"),
+                disordered=frozenset()):
     fig = plt.figure(figsize=(15, 6))
     gs = fig.add_gridspec(1, 2, width_ratios=[2.0, 1.3], wspace=0.32)
 
@@ -125,6 +127,7 @@ def make_figure(dms_id, res, mtypes, members_by_type, outdir=C.FIGURES, disorder
     axB.set_ylabel("site (wt+pos)"); axB.set_xlabel("")
     plt.setp(axB.get_yticklabels(), fontsize=7, rotation=0)
 
+    os.makedirs(outdir, exist_ok=True)
     out = os.path.join(outdir, f"fig_hxk4_{dms_id}_disagreement.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()

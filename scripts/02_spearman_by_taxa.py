@@ -8,10 +8,10 @@ Outputs:
   results/spearman_modeltype_by_taxon.csv    (model_type x taxon mean Spearman)
   results/kruskal_model_across_taxa.csv      (per-model Kruskal-Wallis across taxa)
   results/kruskal_modeltype_across_taxa.csv  (per-model_type Kruskal-Wallis)
-  figures/fig1_model_by_taxon_heatmap.png
-  figures/fig2_modeltype_by_taxon_box.png
-  figures/fig3_modeltype_by_taxon_heatmap.png
-  figures/fig4_taxon_overall_box.png
+  figures/model_taxon_analysis/fig1_model_by_taxon_heatmap.png
+  figures/model_taxon_analysis/fig2_modeltype_by_taxon_box.png
+  figures/model_taxon_analysis/fig3_modeltype_by_taxon_heatmap.png
+  figures/model_taxon_analysis/fig4_taxon_overall_box.png
 """
 import os
 import numpy as np
@@ -88,7 +88,8 @@ def main():
     kw_type = kw_table("model_type", "kruskal_modeltype_across_taxa.csv")
 
     # =================== FIGURES ===================
-    os.makedirs(C.FIGURES, exist_ok=True)
+    FIGDIR = os.path.join(C.FIGURES, "model_taxon_analysis")
+    os.makedirs(FIGDIR, exist_ok=True)
 
     # Fig 1: model x taxon heatmap
     hm = mbt[taxa]
@@ -98,7 +99,7 @@ def main():
     ax.set_title("Mean Spearman (model vs DMS_score) by taxon\n(models ordered by overall mean)")
     ax.set_xlabel("Taxon"); ax.set_ylabel("")
     plt.tight_layout()
-    plt.savefig(os.path.join(C.FIGURES, "fig1_model_by_taxon_heatmap.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig1_model_by_taxon_heatmap.png"), dpi=150)
     plt.close()
 
     # Fig 2: model_type x taxon boxplots (distribution over models-within-type, per assay)
@@ -111,7 +112,7 @@ def main():
     ax.set_xticklabels([t.replace(" & ", "\n& ").replace(", ", ",\n") for t in mtypes], fontsize=8)
     ax.legend(title="Taxon", fontsize=8)
     plt.tight_layout()
-    plt.savefig(os.path.join(C.FIGURES, "fig2_modeltype_by_taxon_box.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig2_modeltype_by_taxon_box.png"), dpi=150)
     plt.close()
 
     # Fig 3: model_type x taxon heatmap
@@ -122,7 +123,7 @@ def main():
     ax.set_xlabel("Taxon"); ax.set_ylabel("")
     ax.set_yticklabels([t.replace(" & ", " &\n") for t in tbt.index], rotation=0, fontsize=8)
     plt.tight_layout()
-    plt.savefig(os.path.join(C.FIGURES, "fig3_modeltype_by_taxon_heatmap.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig3_modeltype_by_taxon_heatmap.png"), dpi=150)
     plt.close()
 
     # Fig 4: overall per-assay Spearman by taxon (all models pooled)
@@ -134,7 +135,7 @@ def main():
     ax.set_title("Spearman by taxon (box=per model-assay; dots=per-assay mean over models)")
     ax.set_xlabel("Taxon"); ax.set_ylabel("Spearman")
     plt.tight_layout()
-    plt.savefig(os.path.join(C.FIGURES, "fig4_taxon_overall_box.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig4_taxon_overall_box.png"), dpi=150)
     plt.close()
 
     # ---- console summary ----

@@ -15,7 +15,7 @@ Observed points significant after BH-FDR across all assays (q_perm < 0.05) are
 drawn filled/red, i.e. co-localizing more than chance; the rest are grey.
 
 Input  -> results/high_disagreement_colocalization/colocalization_per_assay.csv
-Output -> figures/fig_colocalization_forest.png
+Output -> figures/agreement_site_colocalization/fig_colocalization_forest.png
 """
 import os
 import sys
@@ -103,8 +103,9 @@ def main():
     fig.tight_layout(rect=[0, 0.05, 1, 0.98])
 
     suffix = "" if MODE == "high" else f"_{MODE}"
-    out = os.path.join(C.FIGURES, f"fig_colocalization_forest{suffix}.png")
-    os.makedirs(C.FIGURES, exist_ok=True)
+    figdir = os.path.join(C.FIGURES, "agreement_site_colocalization")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, f"fig_colocalization_forest{suffix}.png")
     fig.savefig(out, dpi=150, bbox_inches="tight")
     print(f"-> wrote {out}  ({len(order)} proteins, {len(per)} assays)")
 

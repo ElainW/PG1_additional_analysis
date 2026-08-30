@@ -28,6 +28,8 @@ from importlib import import_module
 sns.set_style("whitegrid")
 persite = import_module("03_persite_ranking")  # reuse within_site_norm_ranks / MIN_SITE_VARIANTS
 
+FIGDIR = os.path.join(C.FIGURES, "persite_analysis")
+
 # (display_name, csv_column, model_type)  -- order preserved for plots
 SUBSET = [
     ("Site_Independent",           "Site_Independent",          "MSA"),
@@ -81,9 +83,10 @@ def fig5_subset():
         g.ax_col_dendrogram.bar(0, 0, color=PALETTE[t], label=t, linewidth=0)
     g.ax_col_dendrogram.legend(title="model_type", loc="center", ncol=2, fontsize=7)
     g.fig.suptitle("Within-site mutation-ranking agreement (23-model subset, clustered)", y=1.02)
-    out = os.path.join(C.FIGURES, "Fig5_subset.png")
+    os.makedirs(FIGDIR, exist_ok=True)
+    out = os.path.join(FIGDIR, "Fig5_subset.png")
     g.savefig(out, dpi=150, bbox_inches="tight")
-    g.savefig(os.path.join(C.FIGURES, "Fig5_subset.pdf"), bbox_inches="tight")
+    g.savefig(os.path.join(FIGDIR, "Fig5_subset.pdf"), bbox_inches="tight")
     plt.close()
     print(f"Saved {out} (+ .pdf)")
 
@@ -170,7 +173,8 @@ def fig6_by_selection_type():
     fig.suptitle("Within-site mutation-ranking agreement between model TYPES, by selection type\n"
                  "(23-model subset; diagonal = within-type, self excluded)", fontsize=13, y=1.0)
     plt.tight_layout(rect=[0, 0, 1, 0.97])
-    out = os.path.join(C.FIGURES, "Fig6_by_selection_type.png")
+    os.makedirs(FIGDIR, exist_ok=True)
+    out = os.path.join(FIGDIR, "Fig6_by_selection_type.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"Saved {out}")

@@ -60,7 +60,7 @@ Outputs (results/MSA_conservation/)
       the sites table + conservation columns (left join on DMS_id, up_pos).
   conservation_disagreement_spearman_by_assay.csv
       per-assay Spearman(disagreement, conservation) with p-value.
-  <name>_{high,low}_disagreement_conservation.tsv
+  per_protein_conservation/<name>_{high,low}_disagreement_conservation.tsv
       each per-protein high-/low-disagreement site table (27 / low-tail selection)
       + conservation columns (does not clobber the originals).
   conservation_high_vs_low_by_assay.csv
@@ -81,6 +81,7 @@ SITES = C.rp("generalization_functional_disagreement_sites.csv")
 HIDIR = C.rp("high_disagreement_sites")   # 27's high-disagreement inputs
 LODIR = C.rp("low_disagreement_sites")    # low-disagreement tail inputs
 OUTDIR = C.rp("MSA_conservation")          # 28's per-assay outputs
+PPDIR = os.path.join(OUTDIR, "per_protein_conservation")  # per-protein tail tables
 
 AA = "ACDEFGHIKLMNPQRSTVWY"
 LOG2_20 = np.log2(20)
@@ -239,6 +240,7 @@ def main():
                   f"{len(t):4d} cols  mean_cons={t['conservation'].mean():.3f}")
 
     os.makedirs(OUTDIR, exist_ok=True)
+    os.makedirs(PPDIR, exist_ok=True)
     cons = pd.concat(tables, ignore_index=True)
     # per-assay percentile of each column's conservation (0-100, across all
     # match columns of that assay; higher = more conserved than the rest)
@@ -289,7 +291,7 @@ def main():
             hm = h.merge(cons[keep].drop(columns=["wt_target"]),
                          on=["DMS_id", "up_pos"], how="left")
             base = os.path.basename(tsv).replace(".tsv", "_conservation.tsv")
-            hm.to_csv(os.path.join(OUTDIR, base), sep="\t", index=False)
+            hm.to_csv(os.path.join(PPDIR, base), sep="\t", index=False)
             frames.append(hm)
             n_tsv += 1
         tails[tail] = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()

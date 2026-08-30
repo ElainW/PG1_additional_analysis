@@ -253,13 +253,13 @@ so the two q-columns are not comparable and neither is a correction of the other
 multiple panel per protein, each row an assay: a dot marks the **expected** overlap with a
 whisker for the **95% null band**, and a diamond marks the **observed** overlap (red where
 `q_perm < 0.05` after BH across all 47 assays, grey otherwise). Output:
-`figures/fig_colocalization_forest.png`.
+`figures/agreement_site_colocalization/fig_colocalization_forest.png`.
 
 **High vs low tail (control).** Both `32` and `33` take a `high`/`low` argument (default
 `high`); `python 32... low && python 33... low` reruns the *identical* test on the
 **low-disagreement** (high-agreement) sites from `30` — same testable-position pools, same
 permutation null — writing `results/low_disagreement_colocalization/` and
-`figures/fig_colocalization_forest_low.png`. **The easy tail co-localizes too, but less:**
+`figures/agreement_site_colocalization/fig_colocalization_forest_low.png`. **The easy tail co-localizes too, but less:**
 pooled **110/263 (42%)**, cluster-bootstrap 95% CI **33–51%**, median per-protein fraction
 **0.46**, **16/20** proteins significant at BH q<0.05 — vs **54%**, CI **41–68%**, **0.67**,
 **18/20** for the high tail (the two CIs only partly overlap). So recurrence of the *same
@@ -381,26 +381,37 @@ than its low-disagreement ones, PTEN/S22A1/HXK4's are *worse* — the same per-a
 heterogeneity seen for conservation itself, not a uniform occupancy effect.
 
 **Why does the conserved-vs-variable direction differ by protein? (two
-hypotheses)** Detail + tables in `NEXT_STEPS.md` "Mechanism of the per-assay
-disagreement↔conservation sign". High/low conservation are a **strict percentile
-split** (script `34`): high = `conservation_percentile` ≥ 80, low = ≤ 20 or NaN
-(gappy column); results below are stable at ≥90 / ≤10 too.
+hypotheses)** (script `34`; `H1_*` / `H2_*` tables in `results/MSA_conservation/H1/`
+and `results/MSA_conservation/H2/`.)
+High/low conservation are a **strict percentile split**: high =
+`conservation_percentile` ≥ 80, low = ≤ 20 or NaN (gappy column). The H2 class-gap
+result is stable at the tighter ≥90 / ≤10 split; the H1 relfrac *baseline* is
+threshold-sensitive (below), so state the split whenever quoting it.
 
 *H1 — DMS-score spread.* The assay-wide premise holds (within-assay
 Spearman(conservation, per-position DMS-score std) = +0.20, positive in 41/48
 assays), but the bridge to disagreement fails (Spearman(disagreement, spread) ≈
-−0.08). Zooming into P53's selected sites (`H1_P53_dms_relfrac_by_site_p80_20.csv`),
+−0.08). Zooming into P53's selected sites (`H1/H1_P53_dms_relfrac_by_site_p80_20.csv`),
 using each site's DMS *relative fraction* (max−min of its substitutions'
 DMS-percentiles within the assay): **high-disagreement sites are compressed**
-(mean relfrac ≈47) vs **low-disagreement sites ≈60–63** and the assay-wide
-conserved-site baseline ≈59–62 — robust at 90/10 (≈45 vs ≈60). So at a critical
+(mean relfrac ≈46) vs **low-disagreement sites ≈62** — and this contrast is
+**robust to the conservation split** (46.2 vs 61.9 at both 80/20 and 90/10; ≈49
+vs ≈63 at a 50/50 median split), because the disagreement tails are defined by
+disagreement, not conservation. The assay-wide *conserved-site* baseline, however,
+**is** threshold-sensitive: mean relfrac over all high-conservation match sites is
+≈68–69 at 50/50, ≈59–62 at 80/20 (Null_Etoposide/Null_Nutlin), but only ≈46–52 at
+90/10 — and WT_Nutlin's conserved baseline is always low (46/42/36). So
+high-disagreement sites read as compressed *relative to typical conserved sites*
+mainly at the looser splits; at 90/10 the most-conserved sites are themselves as
+compressed. (ProteinGym assays are pre-selected for a decent overall DMS range, so
+this compression is per-site, not per-assay.) So at a critical
 conserved residue (C238, R248…) nearly every substitution is similarly deleterious
 → narrow within-site range → the fine ranking is experimental noise → models
 disagree. Disagreement tracks *compressed* within-site signal, the opposite of
 H1's premise.
 
 *H2 — model-class performance.* With the strict split the contrast is clean
-(`H2_persite_spearman_by_class_p80_20.csv`, per-site Spearman by class):
+(`H2/H2_persite_spearman_by_class_p80_20.csv`, per-site Spearman by class):
 - **Disagree-at-conserved (P53), high-conservation shared sites:** sequence+MSA
   models are modestly accurate, **0.144**, while structure-only are **0.040**
   (seq+MSA > structure in 18/27 site-assay pairs) — a real class gap ≈+0.10, so
@@ -414,7 +425,7 @@ sequence/MSA models partly read and structure-only don't; disagree-at-variable =
 a low-information regime where every class is uninformative.
 
 **Per-assay distributions (`35`, P53 / PTEN / HXK4).** Density panels
-(`figures/conservation_hist/<DMS_id>.png`; table `H1_conservation_by_category.csv`)
+(`figures/conservation_hist/<DMS_id>.png`; table `H1/H1_conservation_by_category.csv`)
 plot four residue categories — shared low-agreement (= shared high-disagreement,
 ≥2 assays), shared high-agreement (= shared low-disagreement), highly conserved
 (percentile ≥80), all residues — against (left) conservation percentile 0–100 and
@@ -520,6 +531,22 @@ proteins, only the binding-site part generalizes: disagreement is elevated near
 (disordered regions trend the *opposite* way — lower disagreement — in P53 and
 HSP82). Disease-annotation saturation (HXK4 412/465, P53 333/393 positions) makes
 a combined "functional" flag misleading; the three signals must be tested apart.
+
+**Conservation vs disagreement (28, 34, 35).** With redundancy-reduced (theta-
+reweighted) per-column conservation, the *global* link to within-site disagreement
+nearly vanishes (pooled Spearman 0.18 unweighted → **0.06** weighted; the raw
+signal was largely a homolog-redundancy artifact). The relationship is
+**protein-specific, not global**: per-assay ρ spans **−0.59 to +0.42** (17 assays
+significantly negative, 5 positive) — models disagree most at the *most-conserved*
+sites in P53/HSP82/VKOR1 but at the *least-conserved* sites in NPC1/PTEN/RL40A/
+RPC1/CCDB, so pooling cancels the signal. Two mechanisms explain the split (script
+`34`): where disagreement is at conserved sites (P53), those sites carry a
+**compressed** within-site DMS signal (relfrac ≈46 vs ≈62 at low-disagreement
+sites) that sequence+MSA models read but structure-only models don't (per-site
+Spearman 0.144 vs 0.040) — a real class gap; where disagreement is at variable
+sites (PTEN/HXK4), **all** model classes are uninformative (0.069 vs 0.035, ~76%
+below 0.2) — a low-information regime. Annotations behave as expected under
+weighting (binding/disease/functional sites more conserved, disordered less).
 
 **Disease-mutation anecdotes (from UniProt P35557).** W99 → **W99C / HHF3**
 (gain-of-function, activating) — the assay agrees (W99 is an activating position),
@@ -657,9 +684,13 @@ MSA conservation (redundancy-reduced, `28`) — all under `results/MSA_conservat
 `top_aa`/`top_aa_freq`), `generalization_functional_disagreement_sites_conservation.csv`
 (the sites table + conservation, joined on `up_pos`),
 `conservation_disagreement_spearman_by_assay.csv` (per-assay
-Spearman(disagreement, conservation) + p-value), and per-protein
+Spearman(disagreement, conservation) + p-value), and — under
+`per_protein_conservation/` — per-protein
 `<gene>_high_disagreement_conservation.tsv` (`27`'s labelled sites + conservation
-and its within-assay percentile).
+and its within-assay percentile). The mechanism follow-ups write into two further
+subdirs: `H1/` (script `34`'s `H1_P53_*` relfrac tables and `35`'s
+`H1_conservation_by_category.csv` / `H1_highcons_middisagreement_range.csv`) and
+`H2/` (`34`'s `H2_persite_spearman_by_class_*` per-site class tables).
 
 Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
 batch under `figures/site_disagreement/HXK4_HUMAN/` and the per-protein disagreement

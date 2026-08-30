@@ -15,7 +15,7 @@ Colors reuse 04_subset_figs.PALETTE (model_type tab10) and the RdYlBu_r heatmap.
 
 Outputs per assay:
   results/site_W99_<assay>_subset_rank_matrix.csv
-  figures/fig_site_W99_<assay>_subset.png
+  figures/GCK_w99_deepdive/fig_site_W99_<assay>_subset.png
 """
 import os
 import numpy as np
@@ -69,7 +69,8 @@ def build(dms_id, site=SITE, results_dir=None):
     return M, col_order, wt, stat, row_type
 
 
-def figure(dms_id, M, col_order, wt, stat, row_type, site=SITE, outdir=C.FIGURES, region_note=None):
+def figure(dms_id, M, col_order, wt, stat, row_type, site=SITE,
+           outdir=os.path.join(C.FIGURES, "GCK_w99_deepdive"), region_note=None):
     palette = dict(sub.PALETTE)
     palette["DMS"] = (0.1, 0.1, 0.1)
     n = len(M)
@@ -127,6 +128,7 @@ def figure(dms_id, M, col_order, wt, stat, row_type, site=SITE, outdir=C.FIGURES
     axB.legend(handles, sub.MTYPES, title="model_type", fontsize=7, title_fontsize=8,
                loc="upper left", bbox_to_anchor=(1.04, 1.0), frameon=False)
 
+    os.makedirs(outdir, exist_ok=True)
     out = os.path.join(outdir, f"fig_site_{wt}{site}_{dms_id}_subset.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()

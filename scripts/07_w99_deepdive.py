@@ -9,7 +9,7 @@ left side = experimentally most-tolerated substitutions.
 
 Uses the 45-model family-best subset. Outputs per assay:
   results/site_<SITE>_<assay>_rank_matrix.csv
-  figures/fig_site_<SITE>_<assay>_rankings.png
+  figures/GCK_w99_deepdive/fig_site_<SITE>_<assay>_rankings.png
 """
 import os
 import re
@@ -86,7 +86,9 @@ def figure(dms_id, M, col_order, wt, row_type, mtypes):
                  f"(columns ordered by experiment, left = most fit)", fontsize=11)
     ax.set_xlabel("substitution"); ax.set_ylabel("")
     plt.tight_layout()
-    out = os.path.join(C.FIGURES, f"fig_site_{wt}{SITE}_{dms_id}_rankings.png")
+    figdir = os.path.join(C.FIGURES, "GCK_w99_deepdive")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, f"fig_site_{wt}{SITE}_{dms_id}_rankings.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"Saved {out}")

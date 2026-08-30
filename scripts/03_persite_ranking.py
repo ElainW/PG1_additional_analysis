@@ -24,10 +24,10 @@ Outputs:
   results/persite_modeltype_agreement_matrix.csv  (model_type x model_type)
   results/persite_dms_agreement_long.csv          (per assay: model within-site corr w/ DMS)
   results/persite_dms_agreement_by_modeltype_taxon.csv
-  figures/fig5_persite_model_agreement_clustermap.png
-  figures/fig6_persite_modeltype_agreement_heatmap.png
-  figures/fig7_persite_dms_agreement_by_model.png
-  figures/fig8_persite_dms_agreement_modeltype_taxon.png
+  figures/persite_analysis/fig5_persite_model_agreement_clustermap.png
+  figures/persite_analysis/fig6_persite_modeltype_agreement_heatmap.png
+  figures/persite_analysis/fig7_persite_dms_agreement_by_model.png
+  figures/persite_analysis/fig8_persite_dms_agreement_modeltype_taxon.png
 """
 import os
 import numpy as np
@@ -148,7 +148,8 @@ def main():
     model_dms.to_csv(C.rp("persite_dms_agreement_by_model.csv"), index=False)
 
     # =================== FIGURES ===================
-    os.makedirs(C.FIGURES, exist_ok=True)
+    FIGDIR = os.path.join(C.FIGURES, "persite_analysis")
+    os.makedirs(FIGDIR, exist_ok=True)
 
     # Fig 5: clustered model x model within-site agreement
     mm_f = mm.astype(float).fillna(0.0)
@@ -164,7 +165,7 @@ def main():
         g.ax_col_dendrogram.bar(0, 0, color=color, label=label, linewidth=0)
     g.ax_col_dendrogram.legend(title="model_type", loc="center", ncol=3, fontsize=8)
     g.fig.suptitle("Within-site mutation-ranking agreement between models (clustered)", y=1.02)
-    g.savefig(os.path.join(C.FIGURES, "fig5_persite_model_agreement_clustermap.png"), dpi=130, bbox_inches="tight")
+    g.savefig(os.path.join(FIGDIR, "fig5_persite_model_agreement_clustermap.png"), dpi=130, bbox_inches="tight")
     plt.close()
 
     # Fig 6: model_type x model_type agreement heatmap
@@ -176,7 +177,7 @@ def main():
     ax.set_xticklabels(lab, fontsize=7, rotation=30, ha="right")
     ax.set_yticklabels(lab, fontsize=7, rotation=0)
     plt.tight_layout()
-    plt.savefig(os.path.join(C.FIGURES, "fig6_persite_modeltype_agreement_heatmap.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig6_persite_modeltype_agreement_heatmap.png"), dpi=150)
     plt.close()
 
     # Fig 7: per-model within-site agreement with DMS, colored by model_type
@@ -191,7 +192,7 @@ def main():
     handles = [plt.Rectangle((0, 0), 1, 1, color=palette[t]) for t in mtypes]
     ax.legend(handles, mtypes, title="model_type", fontsize=7, loc="lower right")
     plt.tight_layout()
-    plt.savefig(os.path.join(C.FIGURES, "fig7_persite_dms_agreement_by_model.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig7_persite_dms_agreement_by_model.png"), dpi=150)
     plt.close()
 
     # Fig 8: model_type x taxon within-site DMS agreement
@@ -202,7 +203,7 @@ def main():
     ax.set_xlabel("Taxon"); ax.set_ylabel("")
     ax.set_yticklabels([t.replace(" & ", " &\n") for t in by_mt_tax.index], rotation=0, fontsize=8)
     plt.tight_layout()
-    plt.savefig(os.path.join(C.FIGURES, "fig8_persite_dms_agreement_modeltype_taxon.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig8_persite_dms_agreement_modeltype_taxon.png"), dpi=150)
     plt.close()
 
     # ---- console summary ----

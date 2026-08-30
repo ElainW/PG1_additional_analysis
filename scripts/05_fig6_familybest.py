@@ -11,7 +11,7 @@ so the model_type aggregation stays clean.
 
 Outputs:
   results/family_best_selection.csv
-  figures/Fig6_by_selection_type_familybest.png
+  figures/persite_analysis/Fig6_by_selection_type_familybest.png
   results/persite_modeltype_agreement_by_selectiontype_familybest.csv
 """
 import os
@@ -166,7 +166,9 @@ def main():
                  f"(family-best subset: {len(chosen)} models, one per family; diagonal = within-type, self excluded)",
                  fontsize=13, y=1.0)
     plt.tight_layout(rect=[0, 0, 1, 0.97])
-    out = os.path.join(C.FIGURES, "Fig6_by_selection_type_familybest.png")
+    figdir = os.path.join(C.FIGURES, "persite_analysis")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "Fig6_by_selection_type_familybest.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"\nSaved {out}")

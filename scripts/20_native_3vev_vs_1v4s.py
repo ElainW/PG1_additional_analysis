@@ -13,7 +13,7 @@ independent measurements on shared residues and re-check the disagreement links.
 Outputs:
   results/gck_native_3vev_vs_1v4s_perresidue.csv
   results/gck_native_comparison_summary.csv
-  figures/fig_gck_native_3vev_vs_1v4s.png
+  figures/GCK_3d/fig_gck_native_3vev_vs_1v4s.png
 """
 import os
 import warnings
@@ -122,7 +122,9 @@ def main():
     ax[1].set_title("Distance to (different) activator, by structure")
     ax[1].legend(fontsize=8)
     plt.tight_layout()
-    out = os.path.join(C.FIGURES, "fig_gck_native_3vev_vs_1v4s.png")
+    figdir = os.path.join(C.FIGURES, "GCK_3d")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "fig_gck_native_3vev_vs_1v4s.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"\nSaved {out}")

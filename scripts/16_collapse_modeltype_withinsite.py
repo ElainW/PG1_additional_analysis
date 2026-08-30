@@ -14,7 +14,7 @@ over the subset, then average across the models of each model_type. Uses the
 
 Outputs:
   results/collapse_modeltype_withinsite.csv
-  figures/fig_collapse_modeltype_withinsite.png
+  figures/GCK_pilot_analysis/fig_collapse_modeltype_withinsite.png
 """
 import os
 import numpy as np
@@ -109,7 +109,9 @@ def main():
     fig.suptitle("Winners-collapse by model_type — global vs within-site fitness split "
                  "(Structure = bold)", y=1.035, fontsize=13)
     plt.tight_layout()
-    out = os.path.join(C.FIGURES, "fig_collapse_modeltype_withinsite.png")
+    figdir = os.path.join(C.FIGURES, "GCK_pilot_analysis")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "fig_collapse_modeltype_withinsite.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"\nSaved {out}")

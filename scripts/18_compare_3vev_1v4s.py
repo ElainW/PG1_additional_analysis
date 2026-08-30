@@ -24,7 +24,7 @@ We report:
 Outputs:
   results/gck_structure_comparison_summary.csv
   results/gck_3vev_vs_1v4s_perresidue.csv
-  figures/fig_gck_3vev_vs_1v4s.png
+  figures/GCK_3d/fig_gck_3vev_vs_1v4s.png
 """
 import os
 import warnings
@@ -180,7 +180,9 @@ def main():
     fig.suptitle(f"GCK structure comparison — global Cα RMSD {g_rms:.2f} Å "
                  f"(small {s_rms:.2f} / large {l_rms:.2f})", fontsize=12)
     plt.tight_layout(rect=[0, 0, 1, 0.95])
-    out = os.path.join(C.FIGURES, "fig_gck_3vev_vs_1v4s.png")
+    figdir = os.path.join(C.FIGURES, "GCK_3d")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "fig_gck_3vev_vs_1v4s.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"\nSaved {out}")

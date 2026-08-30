@@ -13,7 +13,7 @@ the group. We aggregate the mean across the 23 subset models.
 
 Outputs:
   results/hxk4_quartile_by_agreement.csv
-  figures/fig_hxk4_quartile_by_agreement.png
+  figures/GCK_pilot_analysis/fig_hxk4_quartile_by_agreement.png
 """
 import os
 import numpy as np
@@ -103,7 +103,9 @@ def main():
     fig.suptitle("HXK4_HUMAN: 'winners' collapse on the high-fitness tail, high- vs low-agreement sites",
                  fontsize=12)
     plt.tight_layout()
-    out = os.path.join(C.FIGURES, "fig_hxk4_quartile_by_agreement.png")
+    figdir = os.path.join(C.FIGURES, "GCK_pilot_analysis")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "fig_hxk4_quartile_by_agreement.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"\nSaved {out}")

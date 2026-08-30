@@ -26,9 +26,9 @@ disagree-at-conserved proteins (P53) with the disagree-at-variable ones
 (PTEN, HXK4).
 
 Outputs (results/MSA_conservation/), tagged by threshold, e.g. _p80_20 / _p90_10:
-  H1_P53_dms_relfrac_by_site_<tag>.csv
-  H1_P53_relfrac_summary_<tag>.csv
-  H2_persite_spearman_by_class_<tag>.csv
+  H1/H1_P53_dms_relfrac_by_site_<tag>.csv
+  H1/H1_P53_relfrac_summary_<tag>.csv
+  H2/H2_persite_spearman_by_class_<tag>.csv
 """
 import os
 import importlib.util
@@ -38,6 +38,9 @@ import common as C
 from scipy.stats import spearmanr
 
 OUT = C.rp("MSA_conservation")
+H1DIR = os.path.join(OUT, "H1")     # H1 relfrac tables
+H2DIR = os.path.join(OUT, "H2")     # H2 per-site class-Spearman tables
+PPDIR = os.path.join(OUT, "per_protein_conservation")  # 28's per-protein tails
 COLOC = os.path.join(C.rp("high_disagreement_colocalization"),
                      "colocalization_shared_sites.csv")
 
@@ -125,7 +128,7 @@ def run_H1(hi, lo, tag):
                      "all_low_n": int((cc.cl == "low").sum()),
                      "all_low_relfrac": round(cc.loc[cc.cl == "low", "relfrac"].mean(), 1)})
         for dtail in ("high", "low"):
-            ts = pd.read_csv(os.path.join(OUT, f"p53_{dtail}_disagreement_conservation.tsv"), sep="\t")
+            ts = pd.read_csv(os.path.join(PPDIR, f"p53_{dtail}_disagreement_conservation.tsv"), sep="\t")
             ts = ts[ts.DMS_id == dms].merge(rf, on="up_pos", how="left")
             for _, r in ts.iterrows():
                 rows.append({"assay": short, "up_pos": int(r.up_pos), "residue": r.residue,
@@ -134,8 +137,9 @@ def run_H1(hi, lo, tag):
                              "cons_label": clabel(r.conservation_percentile, hi, lo),
                              "dms_relfrac": round(r.relfrac, 1) if pd.notna(r.relfrac) else np.nan})
     tab = pd.DataFrame(rows)
-    tab.to_csv(os.path.join(OUT, f"H1_P53_dms_relfrac_by_site_{tag}.csv"), index=False)
-    pd.DataFrame(summ).to_csv(os.path.join(OUT, f"H1_P53_relfrac_summary_{tag}.csv"), index=False)
+    os.makedirs(H1DIR, exist_ok=True)
+    tab.to_csv(os.path.join(H1DIR, f"H1_P53_dms_relfrac_by_site_{tag}.csv"), index=False)
+    pd.DataFrame(summ).to_csv(os.path.join(H1DIR, f"H1_P53_relfrac_summary_{tag}.csv"), index=False)
     sel = tab.groupby(["dis_tail", "cons_label"])["dms_relfrac"].agg(["mean", "count"]).round(1)
     return tab, pd.DataFrame(summ), sel
 
@@ -159,7 +163,8 @@ def run_H2(hi, lo, tag):
                                "cons_label": clabel(rr["cons_pct"], hi, lo)})
                     rows.append(rr)
     h2 = pd.DataFrame(rows)
-    h2.to_csv(os.path.join(OUT, f"H2_persite_spearman_by_class_{tag}.csv"), index=False)
+    os.makedirs(H2DIR, exist_ok=True)
+    h2.to_csv(os.path.join(H2DIR, f"H2_persite_spearman_by_class_{tag}.csv"), index=False)
     return h2
 
 
@@ -176,7 +181,8 @@ def main():
         print("\n[H2] per-site Spearman by class at shared high-disagreement sites, by regime x conservation")
         agg = h2.groupby(["regime", "cons_label"])[["seqmsa", "struct"]].agg(["mean", "count"]).round(3)
         print(agg.to_string())
-    print("\nwrote H1_*/H2_* CSVs (tagged _p80_20 and _p90_10) to", OUT)
+    print("\nwrote H1_*/H2_* CSVs (tagged _p80_20 and _p90_10) to",
+          H1DIR, "and", H2DIR)
 
 
 if __name__ == "__main__":

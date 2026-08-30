@@ -14,8 +14,8 @@ and test the site-level relationship between agreement and accuracy.
 Outputs:
   results/hxk4_agreement_vs_accuracy_sites_<assay>.csv
   results/hxk4_agreement_vs_accuracy_bymodel.csv
-  figures/fig_hxk4_agreement_vs_accuracy_scatter.png
-  figures/fig_hxk4_agreement_vs_accuracy_bymodel.png
+  figures/GCK_pilot_analysis/fig_hxk4_agreement_vs_accuracy_scatter.png
+  figures/GCK_pilot_analysis/fig_hxk4_agreement_vs_accuracy_bymodel.png
 """
 import os
 import numpy as np
@@ -122,7 +122,9 @@ def main():
     fig.suptitle("HXK4_HUMAN: do sites where models agree with each other also match the experiment?",
                  fontsize=12)
     plt.tight_layout()
-    out1 = os.path.join(C.FIGURES, "fig_hxk4_agreement_vs_accuracy_scatter.png")
+    figdir = os.path.join(C.FIGURES, "GCK_pilot_analysis")
+    os.makedirs(figdir, exist_ok=True)
+    out1 = os.path.join(figdir, "fig_hxk4_agreement_vs_accuracy_scatter.png")
     plt.savefig(out1, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"\nSaved {out1}")
@@ -149,7 +151,7 @@ def main():
     fig.suptitle("HXK4_HUMAN: model accuracy vs experiment on HIGH- vs LOW-agreement sites (23-model subset)",
                  fontsize=12)
     plt.tight_layout()
-    out2 = os.path.join(C.FIGURES, "fig_hxk4_agreement_vs_accuracy_bymodel.png")
+    out2 = os.path.join(figdir, "fig_hxk4_agreement_vs_accuracy_bymodel.png")
     plt.savefig(out2, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"Saved {out2}")

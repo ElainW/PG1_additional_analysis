@@ -28,7 +28,7 @@ Disagreement = 1 - mean pairwise within-site Spearman (from 06 results).
 Outputs:
   results/gck_3d_residue_distances.csv           (per residue: dists + disagreement)
   results/gck_3d_summary.csv                     (correlations + permutation tests)
-  figures/fig_gck_3d_distance_vs_disagreement.png
+  figures/GCK_3d/fig_gck_3d_distance_vs_disagreement.png
 """
 import os
 import warnings
@@ -165,7 +165,9 @@ def main():
             print(f"[{key}] WARNING: {mism} wt/pdb residue mismatches")
 
     plt.tight_layout()
-    out = os.path.join(C.FIGURES, "fig_gck_3d_distance_vs_disagreement.png")
+    figdir = os.path.join(C.FIGURES, "GCK_3d")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "fig_gck_3d_distance_vs_disagreement.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
 

@@ -16,7 +16,7 @@ functional map for both assays.
 Outputs:
   results/gck_site_functional_annotation_<assay>.csv
   results/gck_disagreement_vs_function_summary.csv
-  figures/fig_gck_structure_map.png
+  figures/site_disagreement/HXK4_HUMAN/fig_gck_structure_map.png
 """
 import os
 import json
@@ -157,7 +157,9 @@ def main():
     axes[0].legend(handles=legend, fontsize=8, ncol=3, loc="upper center", bbox_to_anchor=(0.5, 1.28))
     axes[0].set_title("GCK (HXK4_HUMAN): per-site model disagreement vs functional map", fontsize=12, pad=28)
     plt.tight_layout()
-    out = os.path.join(C.FIGURES, "fig_gck_structure_map.png")
+    figdir = os.path.join(C.FIGURES, "site_disagreement", "HXK4_HUMAN")
+    os.makedirs(figdir, exist_ok=True)
+    out = os.path.join(figdir, "fig_gck_structure_map.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"\nSaved {out}")
