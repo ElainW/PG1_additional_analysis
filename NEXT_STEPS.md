@@ -1,5 +1,106 @@
 # Planned analyses
 
+## Expand the allosteric map beyond Src
+
+**Plan.** Generate the allosteric map for **HXK4_HUMAN, RASK_HUMAN, CP2C9_HUMAN,
+PTEN_HUMAN, VKOR1_HUMAN** — in addition to **SRC_HUMAN**, already in
+`results/allosteric_map/` (`SRC_HUMAN.tsv`). These proteins were selected because
+(a) there are existing allostery-mapping papers to source/curate site annotations
+from, (b) they have a large number of DMS mutations, and (c) their MSA has a
+suitable Neff/L (`MSA_Neff_L`).
+
+**Structure / conformation selection (PDB IDs).** Per protein, the conformational
+states and the PDB structures collected so far (`?` = state exists but structure not
+yet selected):
+
+| Protein | Conformations | PDB IDs collected |
+| --- | --- | --- |
+| HXK4_HUMAN | 3 states: super-open, open, closed | super-open `1V4T`, open `?`, closed `1V4S` |
+| RASK_HUMAN | ≥2 (need ≥2 structures) | active (RAF1+GTP-bound) `6VJJ`; second `?` |
+| SRC_HUMAN | 3 states (only 2 collected) | inactive `2SRC`, active `1Y57`; third state `?` |
+| CP2C9_HUMAN | — | `1R9O` |
+| PTEN_HUMAN | — | `1D5R` |
+| VKOR1_HUMAN | — | `6WVH` (Claude-selected, extrapolated from other literature structures) |
+
+**Open gaps to resolve before mapping.** (1) HXK4 **open**-state PDB; (2) RASK
+**second** structure (e.g. an inactive/GDP-bound state to pair with active `6VJJ`);
+(3) SRC **third** conformational state (a third PDB beyond `2SRC`/`1Y57`). Note VKOR1
+`6WVH` is an extrapolated pick and should be double-checked against the literature.
+
+**Ties to:** `results/allosteric_map/` (per-protein atlases),
+"Conservation vs allosteric / active sites (Src)" section below (the Src template
+this generalizes), `28_msa_conservation.py` (`MSA_Neff_L` for MSA-suitability screen).
+
+## Multiple-conformation confound at high-disagreement sites
+
+**Scope.** For every mapped protein above with **more than one conformation** —
+**HXK4_HUMAN** (3 states: super-open/open/closed), **RASK_HUMAN**, **SRC_HUMAN**
+(3 states) — test whether
+within-site model disagreement is driven by the models not accounting for
+**multiple conformations**.
+
+**Motivation / hypothesis.** These proteins have different active states associated
+with different conformations. **None** of our structure-based models here considers
+multiple conformations, so residues that behave differently across active vs
+inactive states should be systematically mishandled by structure-only models.
+The signature to look for: high-disagreement residues involved in **long-range
+side-chain↔side-chain interactions** — salt bridges, pi-cation interactions,
+side-chain–side-chain bonds, side-chain–backbone H-bonds — that are present in the
+**active-only** conformation and in **swapping** residues (interactions that change
+partner/state between conformations). Sequence models (or any model that ingests
+sequence — sequence-only, or multimodal sequence+structure / sequence+structure+
+functional-annotation; consider whether an MSA is required) are expected to
+circumvent this problem because they are not tied to a single input conformation.
+
+**Steps.**
+1. Enumerate the candidate sites: residues in long-range side-chain↔side-chain
+   interactions that are active-only or swapping across the conformations (per
+   protein: HXK4 3-state, RASK, SRC 3-state).
+2. For all such sites, check whether we see **some level** of within-site model
+   disagreement — it need not be in the absolute-highest tier, but should be
+   somewhat elevated relative to baseline.
+3. Where such disagreement is present, test whether **sequence models or
+   multimodal models that include sequence** (sequence+structure, or
+   sequence+structure+functional-annotation) **outperform structure-based
+   models** at those sites.
+
+**Ties to:** `results/allosteric_map/` (per-protein conformation/interaction
+annotations), `28_msa_conservation.py` + H2 findings (model-class within-site
+accuracy by class), `16_collapse_modeltype_withinsite.py` (model-type structure),
+`results/qc_directionality/directionality_check.csv` (`model_type` classes).
+
+## Sequence/structure features as a trust signal (or direct predictor) for model calls
+
+**Question.** Can sequence and structural features tell us **how much to trust** the
+existing DL/ML models — or can we use the sequence/structural features **directly**
+(instead of the models) to predict mutation effects, especially at low-agreement
+sites?
+
+**Structural features to quantify.**
+- **Intramolecular interactions & dynamics:** long-range side-chain↔side-chain
+  contacts, classified by conformational role — **active-only**, **inactive-only**,
+  **swapping**, and **static** (see the Src kinase allosteric-landscape paper's
+  quantification of structural features and contacts).
+- **rSASA** (relative solvent-accessible surface area): which low-agreement residues
+  are in the **core (rSASA < 0.25)** vs on the **surface**? Are the core ones
+  involved in key interactions for proper folding?
+- **Secondary-structure type** annotated from UniProt (helix, beta sheet, turn,
+  loop) or from prior publications.
+- **Distance from the catalytic site** and **distance to the nucleotide**.
+
+**Sequence features to quantify.**
+- Change in **net charge**, change in **hydrophobicity**.
+- **Mutation type** — WT and mutant amino-acid identity.
+
+**Analysis.** Relate these features to within-site model disagreement / agreement:
+(a) do they explain where models are untrustworthy (trust signal), and (b) how far a
+feature-only predictor gets on its own vs the DL/ML models.
+
+**Ties to:** the two sections above (allosteric maps + multiple-conformation sites),
+Src kinase allosteric-landscape paper (structural-feature/contact quantification),
+`17_gck_3d_distances.py` (catalytic/ligand distance template),
+`28_msa_conservation.py` (conservation feature, per-site disagreement).
+
 ## R377H (and model-undercalled GCK LoF) via the GCK allostery map
 
 **Motivation.** Script `22` showed models systematically *under-call* LoF disease
@@ -73,7 +174,7 @@ Nguyen_2022, Chakraborty_2023_binding-DAS_25uM). Atlas fields: `site_class`
    and within-assay `conservation_percentile`); allosteric second-shell
    intermediate; bare allosteric sites *less* conserved despite being functional.
 2. Activating (GoF, ddGa<0) sites are less conserved than inhibitory (LoF) sites.
-3. High-disagreement Src sites (`26`, `27`; `src_high_disagreement_conservation.tsv`)
+3. High-disagreement Src sites (`26`, `27`; `per_protein_conservation/src_high_disagreement_conservation.tsv`)
    are enriched for **allosteric** rather than active-site class, and tend to be
    conserved-but-allosteric or variable — where sequence/MSA models lack the signal.
 
@@ -95,7 +196,7 @@ power (7 active-site residues).
 
 **Ties to:** `28_msa_conservation.py` (conservation),
 `26_src_allosteric_sites.py` + `results/allosteric_map/SRC_HUMAN.tsv` (atlas),
-`results/MSA_conservation/src_high_disagreement_conservation.tsv` (labelled sites),
+`results/MSA_conservation/per_protein_conservation/src_high_disagreement_conservation.tsv` (labelled sites),
 Beltran, Naqvi, Faure & Lehner 2026 (Src allosteric landscape).
 
 ## Mechanism of the per-assay disagreement ↔ conservation sign
@@ -105,48 +206,21 @@ conservation) is protein-specific (−0.59 to +0.42): in some proteins (P53, HSP
 VKOR1) models disagree most at the **most-conserved** sites, in others (NPC1, PTEN,
 RL40A, RPC1, CCDB) at the **least-conserved**. Why? Two hypotheses.
 
-**H1 — experimental (DMS-score spread).** At more-conserved positions the DMS
-scores of the ~19 substitutions are spread over a larger fraction of the assay's
-score range (more functional signal), which could drive within-site disagreement.
-*Status: tested, rejected — and the true pattern is the opposite.* Within-assay
-Spearman(conservation, per-position DMS-score std) = **+0.20** (positive in 41/48
-assays) — the assay-wide premise holds — but Spearman(disagreement, DMS-spread) =
-**−0.08** (positive in only 12/48). Zoomed into P53's three Giacomelli assays under the strict split (script `34`;
-high = percentile ≥80, low = ≤20 or NaN;
-`results/MSA_conservation/H1_P53_dms_relfrac_by_site_p80_20.csv`), with each site's
-DMS *relative fraction* = max−min of its substitutions' DMS-percentiles within the
-assay: the **high-disagreement** selected sites are **compressed** (mean relfrac
-≈47) vs the **low-disagreement** sites (≈60–63) and the assay-wide high-conservation
-baseline (≈59–62); robust at 90/10 (≈45 vs ≈60). Mechanism: at a critical conserved
-residue nearly every substitution is similarly deleterious → narrow within-site DMS
-range → the fine within-site order is noise → models disagree. Disagreement tracks
-*compressed* within-site signal, not the larger spread H1 posited. (ProteinGym
-assays are pre-selected for a decent overall DMS range, so this is a per-site, not
-per-assay, compression.)
+**H1 (DMS-score spread) — DONE, rejected. H2 (model-class performance) — DONE,
+supported.** The full findings, numbers, and the threshold caveat now live in the
+README (§"Site conservation vs disagreement", the two-hypotheses subsection);
+outputs are `results/MSA_conservation/H1/H1_*` and `H2/H2_*` from script `34`. In brief:
+H1's premise (conserved ⇒ wider within-site DMS spread ⇒ disagreement) fails — the
+opposite holds, high-disagreement sites carry a *compressed* within-site DMS signal
+(relfrac ≈46 vs ≈62 at the low-disagreement sites, robust to the conservation
+split); **note** the "conserved-site baseline" is threshold-sensitive (≈68–69 at
+50/50, ≈59–62 at 80/20, ≈46–52 at 90/10), so always state the split. H2 holds under
+the strict split: at P53's conserved high-disagreement sites seq+MSA models beat
+structure-only (0.144 vs 0.040), whereas at PTEN/HXK4's variable sites all classes
+are uninformative (0.069 vs 0.035). What **remains** is the generalization beyond
+P53/PTEN/HXK4 (the Steps below).
 
-**H2 — model-class performance.** Models disagree most at conserved sites *when the
-MSA / Structure&MSA classes do much better there than sequence/structure-only
-models* (a real accuracy gap → divergent rankings), and disagree most at
-low-conservation sites *when all classes do poorly* (little information). Classes
-per `results/qc_directionality/directionality_check.csv:model_type`.
-*Status: supported under the strict conservation split (script `34`; high =
-percentile ≥80, low = ≤20 or NaN; stable at 90/10). Per-site Spearman by class,
-`results/MSA_conservation/H2_persite_spearman_by_class_p80_20.csv`.*
-- **Disagree-at-conserved (P53), high-conservation shared sites — a real class
-  gap.** sequence+MSA per-site Spearman **0.144** vs structure-only **0.040**
-  (seq+MSA > structure in 18/27 site-assay pairs). Conserved high-disagreement
-  sites carry signal that sequence/MSA models partly read and structure-only
-  models don't → the classes genuinely diverge.
-- **Disagree-at-variable (PTEN, HXK4), low-conservation shared sites — everyone
-  loses.** sequence+MSA **0.069** vs structure-only **0.035**, ~78% of sites below
-  0.2 (HXK4 W99, percentile 13.8, the archetype). No class is informative.
-- So the two regimes are mechanistically distinct: disagree-at-conserved =
-  compressed within-site signal that sequence/MSA models exploit unevenly vs
-  structure-only; disagree-at-variable = a low-information regime for every class.
-  Threshold sensitivity (80/20 vs 90/10) and the full per-assay generalization
-  (beyond P53/PTEN/HXK4) remain to complete.
-
-**Steps.**
+**Steps (remaining generalization work).**
 1. Compute per-site, per-model within-site rank accuracy for all assays; summarise
    by `model_type` and by conservation tertile (extend the P53/PTEN probe to all 53).
 2. Decompose the disagreement metric itself: is high disagreement driven by
