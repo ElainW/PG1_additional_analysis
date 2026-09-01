@@ -128,6 +128,7 @@ python3 28_msa_conservation.py                # per-column MSA conservation vs d
 python3 29_family_best_category_analysis.py   # per-category leaderboard (Spearman + NDCG@10) + high/low-disagreement rank-vs-accuracy (fig9)
 python3 30_export_low_disagreement_sites.py   # per-protein tables of low-disagreement sites (mirror of 27)
 python3 31_disagreement_distributions.py      # per-UniProt disagreement distribution plots -> figures/site_disagreement/distribution/
+
 python3 32_high_disagreement_colocalization.py # do a protein's high-disagreement sites recur across its assays? permutation test (add 'low' arg for control tail)
 python3 33_colocalization_forest.py           # forest plot of 32's per-assay observed-vs-null overlap ('low' arg for control tail)
 python3 34_conservation_disagreement_mechanism.py # H1 (DMS-spread) + H2 (model-class) mechanism tests -> results/MSA_conservation/{H1,H2}/
@@ -142,6 +143,7 @@ python3 42_assayspecific_best_model_per_assay.py   # single best family-best mod
 python3 43_assayspecific_rank_tiers.py        # top / rank-23 / lowest within-site model at assay-specific hard sites
 python3 44_persite_category_leaderboard.py    # per-site Spearman leaderboard over 217 assays x 45 models + category tier plot
 python3 45_p53_highcons_classwise.py          # P53 disagree-at-conserved: seq/MSA vs structure-based per-site Spearman by class
+python3 46_persite_vs_global_spearman.py      # per-site (weighted) vs overall Spearman + curve fit (--recompute to rebuild the ~8min long table)
 ```
 Planned analyses are tracked in `NEXT_STEPS.md`.
 
@@ -690,6 +692,33 @@ acceptable substitution. The DMS assays behave the same way (GoF 0.67 vs LoF 0.5
 median), so neither models nor these molecular assays capture dosage/physiological
 GoF pathogenicity.
 
+**Per-site vs overall Spearman (46).** For every (assay, model) among the
+23-model subset we compare the standard whole-assay Spearman (**overall**, all
+variants, = `01`) against a **per-site** Spearman: within single substitutions,
+group by residue position, take Spearman(DMS, model) at each site with ≥3
+mutations, then average those site Spearmans **weighted by #mutations/site**
+(undefined sites dropped). Overall mixes the easy across-position signal with the
+hard within-site signal; per-site isolates the local landscape. Across all 217
+assays (4,968 of 4,991 defined — CCDB_ECOLI_Adkar_2012 has no ≥3-mut sites) the
+two track each other at **Pearson r=0.65, Spearman ρ=0.64**, but per-site is
+systematically **lower**: mean **0.29 vs 0.46 overall**, **90.4%** of points fall
+below y=x (median gap **−0.17**) — within-site is the harder problem for every
+model class. The cloud is essentially linear over this range: of the three
+candidate curves fit, the saturating exponential wins but only by degenerating to
+near-linear (`y = 3.19 − 3.14·e^(−0.17x)`, **R²=0.42** ≈ Pearson²); the genuinely
+concave forms are worse (logarithmic R²=0.34, negative-quadratic-on-left-half
+R²=0.26), so there is no meaningful diminishing-returns curvature. Per-assay
+scatters for the ten target assays (PTEN ×2, P53 ×4, GCK/HXK4 ×2, CP2C9 ×2) show
+the coupling varies sharply by assay: **CP2C9 tightest** (per-assay r 0.96–0.98),
+PTEN/GCK intermediate (r 0.73–0.93), and the **P53 Giacomelli assays decouple** —
+overall stays ~0.4 but per-site collapses to ~0.03–0.06 (WT_Nutlin: across the 23
+models overall vs per-site even correlate *negatively*, ρ=−0.17), the sharpest
+"good whole-assay number masking an unresolved within-site landscape" case in the
+target set. Outputs: `persite_vs_global_long.csv`,
+`persite_vs_global_summary.csv`, `aggregate_curve_fits.csv`;
+`figures/persite_vs_global/aggregate_persite_vs_global.png` + one scatter per
+target assay.
+
 ## External claims we checked
 Two claims from *"Overestimating zero-shot fitness prediction"*
 (`../../Papers/interesting papers/overestimating_zeroshot_fitness_prediction.pdf`):
@@ -791,6 +820,11 @@ Overlap: `assay_position_overlap_{proteins,pairs,selected_assays}.csv`.
 Physchem / accuracy / collapse: `abundance_physchem_model_table.csv`,
 `hxk4_agreement_vs_accuracy_*.csv`, `hxk4_quartile_by_agreement*.csv`,
 `collapse_modeltype_withinsite.csv`.
+Per-site vs overall Spearman (`46`) — under `results/persite_vs_global/`:
+`persite_vs_global_long.csv` (per assay × model: `overall_spearman`,
+`persite_spearman`, `n_sites_used`, `n_muts_in_sites`, `n_variants`),
+`persite_vs_global_summary.csv` (per-assay overall↔per-site Pearson/Spearman +
+means), `aggregate_curve_fits.csv` (the three candidate curve fits + R²).
 Allosteric maps: `allosteric_map/SRC_HUMAN.tsv` (per-residue Src allosteric-site
 atlas parsed from Beltran 2026 — site class, inhibitory/activating direction,
 region, druggable pocket, evidence; `26`).
