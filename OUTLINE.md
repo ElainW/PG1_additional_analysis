@@ -39,12 +39,12 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | # | Figure | Section | Main / appx | Source |
 |---|--------|---------|-------------|--------|
 | F1 | Schematic: optimization-as-scoring-function + global-vs-within-site axes | §1–§2 | main | new (schematic) |
-| F2 | Global Spearman vs within-site Spearman per model, with P53-Giacomelli breakdown highlighted | §3.1 | main | new cut of `03`/`spearman_long` |
-| F3 | Winners collapse: ρ vs fitness quantile (overall → top-25% → top-10%) | §3.2 | main | `14`/`16`; external-claim table |
-| F4 | Oracle vs category tiers: within-site ρ for top-1/top-3/all vs per-site oracle | §3.3 | main | `29` `fig9_*` |
-| F5 | Spearman vs NDCG@10 redundancy (rank–rank scatter / correlation) | §3.4 | appx | `29` leaderboard |
-| F16 | Functional enrichment: disagreement near binding/active-site residues, per protein (10/13, pooled p=5e-13) | §4.0 | main | `15` `generalization_functional_disagreement_per_protein.csv` |
-| F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §4.0 | appx | `23` `fig_<gene>_structure_map.png`; allostery `26` |
+| F16 | Functional enrichment: disagreement near binding/active-site residues, per protein (10/13, pooled p=5e-13) | §3.1 | main | `15` `generalization_functional_disagreement_per_protein.csv` |
+| F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §3.1 | appx | `23` `fig_<gene>_structure_map.png`; allostery `26` |
+| F2 | Global Spearman vs within-site Spearman per model, with P53-Giacomelli breakdown highlighted | §3.2 | main | new cut of `03`/`spearman_long` |
+| F3 | Winners collapse: ρ vs fitness quantile (overall → top-25% → top-10%) | §3.3 | main | `14`/`16`; external-claim table |
+| F4 | Oracle vs category tiers: within-site ρ for top-1/top-3/all vs per-site oracle | §3.4 | main | `29` `fig9_*` |
+| F5 | Spearman vs NDCG@10 redundancy (rank–rank scatter / correlation) | §3.5 | appx | `29` leaderboard |
 | F6 | Co-localization forest, high vs low tail (obs vs null band, per protein) | §4.1 | main | `33` `fig_colocalization_forest*.png` |
 | F7 | Co-localization summary: pooled fraction + bootstrap CI, high vs low | §4.1 | appx | `32` `colocalization_pooled_ci.csv` |
 | F8 | Rank↔within-site accuracy at high-disagreement sites (the ρ≈−0.05…−0.15 panel) | §4.2 | main | `29` `fig9_*` |
@@ -78,7 +78,7 @@ reused.
 - Cite **Spinner et al.** as precedent; we generalize + diagnose.
 - **Stakes (why the hard sites are the ones that matter):** the sites where model
   selection fails — the high-disagreement sites — are **enriched for functional
-  importance** (binding / active / allosteric residues; §4.0). In a real
+  importance** (binding / active / allosteric residues; §3.1). In a real
   optimization task you are *working on exactly these positions*, so the recipe
   fails precisely where the task lives. This is what makes the negative result
   consequential rather than academic.
@@ -100,43 +100,11 @@ reused.
 
 ## 3. The recipe fails  *(element #3 — core, ordered as an argument)*
 
-**3.1 Global rank correlation mostly tracks within-site — until it doesn't.**
-For most models on most assays, global and within-site Spearman are correlated,
-so the leaderboard isn't uniformly wrong. The failure is **assay-specific and
-catastrophic**: on some assays within-site signal collapses even for globally
-strong models — e.g. **P53_HUMAN Giacomelli** (within-site Spearman breaks down
-completely). You can't tell from a global number whether you're on a well-behaved
-or a broken-within-site assay, and the new-protein setting gives no way to check.
-- **Figs:** F2.
-
-**3.2 The winners collapse.** Ranking power vanishes on the top fitness quartile
-(ESM3 0.49→0.04→−0.01 at top-25%/10%; reproduces the CP2C9 cytochrome case;
-generalizes across 209 assays). Models are good *filters of deleterious variants,
-poor prioritizers of winners* — and optimization is exactly the winner regime.
-- **Figs:** F3.
-
-**3.3 Headline: category-level selection barely helps.** Better-ranked models win
-at high-disagreement sites only weakly (ρ(rank, within-site) ≈ **−0.05 to
-−0.15**); the **per-site oracle (0.56–0.73) dwarfs every category tier**. Picking
-the top model by Spearman/NDCG in the assay category does **not** solve it;
-site-specific choice would help far more.
-- **Figs:** F4.
-
-**3.4 Spearman and NDCG@10 are redundant, not complementary.** Neither captures
-within-site or winner ranking; they rank models near-identically.
-- **Figs:** F5 (appx).
-
-## 4. Failure-cause diagnostics  *(element #4)*
-
-Why do models disagree, and is the disagreement exploitable for selection? First
-establish *why we care* (§4.0), then split high-disagreement sites into two
-categories, then ask what property (if any) tells you which model to trust.
-
-**4.0 Why these sites matter: high-disagreement sites are enriched for functional
-importance.** This is the stakes subsection — the reason the negative result is
-consequential. In an actual optimization task you work on the functionally
-important residues (binding / active / allosteric), and those are where models
-disagree:
+**3.1 Why these sites matter: high-disagreement sites are enriched for functional
+importance.** The stakes, established before the failures — the reason the negative
+result is consequential. In an actual optimization task you work on the functionally
+important residues (binding / active / allosteric), and those are exactly where
+models disagree, so the recipe fails where the task lives:
 - **Binding/active-site enrichment generalizes.** Across multi-assay proteins,
   within-site disagreement is elevated near **binding/active-site residues** in
   **10/13 proteins** (pooled p=**5×10⁻¹³**, `15`); on GCK specifically the 1-D
@@ -162,6 +130,39 @@ disagree:
     functionally *annotated* residues."
 - **Figs:** F16 (main — cross-protein binding enrichment), F17 (appx — GCK
   structure-map exemplar with allostery overlay).
+
+**3.2 Global rank correlation mostly tracks within-site — until it doesn't.**
+For most models on most assays, global and within-site Spearman are correlated,
+so the leaderboard isn't uniformly wrong. The failure is **assay-specific and
+catastrophic**: on some assays within-site signal collapses even for globally
+strong models — e.g. **P53_HUMAN Giacomelli** (within-site Spearman breaks down
+completely). You can't tell from a global number whether you're on a well-behaved
+or a broken-within-site assay, and the new-protein setting gives no way to check.
+- **Figs:** F2.
+
+**3.3 The winners collapse.** Ranking power vanishes on the top fitness quartile
+(ESM3 0.49→0.04→−0.01 at top-25%/10%; reproduces the CP2C9 cytochrome case;
+generalizes across 209 assays). Models are good *filters of deleterious variants,
+poor prioritizers of winners* — and optimization is exactly the winner regime.
+- **Figs:** F3.
+
+**3.4 Headline: category-level selection barely helps.** Better-ranked models win
+at high-disagreement sites only weakly (ρ(rank, within-site) ≈ **−0.05 to
+−0.15**); the **per-site oracle (0.56–0.73) dwarfs every category tier**. Picking
+the top model by Spearman/NDCG in the assay category does **not** solve it;
+site-specific choice would help far more.
+- **Figs:** F4.
+
+**3.5 Spearman and NDCG@10 are redundant, not complementary.** Neither captures
+within-site or winner ranking; they rank models near-identically.
+- **Figs:** F5 (appx).
+
+## 4. Failure-cause diagnostics  *(element #4)*
+
+Why do models disagree, and is the disagreement exploitable for selection? We
+established *why we care* in §3.1 (these sites are functionally important). Here we
+split high-disagreement sites into two categories, then ask what property (if any)
+tells you which model to trust.
 
 **4.1 Category A — shared high-disagreement sites (recur across ≥2 assays).**
 *(Also establishes disagreement is site-intrinsic, not phenotypic noise — the
@@ -243,7 +244,7 @@ structure-robust) — disagreement isn't reducible to a single simple feature.
 **Actionable takeaways:**
 1. **Don't select a single model by category-level Spearman/NDCG@10 for
    optimization.** Global rank mostly tracks within-site but breaks
-   catastrophically on some assays (§3.1), collapses on the winners tail (§3.2),
+   catastrophically on some assays (§3.2), collapses on the winners tail (§3.3),
    and barely predicts which model is right at disagreement sites (§4.2); the
    per-site oracle dwarfs every tier.
 2. **Report within-site ranking and top-quartile ("winners") accuracy as
@@ -290,7 +291,7 @@ P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
   assays — the generalization of the tolerance/compression explanation beyond P53.
 - Confirm which figs are regenerable vs need new scripts (F2, F9 appear to need
   new cuts).
-- **Allostery expansion (§4.0):** extend the allosteric-site atlas beyond
+- **Allostery expansion (§3.1):** extend the allosteric-site atlas beyond
   SRC_HUMAN (HXK4/RASK/CP2C9/PTEN/VKOR1, per NEXT_STEPS) and test whether
   high-disagreement sites concentrate at allosteric/distal functional residues —
   strengthens the "functionally important sites" stakes. *[User adding info.]*
