@@ -128,6 +128,21 @@ python3 28_msa_conservation.py                # per-column MSA conservation vs d
 python3 29_family_best_category_analysis.py   # per-category leaderboard (Spearman + NDCG@10) + high/low-disagreement rank-vs-accuracy (fig9)
 python3 30_export_low_disagreement_sites.py   # per-protein tables of low-disagreement sites (mirror of 27)
 python3 31_disagreement_distributions.py      # per-UniProt disagreement distribution plots -> figures/site_disagreement/distribution/
+
+python3 32_high_disagreement_colocalization.py # do a protein's high-disagreement sites recur across its assays? permutation test (add 'low' arg for control tail)
+python3 33_colocalization_forest.py           # forest plot of 32's per-assay observed-vs-null overlap ('low' arg for control tail)
+python3 34_conservation_disagreement_mechanism.py # H1 (DMS-spread) + H2 (model-class) mechanism tests -> results/MSA_conservation/{H1,H2}/
+python3 35_conservation_histograms.py         # H1 per-category conservation tables for P53/PTEN/GCK -> H1/H1_conservation_by_category.csv
+python3 35_conservation_density_plots.py      # H1 per-category conservation tables for CYP2C9 -> H1/H1_conservation_by_category_cyp2c9.csv
+python3 37_conservation_dms_panels.py         # per-assay 2x2 conservation+DMS density panels (PTEN/CP2C9/HXK4/P53)
+python3 38_h2_lowcons_persite_spearman_density.py  # H2 table: per-site Spearman at shared high-disagreement LOW-conservation sites
+python3 39_h2_shared_strip_panel.py           # box+strip panel of 38 (PTEN|HXK4|CP2C9)
+python3 40_h2_highcons_shared_strip_panel.py  # H2 high-conservation counterpart table+panel (P53|HXK4)
+python3 41_assayspecific_category_best.py     # assay-SPECIFIC hard sites: does category-tuned model choice help? (3 figs + picks)
+python3 42_assayspecific_best_model_per_assay.py   # single best family-best model per assay at its assay-specific hard sites
+python3 43_assayspecific_rank_tiers.py        # top / rank-23 / lowest within-site model at assay-specific hard sites
+python3 44_persite_category_leaderboard.py    # per-site Spearman leaderboard over 217 assays x 45 models + category tier plot
+python3 45_p53_highcons_classwise.py          # P53 disagree-at-conserved: seq/MSA vs structure-based per-site Spearman by class
 python3 46_persite_vs_global_spearman.py      # per-site (weighted) vs overall Spearman + curve fit (--recompute to rebuild the ~8min long table)
 ```
 Planned analyses are tracked in `NEXT_STEPS.md`.
@@ -447,6 +462,95 @@ panel the low-agreement category is split into residues with an actual percentil
 HXK4-abundance 3, PTEN 1 per assay — i.e. P53's low-agreement conservation is
 genuinely high, not a gap artifact.
 
+### H2 per-site strip panels — the class gap, made per-site (`35`, `38`–`40`, `45`)
+
+Scripts `35`, `38`–`40` and `45` are the **table + figure machinery** behind the H2
+mechanism conclusion that `34` states in aggregate. All share one per-site quantity:
+**per-site Spearman** = `spearman(model_score, DMS_score)` over a single position's
+missense substitutions (scores used as-is, already oriented higher = fitter), computed
+at the protein's **shared** high-disagreement positions (flagged in ≥2 of its assays,
+from `32`'s `colocalization_shared_sites.csv`) with **≥5 subs**. In every panel each dot
+is one site, coloured by the *signed* `median(site DMS percentile) − WT DMS percentile`
+(RdBu; red = below WT, white = at WT), with the WT raw score oriented by
+`raw_DMS_directionality` before ranking — so dot colour reads as "below/above WT" only
+where the per-panel "WT at pct" is high (PTEN/HXK4/CP2C9 ~69–88; the P53 selection
+screens put WT mid, pct 35–48, so read colour relative to WT there, not as absolute
+deleteriousness).
+
+- **`35` (two scripts) — H1 conservation-category tables.** `35_conservation_histograms.py`
+  (P53/PTEN/GCK) and `35_conservation_density_plots.py` (CYP2C9) tabulate, per assay, each
+  shared high-/low-disagreement residue's *relative fraction of conservation*
+  (`conservation_percentile`/100, NaN→0) and its conservation category (high ≥80 / low ≤20
+  or NaN / mid), plus the relfrac range of highly-conserved **mid**-disagreement residues.
+  They only write the `H1/H1_conservation_by_category*.csv` tables; the density **figures**
+  that used to live here are now drawn by `37`.
+- **`38`+`39` — disagree-at-VARIABLE (low-conservation) panel.** `38` filters the shared
+  high-disagreement sites to **low conservation** (percentile < 20 or NaN) with ≥5 subs and
+  scores the **best-in-class model of each `model_type`** (highest overall Spearman in its
+  class; MSA forced to PoET so it is present on every assay) → `H2/h2_lowcons_shared_persite_spearman_by_site.csv`.
+  `39` draws the box+strip panel (columns PTEN | HXK4 | CP2C9, two assay rows). **Finding:
+  every class sits near ρ≈0** — the low-information regime of `34`'s H2 (no class reads a
+  variable, ambiguous site).
+- **`40` — disagree-at-CONSERVED (high-conservation) counterpart.** Same construction with
+  the filter flipped to conservation **≥ 80** (NaN excluded), for P53 and HXK4 →
+  `H2/h2_highcons_shared_persite_spearman_by_site.csv` + panel. This is where the class gap
+  lives (seq/MSA above structure-only), and `45` quantifies it.
+- **`45` — P53 seq/MSA vs structure-based, per class.** For P53's shared high-disagreement
+  **high-conservation** sites (`40`'s selection), the **median** per-site Spearman of each of
+  the 45 family-best models, boxed by the 5 populated model classes (ESM3 alone printed for
+  reference), with a per-assay Mann–Whitney `seq/MSA > structure-based` test.
+  **The seq/MSA-reads-conserved-signal gap is real but assay-specific:** it holds cleanly in
+  the two P53 **Null** selection assays (Giacomelli Null_Etoposide seq/MSA **0.224** vs struct
+  **0.109**; Null_Nutlin **0.157** vs **0.052**) but **reverses** in WT_Nutlin (0.263 vs
+  **0.332**) and is a wash in Kotler (0.121 vs 0.143, only n=3 sites). So `34`'s "disagree-at-
+  conserved = a real seq/MSA vs structure class gap" is driven by the Null-selection P53 arms,
+  not a uniform P53 property. `45` also writes `highcons_all` (every conserved site) and
+  `allsites` control tables/figures.
+
+### Assay-specific high-disagreement sites — does model choice rescue them? (`41`–`44`)
+
+The colocalization work (`32`) established that most high-disagreement sites **recur** across a
+protein's assays. Scripts `41`–`44` turn to the **complement**: positions flagged
+high-disagreement in only **one** assay (script-27 sites **minus** the protein's shared set,
+≥5 subs) — 7 assays across PTEN, HXK4/GCK, CP2C9, P53 carry these. The question is whether
+*assay-specific* disagreement is partly a matter of **picking the right model**: does a model
+tuned to the assay's phenotype category, or the assay's own best within-site model, do better
+at these sites?
+
+- **`41` — category-tuned model choice.** For each of the 5 selection categories, take the top
+  model on the `29` leaderboard (by Spearman, and separately by NDCG@10) and the best model of
+  each `model_type` class, and score their per-site Spearman at every assay's assay-specific
+  sites; a green baseline marks that model's *typical* within-site median over all ≥5-sub
+  positions in its category. **Category tuning does not rescue these sites:** the own-category
+  model's hard-site median is modest and **within the spread of models tuned for other
+  categories** (e.g. CP2C9-abundance own-cat 0.32 vs 0.11–0.32 across the five category models;
+  PTEN-Matreyek own-cat −0.02 vs −0.12–0.23), and everywhere well below the green typical-median
+  baseline. Outputs: `h2_assayspecific_persite_spearman_by_site{,_ndcg}.csv`,
+  `h2_assayspecific_persite_spearman_by_modelclass.csv`, `h2_assayspecific_category_best_models.csv`.
+- **`42` — single best model per assay.** Over the 45 family-best models, the winner (by median
+  per-site Spearman at the assay's assay-specific sites) is **idiosyncratic** — a different class
+  each time and never a globally top model: MIFST/MIF (Structure) for PTEN, MSA_Transformer for
+  HXK4-abundance, S2F for CP2C9-abundance, ESM2_650M for CP2C9-activity, SaProt/TranceptEVE for
+  the two P53 assays — reinforcing that there is no single winner; the right model is
+  site/assay-specific. Outputs: `h2_assayspecific_model_ranking_by_assay.csv`,
+  `h2_assayspecific_best_model_per_assay.csv`.
+- **`43` — does the assay's best within-site model still win here?** Rank the 45 family-best by
+  their **whole-assay** within-site median, pick the top / rank-23 / lowest, and plot each at the
+  assay-specific hard sites (dotted mark = the ranking basis). **The whole-assay ranking breaks
+  down at these sites:** even the assay's #1 within-site model collapses far below its own typical
+  median (CP2C9-abundance top 0.09 vs assay median 0.57; P53-Kotler top **−0.39** vs 0.54) and
+  does **not** reliably beat the middle/bottom tiers — confirming these sites are hard for *every*
+  model, not just the poor ones. Output: `h2_assayspecific_rank_tiers.csv`.
+- **`44` — per-site category leaderboard (all 217 assays).** The within-site analogue of `29`'s
+  whole-assay leaderboard: for every assay × 45 family-best model, mean per-site Spearman over its
+  ≥5-sub positions, averaged per category → `persite_spearman_by_assay.csv`,
+  `persite_category_leaderboard.csv`. **`AIDO.Protein-RAG-16B` (Structure & MSA) tops the within-
+  site leaderboard in 4/5 categories** (Activity 0.32, Binding 0.36, OrganismalFitness 0.30,
+  Stability 0.43), with **VenusREM** (also Structure & MSA) topping Expression (0.42) — i.e.
+  context-rich Structure&MSA models lead within-site accuracy overall, yet (per `41`–`43`) even
+  they do not resolve the assay-specific hard sites. Part 2 reruns `43`'s tier plot with the
+  top/rank-23/lowest chosen from this category leaderboard instead of the assay's own rank.
+
 ## Key findings
 
 **Taxon & model_type (02).** Pooled over models, mean Spearman is similar for
@@ -551,7 +655,21 @@ sites) that sequence+MSA models read but structure-only models don't (per-site
 Spearman 0.144 vs 0.040) — a real class gap; where disagreement is at variable
 sites (PTEN/HXK4), **all** model classes are uninformative (0.069 vs 0.035, ~76%
 below 0.2) — a low-information regime. Annotations behave as expected under
-weighting (binding/disease/functional sites more conserved, disordered less).
+weighting (binding/disease/functional sites more conserved, disordered less). The
+per-site strip panels (`38`–`40`, `45`) make the split visual and refine it: the
+seq/MSA-over-structure class gap at disagree-at-conserved sites holds in P53's **Null**
+selection assays (seq/MSA 0.22/0.16 vs struct 0.11/0.05) but reverses in WT_Nutlin.
+
+**No model choice rescues assay-specific hard sites (41–44).** For high-disagreement
+positions flagged in only one of a protein's assays (7 assays; PTEN/HXK4/CP2C9/P53),
+neither a **category-tuned** model (`41` — own-category model sits inside the spread of
+other categories' models) nor the assay's **own best within-site** model (`43` — the #1
+model collapses far below its typical median, e.g. CP2C9-abundance 0.09 vs 0.57, and
+doesn't beat the rank-23/lowest tiers) does appreciably better; the single best model per
+assay is idiosyncratic and never a globally top model (`42`). Context-rich Structure&MSA
+models (`AIDO.Protein-RAG-16B`, `VenusREM`) top the per-site accuracy leaderboard across
+217 assays in all 5 categories (`44`), yet still fail these sites — so assay-specific
+disagreement is site-intrinsic, not a solvable model-selection problem.
 
 **Disease-mutation anecdotes (from UniProt P35557).** W99 → **W99C / HHF3**
 (gain-of-function, activating) — the assay agrees (W99 is an activating position),
@@ -726,8 +844,20 @@ Spearman(disagreement, conservation) + p-value), and — under
 `<gene>_high_disagreement_conservation.tsv` (`27`'s labelled sites + conservation
 and its within-assay percentile). The mechanism follow-ups write into two further
 subdirs: `H1/` (script `34`'s `H1_P53_*` relfrac tables and `35`'s
-`H1_conservation_by_category.csv` / `H1_highcons_middisagreement_range.csv`) and
-`H2/` (`34`'s `H2_persite_spearman_by_class_*` per-site class tables).
+`H1_conservation_by_category{,_cyp2c9}.csv` / `H1_highcons_middisagreement_range{,_cyp2c9}.csv`)
+and `H2/` — `34`'s `H2_persite_spearman_by_class_*` per-site class tables, the shared-site
+per-site Spearman tables from `38`/`40`
+(`h2_{low,high}cons_shared_persite_spearman_by_site.csv`), the assay-specific tables from
+`41`–`43` (`h2_assayspecific_persite_spearman_by_site{,_ndcg,_by_modelclass}.csv`,
+`h2_assayspecific_category_best_models.csv`, `h2_assayspecific_model_ranking_by_assay.csv`,
+`h2_assayspecific_best_model_per_assay.csv`, `h2_assayspecific_rank_tiers.csv`), and `45`'s
+P53 classwise tables (`h2_p53_{highcons,highcons_all,allsites}_classwise_persite.csv`).
+Colocalization (`32`/`33`) — under `results/high_disagreement_colocalization/` (and the
+`low`-tail mirror `results/low_disagreement_colocalization/`): `colocalization_summary.csv`,
+`colocalization_per_assay.csv`, `colocalization_shared_sites.csv`, `colocalization_pooled_ci.csv`.
+Per-site leaderboard (`44`) — under `results/persite_analysis/`:
+`persite_spearman_by_assay.csv` (217 assays × 45 models) and
+`persite_category_leaderboard.csv` (category × model mean per-site Spearman + rank).
 
 Figures (regenerable, not tracked) land in `figures/`, with the HXK4 low-agreement
 batch under `figures/site_disagreement/HXK4_HUMAN/` and the per-protein disagreement
