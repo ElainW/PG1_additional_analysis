@@ -65,8 +65,9 @@ def per_model_median(subs, present):
 
 
 def build(kind):
-    """kind='highcons': shared high-disagreement, pct>80 sites (script 40).
-       kind='allsites': every >=5-sub position in the assay."""
+    """kind='highcons'     : shared high-disagreement, pct>80 sites (script 40).
+       kind='highcons_all' : ALL highly-conserved positions (pct>80), any disagreement.
+       kind='allsites'     : every >=5-sub position in the assay."""
     hd = M40.shared_high_sites() if kind == "highcons" else None
     rows = []
     for dms_id in ASSAYS:
@@ -74,6 +75,12 @@ def build(kind):
         if kind == "highcons":
             _, sites = M40.selected_high(dms_id, hd)
             subs = [sub for _, _, _, sub in sites]
+        elif kind == "highcons_all":
+            off = M38._offset(dms_id)
+            ck = M38.CONS[M38.CONS.DMS_id == dms_id].set_index("up_pos")["conservation_percentile"]
+            subs = [g for p, g in df.groupby("p")
+                    if len(g) >= M40.MIN_SUBS and pd.notna(ck.get(p + off, np.nan))
+                    and ck.get(p + off, np.nan) > 80]
         else:
             subs = [g for _, g in df.groupby("p") if len(g) >= M40.MIN_SUBS]
         if not subs:
@@ -141,6 +148,11 @@ def main():
     hc.to_csv(os.path.join(H2DIR, "h2_p53_highcons_classwise_persite.csv"), index=False)
     plot(hc, "high-cons shared sites (pct>80)",
          os.path.join(figdir, "fig_p53_highcons_classwise.png"))
+
+    hca = build("highcons_all")
+    hca.to_csv(os.path.join(H2DIR, "h2_p53_highcons_all_classwise_persite.csv"), index=False)
+    plot(hca, "all highly-conserved sites (pct>80)",
+         os.path.join(figdir, "fig_p53_highcons_all_classwise.png"))
 
     allp = build("allsites")
     allp.to_csv(os.path.join(H2DIR, "h2_p53_allsites_classwise_persite.csv"), index=False)
