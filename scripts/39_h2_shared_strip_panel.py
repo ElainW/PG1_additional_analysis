@@ -3,7 +3,7 @@ Combined panel (ONE COLUMN PER UniProt: PTEN | HXK4/GCK | CP2C9; two assay rows)
 of the per-site model Spearman at SHARED high-disagreement / low-conservation
 sites, as box + strip plots.
 
-Reads results/persite_analysis/h2_lowcons_shared_persite_spearman_by_site.csv (38).
+Reads results/MSA_conservation/H2/h2_lowcons_shared_persite_spearman_by_site.csv (38).
 Boxes are coloured by model_type class (standard palette). Each dot is one site,
 drawn in a single-hue white->black greyscale encoding how far that site's DMS
 signal sits from wild-type: |median(site substitution DMS percentiles) - WT DMS
@@ -26,7 +26,8 @@ import common as C
 sns.set_style("whitegrid")
 rng = np.random.default_rng(0)
 
-CSV = C.rp("h2_lowcons_shared_persite_spearman_by_site.csv")
+CSV = os.path.join(C.RESULTS, "MSA_conservation", "H2",
+                   "h2_lowcons_shared_persite_spearman_by_site.csv")
 
 # columns = UniProt; rows = that protein's assays (top -> bottom)
 PROT_ASSAYS = {

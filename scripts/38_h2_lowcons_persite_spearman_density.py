@@ -30,7 +30,7 @@ matching scripts 04/07.
 
 Outputs:
   figures/h2_persite_spearman_density/fig_<DMS_id>_lowcons_persite_spearman.png
-  results/persite_analysis/h2_lowcons_persite_spearman_by_site.csv
+  results/MSA_conservation/H2/h2_lowcons_shared_persite_spearman_by_site.csv
 """
 import os
 import importlib.util
@@ -176,7 +176,8 @@ def main():
                                      "abs_dms_pct_diff_from_wt": round(abs(diff), 2)})
 
     tab = pd.DataFrame(all_rows)
-    out_csv = C.rp("h2_lowcons_shared_persite_spearman_by_site.csv")
+    out_csv = os.path.join(C.RESULTS, "MSA_conservation", "H2",
+                           "h2_lowcons_shared_persite_spearman_by_site.csv")
     tab.to_csv(out_csv, index=False)
     print(f"\nwrote {out_csv}  ({len(tab)} rows)")
     # quick class summary per assay

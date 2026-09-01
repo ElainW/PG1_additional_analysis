@@ -14,7 +14,7 @@ model, standard palette); each dot is one site, greyscaled by
 far). Columns = UniProt (P53 | HXK4); rows = that protein's assays.
 
 Outputs:
-  results/persite_analysis/h2_highcons_shared_persite_spearman_by_site.csv
+  results/MSA_conservation/H2/h2_highcons_shared_persite_spearman_by_site.csv
   figures/h2_persite_spearman_density/fig_shared_highcons_persite_spearman_panel.png
 """
 import os
@@ -123,7 +123,8 @@ def build_table():
                                  "dms_pct_diff_from_wt": round(diff, 2),
                                  "abs_dms_pct_diff_from_wt": round(abs(diff), 2)})
     tab = pd.DataFrame(rows)
-    tab.to_csv(C.rp("h2_highcons_shared_persite_spearman_by_site.csv"), index=False)
+    tab.to_csv(os.path.join(C.RESULTS, "MSA_conservation", "H2",
+                            "h2_highcons_shared_persite_spearman_by_site.csv"), index=False)
     return tab, models
 
 
