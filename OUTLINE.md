@@ -43,6 +43,8 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F3 | Winners collapse: ρ vs fitness quantile (overall → top-25% → top-10%) | §3.2 | main | `14`/`16`; external-claim table |
 | F4 | Oracle vs category tiers: within-site ρ for top-1/top-3/all vs per-site oracle | §3.3 | main | `29` `fig9_*` |
 | F5 | Spearman vs NDCG@10 redundancy (rank–rank scatter / correlation) | §3.4 | appx | `29` leaderboard |
+| F16 | Functional enrichment: disagreement near binding/active-site residues, per protein (10/13, pooled p=5e-13) | §4.0 | main | `15` `generalization_functional_disagreement_per_protein.csv` |
+| F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §4.0 | appx | `23` `fig_<gene>_structure_map.png`; allostery `26` |
 | F6 | Co-localization forest, high vs low tail (obs vs null band, per protein) | §4.1 | main | `33` `fig_colocalization_forest*.png` |
 | F7 | Co-localization summary: pooled fraction + bootstrap CI, high vs low | §4.1 | appx | `32` `colocalization_pooled_ci.csv` |
 | F8 | Rank↔within-site accuracy at high-disagreement sites (the ρ≈−0.05…−0.15 panel) | §4.2 | main | `29` `fig9_*` |
@@ -74,6 +76,12 @@ reused.
   is computed on a quantity (global rank correlation) that isn't the quantity
   optimization needs (within-site ranking of substitutions at winners).
 - Cite **Spinner et al.** as precedent; we generalize + diagnose.
+- **Stakes (why the hard sites are the ones that matter):** the sites where model
+  selection fails — the high-disagreement sites — are **enriched for functional
+  importance** (binding / active / allosteric residues; §4.0). In a real
+  optimization task you are *working on exactly these positions*, so the recipe
+  fails precisely where the task lives. This is what makes the negative result
+  consequential rather than academic.
 - **Figs:** F1 (schematic + two axes).
 
 ## 2. Setup, metrics & approach  *(elements #1–#2)*
@@ -120,15 +128,44 @@ within-site or winner ranking; they rank models near-identically.
 
 ## 4. Failure-cause diagnostics  *(element #4)*
 
-Why do models disagree, and is the disagreement exploitable for selection? Split
-high-disagreement sites into two categories, then ask what property (if any)
-tells you which model to trust.
+Why do models disagree, and is the disagreement exploitable for selection? First
+establish *why we care* (§4.0), then split high-disagreement sites into two
+categories, then ask what property (if any) tells you which model to trust.
 
-**4.0 Disagreement is site-intrinsic, not phenotypic noise.** High-disagreement
-positions recur across a protein's assays → property of the *position*. Motivates
-the A/B split.
+**4.0 Why these sites matter: high-disagreement sites are enriched for functional
+importance.** This is the stakes subsection — the reason the negative result is
+consequential. In an actual optimization task you work on the functionally
+important residues (binding / active / allosteric), and those are where models
+disagree:
+- **Binding/active-site enrichment generalizes.** Across multi-assay proteins,
+  within-site disagreement is elevated near **binding/active-site residues** in
+  **10/13 proteins** (pooled p=**5×10⁻¹³**, `15`); on GCK specifically the 1-D
+  binding-site enrichment holds in both assays (activity p=0.005, abundance
+  p=0.018, `08`).
+- **Allostery (being expanded).** Curated allosteric-site atlases (currently
+  SRC_HUMAN, `26`; HXK4/RASK/CP2C9/PTEN/VKOR1 in progress per NEXT_STEPS) let us
+  test whether disagreement also concentrates at **allosteric/distal** functional
+  sites that conservation-based models miss. *[User to add.]*
+- **Honest scope caveats (state up front):**
+  - Functional annotations (ClinVar P/LP + UniProt binding/GoF supplement) are
+    high-quality for only a **few well-characterized human proteins with decent
+    MSAs** — GCK, PTEN, TP53, SRC, CYP2C9, KRAS, etc. — so the enrichment is a
+    curated-protein result, not a proteome-wide claim.
+  - **Not all functional signals generalize:** the disease-variant and
+    disordered-region patterns do **not** (disordered trends *opposite* — lower
+    disagreement — in P53/HSP82); disease-annotation saturation (HXK4 412/465,
+    P53 333/393) makes a combined "functional" flag misleading → test binding,
+    disease, disorder **apart**.
+  - The binding enrichment is **annotation-level, not 3-D**: on GCK it does *not*
+    survive as a physical-pocket-proximity effect in real 3-D (`17`), though a few
+    hotspots (R63, Y214, Q287) do contact ligand. Frame as "enriched at
+    functionally *annotated* residues."
+- **Figs:** F16 (main — cross-protein binding enrichment), F17 (appx — GCK
+  structure-map exemplar with allostery overlay).
 
 **4.1 Category A — shared high-disagreement sites (recur across ≥2 assays).**
+*(Also establishes disagreement is site-intrinsic, not phenotypic noise — the
+recurrence across a protein's assays is the evidence.)*
 Significantly enriched: **131/241 (54%)** union sites shared by ≥2 assays
 (cluster-bootstrap 95% CI 41–68%; 18/20 proteins BH q<0.05; large fold-enrichment,
 e.g. P53 obs 40 vs null [0,5]); holds at lowest Neff/L → not a shallow-MSA
@@ -253,3 +290,7 @@ P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
   assays — the generalization of the tolerance/compression explanation beyond P53.
 - Confirm which figs are regenerable vs need new scripts (F2, F9 appear to need
   new cuts).
+- **Allostery expansion (§4.0):** extend the allosteric-site atlas beyond
+  SRC_HUMAN (HXK4/RASK/CP2C9/PTEN/VKOR1, per NEXT_STEPS) and test whether
+  high-disagreement sites concentrate at allosteric/distal functional residues —
+  strengthens the "functionally important sites" stakes. *[User adding info.]*
