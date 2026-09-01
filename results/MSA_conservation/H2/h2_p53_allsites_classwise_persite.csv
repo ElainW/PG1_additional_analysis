@@ -1,0 +1,181 @@
+DMS_id,n_sites,model,model_type,median_persite_spearman
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Protriever,MSA,-0.0333
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,PoET,MSA,-0.0105
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,TranceptEVE_L,MSA,-0.0175
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,GEMME,MSA,0.0044
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,EVE_ensemble,MSA,-0.0105
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,MSA_Transformer_ensemble,MSA,-0.0263
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Tranception_L,MSA,0.0123
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,SiteRM,MSA,-0.014
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,DeepSequence_ensemble,MSA,-0.0158
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,EVmutation,MSA,0.02
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Wavenet,MSA,0.0246
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Site_Independent,MSA,0.0203
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Unirep_evotune,MSA,0.0579
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,VespaG,Single sequence,0.0456
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,VESPA,Single sequence,-0.0018
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ESM2_650M,Single sequence,0.0579
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ESMC-600M,Single sequence,0.0395
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ESM1v_ensemble,Single sequence,0.0053
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,xTrimoPGLM-3B-MLM,Single sequence,0.0298
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ESM1b,Single sequence,0.0088
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Progen3_3b,Single sequence,-0.0053
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Progen2_xlarge,Single sequence,0.0176
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,CARP_640M,Single sequence,-0.0123
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Tranception_L_no_retrieval,Single sequence,-0.0088
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,xTrimoPGLM-100B-int4,Single sequence,-0.0211
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,RITA_xl,Single sequence,-0.0193
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ProtGPT2,Single sequence,-0.007
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,Unirep,Single sequence,-0.1088
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ProSST-2048,Single sequence & Structure,0.0386
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,S3F,Single sequence & Structure,0.0456
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,S2F,Single sequence & Structure,0.0386
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ProtSSN_ensemble,Single sequence & Structure,0.0877
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,SaProt_650M_AF2,Single sequence & Structure,0.0526
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,MIFST,Single sequence & Structure,0.0333
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,MULAN_small,Single sequence & Structure,0.0
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ESM3,"Single sequence, Structure & Function annotations",0.0544
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ESM-IF1,Structure,0.0632
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,MIF,Structure,0.0561
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ProteinMPNN,Structure,0.0368
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,AIDO.Protein-RAG-16B,Structure & MSA,0.0158
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,VenusREM,Structure & MSA,0.0333
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,S3F_MSA,Structure & MSA,0.0246
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,S2F_MSA,Structure & MSA,0.0228
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,ESCOTT,Structure & MSA,0.0097
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,393,RSALOR,Structure & MSA,0.0318
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Protriever,MSA,0.0404
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,PoET,MSA,0.0386
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,TranceptEVE_L,MSA,0.0439
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,GEMME,MSA,0.0592
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,EVE_ensemble,MSA,0.0175
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,MSA_Transformer_ensemble,MSA,0.0456
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Tranception_L,MSA,0.0351
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,SiteRM,MSA,0.0351
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,DeepSequence_ensemble,MSA,0.0491
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,EVmutation,MSA,0.0414
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Wavenet,MSA,0.0842
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Site_Independent,MSA,0.0281
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Unirep_evotune,MSA,0.0421
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,VespaG,Single sequence,0.0544
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,VESPA,Single sequence,0.0351
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ESM2_650M,Single sequence,0.0368
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ESMC-600M,Single sequence,0.0219
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ESM1v_ensemble,Single sequence,0.0281
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,xTrimoPGLM-3B-MLM,Single sequence,0.0614
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ESM1b,Single sequence,0.0228
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Progen3_3b,Single sequence,0.0123
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Progen2_xlarge,Single sequence,0.0509
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,CARP_640M,Single sequence,0.0158
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Tranception_L_no_retrieval,Single sequence,0.007
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,xTrimoPGLM-100B-int4,Single sequence,0.0298
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,RITA_xl,Single sequence,0.014
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ProtGPT2,Single sequence,0.0018
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,Unirep,Single sequence,-0.0912
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ProSST-2048,Single sequence & Structure,0.0895
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,S3F,Single sequence & Structure,0.0386
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,S2F,Single sequence & Structure,0.0439
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ProtSSN_ensemble,Single sequence & Structure,0.0789
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,SaProt_650M_AF2,Single sequence & Structure,0.0614
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,MIFST,Single sequence & Structure,0.0474
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,MULAN_small,Single sequence & Structure,0.0263
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ESM3,"Single sequence, Structure & Function annotations",0.0869
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ESM-IF1,Structure,0.1
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,MIF,Structure,0.0912
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ProteinMPNN,Structure,0.0175
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,AIDO.Protein-RAG-16B,Structure & MSA,0.086
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,VenusREM,Structure & MSA,0.0737
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,S3F_MSA,Structure & MSA,0.0491
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,S2F_MSA,Structure & MSA,0.0614
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,ESCOTT,Structure & MSA,0.0549
+P53_HUMAN_Giacomelli_2018_Null_Nutlin,393,RSALOR,Structure & MSA,0.0464
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Protriever,MSA,-0.0561
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,PoET,MSA,-0.0368
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,TranceptEVE_L,MSA,-0.0053
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,GEMME,MSA,-0.0176
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,EVE_ensemble,MSA,-0.0298
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,MSA_Transformer_ensemble,MSA,-0.1123
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Tranception_L,MSA,0.0
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,SiteRM,MSA,-0.0281
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,DeepSequence_ensemble,MSA,-0.0298
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,EVmutation,MSA,-0.0246
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Wavenet,MSA,-0.0439
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Site_Independent,MSA,-0.0144
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Unirep_evotune,MSA,-0.0053
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,VespaG,Single sequence,0.014
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,VESPA,Single sequence,-0.0158
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ESM2_650M,Single sequence,0.0596
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ESMC-600M,Single sequence,0.036
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ESM1v_ensemble,Single sequence,0.0263
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,xTrimoPGLM-3B-MLM,Single sequence,0.0088
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ESM1b,Single sequence,0.0123
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Progen3_3b,Single sequence,0.0509
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Progen2_xlarge,Single sequence,-0.0561
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,CARP_640M,Single sequence,0.014
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Tranception_L_no_retrieval,Single sequence,0.0211
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,xTrimoPGLM-100B-int4,Single sequence,-0.0807
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,RITA_xl,Single sequence,0.007
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ProtGPT2,Single sequence,0.0035
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,Unirep,Single sequence,-0.0579
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ProSST-2048,Single sequence & Structure,0.0439
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,S3F,Single sequence & Structure,0.0632
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,S2F,Single sequence & Structure,0.0702
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ProtSSN_ensemble,Single sequence & Structure,0.0579
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,SaProt_650M_AF2,Single sequence & Structure,0.0526
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,MIFST,Single sequence & Structure,0.0632
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,MULAN_small,Single sequence & Structure,0.0211
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ESM3,"Single sequence, Structure & Function annotations",0.086
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ESM-IF1,Structure,0.0561
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,MIF,Structure,0.0772
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ProteinMPNN,Structure,0.007
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,AIDO.Protein-RAG-16B,Structure & MSA,-0.0263
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,VenusREM,Structure & MSA,0.0526
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,S3F_MSA,Structure & MSA,0.0193
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,S2F_MSA,Structure & MSA,0.0228
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,ESCOTT,Structure & MSA,-0.022
+P53_HUMAN_Giacomelli_2018_WT_Nutlin,393,RSALOR,Structure & MSA,0.0008
+P53_HUMAN_Kotler_2018,154,Protriever,MSA,0.5
+P53_HUMAN_Kotler_2018,154,PoET,MSA,0.5393
+P53_HUMAN_Kotler_2018,154,TranceptEVE_L,MSA,0.5119
+P53_HUMAN_Kotler_2018,154,GEMME,MSA,0.4857
+P53_HUMAN_Kotler_2018,154,EVE_ensemble,MSA,0.3714
+P53_HUMAN_Kotler_2018,154,MSA_Transformer_ensemble,MSA,0.3714
+P53_HUMAN_Kotler_2018,154,Tranception_L,MSA,0.5179
+P53_HUMAN_Kotler_2018,154,SiteRM,MSA,0.4857
+P53_HUMAN_Kotler_2018,154,DeepSequence_ensemble,MSA,0.3929
+P53_HUMAN_Kotler_2018,154,EVmutation,MSA,0.4748
+P53_HUMAN_Kotler_2018,154,Wavenet,MSA,0.4286
+P53_HUMAN_Kotler_2018,154,Site_Independent,MSA,0.4068
+P53_HUMAN_Kotler_2018,154,Unirep_evotune,MSA,0.3821
+P53_HUMAN_Kotler_2018,154,VespaG,Single sequence,0.4429
+P53_HUMAN_Kotler_2018,154,VESPA,Single sequence,0.4857
+P53_HUMAN_Kotler_2018,154,ESM2_650M,Single sequence,0.4857
+P53_HUMAN_Kotler_2018,154,ESMC-600M,Single sequence,0.4505
+P53_HUMAN_Kotler_2018,154,ESM1v_ensemble,Single sequence,0.5393
+P53_HUMAN_Kotler_2018,154,xTrimoPGLM-3B-MLM,Single sequence,0.4857
+P53_HUMAN_Kotler_2018,154,ESM1b,Single sequence,0.4857
+P53_HUMAN_Kotler_2018,154,Progen3_3b,Single sequence,0.4286
+P53_HUMAN_Kotler_2018,154,Progen2_xlarge,Single sequence,0.4571
+P53_HUMAN_Kotler_2018,154,CARP_640M,Single sequence,0.5
+P53_HUMAN_Kotler_2018,154,Tranception_L_no_retrieval,Single sequence,0.4143
+P53_HUMAN_Kotler_2018,154,xTrimoPGLM-100B-int4,Single sequence,0.4286
+P53_HUMAN_Kotler_2018,154,RITA_xl,Single sequence,0.4286
+P53_HUMAN_Kotler_2018,154,ProtGPT2,Single sequence,0.0976
+P53_HUMAN_Kotler_2018,154,Unirep,Single sequence,0.037
+P53_HUMAN_Kotler_2018,154,ProSST-2048,Single sequence & Structure,0.4286
+P53_HUMAN_Kotler_2018,154,S3F,Single sequence & Structure,0.4857
+P53_HUMAN_Kotler_2018,154,S2F,Single sequence & Structure,0.5
+P53_HUMAN_Kotler_2018,154,ProtSSN_ensemble,Single sequence & Structure,0.5
+P53_HUMAN_Kotler_2018,154,SaProt_650M_AF2,Single sequence & Structure,0.5
+P53_HUMAN_Kotler_2018,154,MIFST,Single sequence & Structure,0.4857
+P53_HUMAN_Kotler_2018,154,MULAN_small,Single sequence & Structure,0.3143
+P53_HUMAN_Kotler_2018,154,ESM3,"Single sequence, Structure & Function annotations",0.4395
+P53_HUMAN_Kotler_2018,154,ESM-IF1,Structure,0.4
+P53_HUMAN_Kotler_2018,154,MIF,Structure,0.3857
+P53_HUMAN_Kotler_2018,154,ProteinMPNN,Structure,0.1845
+P53_HUMAN_Kotler_2018,154,AIDO.Protein-RAG-16B,Structure & MSA,0.5393
+P53_HUMAN_Kotler_2018,154,VenusREM,Structure & MSA,0.4286
+P53_HUMAN_Kotler_2018,154,S3F_MSA,Structure & MSA,0.4929
+P53_HUMAN_Kotler_2018,154,S2F_MSA,Structure & MSA,0.5429
+P53_HUMAN_Kotler_2018,154,ESCOTT,Structure & MSA,0.488
+P53_HUMAN_Kotler_2018,154,RSALOR,Structure & MSA,0.434

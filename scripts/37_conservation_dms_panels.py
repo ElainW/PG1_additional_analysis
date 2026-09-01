@@ -223,18 +223,23 @@ def plot_assay(d, df, dms_sub, dms_res, shared_high, shared_low):
     ax1.set_xlim(0, 100)
     _style_legend(ax1, "categories (number of positions)")
 
-    # (2) raw DMS-score density (all substitutions at each category's residues)
+    # (2) oriented DMS-score density (all substitutions at each category's residues)
+    # DMS_score is already oriented higher=fitter for every assay (raw_DMS_directionality
+    # applied upstream). WT_DMS is the RAW paper score, so orient it the same way before
+    # placing it on this axis (a no-op for +1 assays; flips the -1 ones).
     for name in CATS:
         sub = dms_sub[dms_sub.up_pos.isin(catpos[name])]["DMS_score"].values
         disp = "all mutations" if name == "all residues" else LABELS[name]
         _kde(ax2, name, sub, label=disp)
-    wt = WT_DMS.get(d)
+    direction = REF.loc[d, "raw_DMS_directionality"] if "raw_DMS_directionality" in REF.columns else 1
+    wt_raw = WT_DMS.get(d)
+    wt = direction * wt_raw if wt_raw is not None else None
+    if wt == 0:
+        wt = 0.0                       # normalize -0.0 (from -1 * 0.0) to 0.0
     if wt is not None:
         ax2.axvline(wt, ls="--", color="black", lw=1.3, label=f"wild-type = {wt:g}")
-    direction = REF.loc[d, "raw_DMS_directionality"] if "raw_DMS_directionality" in REF.columns else None
-    fit = ("higher is higher fitness" if direction == 1
-           else "lower is higher fitness" if direction == -1 else None)
-    ax2.set_xlabel(f"DMS score ({fit})" if fit else "DMS score")
+    fit = "higher is higher fitness"      # DMS_score is oriented for all assays
+    ax2.set_xlabel(f"DMS score ({fit})")
     ax2.set_ylabel("density")
     if d in DMS_XMAX:
         ax2.set_xlim(right=DMS_XMAX[d])

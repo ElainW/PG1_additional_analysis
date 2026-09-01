@@ -1,0 +1,226 @@
+coarse_selection_type,model,model_type,mean_persite_spearman,n_assays,persite_rank
+Activity,AIDO.Protein-RAG-16B,Structure & MSA,0.3246,42,1
+Activity,VenusREM,Structure & MSA,0.3209,42,2
+Activity,Protriever,MSA,0.3193,38,3
+Activity,ProSST-2048,Single sequence & Structure,0.3185,42,4
+Activity,PoET,MSA,0.315,42,5
+Activity,MSA_Transformer_ensemble,MSA,0.3136,42,6
+Activity,ESM3,"Single sequence, Structure & Function annotations",0.3129,42,7
+Activity,S3F_MSA,Structure & MSA,0.312,42,8
+Activity,S2F_MSA,Structure & MSA,0.3118,42,9
+Activity,S3F,Single sequence & Structure,0.3097,42,10
+Activity,SaProt_650M_AF2,Single sequence & Structure,0.3074,42,11
+Activity,S2F,Single sequence & Structure,0.3069,42,12
+Activity,VespaG,Single sequence,0.3056,42,13
+Activity,ProtSSN_ensemble,Single sequence & Structure,0.305,42,14
+Activity,TranceptEVE_L,MSA,0.3011,42,15
+Activity,Tranception_L,MSA,0.3007,42,16
+Activity,GEMME,MSA,0.2873,42,17
+Activity,VESPA,Single sequence,0.2872,42,18
+Activity,ESCOTT,Structure & MSA,0.2863,42,19
+Activity,EVmutation,MSA,0.2785,42,20
+Activity,Tranception_L_no_retrieval,Single sequence,0.2751,42,21
+Activity,ESM2_650M,Single sequence,0.2741,42,22
+Activity,ESMC-600M,Single sequence,0.2734,42,23
+Activity,Progen3_3b,Single sequence,0.2734,42,24
+Activity,Progen2_xlarge,Single sequence,0.2718,42,25
+Activity,SiteRM,MSA,0.2674,42,26
+Activity,DeepSequence_ensemble,MSA,0.2637,42,27
+Activity,EVE_ensemble,MSA,0.2617,42,28
+Activity,ESM1v_ensemble,Single sequence,0.2616,42,29
+Activity,xTrimoPGLM-3B-MLM,Single sequence,0.2569,42,30
+Activity,RITA_xl,Single sequence,0.2566,42,31
+Activity,ESM1b,Single sequence,0.2561,42,32
+Activity,RSALOR,Structure & MSA,0.256,42,33
+Activity,ESM-IF1,Structure,0.2554,42,34
+Activity,CARP_640M,Single sequence,0.2537,42,35
+Activity,MIFST,Single sequence & Structure,0.2536,42,36
+Activity,MIF,Structure,0.2531,42,37
+Activity,MULAN_small,Single sequence & Structure,0.246,42,38
+Activity,Unirep_evotune,MSA,0.237,42,39
+Activity,Site_Independent,MSA,0.2365,42,40
+Activity,xTrimoPGLM-100B-int4,Single sequence,0.2321,42,41
+Activity,Wavenet,MSA,0.2172,42,42
+Activity,Unirep,Single sequence,0.1436,42,43
+Activity,ProtGPT2,Single sequence,0.1077,42,44
+Activity,ProteinMPNN,Structure,0.0875,42,45
+Binding,AIDO.Protein-RAG-16B,Structure & MSA,0.3621,12,1
+Binding,ESM3,"Single sequence, Structure & Function annotations",0.3464,12,2
+Binding,VenusREM,Structure & MSA,0.3426,12,3
+Binding,ProSST-2048,Single sequence & Structure,0.3414,12,4
+Binding,PoET,MSA,0.3284,12,5
+Binding,VespaG,Single sequence,0.3218,12,6
+Binding,ProtSSN_ensemble,Single sequence & Structure,0.3201,12,7
+Binding,S3F_MSA,Structure & MSA,0.3189,12,8
+Binding,S3F,Single sequence & Structure,0.3181,12,9
+Binding,S2F_MSA,Structure & MSA,0.3163,12,10
+Binding,Protriever,MSA,0.3125,12,11
+Binding,S2F,Single sequence & Structure,0.3107,12,12
+Binding,SaProt_650M_AF2,Single sequence & Structure,0.3093,12,13
+Binding,VESPA,Single sequence,0.2954,12,14
+Binding,MSA_Transformer_ensemble,MSA,0.2942,12,15
+Binding,ESM-IF1,Structure,0.2885,12,16
+Binding,MULAN_small,Single sequence & Structure,0.2877,12,17
+Binding,MIF,Structure,0.2873,12,18
+Binding,TranceptEVE_L,MSA,0.2852,12,19
+Binding,Tranception_L,MSA,0.2814,12,20
+Binding,ESM2_650M,Single sequence,0.2786,12,21
+Binding,Progen3_3b,Single sequence,0.2778,12,22
+Binding,Unirep_evotune,MSA,0.2768,12,23
+Binding,GEMME,MSA,0.2741,12,24
+Binding,ESCOTT,Structure & MSA,0.2696,12,25
+Binding,Progen2_xlarge,Single sequence,0.2695,12,26
+Binding,SiteRM,MSA,0.2667,12,27
+Binding,MIFST,Single sequence & Structure,0.2664,12,28
+Binding,RITA_xl,Single sequence,0.262,12,29
+Binding,Tranception_L_no_retrieval,Single sequence,0.2568,12,30
+Binding,xTrimoPGLM-3B-MLM,Single sequence,0.2534,12,31
+Binding,Wavenet,MSA,0.2486,12,32
+Binding,ESM1v_ensemble,Single sequence,0.2463,12,33
+Binding,ESMC-600M,Single sequence,0.2384,12,34
+Binding,EVmutation,MSA,0.2348,12,35
+Binding,CARP_640M,Single sequence,0.2309,12,36
+Binding,ESM1b,Single sequence,0.2275,12,37
+Binding,DeepSequence_ensemble,MSA,0.225,12,38
+Binding,RSALOR,Structure & MSA,0.2241,12,39
+Binding,EVE_ensemble,MSA,0.2097,12,40
+Binding,Site_Independent,MSA,0.2066,12,41
+Binding,xTrimoPGLM-100B-int4,Single sequence,0.2034,12,42
+Binding,Unirep,Single sequence,0.1769,12,43
+Binding,ProtGPT2,Single sequence,0.1176,12,44
+Binding,ProteinMPNN,Structure,0.0708,12,45
+Expression,VenusREM,Structure & MSA,0.4162,18,1
+Expression,ProSST-2048,Single sequence & Structure,0.414,18,2
+Expression,SaProt_650M_AF2,Single sequence & Structure,0.3999,18,3
+Expression,Protriever,MSA,0.3958,15,4
+Expression,VespaG,Single sequence,0.3878,18,5
+Expression,S2F_MSA,Structure & MSA,0.3854,18,6
+Expression,AIDO.Protein-RAG-16B,Structure & MSA,0.3836,18,7
+Expression,PoET,MSA,0.3816,18,8
+Expression,ESMC-600M,Single sequence,0.3769,18,9
+Expression,S2F,Single sequence & Structure,0.3758,18,10
+Expression,ProtSSN_ensemble,Single sequence & Structure,0.3744,18,11
+Expression,S3F_MSA,Structure & MSA,0.3725,18,12
+Expression,S3F,Single sequence & Structure,0.372,18,13
+Expression,ESM3,"Single sequence, Structure & Function annotations",0.37,18,14
+Expression,MSA_Transformer_ensemble,MSA,0.3657,18,15
+Expression,VESPA,Single sequence,0.3637,18,16
+Expression,Progen2_xlarge,Single sequence,0.3635,18,17
+Expression,ESM1v_ensemble,Single sequence,0.3505,18,18
+Expression,ESM2_650M,Single sequence,0.3496,18,19
+Expression,xTrimoPGLM-3B-MLM,Single sequence,0.3478,18,20
+Expression,TranceptEVE_L,MSA,0.3474,18,21
+Expression,MIF,Structure,0.3451,18,22
+Expression,GEMME,MSA,0.3425,18,23
+Expression,RITA_xl,Single sequence,0.3404,18,24
+Expression,ESCOTT,Structure & MSA,0.3391,18,25
+Expression,SiteRM,MSA,0.338,18,26
+Expression,Progen3_3b,Single sequence,0.3378,18,27
+Expression,MIFST,Single sequence & Structure,0.3368,18,28
+Expression,ESM1b,Single sequence,0.3361,18,29
+Expression,Tranception_L_no_retrieval,Single sequence,0.3309,18,30
+Expression,Tranception_L,MSA,0.326,18,31
+Expression,ESM-IF1,Structure,0.3259,18,32
+Expression,EVmutation,MSA,0.3166,18,33
+Expression,CARP_640M,Single sequence,0.3159,18,34
+Expression,Unirep_evotune,MSA,0.3103,18,35
+Expression,MULAN_small,Single sequence & Structure,0.301,18,36
+Expression,EVE_ensemble,MSA,0.2907,18,37
+Expression,Site_Independent,MSA,0.2899,18,38
+Expression,Wavenet,MSA,0.2859,18,39
+Expression,RSALOR,Structure & MSA,0.278,18,40
+Expression,DeepSequence_ensemble,MSA,0.2665,18,41
+Expression,xTrimoPGLM-100B-int4,Single sequence,0.2664,18,42
+Expression,Unirep,Single sequence,0.2168,18,43
+Expression,ProtGPT2,Single sequence,0.1597,18,44
+Expression,ProteinMPNN,Structure,0.0622,18,45
+OrganismalFitness,AIDO.Protein-RAG-16B,Structure & MSA,0.3026,77,1
+OrganismalFitness,Protriever,MSA,0.3006,68,2
+OrganismalFitness,PoET,MSA,0.2987,77,3
+OrganismalFitness,VespaG,Single sequence,0.291,77,4
+OrganismalFitness,S3F_MSA,Structure & MSA,0.2897,77,5
+OrganismalFitness,S2F_MSA,Structure & MSA,0.2879,77,6
+OrganismalFitness,Tranception_L,MSA,0.2838,77,7
+OrganismalFitness,VenusREM,Structure & MSA,0.2812,77,8
+OrganismalFitness,S3F,Single sequence & Structure,0.28,77,9
+OrganismalFitness,TranceptEVE_L,MSA,0.279,77,10
+OrganismalFitness,ESM3,"Single sequence, Structure & Function annotations",0.2784,77,11
+OrganismalFitness,ProSST-2048,Single sequence & Structure,0.2782,77,12
+OrganismalFitness,VESPA,Single sequence,0.2757,77,13
+OrganismalFitness,MSA_Transformer_ensemble,MSA,0.2742,77,14
+OrganismalFitness,GEMME,MSA,0.2729,77,15
+OrganismalFitness,ESCOTT,Structure & MSA,0.2727,77,16
+OrganismalFitness,S2F,Single sequence & Structure,0.2723,77,17
+OrganismalFitness,Tranception_L_no_retrieval,Single sequence,0.2721,77,18
+OrganismalFitness,Progen3_3b,Single sequence,0.271,77,19
+OrganismalFitness,Progen2_xlarge,Single sequence,0.2699,77,20
+OrganismalFitness,ProtSSN_ensemble,Single sequence & Structure,0.2692,77,21
+OrganismalFitness,RITA_xl,Single sequence,0.2653,77,22
+OrganismalFitness,xTrimoPGLM-3B-MLM,Single sequence,0.2624,77,23
+OrganismalFitness,SiteRM,MSA,0.2589,77,24
+OrganismalFitness,SaProt_650M_AF2,Single sequence & Structure,0.2576,77,25
+OrganismalFitness,Unirep_evotune,MSA,0.2544,77,26
+OrganismalFitness,ESM1v_ensemble,Single sequence,0.2507,77,27
+OrganismalFitness,CARP_640M,Single sequence,0.2492,77,28
+OrganismalFitness,EVmutation,MSA,0.2487,77,29
+OrganismalFitness,ESM2_650M,Single sequence,0.2461,77,30
+OrganismalFitness,Wavenet,MSA,0.2448,77,31
+OrganismalFitness,ESMC-600M,Single sequence,0.2409,77,32
+OrganismalFitness,MIFST,Single sequence & Structure,0.2395,77,33
+OrganismalFitness,RSALOR,Structure & MSA,0.2382,77,34
+OrganismalFitness,ESM-IF1,Structure,0.238,77,35
+OrganismalFitness,EVE_ensemble,MSA,0.2335,77,36
+OrganismalFitness,DeepSequence_ensemble,MSA,0.2321,77,37
+OrganismalFitness,ESM1b,Single sequence,0.2297,77,38
+OrganismalFitness,xTrimoPGLM-100B-int4,Single sequence,0.2295,77,39
+OrganismalFitness,Site_Independent,MSA,0.2206,77,40
+OrganismalFitness,MIF,Structure,0.2192,77,41
+OrganismalFitness,MULAN_small,Single sequence & Structure,0.2078,77,42
+OrganismalFitness,ProtGPT2,Single sequence,0.1029,77,43
+OrganismalFitness,Unirep,Single sequence,0.0993,77,44
+OrganismalFitness,ProteinMPNN,Structure,0.0693,77,45
+Stability,AIDO.Protein-RAG-16B,Structure & MSA,0.433,66,1
+Stability,ProSST-2048,Single sequence & Structure,0.4168,66,2
+Stability,VenusREM,Structure & MSA,0.4129,66,3
+Stability,ESM3,"Single sequence, Structure & Function annotations",0.3821,66,4
+Stability,S3F,Single sequence & Structure,0.3819,66,5
+Stability,ProtSSN_ensemble,Single sequence & Structure,0.3696,66,6
+Stability,SaProt_650M_AF2,Single sequence & Structure,0.3675,66,7
+Stability,S3F_MSA,Structure & MSA,0.3652,66,8
+Stability,S2F,Single sequence & Structure,0.3562,66,9
+Stability,S2F_MSA,Structure & MSA,0.3507,66,10
+Stability,ESM-IF1,Structure,0.3497,66,11
+Stability,MIF,Structure,0.3293,66,12
+Stability,MIFST,Single sequence & Structure,0.3255,66,13
+Stability,ESM2_650M,Single sequence,0.3202,66,14
+Stability,ESMC-600M,Single sequence,0.3202,66,15
+Stability,ESCOTT,Structure & MSA,0.319,66,16
+Stability,VespaG,Single sequence,0.3163,66,17
+Stability,GEMME,MSA,0.309,66,18
+Stability,Protriever,MSA,0.3004,65,19
+Stability,EVmutation,MSA,0.2999,66,20
+Stability,PoET,MSA,0.2992,66,21
+Stability,RSALOR,Structure & MSA,0.2956,66,22
+Stability,MULAN_small,Single sequence & Structure,0.2947,66,23
+Stability,TranceptEVE_L,MSA,0.2814,66,24
+Stability,EVE_ensemble,MSA,0.2812,66,25
+Stability,DeepSequence_ensemble,MSA,0.2786,66,26
+Stability,CARP_640M,Single sequence,0.273,66,27
+Stability,ESM1b,Single sequence,0.2699,66,28
+Stability,MSA_Transformer_ensemble,MSA,0.2681,66,29
+Stability,xTrimoPGLM-3B-MLM,Single sequence,0.2644,66,30
+Stability,Site_Independent,MSA,0.2621,66,31
+Stability,Tranception_L,MSA,0.2611,66,32
+Stability,ESM1v_ensemble,Single sequence,0.2592,66,33
+Stability,Wavenet,MSA,0.2522,66,34
+Stability,VESPA,Single sequence,0.2486,66,35
+Stability,ProteinMPNN,Structure,0.2447,66,36
+Stability,Progen2_xlarge,Single sequence,0.2362,66,37
+Stability,Progen3_3b,Single sequence,0.2254,66,38
+Stability,xTrimoPGLM-100B-int4,Single sequence,0.2233,66,39
+Stability,Unirep_evotune,MSA,0.2231,66,40
+Stability,SiteRM,MSA,0.2221,66,41
+Stability,Tranception_L_no_retrieval,Single sequence,0.2018,66,42
+Stability,RITA_xl,Single sequence,0.2006,66,43
+Stability,ProtGPT2,Single sequence,0.1497,66,44
+Stability,Unirep,Single sequence,0.094,66,45

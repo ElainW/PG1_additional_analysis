@@ -1,0 +1,8 @@
+DMS_id,UniProt_ID,category,n_sites,model,model_type,median_persite_spearman,mean_persite_spearman,n_scored_sites,overall_rho
+PTEN_HUMAN_Matreyek_2021,PTEN_HUMAN,Expression,9,MIFST,Single sequence & Structure,0.5667,0.4057,9,0.4146
+PTEN_HUMAN_Mighell_2018,PTEN_HUMAN,Activity,16,MIF,Structure,0.2767,0.0946,16,0.3879
+HXK4_HUMAN_Gersing_2023_abundance,HXK4_HUMAN,Expression,9,MSA_Transformer_ensemble,MSA,0.3706,0.1993,9,0.4526
+CP2C9_HUMAN_Amorosi_2021_abundance,CP2C9_HUMAN,Expression,6,S2F,Single sequence & Structure,0.3429,0.3059,6,0.4743
+CP2C9_HUMAN_Amorosi_2021_activity,CP2C9_HUMAN,Binding,9,ESM2_650M,Single sequence,0.5455,0.471,9,0.4382
+P53_HUMAN_Giacomelli_2018_Null_Etoposide,P53_HUMAN,OrganismalFitness,3,SaProt_650M_AF2,Single sequence & Structure,0.3667,0.2234,3,0.4728
+P53_HUMAN_Kotler_2018,P53_HUMAN,OrganismalFitness,3,TranceptEVE_L,MSA,0.3,0.069,3,0.4745

@@ -1,0 +1,35 @@
+scheme,category,model_type,model,metric_value
+category-top-spearman,Expression,Structure & MSA,VenusREM,0.5328
+category-top-spearman,Activity,Structure & MSA,AIDO.Protein-RAG-16B,0.5221
+category-top-spearman,Stability,Single sequence & Structure,ProSST-2048,0.6526
+category-top-spearman,OrganismalFitness,Structure & MSA,AIDO.Protein-RAG-16B,0.4968
+category-top-spearman,Binding,Structure & MSA,VenusREM,0.4559
+category-top-ndcg10,Expression,MSA,MSA_Transformer_ensemble,0.8058
+category-top-ndcg10,Activity,Structure & MSA,ESCOTT,0.7978
+category-top-ndcg10,Stability,"Single sequence, Structure & Function annotations",ESM3,0.8721
+category-top-ndcg10,OrganismalFitness,MSA,TranceptEVE_L,0.7736
+category-top-ndcg10,Binding,"Single sequence, Structure & Function annotations",ESM3,0.7302
+modelclass-best-spearman,Expression,MSA,PoET,
+modelclass-best-spearman,Expression,Single sequence,VespaG,
+modelclass-best-spearman,Expression,Structure,MIF,
+modelclass-best-spearman,Expression,Single sequence & Structure,ProSST-2048,
+modelclass-best-spearman,Expression,Structure & MSA,VenusREM,
+modelclass-best-spearman,Expression,"Single sequence, Structure & Function annotations",ESM3,
+modelclass-best-spearman,Activity,MSA,PoET,
+modelclass-best-spearman,Activity,Single sequence,VespaG,
+modelclass-best-spearman,Activity,Structure,ESM-IF1,
+modelclass-best-spearman,Activity,Single sequence & Structure,ProSST-2048,
+modelclass-best-spearman,Activity,Structure & MSA,AIDO.Protein-RAG-16B,
+modelclass-best-spearman,Activity,"Single sequence, Structure & Function annotations",ESM3,
+modelclass-best-spearman,OrganismalFitness,MSA,PoET,
+modelclass-best-spearman,OrganismalFitness,Single sequence,VespaG,
+modelclass-best-spearman,OrganismalFitness,Structure,ESM-IF1,
+modelclass-best-spearman,OrganismalFitness,Single sequence & Structure,ProSST-2048,
+modelclass-best-spearman,OrganismalFitness,Structure & MSA,AIDO.Protein-RAG-16B,
+modelclass-best-spearman,OrganismalFitness,"Single sequence, Structure & Function annotations",ESM3,
+modelclass-best-spearman,Binding,MSA,PoET,
+modelclass-best-spearman,Binding,Single sequence,VespaG,
+modelclass-best-spearman,Binding,Structure,ESM-IF1,
+modelclass-best-spearman,Binding,Single sequence & Structure,ProSST-2048,
+modelclass-best-spearman,Binding,Structure & MSA,VenusREM,
+modelclass-best-spearman,Binding,"Single sequence, Structure & Function annotations",ESM3,

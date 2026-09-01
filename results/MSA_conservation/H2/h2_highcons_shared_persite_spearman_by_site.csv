@@ -1,0 +1,235 @@
+UniProt_ID,DMS_id,category,up_pos,residue,cons_pct,n_subs,model_type,model,persite_spearman,site_median_dms_pct,wt_dms_raw,raw_DMS_directionality,wt_dms_oriented,wt_dms_pct,dms_pct_diff_from_wt,abs_dms_pct_diff_from_wt
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,176,C176,97.3,19,MSA,PoET,0.6929824561403508,14.05,0.0,1,0.0,34.74,-20.69,20.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,176,C176,97.3,19,Single sequence,VespaG,0.3508771929824562,14.05,0.0,1,0.0,34.74,-20.69,20.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,176,C176,97.3,19,Structure,ESM-IF1,-0.18947368421052632,14.05,0.0,1,0.0,34.74,-20.69,20.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,176,C176,97.3,19,Single sequence & Structure,ProSST-2048,-0.1754385964912281,14.05,0.0,1,0.0,34.74,-20.69,20.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,176,C176,97.3,19,Structure & MSA,AIDO.Protein-RAG-16B,0.5754385964912281,14.05,0.0,1,0.0,34.74,-20.69,20.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,176,C176,97.3,19,"Single sequence, Structure & Function annotations",ESM3,-0.2824561403508772,14.05,0.0,1,0.0,34.74,-20.69,20.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,179,H179,92.9,19,MSA,PoET,0.4859649122807017,12.48,0.0,1,0.0,34.74,-22.26,22.26
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,179,H179,92.9,19,Single sequence,VespaG,0.30000000000000004,12.48,0.0,1,0.0,34.74,-22.26,22.26
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,179,H179,92.9,19,Structure,ESM-IF1,0.13859649122807016,12.48,0.0,1,0.0,34.74,-22.26,22.26
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,179,H179,92.9,19,Single sequence & Structure,ProSST-2048,-0.07719298245614034,12.48,0.0,1,0.0,34.74,-22.26,22.26
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,179,H179,92.9,19,Structure & MSA,AIDO.Protein-RAG-16B,0.5052631578947369,12.48,0.0,1,0.0,34.74,-22.26,22.26
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,179,H179,92.9,19,"Single sequence, Structure & Function annotations",ESM3,-0.04736842105263158,12.48,0.0,1,0.0,34.74,-22.26,22.26
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,215,S215,89.3,19,MSA,PoET,0.5596491228070175,16.65,0.0,1,0.0,34.74,-18.09,18.09
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,215,S215,89.3,19,Single sequence,VespaG,0.42280701754385963,16.65,0.0,1,0.0,34.74,-18.09,18.09
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,215,S215,89.3,19,Structure,ESM-IF1,0.256140350877193,16.65,0.0,1,0.0,34.74,-18.09,18.09
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,215,S215,89.3,19,Single sequence & Structure,ProSST-2048,0.3385964912280702,16.65,0.0,1,0.0,34.74,-18.09,18.09
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,215,S215,89.3,19,Structure & MSA,AIDO.Protein-RAG-16B,0.419298245614035,16.65,0.0,1,0.0,34.74,-18.09,18.09
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,215,S215,89.3,19,"Single sequence, Structure & Function annotations",ESM3,0.23333333333333334,16.65,0.0,1,0.0,34.74,-18.09,18.09
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,238,C238,98.1,19,MSA,PoET,0.6859649122807018,8.25,0.0,1,0.0,34.74,-26.49,26.49
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,238,C238,98.1,19,Single sequence,VespaG,-0.07368421052631578,8.25,0.0,1,0.0,34.74,-26.49,26.49
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,238,C238,98.1,19,Structure,ESM-IF1,-0.22456140350877193,8.25,0.0,1,0.0,34.74,-26.49,26.49
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,238,C238,98.1,19,Single sequence & Structure,ProSST-2048,-0.11929824561403508,8.25,0.0,1,0.0,34.74,-26.49,26.49
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,238,C238,98.1,19,Structure & MSA,AIDO.Protein-RAG-16B,0.5403508771929825,8.25,0.0,1,0.0,34.74,-26.49,26.49
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,238,C238,98.1,19,"Single sequence, Structure & Function annotations",ESM3,-0.3719298245614035,8.25,0.0,1,0.0,34.74,-26.49,26.49
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,241,S241,97.6,19,MSA,PoET,0.44912280701754387,10.03,0.0,1,0.0,34.74,-24.71,24.71
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,241,S241,97.6,19,Single sequence,VespaG,0.04736842105263158,10.03,0.0,1,0.0,34.74,-24.71,24.71
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,241,S241,97.6,19,Structure,ESM-IF1,-0.06842105263157894,10.03,0.0,1,0.0,34.74,-24.71,24.71
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,241,S241,97.6,19,Single sequence & Structure,ProSST-2048,-0.2210526315789474,10.03,0.0,1,0.0,34.74,-24.71,24.71
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,241,S241,97.6,19,Structure & MSA,AIDO.Protein-RAG-16B,0.12631578947368421,10.03,0.0,1,0.0,34.74,-24.71,24.71
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,241,S241,97.6,19,"Single sequence, Structure & Function annotations",ESM3,-0.15614035087719297,10.03,0.0,1,0.0,34.74,-24.71,24.71
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,242,C242,98.8,19,MSA,PoET,0.6087719298245614,13.98,0.0,1,0.0,34.74,-20.76,20.76
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,242,C242,98.8,19,Single sequence,VespaG,-0.07543859649122807,13.98,0.0,1,0.0,34.74,-20.76,20.76
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,242,C242,98.8,19,Structure,ESM-IF1,-0.031578947368421054,13.98,0.0,1,0.0,34.74,-20.76,20.76
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,242,C242,98.8,19,Single sequence & Structure,ProSST-2048,0.4385964912280701,13.98,0.0,1,0.0,34.74,-20.76,20.76
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,242,C242,98.8,19,Structure & MSA,AIDO.Protein-RAG-16B,0.48947368421052634,13.98,0.0,1,0.0,34.74,-20.76,20.76
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,242,C242,98.8,19,"Single sequence, Structure & Function annotations",ESM3,-0.04385964912280702,13.98,0.0,1,0.0,34.74,-20.76,20.76
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,248,R248,94.7,19,MSA,PoET,0.6175438596491227,12.62,0.0,1,0.0,34.74,-22.12,22.12
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,248,R248,94.7,19,Single sequence,VespaG,0.46842105263157896,12.62,0.0,1,0.0,34.74,-22.12,22.12
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,248,R248,94.7,19,Structure,ESM-IF1,0.27017543859649124,12.62,0.0,1,0.0,34.74,-22.12,22.12
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,248,R248,94.7,19,Single sequence & Structure,ProSST-2048,0.256140350877193,12.62,0.0,1,0.0,34.74,-22.12,22.12
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,248,R248,94.7,19,Structure & MSA,AIDO.Protein-RAG-16B,0.5651602123707907,12.62,0.0,1,0.0,34.74,-22.12,22.12
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,248,R248,94.7,19,"Single sequence, Structure & Function annotations",ESM3,0.19298245614035087,12.62,0.0,1,0.0,34.74,-22.12,22.12
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,275,C275,96.1,19,MSA,PoET,0.5719298245614035,6.88,0.0,1,0.0,34.74,-27.86,27.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,275,C275,96.1,19,Single sequence,VespaG,-0.2631578947368421,6.88,0.0,1,0.0,34.74,-27.86,27.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,275,C275,96.1,19,Structure,ESM-IF1,-0.2421052631578947,6.88,0.0,1,0.0,34.74,-27.86,27.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,275,C275,96.1,19,Single sequence & Structure,ProSST-2048,-0.0456140350877193,6.88,0.0,1,0.0,34.74,-27.86,27.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,275,C275,96.1,19,Structure & MSA,AIDO.Protein-RAG-16B,0.30000000000000004,6.88,0.0,1,0.0,34.74,-27.86,27.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,275,C275,96.1,19,"Single sequence, Structure & Function annotations",ESM3,-0.10701754385964912,6.88,0.0,1,0.0,34.74,-27.86,27.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,277,C277,96.7,19,MSA,PoET,0.2263157894736842,28.59,0.0,1,0.0,34.74,-6.15,6.15
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,277,C277,96.7,19,Single sequence,VespaG,0.46491228070175433,28.59,0.0,1,0.0,34.74,-6.15,6.15
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,277,C277,96.7,19,Structure,ESM-IF1,-0.06842105263157894,28.59,0.0,1,0.0,34.74,-6.15,6.15
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,277,C277,96.7,19,Single sequence & Structure,ProSST-2048,-0.09824561403508772,28.59,0.0,1,0.0,34.74,-6.15,6.15
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,277,C277,96.7,19,Structure & MSA,AIDO.Protein-RAG-16B,0.3140350877192983,28.59,0.0,1,0.0,34.74,-6.15,6.15
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,277,C277,96.7,19,"Single sequence, Structure & Function annotations",ESM3,-0.09298245614035087,28.59,0.0,1,0.0,34.74,-6.15,6.15
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,279,G279,90.5,19,MSA,PoET,-0.14385964912280702,63.61,0.0,1,0.0,34.74,28.87,28.87
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,279,G279,90.5,19,Single sequence,VespaG,0.19473684210526312,63.61,0.0,1,0.0,34.74,28.87,28.87
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,279,G279,90.5,19,Structure,ESM-IF1,-0.12982456140350876,63.61,0.0,1,0.0,34.74,28.87,28.87
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,279,G279,90.5,19,Single sequence & Structure,ProSST-2048,0.3578947368421052,63.61,0.0,1,0.0,34.74,28.87,28.87
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,279,G279,90.5,19,Structure & MSA,AIDO.Protein-RAG-16B,-0.05087719298245614,63.61,0.0,1,0.0,34.74,28.87,28.87
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,279,G279,90.5,19,"Single sequence, Structure & Function annotations",ESM3,0.0,63.61,0.0,1,0.0,34.74,28.87,28.87
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,176,C176,97.3,19,MSA,PoET,0.46842105263157896,15.71,0.0,-1,-0.0,48.27,-32.56,32.56
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,176,C176,97.3,19,Single sequence,VespaG,0.18596491228070175,15.71,0.0,-1,-0.0,48.27,-32.56,32.56
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,176,C176,97.3,19,Structure,ESM-IF1,-0.03684210526315789,15.71,0.0,-1,-0.0,48.27,-32.56,32.56
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,176,C176,97.3,19,Single sequence & Structure,ProSST-2048,0.06842105263157894,15.71,0.0,-1,-0.0,48.27,-32.56,32.56
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,176,C176,97.3,19,Structure & MSA,AIDO.Protein-RAG-16B,0.24035087719298245,15.71,0.0,-1,-0.0,48.27,-32.56,32.56
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,176,C176,97.3,19,"Single sequence, Structure & Function annotations",ESM3,0.014035087719298246,15.71,0.0,-1,-0.0,48.27,-32.56,32.56
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,179,H179,92.9,19,MSA,PoET,0.17719298245614035,12.49,0.0,-1,-0.0,48.27,-35.77,35.77
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,179,H179,92.9,19,Single sequence,VespaG,0.23508771929824557,12.49,0.0,-1,-0.0,48.27,-35.77,35.77
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,179,H179,92.9,19,Structure,ESM-IF1,0.4508771929824561,12.49,0.0,-1,-0.0,48.27,-35.77,35.77
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,179,H179,92.9,19,Single sequence & Structure,ProSST-2048,-0.2543859649122807,12.49,0.0,-1,-0.0,48.27,-35.77,35.77
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,179,H179,92.9,19,Structure & MSA,AIDO.Protein-RAG-16B,0.39824561403508774,12.49,0.0,-1,-0.0,48.27,-35.77,35.77
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,179,H179,92.9,19,"Single sequence, Structure & Function annotations",ESM3,0.24736842105263157,12.49,0.0,-1,-0.0,48.27,-35.77,35.77
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,215,S215,89.3,19,MSA,PoET,0.22982456140350876,15.6,0.0,-1,-0.0,48.27,-32.66,32.66
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,215,S215,89.3,19,Single sequence,VespaG,0.27017543859649124,15.6,0.0,-1,-0.0,48.27,-32.66,32.66
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,215,S215,89.3,19,Structure,ESM-IF1,0.5807017543859649,15.6,0.0,-1,-0.0,48.27,-32.66,32.66
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,215,S215,89.3,19,Single sequence & Structure,ProSST-2048,0.43684210526315786,15.6,0.0,-1,-0.0,48.27,-32.66,32.66
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,215,S215,89.3,19,Structure & MSA,AIDO.Protein-RAG-16B,0.2614035087719298,15.6,0.0,-1,-0.0,48.27,-32.66,32.66
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,215,S215,89.3,19,"Single sequence, Structure & Function annotations",ESM3,0.47543859649122805,15.6,0.0,-1,-0.0,48.27,-32.66,32.66
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,238,C238,98.1,19,MSA,PoET,0.5789473684210525,9.29,0.0,-1,-0.0,48.27,-38.97,38.97
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,238,C238,98.1,19,Single sequence,VespaG,-0.07017543859649124,9.29,0.0,-1,-0.0,48.27,-38.97,38.97
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,238,C238,98.1,19,Structure,ESM-IF1,-0.28596491228070176,9.29,0.0,-1,-0.0,48.27,-38.97,38.97
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,238,C238,98.1,19,Single sequence & Structure,ProSST-2048,-0.02631578947368421,9.29,0.0,-1,-0.0,48.27,-38.97,38.97
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,238,C238,98.1,19,Structure & MSA,AIDO.Protein-RAG-16B,0.26491228070175443,9.29,0.0,-1,-0.0,48.27,-38.97,38.97
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,238,C238,98.1,19,"Single sequence, Structure & Function annotations",ESM3,-0.32631578947368417,9.29,0.0,-1,-0.0,48.27,-38.97,38.97
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,241,S241,97.6,19,MSA,PoET,0.28771929824561404,18.04,0.0,-1,-0.0,48.27,-30.23,30.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,241,S241,97.6,19,Single sequence,VespaG,0.10350877192982455,18.04,0.0,-1,-0.0,48.27,-30.23,30.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,241,S241,97.6,19,Structure,ESM-IF1,0.4526315789473684,18.04,0.0,-1,-0.0,48.27,-30.23,30.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,241,S241,97.6,19,Single sequence & Structure,ProSST-2048,0.0824561403508772,18.04,0.0,-1,-0.0,48.27,-30.23,30.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,241,S241,97.6,19,Structure & MSA,AIDO.Protein-RAG-16B,0.05263157894736842,18.04,0.0,-1,-0.0,48.27,-30.23,30.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,241,S241,97.6,19,"Single sequence, Structure & Function annotations",ESM3,0.12631578947368421,18.04,0.0,-1,-0.0,48.27,-30.23,30.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,242,C242,98.8,19,MSA,PoET,0.5526315789473685,9.25,0.0,-1,-0.0,48.27,-39.01,39.01
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,242,C242,98.8,19,Single sequence,VespaG,-0.30350877192982456,9.25,0.0,-1,-0.0,48.27,-39.01,39.01
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,242,C242,98.8,19,Structure,ESM-IF1,-0.11403508771929824,9.25,0.0,-1,-0.0,48.27,-39.01,39.01
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,242,C242,98.8,19,Single sequence & Structure,ProSST-2048,0.07017543859649124,9.25,0.0,-1,-0.0,48.27,-39.01,39.01
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,242,C242,98.8,19,Structure & MSA,AIDO.Protein-RAG-16B,0.4421052631578948,9.25,0.0,-1,-0.0,48.27,-39.01,39.01
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,242,C242,98.8,19,"Single sequence, Structure & Function annotations",ESM3,-0.23157894736842102,9.25,0.0,-1,-0.0,48.27,-39.01,39.01
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,248,R248,94.7,19,MSA,PoET,0.22807017543859648,20.78,0.0,-1,-0.0,48.27,-27.48,27.48
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,248,R248,94.7,19,Single sequence,VespaG,0.05263157894736842,20.78,0.0,-1,-0.0,48.27,-27.48,27.48
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,248,R248,94.7,19,Structure,ESM-IF1,0.2964912280701754,20.78,0.0,-1,-0.0,48.27,-27.48,27.48
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,248,R248,94.7,19,Single sequence & Structure,ProSST-2048,0.2421052631578947,20.78,0.0,-1,-0.0,48.27,-27.48,27.48
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,248,R248,94.7,19,Structure & MSA,AIDO.Protein-RAG-16B,0.30526315789473685,20.78,0.0,-1,-0.0,48.27,-27.48,27.48
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,248,R248,94.7,19,"Single sequence, Structure & Function annotations",ESM3,0.2614035087719298,20.78,0.0,-1,-0.0,48.27,-27.48,27.48
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,275,C275,96.1,19,MSA,PoET,0.31052631578947365,11.76,0.0,-1,-0.0,48.27,-36.51,36.51
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,275,C275,96.1,19,Single sequence,VespaG,-0.06140350877192983,11.76,0.0,-1,-0.0,48.27,-36.51,36.51
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,275,C275,96.1,19,Structure,ESM-IF1,0.12456140350877193,11.76,0.0,-1,-0.0,48.27,-36.51,36.51
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,275,C275,96.1,19,Single sequence & Structure,ProSST-2048,0.11578947368421051,11.76,0.0,-1,-0.0,48.27,-36.51,36.51
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,275,C275,96.1,19,Structure & MSA,AIDO.Protein-RAG-16B,0.07543859649122807,11.76,0.0,-1,-0.0,48.27,-36.51,36.51
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,275,C275,96.1,19,"Single sequence, Structure & Function annotations",ESM3,0.2,11.76,0.0,-1,-0.0,48.27,-36.51,36.51
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,277,C277,96.7,19,MSA,PoET,-0.14736842105263157,69.26,0.0,-1,-0.0,48.27,21.0,21.0
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,277,C277,96.7,19,Single sequence,VespaG,0.21403508771929824,69.26,0.0,-1,-0.0,48.27,21.0,21.0
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,277,C277,96.7,19,Structure,ESM-IF1,0.27368421052631575,69.26,0.0,-1,-0.0,48.27,21.0,21.0
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,277,C277,96.7,19,Single sequence & Structure,ProSST-2048,0.23333333333333334,69.26,0.0,-1,-0.0,48.27,21.0,21.0
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,277,C277,96.7,19,Structure & MSA,AIDO.Protein-RAG-16B,0.0456140350877193,69.26,0.0,-1,-0.0,48.27,21.0,21.0
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,277,C277,96.7,19,"Single sequence, Structure & Function annotations",ESM3,0.19649122807017544,69.26,0.0,-1,-0.0,48.27,21.0,21.0
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,279,G279,90.5,19,MSA,PoET,-0.38947368421052625,63.32,0.0,-1,-0.0,48.27,15.05,15.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,279,G279,90.5,19,Single sequence,VespaG,-0.12631578947368421,63.32,0.0,-1,-0.0,48.27,15.05,15.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,279,G279,90.5,19,Structure,ESM-IF1,-0.2631578947368421,63.32,0.0,-1,-0.0,48.27,15.05,15.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,279,G279,90.5,19,Single sequence & Structure,ProSST-2048,0.40175438596491225,63.32,0.0,-1,-0.0,48.27,15.05,15.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,279,G279,90.5,19,Structure & MSA,AIDO.Protein-RAG-16B,-0.07017543859649124,63.32,0.0,-1,-0.0,48.27,15.05,15.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Nutlin,OrganismalFitness,279,G279,90.5,19,"Single sequence, Structure & Function annotations",ESM3,-0.18341379562965102,63.32,0.0,-1,-0.0,48.27,15.05,15.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,176,C176,97.3,19,MSA,PoET,0.7912280701754386,2.52,0.0,-1,-0.0,46.56,-44.05,44.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,176,C176,97.3,19,Single sequence,VespaG,0.531578947368421,2.52,0.0,-1,-0.0,46.56,-44.05,44.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,176,C176,97.3,19,Structure,ESM-IF1,0.11578947368421051,2.52,0.0,-1,-0.0,46.56,-44.05,44.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,176,C176,97.3,19,Single sequence & Structure,ProSST-2048,0.2263157894736842,2.52,0.0,-1,-0.0,46.56,-44.05,44.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,176,C176,97.3,19,Structure & MSA,AIDO.Protein-RAG-16B,0.4473684210526316,2.52,0.0,-1,-0.0,46.56,-44.05,44.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,176,C176,97.3,19,"Single sequence, Structure & Function annotations",ESM3,0.08771929824561404,2.52,0.0,-1,-0.0,46.56,-44.05,44.05
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,179,H179,92.9,19,MSA,PoET,0.36315789473684207,2.33,0.0,-1,-0.0,46.56,-44.23,44.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,179,H179,92.9,19,Single sequence,VespaG,0.2175438596491228,2.33,0.0,-1,-0.0,46.56,-44.23,44.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,179,H179,92.9,19,Structure,ESM-IF1,0.3456140350877193,2.33,0.0,-1,-0.0,46.56,-44.23,44.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,179,H179,92.9,19,Single sequence & Structure,ProSST-2048,0.02456140350877193,2.33,0.0,-1,-0.0,46.56,-44.23,44.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,179,H179,92.9,19,Structure & MSA,AIDO.Protein-RAG-16B,0.042105263157894736,2.33,0.0,-1,-0.0,46.56,-44.23,44.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,179,H179,92.9,19,"Single sequence, Structure & Function annotations",ESM3,0.30877192982456136,2.33,0.0,-1,-0.0,46.56,-44.23,44.23
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,238,C238,98.1,19,MSA,PoET,0.6175438596491227,5.88,0.0,-1,-0.0,46.56,-40.69,40.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,238,C238,98.1,19,Single sequence,VespaG,0.3473684210526316,5.88,0.0,-1,-0.0,46.56,-40.69,40.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,238,C238,98.1,19,Structure,ESM-IF1,0.07719298245614034,5.88,0.0,-1,-0.0,46.56,-40.69,40.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,238,C238,98.1,19,Single sequence & Structure,ProSST-2048,0.29298245614035084,5.88,0.0,-1,-0.0,46.56,-40.69,40.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,238,C238,98.1,19,Structure & MSA,AIDO.Protein-RAG-16B,0.4280701754385965,5.88,0.0,-1,-0.0,46.56,-40.69,40.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,238,C238,98.1,19,"Single sequence, Structure & Function annotations",ESM3,0.12631578947368421,5.88,0.0,-1,-0.0,46.56,-40.69,40.69
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,241,S241,97.6,19,MSA,PoET,0.3385964912280702,14.84,0.0,-1,-0.0,46.56,-31.73,31.73
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,241,S241,97.6,19,Single sequence,VespaG,0.13684210526315788,14.84,0.0,-1,-0.0,46.56,-31.73,31.73
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,241,S241,97.6,19,Structure,ESM-IF1,0.32807017543859646,14.84,0.0,-1,-0.0,46.56,-31.73,31.73
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,241,S241,97.6,19,Single sequence & Structure,ProSST-2048,0.10350877192982455,14.84,0.0,-1,-0.0,46.56,-31.73,31.73
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,241,S241,97.6,19,Structure & MSA,AIDO.Protein-RAG-16B,0.3017543859649123,14.84,0.0,-1,-0.0,46.56,-31.73,31.73
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,241,S241,97.6,19,"Single sequence, Structure & Function annotations",ESM3,0.07543859649122807,14.84,0.0,-1,-0.0,46.56,-31.73,31.73
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,248,R248,94.7,19,MSA,PoET,0.3929824561403509,12.25,0.0,-1,-0.0,46.56,-34.31,34.31
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,248,R248,94.7,19,Single sequence,VespaG,0.4140350877192982,12.25,0.0,-1,-0.0,46.56,-34.31,34.31
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,248,R248,94.7,19,Structure,ESM-IF1,0.5789473684210525,12.25,0.0,-1,-0.0,46.56,-34.31,34.31
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,248,R248,94.7,19,Single sequence & Structure,ProSST-2048,0.7087719298245614,12.25,0.0,-1,-0.0,46.56,-34.31,34.31
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,248,R248,94.7,19,Structure & MSA,AIDO.Protein-RAG-16B,0.44912280701754387,12.25,0.0,-1,-0.0,46.56,-34.31,34.31
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,248,R248,94.7,19,"Single sequence, Structure & Function annotations",ESM3,0.7842105263157895,12.25,0.0,-1,-0.0,46.56,-34.31,34.31
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,277,C277,96.7,19,MSA,PoET,-0.04912280701754386,36.98,0.0,-1,-0.0,46.56,-9.59,9.59
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,277,C277,96.7,19,Single sequence,VespaG,0.3385964912280702,36.98,0.0,-1,-0.0,46.56,-9.59,9.59
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,277,C277,96.7,19,Structure,ESM-IF1,0.743859649122807,36.98,0.0,-1,-0.0,46.56,-9.59,9.59
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,277,C277,96.7,19,Single sequence & Structure,ProSST-2048,0.6245614035087719,36.98,0.0,-1,-0.0,46.56,-9.59,9.59
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,277,C277,96.7,19,Structure & MSA,AIDO.Protein-RAG-16B,0.11228070175438597,36.98,0.0,-1,-0.0,46.56,-9.59,9.59
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,277,C277,96.7,19,"Single sequence, Structure & Function annotations",ESM3,0.5719298245614035,36.98,0.0,-1,-0.0,46.56,-9.59,9.59
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,279,G279,90.5,19,MSA,PoET,-0.25789473684210523,51.43,0.0,-1,-0.0,46.56,4.86,4.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,279,G279,90.5,19,Single sequence,VespaG,0.019298245614035085,51.43,0.0,-1,-0.0,46.56,4.86,4.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,279,G279,90.5,19,Structure,ESM-IF1,-0.3578947368421052,51.43,0.0,-1,-0.0,46.56,4.86,4.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,279,G279,90.5,19,Single sequence & Structure,ProSST-2048,0.07192982456140351,51.43,0.0,-1,-0.0,46.56,4.86,4.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,279,G279,90.5,19,Structure & MSA,AIDO.Protein-RAG-16B,-0.14385964912280702,51.43,0.0,-1,-0.0,46.56,4.86,4.86
+P53_HUMAN,P53_HUMAN_Giacomelli_2018_WT_Nutlin,OrganismalFitness,279,G279,90.5,19,"Single sequence, Structure & Function annotations",ESM3,-0.2176393364409256,51.43,0.0,-1,-0.0,46.56,4.86,4.86
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,238,C238,98.5,7,MSA,PoET,0.5,25.57,-2.4,-1,2.4,79.96,-54.39,54.39
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,238,C238,98.5,7,Single sequence,VespaG,-0.3214285714285715,25.57,-2.4,-1,2.4,79.96,-54.39,54.39
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,238,C238,98.5,7,Structure,ESM-IF1,0.21428571428571433,25.57,-2.4,-1,2.4,79.96,-54.39,54.39
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,238,C238,98.5,7,Single sequence & Structure,ProSST-2048,-0.14285714285714288,25.57,-2.4,-1,2.4,79.96,-54.39,54.39
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,238,C238,98.5,7,Structure & MSA,AIDO.Protein-RAG-16B,0.21428571428571433,25.57,-2.4,-1,2.4,79.96,-54.39,54.39
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,238,C238,98.5,7,"Single sequence, Structure & Function annotations",ESM3,-0.3214285714285715,25.57,-2.4,-1,2.4,79.96,-54.39,54.39
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,248,R248,95.3,5,MSA,PoET,0.09999999999999999,18.89,-2.4,-1,2.4,79.96,-61.07,61.07
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,248,R248,95.3,5,Single sequence,VespaG,0.09999999999999999,18.89,-2.4,-1,2.4,79.96,-61.07,61.07
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,248,R248,95.3,5,Structure,ESM-IF1,0.49999999999999994,18.89,-2.4,-1,2.4,79.96,-61.07,61.07
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,248,R248,95.3,5,Single sequence & Structure,ProSST-2048,0.7,18.89,-2.4,-1,2.4,79.96,-61.07,61.07
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,248,R248,95.3,5,Structure & MSA,AIDO.Protein-RAG-16B,0.7999999999999999,18.89,-2.4,-1,2.4,79.96,-61.07,61.07
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,248,R248,95.3,5,"Single sequence, Structure & Function annotations",ESM3,0.39999999999999997,18.89,-2.4,-1,2.4,79.96,-61.07,61.07
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,275,C275,96.8,6,MSA,PoET,0.3142857142857143,8.78,-2.4,-1,2.4,79.96,-71.18,71.18
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,275,C275,96.8,6,Single sequence,VespaG,0.3142857142857143,8.78,-2.4,-1,2.4,79.96,-71.18,71.18
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,275,C275,96.8,6,Structure,ESM-IF1,-0.2,8.78,-2.4,-1,2.4,79.96,-71.18,71.18
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,275,C275,96.8,6,Single sequence & Structure,ProSST-2048,0.14285714285714288,8.78,-2.4,-1,2.4,79.96,-71.18,71.18
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,275,C275,96.8,6,Structure & MSA,AIDO.Protein-RAG-16B,-0.028571428571428574,8.78,-2.4,-1,2.4,79.96,-71.18,71.18
+P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,275,C275,96.8,6,"Single sequence, Structure & Function annotations",ESM3,0.028571428571428574,8.78,-2.4,-1,2.4,79.96,-71.18,71.18
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,2,L2,99.7,19,MSA,PoET,-0.014035087719298246,69.35,1.0,1,1.0,71.37,-2.02,2.02
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,2,L2,99.7,19,Single sequence,VespaG,-0.2824561403508772,69.35,1.0,1,1.0,71.37,-2.02,2.02
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,2,L2,99.7,19,Structure,ESM-IF1,0.1701754385964912,69.35,1.0,1,1.0,71.37,-2.02,2.02
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,2,L2,99.7,19,Single sequence & Structure,ProSST-2048,0.13859649122807016,69.35,1.0,1,1.0,71.37,-2.02,2.02
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,2,L2,99.7,19,Structure & MSA,AIDO.Protein-RAG-16B,-0.056140350877192984,69.35,1.0,1,1.0,71.37,-2.02,2.02
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,2,L2,99.7,19,"Single sequence, Structure & Function annotations",ESM3,0.08771929824561404,69.35,1.0,1,1.0,71.37,-2.02,2.02
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,4,D4,92.9,19,MSA,PoET,-0.27368421052631575,74.55,1.0,1,1.0,71.37,3.19,3.19
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,4,D4,92.9,19,Single sequence,VespaG,-0.29473684210526313,74.55,1.0,1,1.0,71.37,3.19,3.19
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,4,D4,92.9,19,Structure,ESM-IF1,-0.3192982456140351,74.55,1.0,1,1.0,71.37,3.19,3.19
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,4,D4,92.9,19,Single sequence & Structure,ProSST-2048,-0.16140350877192983,74.55,1.0,1,1.0,71.37,3.19,3.19
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,4,D4,92.9,19,Structure & MSA,AIDO.Protein-RAG-16B,-0.20096535502004823,74.55,1.0,1,1.0,71.37,3.19,3.19
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,4,D4,92.9,19,"Single sequence, Structure & Function annotations",ESM3,-0.28771929824561404,74.55,1.0,1,1.0,71.37,3.19,3.19
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,156,H156,86.7,19,MSA,PoET,0.2421052631578947,18.86,1.0,1,1.0,71.37,-52.51,52.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,156,H156,86.7,19,Single sequence,VespaG,-0.03333333333333333,18.86,1.0,1,1.0,71.37,-52.51,52.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,156,H156,86.7,19,Structure,ESM-IF1,-0.056140350877192984,18.86,1.0,1,1.0,71.37,-52.51,52.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,156,H156,86.7,19,Single sequence & Structure,ProSST-2048,0.4140350877192982,18.86,1.0,1,1.0,71.37,-52.51,52.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,156,H156,86.7,19,Structure & MSA,AIDO.Protein-RAG-16B,0.6087719298245614,18.86,1.0,1,1.0,71.37,-52.51,52.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,156,H156,86.7,19,"Single sequence, Structure & Function annotations",ESM3,0.1456140350877193,18.86,1.0,1,1.0,71.37,-52.51,52.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,377,R377,99.0,19,MSA,PoET,0.30350877192982456,18.27,1.0,1,1.0,71.37,-53.09,53.09
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,377,R377,99.0,19,Single sequence,VespaG,0.34912280701754383,18.27,1.0,1,1.0,71.37,-53.09,53.09
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,377,R377,99.0,19,Structure,ESM-IF1,0.07719298245614034,18.27,1.0,1,1.0,71.37,-53.09,53.09
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,377,R377,99.0,19,Single sequence & Structure,ProSST-2048,0.1736842105263158,18.27,1.0,1,1.0,71.37,-53.09,53.09
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,377,R377,99.0,19,Structure & MSA,AIDO.Protein-RAG-16B,0.0456140350877193,18.27,1.0,1,1.0,71.37,-53.09,53.09
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,377,R377,99.0,19,"Single sequence, Structure & Function annotations",ESM3,0.015789473684210527,18.27,1.0,1,1.0,71.37,-53.09,53.09
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,460,A460,98.3,18,MSA,PoET,-0.07120743034055728,97.58,1.0,1,1.0,71.37,26.21,26.21
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,460,A460,98.3,18,Single sequence,VespaG,-0.052631578947368425,97.58,1.0,1,1.0,71.37,26.21,26.21
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,460,A460,98.3,18,Structure,ESM-IF1,0.017543859649122806,97.58,1.0,1,1.0,71.37,26.21,26.21
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,460,A460,98.3,18,Single sequence & Structure,ProSST-2048,0.06707946336429307,97.58,1.0,1,1.0,71.37,26.21,26.21
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,460,A460,98.3,18,Structure & MSA,AIDO.Protein-RAG-16B,-0.07533539731682146,97.58,1.0,1,1.0,71.37,26.21,26.21
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,460,A460,98.3,18,"Single sequence, Structure & Function annotations",ESM3,-0.03199174406604747,97.58,1.0,1,1.0,71.37,26.21,26.21
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,463,L463,85.4,19,MSA,PoET,0.16842105263157894,78.31,1.0,1,1.0,71.37,6.94,6.94
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,463,L463,85.4,19,Single sequence,VespaG,-0.1105263157894737,78.31,1.0,1,1.0,71.37,6.94,6.94
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,463,L463,85.4,19,Structure,ESM-IF1,0.26491228070175443,78.31,1.0,1,1.0,71.37,6.94,6.94
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,463,L463,85.4,19,Single sequence & Structure,ProSST-2048,0.19298245614035087,78.31,1.0,1,1.0,71.37,6.94,6.94
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,463,L463,85.4,19,Structure & MSA,AIDO.Protein-RAG-16B,-0.46315789473684205,78.31,1.0,1,1.0,71.37,6.94,6.94
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2022_activity,OrganismalFitness,463,L463,85.4,19,"Single sequence, Structure & Function annotations",ESM3,-0.0017543859649122807,78.31,1.0,1,1.0,71.37,6.94,6.94
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,156,H156,85.1,18,MSA,PoET,-0.11248710010319916,64.52,1.0,1,1.0,83.04,-18.51,18.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,156,H156,85.1,18,Single sequence,VespaG,-0.17440660474716205,64.52,1.0,1,1.0,83.04,-18.51,18.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,156,H156,85.1,18,Structure,ESM-IF1,-0.034055727554179564,64.52,1.0,1,1.0,83.04,-18.51,18.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,156,H156,85.1,18,Single sequence & Structure,ProSST-2048,-0.15789473684210525,64.52,1.0,1,1.0,83.04,-18.51,18.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,156,H156,85.1,18,Structure & MSA,AIDO.Protein-RAG-16B,-0.5500515995872033,64.52,1.0,1,1.0,83.04,-18.51,18.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,156,H156,85.1,18,"Single sequence, Structure & Function annotations",ESM3,-0.15170278637770898,64.52,1.0,1,1.0,83.04,-18.51,18.51
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,377,R377,99.8,19,MSA,PoET,0.32280701754385965,3.24,1.0,1,1.0,83.04,-79.8,79.8
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,377,R377,99.8,19,Single sequence,VespaG,0.08771929824561404,3.24,1.0,1,1.0,83.04,-79.8,79.8
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,377,R377,99.8,19,Structure,ESM-IF1,0.06666666666666667,3.24,1.0,1,1.0,83.04,-79.8,79.8
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,377,R377,99.8,19,Single sequence & Structure,ProSST-2048,0.2631578947368421,3.24,1.0,1,1.0,83.04,-79.8,79.8
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,377,R377,99.8,19,Structure & MSA,AIDO.Protein-RAG-16B,0.2456140350877193,3.24,1.0,1,1.0,83.04,-79.8,79.8
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,377,R377,99.8,19,"Single sequence, Structure & Function annotations",ESM3,0.3614035087719299,3.24,1.0,1,1.0,83.04,-79.8,79.8
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,460,A460,99.6,18,MSA,PoET,-0.23426212590299278,74.59,1.0,1,1.0,83.04,-8.45,8.45
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,460,A460,99.6,18,Single sequence,VespaG,-0.17440660474716205,74.59,1.0,1,1.0,83.04,-8.45,8.45
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,460,A460,99.6,18,Structure,ESM-IF1,-0.05056759545923632,74.59,1.0,1,1.0,83.04,-8.45,8.45
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,460,A460,99.6,18,Single sequence & Structure,ProSST-2048,-0.1042311661506708,74.59,1.0,1,1.0,83.04,-8.45,8.45
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,460,A460,99.6,18,Structure & MSA,AIDO.Protein-RAG-16B,-0.15376676986584106,74.59,1.0,1,1.0,83.04,-8.45,8.45
+HXK4_HUMAN,HXK4_HUMAN_Gersing_2023_abundance,Expression,460,A460,99.6,18,"Single sequence, Structure & Function annotations",ESM3,-0.08152734778121776,74.59,1.0,1,1.0,83.04,-8.45,8.45
