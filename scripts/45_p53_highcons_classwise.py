@@ -53,26 +53,42 @@ STRUCT_BASED = {"Structure", "Structure & MSA", "Single sequence & Structure"}
 ASSAYS = M40.PROT_ASSAYS["P53_HUMAN"]
 
 
-def main():
-    hd = M40.shared_high_sites()
+def per_model_median(subs, present):
+    """{model: median per-site Spearman over the given position subs}."""
+    out = {}
+    for m in present:
+        rhos = [M38.persite_spearman(s, m) for s in subs]
+        rhos = [r for r in rhos if pd.notna(r)]
+        if rhos:
+            out[m] = round(float(np.median(rhos)), 4)
+    return out
+
+
+def build(kind):
+    """kind='highcons': shared high-disagreement, pct>80 sites (script 40).
+       kind='allsites': every >=5-sub position in the assay."""
+    hd = M40.shared_high_sites() if kind == "highcons" else None
     rows = []
     for dms_id in ASSAYS:
-        df, sites = M40.selected_high(dms_id, hd)
-        if not sites:
+        df = M38._scores(dms_id)
+        if kind == "highcons":
+            _, sites = M40.selected_high(dms_id, hd)
+            subs = [sub for _, _, _, sub in sites]
+        else:
+            subs = [g for _, g in df.groupby("p") if len(g) >= M40.MIN_SUBS]
+        if not subs:
             continue
-        for m in [x for x in MODELS if x in df.columns]:
-            rhos = [M38.persite_spearman(sub, m) for _, _, _, sub in sites]
-            rhos = [r for r in rhos if pd.notna(r)]
-            if rhos:
-                rows.append({"DMS_id": dms_id, "n_sites": len(sites), "model": m,
-                             "model_type": M2T[m],
-                             "median_persite_spearman": round(float(np.median(rhos)), 4)})
-    tab = pd.DataFrame(rows)
-    tab.to_csv(os.path.join(H2DIR, "h2_p53_highcons_classwise_persite.csv"), index=False)
+        present = [m for m in MODELS if m in df.columns]
+        for m, v in per_model_median(subs, present).items():
+            rows.append({"DMS_id": dms_id, "n_sites": len(subs), "model": m,
+                         "model_type": M2T[m], "median_persite_spearman": v})
+    return pd.DataFrame(rows)
 
+
+def plot(tab, site_desc, out):
     present = [a for a in ASSAYS if a in set(tab.DMS_id)]
     fig, axes = plt.subplots(2, 2, figsize=(15, 10), sharey=True, squeeze=False)
-    print("\nseq/MSA vs structure-based median per-site Spearman (per model), by assay:")
+    print(f"\n[{site_desc}] seq/MSA vs structure-based median per-site Spearman, by assay:")
     for i, dms_id in enumerate(present):
         ax = axes[i // 2][i % 2]
         d = tab[(tab.DMS_id == dms_id) & (tab.model_type.isin(CLASS_ORDER))]
@@ -87,15 +103,14 @@ def main():
                        edgecolor="black", linewidth=0.5, alpha=0.9, zorder=3)
         ax.axhline(0, color="0.4", ls="--", lw=1)
         n = tab[tab.DMS_id == dms_id].n_sites.iloc[0]
-        ax.set_title(f"{dms_id}\n(high-cons shared sites: n={n})", fontsize=10)
+        ax.set_title(f"{dms_id}\n({site_desc}: n={n})", fontsize=10)
         ax.set_xlabel("")
         ax.set_ylabel("median per-site Spearman (per model)")
         ax.set_xticks(range(len(CLASS_ORDER)))
-        ax.set_xticklabels([f"{SHORT[c]}\n(n={ (d.model_type==c).sum() })" for c in CLASS_ORDER],
+        ax.set_xticklabels([f"{SHORT[c]}\n(n={(d.model_type==c).sum()})" for c in CLASS_ORDER],
                            fontsize=8)
         ax.set_ylim(-1.05, 1.05)
         ax.yaxis.grid(False)
-        # seq/MSA vs structure-based comparison
         a = tab[(tab.DMS_id == dms_id) & (tab.model_type.isin(SEQ_MSA))].median_persite_spearman
         b = tab[(tab.DMS_id == dms_id) & (tab.model_type.isin(STRUCT_BASED))].median_persite_spearman
         p = mannwhitneyu(a, b, alternative="greater").pvalue if len(a) and len(b) else np.nan
@@ -103,23 +118,34 @@ def main():
                             f"MWU seq>struct p={p:.3f}", transform=ax.transAxes,
                 va="top", ha="left", fontsize=8, color="0.2")
         esm3 = tab[(tab.DMS_id == dms_id) & (tab.model_type == FUNC_CLASS)].median_persite_spearman
-        print(f"  {dms_id}: seq/MSA med {a.median():.2f} (n={len(a)}) vs struct med "
-              f"{b.median():.2f} (n={len(b)})  MWU p(seq>struct)={p:.3f}"
-              + (f"  [ESM3={esm3.iloc[0]:.2f}]" if len(esm3) else ""))
+        print(f"  {dms_id}: seq/MSA {a.median():.2f} (n={len(a)}) vs struct {b.median():.2f} "
+              f"(n={len(b)})  MWU p={p:.3f}" + (f"  [ESM3={esm3.iloc[0]:.2f}]" if len(esm3) else ""))
     for j in range(len(present), 4):
         axes[j // 2][j % 2].axis("off")
     handles = [plt.Rectangle((0, 0), 1, 1, fc=PALETTE[c], alpha=0.6, ec="none",
                              label=f"{SHORT[c]} = {c}") for c in CLASS_ORDER]
     fig.legend(handles=handles, loc="lower center", ncol=3, fontsize=8, frameon=False,
-               bbox_to_anchor=(0.5, -0.02), title="model_type class (box/dot colour); each dot = one model")
-    fig.suptitle("P53 shared high-disagreement, HIGH-conservation sites (pct>80) — median "
-                 "per-site Spearman by model class  (45 family-best; Seq+Struct+Fn = ESM3, "
-                 "1 model)", fontsize=12, y=1.0)
+               bbox_to_anchor=(0.5, -0.02),
+               title="model_type class (box/dot colour); each dot = one model")
+    fig.suptitle(f"P53 — median per-site Spearman by model class at {site_desc}  "
+                 "(45 family-best; Seq+Struct+Fn = ESM3, 1 model)", fontsize=12, y=1.0)
     plt.tight_layout(rect=(0, 0.05, 1, 0.96))
-    out = os.path.join(C.FIGURES, "h2_persite_spearman_density", "fig_p53_highcons_classwise.png")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
-    print("\nsaved", out)
+    print("saved", out)
+
+
+def main():
+    figdir = os.path.join(C.FIGURES, "h2_persite_spearman_density")
+    hc = build("highcons")
+    hc.to_csv(os.path.join(H2DIR, "h2_p53_highcons_classwise_persite.csv"), index=False)
+    plot(hc, "high-cons shared sites (pct>80)",
+         os.path.join(figdir, "fig_p53_highcons_classwise.png"))
+
+    allp = build("allsites")
+    allp.to_csv(os.path.join(H2DIR, "h2_p53_allsites_classwise_persite.csv"), index=False)
+    plot(allp, "all ≥5-sub positions",
+         os.path.join(figdir, "fig_p53_allsites_classwise.png"))
 
 
 if __name__ == "__main__":
