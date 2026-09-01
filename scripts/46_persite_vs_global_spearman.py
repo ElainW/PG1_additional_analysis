@@ -335,15 +335,12 @@ def main():
     pd.DataFrame([{"model": f["name"], "r2": f["r2"], "equation": f["label"]}
                   for f in fits]).to_csv(
         os.path.join(OUTRES, "aggregate_curve_fits.csv"), index=False)
-    styles = {"exp_neg": dict(c="k", ls="-", lw=2.4),
-              "logarithmic": dict(c="#08519c", ls="--", lw=2.0),
-              "quad_left": dict(c="#b30000", ls="-.", lw=2.0)}
-    nice = {"exp_neg": "saturating exp", "logarithmic": "logarithmic",
-            "quad_left": "concave quad (left half)"}
-    for fdt in sorted(fits, key=lambda d: d["name"]):
-        xg, yg = curve_xy(fdt)
-        ax.plot(xg, yg, zorder=5, **styles[fdt["name"]],
-                label=f"{nice[fdt['name']]}  (R²={fdt['r2']:.2f})")
+    # plot the saturating-exponential fit (best R^2 of the candidates; all three
+    # are still fit and recorded to aggregate_curve_fits.csv)
+    expfit = next(f for f in fits if f["name"] == "exp_neg")
+    xg, yg = curve_xy(expfit)
+    ax.plot(xg, yg, c="k", ls="-", lw=2.4, zorder=5,
+            label=f"saturating exp  (R²={expfit['r2']:.2f})\n{expfit['label']}")
     ax.legend(fontsize=7.5, loc="center left", bbox_to_anchor=(1.02, 0.5),
               framealpha=0.95, title="model type / fit", borderaxespad=0)
     fig.tight_layout()
