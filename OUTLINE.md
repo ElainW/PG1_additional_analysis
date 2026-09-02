@@ -123,7 +123,8 @@ annotations), **F20** (assemble selected panels from F10/F12 +
   NDCG@10 in the relevant assay category. *Does that solve model selection?*
 - **Thesis (the "I can't believe it's not better"):** No — the selection metric
   is computed on a quantity (global rank correlation) that isn't the quantity
-  optimization needs (within-site ranking of substitutions at winners).
+  optimization needs (within-site ranking of substitutions at functionally
+  important positions).
 - **The broader premise — ProteinGym is treated as the gold standard, but the
   leaderboard doesn't transfer to design.** The field defaults to "higher
   ProteinGym Spearman/NDCG@10 ⇒ better model," yet **higher ProteinGym performance
