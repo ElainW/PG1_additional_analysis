@@ -20,7 +20,7 @@ UniProt annotation tables live in `data/uniprot/additional_annotations/`: GoF-su
 tables (script `24`) and per-protein structural/functional annotations — binding
 residues per ligand, subdomains, disordered regions, disease variants (script `25`,
 mirrors what `23` overlays). Allosteric-site atlases parsed from primary papers are in
-`results/allosteric_map/` (script `26`; SRC_HUMAN first).
+`results/allosteric_map/` (SRC_HUMAN from script `26`, RASK_HUMAN/KRAS from `47`).
 Structure files (used by the 3-D scripts `17`–`20`) live in `data/structures/pdb/`
 (crystal PDBs 1V4S, 3VEV) and `data/structures/af2/` (AlphaFold model HXK4_HUMAN).
 
@@ -144,6 +144,7 @@ python3 43_assayspecific_rank_tiers.py        # top / rank-23 / lowest within-si
 python3 44_persite_category_leaderboard.py    # per-site Spearman leaderboard over 217 assays x 45 models + category tier plot
 python3 45_p53_highcons_classwise.py          # P53 disagree-at-conserved: seq/MSA vs structure-based per-site Spearman by class
 python3 46_persite_vs_global_spearman.py      # per-site (weighted) vs overall Spearman + curve fit (--recompute to rebuild the ~8min long table)
+python3 47_kras_allosteric_sites.py           # curate KRAS allosteric sites from Weng 2023 -> results/allosteric_map/RASK_HUMAN.tsv
 ```
 Planned analyses are tracked in `NEXT_STEPS.md`.
 
@@ -827,7 +828,10 @@ Per-site vs overall Spearman (`46`) — under `results/persite_vs_global/`:
 means), `aggregate_curve_fits.csv` (the three candidate curve fits + R²).
 Allosteric maps: `allosteric_map/SRC_HUMAN.tsv` (per-residue Src allosteric-site
 atlas parsed from Beltran 2026 — site class, inhibitory/activating direction,
-region, druggable pocket, evidence; `26`).
+region, druggable pocket, evidence; `26`) and `allosteric_map/RASK_HUMAN.tsv`
+(KRAS / P01116, 102 residues curated from Weng et al. Nature 2023 — binding-
+interface vs allosteric class, direction, region/β-strand shell, Ostrem switch-II
+and P1–P4 surface pockets, per-figure evidence; `47`).
 Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`,
 `generalization_candidate_proteins.csv` (24 multi-assay proteins + RCSB PDB
 options, for choosing a protein/structure to extend the analysis — `21`; includes
