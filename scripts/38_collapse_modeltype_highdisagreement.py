@@ -28,6 +28,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+import seaborn as sns
 from scipy.stats import spearmanr
 import common as C
 from importlib import import_module
@@ -113,7 +114,9 @@ def main():
     print(f"assays pooled: {per['DMS_id'].nunique()}")
 
     # ---- figure: 2 panels (split); color=model_type; solid=high, dashed=all ----
-    palette = dict(zip(C.MODEL_TYPE_ORDER, plt.cm.tab10(np.linspace(0, 1, len(C.MODEL_TYPE_ORDER)))))
+    # discrete tab10 in MODEL_TYPE_ORDER — same as 04/09/16 (MSA=blue, Single
+    # sequence=orange, Structure=green, Single seq & Structure=red, …)
+    palette = dict(zip(C.MODEL_TYPE_ORDER, sns.color_palette("tab10", len(C.MODEL_TYPE_ORDER))))
     x = np.arange(len(SUBSETS))
     ls = {"high": "-", "all": "--"}
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)

@@ -22,6 +22,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import seaborn as sns
 from scipy.stats import spearmanr
 import common as C
 from importlib import import_module
@@ -83,7 +84,10 @@ def main():
     print(piv.round(3).to_string())
 
     # ---- figure: 2 rows (split) x 2 cols (assay), model_type lines ----
-    palette = dict(zip(C.MODEL_TYPE_ORDER, plt.cm.tab10(np.linspace(0, 1, len(C.MODEL_TYPE_ORDER)))))
+    # model_type palette: discrete tab10 in MODEL_TYPE_ORDER — same mapping as
+    # 04_subset_figs.PALETTE / the W99 figures (MSA=blue, Single sequence=orange,
+    # Structure=green, Single seq & Structure=red, Structure & MSA=purple, …)
+    palette = dict(zip(C.MODEL_TYPE_ORDER, sns.color_palette("tab10", len(C.MODEL_TYPE_ORDER))))
     x = np.arange(len(SUBSETS))
     xt = [s for s, _ in SUBSETS]
     splits = ["global", "within-site"]
