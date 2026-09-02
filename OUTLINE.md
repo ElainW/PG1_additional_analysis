@@ -43,6 +43,9 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 |---|--------|---------|-------------|--------|
 | F1 | Schematic: optimization-as-scoring-function + global-vs-within-site axes | §1–§2 | main | new (schematic) |
 | F0 | **Within-site disagreement computation flow** (rank ~19 subs per model → pairwise Spearman every model pair → 1 − mean = disagreement) — the basis of all analyses | §2 | main | `render_within_site_flow.py` → `figures/within_site_disagreement_flow.pdf` (exists) |
+| F0b | GCK per-site within-site disagreement **distribution**, both assays (activity/abundance), selected high/low tails + 0.5 boundary + median marked — the metric realized on a real protein | §2 | main (combine w/ F0) or appx | `31` `figures/site_disagreement/distribution/HXK4_HUMAN.*` (exists) |
+| F18 | Within-site rank agreement between **model types** (MSA↔Structure&MSA highest ≈0.70–0.73; pure Structure the outliers ≈0.37–0.44) | §2 | appx | `03` `persite_modeltype_agreement_matrix.csv` (exists as heatmap) |
+| F19 | Within-site rank agreement matrix, **23-model subset** (labelled per-model heatmap) | §2 | appx | `04` `figures/persite_analysis/Fig5_subset.pdf` (exists) |
 | F16 | Functional enrichment: disagreement near binding/active-site residues, per protein (10/13, pooled p=5e-13) | §3.1 | main | `15` `generalization_functional_disagreement_per_protein.csv` |
 | F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §3.1 | appx | `23` `fig_<gene>_structure_map.png`; allostery `26` |
 | F2 | Global Spearman vs within-site Spearman per model, with P53-Giacomelli breakdown highlighted | §3.2 | main | new cut of `03`/`spearman_long` |
@@ -61,8 +64,10 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F15 | Boundary: `MSA_Neff_L` distribution + both-tails degradation | §5 | appx | `02`/`28` |
 
 F0 already exists as a rendered vector export
-(`figures/within_site_disagreement_flow.pdf`, `render_within_site_flow.py`); F1 is
-a new schematic to draw.
+(`figures/within_site_disagreement_flow.pdf`, `render_within_site_flow.py`); F0b,
+F18, F19 also already exist (`31`/`03`/`04`). F1 is the only new schematic to draw.
+F0b (GCK disagreement distribution) may be combined with F0 into a single method
+panel or moved to the appendix (user's call).
 
 ---
 
@@ -123,7 +128,10 @@ a new schematic to draw.
   `coarse_selection_type` → separates *model wrong* from *model measures a
   different phenotype*.
 - **Figs:** F0 (within-site disagreement computation flow — the foundational
-  method figure), F1 (shared with §1).
+  method figure; optionally combined with F0b, the GCK disagreement distribution,
+  into one method panel), F1 (shared with §1). Appendix support: F18 (model-type
+  within-site agreement — Structure models are the outliers), F19 (23-model
+  within-site agreement matrix).
 
 ## 3. The recipe fails  *(element #3 — core, ordered as an argument)*
 
