@@ -51,11 +51,13 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F2 | **Aggregate** per-site (within-site) Spearman vs overall Spearman, across assays × models — within-site sits far below the diagonal (much harder than global) | §3.2 | appx | `figures/persite_vs_global/aggregate_persite_vs_global.pdf` (exists) |
 | F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | appx | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
 | F3 | **Winners collapse by model_type, global vs within-site split** (2×2: activity/abundance × global/within-site; ρ vs fitness subset all→top-50/25/10%). Global row collapses to ≈0 on the top quartile; within-site row collapses far more gently (retains ≈0.14–0.38); Structure bold = doesn't collapse worse | §3.3 | main | `16` `collapse_modeltype_withinsite` (exists) |
-| F4 | Oracle vs category tiers: within-site ρ for top-1/top-3/all vs per-site oracle | §3.4 | main | `29` `fig9_*` |
+| F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | appx | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (53-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
 | F5 | Spearman vs NDCG@10 redundancy (rank–rank scatter / correlation) | §3.5 | appx | `29` leaderboard |
-| F6 | Co-localization forest, high vs low tail (obs vs null band, per protein) | §4.1 | main | `33` `fig_colocalization_forest*.png` |
+| F6 | **Co-localization forest — 2-panel excerpt (main):** P53_HUMAN (obs overlap ≫ null band, strongly significant) vs VKOR1_HUMAN (obs ≈ null, n.s.) — the co-localization contrast in one figure | §4.1 | main | `33` `fig_colocalization_forest.png` (excerpt these two panels) |
+| F6b | Full **high**-disagreement co-localization forest, all 20 proteins (obs vs 95% null band, red=BH q<0.05) | §4.1 | appx | `33` `fig_colocalization_forest.png` (exists) |
+| F6c | Full **low**-disagreement co-localization forest, all 20 proteins (control — the easy tail co-localizes too, but less) | §4.1 | appx | `33` `fig_colocalization_forest_low.png` (exists) |
 | F7 | Co-localization summary: pooled fraction + bootstrap CI, high vs low | §4.1 | appx | `32` `colocalization_pooled_ci.csv` |
-| F8 | Rank↔within-site accuracy at high-disagreement sites (the ρ≈−0.05…−0.15 panel) | §4.2 | main | `29` `fig9_*` |
+| F8 | **HXK4 winners collapse, high- vs low-agreement sites** (activity/abundance; 23-model subset): ρ vs fitness subset all→top-50/25/10% — collapses to ≈0 on the high-fitness tail in **both** agreement classes (agreement doesn't rescue the collapse) | §3.3 | appx | `14` `hxk4_quartile_by_agreement*` (exists) |
 | F9 | Within-site DMS range & |mean−WT| vs disagreement, pooled across assays | §4.3 | main | new (from `O2/20250613` + disagreement tables) |
 | F10 | Per-site within-site DMS relfrac, high- vs low-disagreement sites | §4.3 | appx | `34` H1 relfrac tables |
 | F11 | Conservation null: pooled ρ(disagreement, conservation) unweighted vs weighted; per-assay ρ spread (−0.59…+0.42) | §4.4 | main | `28` `conservation_disagreement_spearman_by_assay.csv` |
@@ -186,14 +188,16 @@ fitness definition — under a **within-site** winners split it is far gentler
 (retains ≈0.14–0.38 vs ≈0 globally), so much of the collapse is the global
 definition mixing in across-position signal (cf. §4); (ii) it holds across
 **model types**, and Structure-only models (bold) do **not** collapse worse.
-- **Figs:** F3 (main — winners collapse by model_type, global vs within-site).
+- **Figs:** F3 (main — winners collapse by model_type, global vs within-site);
+  F8 (appx — HXK4 collapse, high- vs low-agreement sites: agreement doesn't rescue).
 
 **3.4 Headline: category-level selection barely helps.** Better-ranked models win
 at high-disagreement sites only weakly (ρ(rank, within-site) ≈ **−0.05 to
 −0.15**); the **per-site oracle (0.56–0.73) dwarfs every category tier**. Picking
 the top model by Spearman/NDCG in the assay category does **not** solve it;
 site-specific choice would help far more.
-- **Figs:** F4.
+- **Figs:** F4 (fig9 — category-rank tiers ≈flat at high- vs low-disagreement
+  sites; appx). The per-site oracle number is quoted in text.
 
 **3.5 Spearman and NDCG@10 are redundant, not complementary.** Neither captures
 within-site or winner ranking; they rank models near-identically.
@@ -216,7 +220,9 @@ artifact. **Control:** low-disagreement tail also recurs but **less** — 110/26
 (42%), CI 33–51%, 16/20 significant → hard sites recur *more* (not "any extreme
 repeats"). Cause: intrinsically ill-posed positions; disagreement here is *not*
 selectable-away.
-- **Figs:** F6 (main — the co-localization stats fig), F7 (appx).
+- **Figs:** F6 (main — 2-panel excerpt, P53 significant vs VKOR1 n.s.); F6b (appx
+  — full high-disagreement forest, 20 proteins), F6c (appx — full low-disagreement
+  forest control), F7 (appx — pooled fraction + bootstrap CI).
 
 **4.2 Category B — assay-specific high-disagreement sites (one assay only).**
 Two candidate causes: (i) genuine model-performance spread, (ii) assay-specific
@@ -229,7 +235,8 @@ chooser even where model choice matters.
   assay-specific sites*) needs a re-run of `29` restricted to Category-B sites
   (partition by the `32` co-localization output). Flag as planned; don't
   over-claim from the pooled number.
-- **Figs:** F8.
+- **Figs:** F4 (fig9 — the ≈flat rank tiers at high-disagreement sites; appx,
+  shared with §3.4).
 
 **4.3 What intrinsic site property *does* explain assay-specific disagreement:
 the DMS-score structure at the position.** Across the many assays with
@@ -344,6 +351,13 @@ P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
   assay-specific sites, not just pooled.
 - **F9 (new):** pooled within-site DMS range & |mean−WT| vs disagreement across
   assays — the generalization of the tolerance/compression explanation beyond P53.
+- **Recombine `figures/conservation_dms_panels/` into a 3-regime figure:** compose
+  a single panel showing the **three conservation levels of high-disagreement
+  sites** — conserved (e.g. P53 Giacomelli), variable (e.g. PTEN, HXK4), and
+  intermediate/mixed (e.g. CP2C9) — from the existing per-assay panels
+  (`P53_*`, `PTEN_*`, `HXK4_*`, `CP2C9_*`). Illustrates that high disagreement
+  occurs across the conservation spectrum (ties §4.3 tolerance/compression + §4.4
+  conservation null). Candidate appendix figure for §4.4.
 - Confirm which figs are regenerable vs need new scripts (F2, F9 appear to need
   new cuts).
 - **Allostery expansion (§3.1):** extend the allosteric-site atlas beyond
