@@ -48,7 +48,8 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F19 | Within-site rank agreement matrix, **23-model subset** (labelled per-model heatmap) | §2 | appx | `04` `figures/persite_analysis/Fig5_subset.pdf` (exists) |
 | F16 | Functional enrichment: disagreement near binding/active-site residues, per protein (10/13, pooled p=5e-13) | §3.1 | main | `15` `generalization_functional_disagreement_per_protein.csv` |
 | F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §3.1 | appx | `23` `fig_<gene>_structure_map.png`; allostery `26` |
-| F2 | Global Spearman vs within-site Spearman per model, with P53-Giacomelli breakdown highlighted | §3.2 | main | new cut of `03`/`spearman_long` |
+| F2 | **Aggregate** per-site (within-site) Spearman vs overall Spearman, across assays × models — within-site sits far below the diagonal (much harder than global) | §3.2 | appx | `figures/persite_vs_global/aggregate_persite_vs_global.pdf` (exists) |
+| F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | appx | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
 | F3 | Winners collapse: ρ vs fitness quantile (overall → top-25% → top-10%) | §3.3 | main | `14`/`16`; external-claim table |
 | F4 | Oracle vs category tiers: within-site ρ for top-1/top-3/all vs per-site oracle | §3.4 | main | `29` `fig9_*` |
 | F5 | Spearman vs NDCG@10 redundancy (rank–rank scatter / correlation) | §3.5 | appx | `29` leaderboard |
@@ -173,7 +174,8 @@ catastrophic**: on some assays within-site signal collapses even for globally
 strong models — e.g. **P53_HUMAN Giacomelli** (within-site Spearman breaks down
 completely). You can't tell from a global number whether you're on a well-behaved
 or a broken-within-site assay, and the new-protein setting gives no way to check.
-- **Figs:** F2.
+- **Figs:** F2 (aggregate global-vs-within-site, appx) + F2b (P53 WT_Nutlin
+  outlier where within-site collapses for all models, appx).
 
 **3.3 The winners collapse.** Ranking power vanishes on the top fitness quartile
 (ESM3 0.49→0.04→−0.01 at top-25%/10%; reproduces the CP2C9 cytochrome case;
