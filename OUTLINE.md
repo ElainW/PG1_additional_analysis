@@ -28,9 +28,15 @@ supplementary link.
 > measures **global** rank correlation while optimization lives in **within-site**
 > ranking of substitutions at **functionally important** positions.
 
-We generalize and mechanize the Spinner et al. observation (selection metrics
-don't correlate with enzyme function) across 217 DMS assays × 97 zero-shot
-models, and diagnose *why* the recipe fails and what (little) can be done instead.
+Spinner et al. showed that a battery of *in silico* sequence, structure, and
+biochemical/biophysical descriptors do not correlate well with model performance
+or enzyme function. We take a different route. Empirically we only broaden their
+setting — more protein families and more of the high-performing fitness predictors
+benchmarked in ProteinGym (217 DMS assays × 97 zero-shot models) — rather than
+claiming a large generalization. And crucially we do **not** use those in-silico
+descriptors: instead we propose **new sequence- and structure-based metrics** that
+explain *where and why* the models fail (their failure modes) and thereby inform
+what to do instead.
 
 ---
 
