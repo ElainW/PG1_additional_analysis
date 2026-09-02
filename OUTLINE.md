@@ -62,6 +62,7 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §3.1 | `23` `fig_<gene>_structure_map.png`; allostery `26` |
 | F2 | **Aggregate** per-site (within-site) Spearman vs overall Spearman, across assays × models — within-site sits far below the diagonal (much harder than global) | §3.2 | `figures/persite_vs_global/aggregate_persite_vs_global.pdf` (exists) |
 | F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
+| F22 | **Winners-collapse by model_type — all high-disagreement sites pooled (51 assays) vs all ≥5-sub sites** (generalizes F3 beyond HXK4; 45 family-best). 2 panels (global / within-site split), model_type lines, solid = high-disagreement, dashed = all. **Global:** both collapse to ≈0 on the top decile (high starts lower, ~0.34 vs 0.42; Structure holds up best on the global tail). **Within-site (pooled):** far gentler — high-disagreement sites *don't* collapse (top classes ρ≈0.35–0.40 flat across quartiles) vs all-sites declining to ~0.15. *Caveat: the within-site split here is pooled across positions (reintroduces across-position signal), so not the per-site accuracy of §4.2/F21.* | §3.3 | `38` `figures/persite_analysis/fig_collapse_modeltype_highdisagreement.png` (exists) |
 | F8 | **HXK4 winners collapse, high- vs low-agreement sites** (activity/abundance; 23-model subset): ρ vs fitness subset all→top-50/25/10% — collapses to ≈0 on the high-fitness tail in **both** agreement classes (agreement doesn't rescue the collapse). *Complements F3 rather than duplicating it: different dataset (HXK4 only, 23-model subset) and a different axis (high- vs low-**agreement** sites), where F3 is model_type × global-vs-within-site pooled across assays. Decision: F3 stays the main-text winners-collapse figure, F8 stays in the appendix.* | §3.3 | `14` `hxk4_quartile_by_agreement*` (exists) |
 | F21 | **Both metric-selected models degrade at high-disagreement sites (H2):** per-site accuracy of the category-top-Spearman and category-top-NDCG@10 models at assay-specific high-disagreement sites (2 panels; whole-assay ρ≈0.36 → per-site ρ≈0.09) | §4.2 | `34` `figures/h2_persite_spearman_density/fig_assayspecific_category_best_{spearman,ndcg}_panel.png` (exist) |
 | F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (53-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
@@ -216,8 +217,10 @@ fitness definition — under a **within-site** winners split it is far gentler
 (retains ≈0.14–0.38 vs ≈0 globally), so much of the collapse is the global
 definition mixing in across-position signal (cf. §4); (ii) it holds across
 **model types**, and Structure-only models (bold) do **not** collapse worse.
-- **Figs:** F3 (main — winners collapse by model_type, global vs within-site);
-  F8 (appx — HXK4 collapse, high- vs low-agreement sites: agreement doesn't rescue).
+- **Figs:** F3 (main — winners collapse by model_type, global vs within-site, HXK4);
+  F22 (appx — same but pooled over all high-disagreement sites, 51 assays, high vs
+  all sites); F8 (appx — HXK4 collapse, high- vs low-agreement sites: agreement
+  doesn't rescue).
 
 **3.4 Headline: category-level selection barely helps.** Better-ranked models win
 at high-disagreement sites only weakly (ρ(rank, within-site) ≈ **−0.05 to

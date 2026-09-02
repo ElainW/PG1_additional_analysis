@@ -1,0 +1,97 @@
+site_set,split,subset,model_type,mean_spearman,n_obs,n_assays
+all,global,all,MSA,0.42687972949546454,654,51
+all,global,all,Single sequence,0.3903236863356434,765,51
+all,global,all,Single sequence & Structure,0.45673494325573183,357,51
+all,global,all,"Single sequence, Structure & Function annotations",0.43182580495243916,51,51
+all,global,all,Structure,0.30460178349737227,153,51
+all,global,all,Structure & MSA,0.49762738505715715,306,51
+all,global,top10,MSA,-0.05650339607018394,602,47
+all,global,top10,Single sequence,-0.04810109553637229,705,47
+all,global,top10,Single sequence & Structure,-0.012380764912732583,329,47
+all,global,top10,"Single sequence, Structure & Function annotations",-0.007943344819451916,47,47
+all,global,top10,Structure,0.0015468605207147152,141,47
+all,global,top10,Structure & MSA,-0.04499124991863089,282,47
+all,global,top25,MSA,-0.025420120459481933,641,50
+all,global,top25,Single sequence,-0.01704613116693426,750,50
+all,global,top25,Single sequence & Structure,0.022216030854374094,350,50
+all,global,top25,"Single sequence, Structure & Function annotations",0.03461596131987167,50,50
+all,global,top25,Structure,0.029715215312240553,150,50
+all,global,top25,Structure & MSA,-0.0016627853849829565,300,50
+all,global,top50,MSA,0.07918601686271601,641,50
+all,global,top50,Single sequence,0.07188922965531772,750,50
+all,global,top50,Single sequence & Structure,0.12014308527808132,350,50
+all,global,top50,"Single sequence, Structure & Function annotations",0.13176566437289192,50,50
+all,global,top50,Structure,0.10514693916122293,150,50
+all,global,top50,Structure & MSA,0.11788290844891795,300,50
+all,within-site,all,MSA,0.42687972949546454,654,51
+all,within-site,all,Single sequence,0.3903236863356434,765,51
+all,within-site,all,Single sequence & Structure,0.45673494325573183,357,51
+all,within-site,all,"Single sequence, Structure & Function annotations",0.43182580495243916,51,51
+all,within-site,all,Structure,0.30460178349737227,153,51
+all,within-site,all,Structure & MSA,0.49762738505715715,306,51
+all,within-site,top10,MSA,0.17343080055360532,615,48
+all,within-site,top10,Single sequence,0.14578594788115853,720,48
+all,within-site,top10,Single sequence & Structure,0.21677432674839886,336,48
+all,within-site,top10,"Single sequence, Structure & Function annotations",0.1797880998122218,48,48
+all,within-site,top10,Structure,0.14527987714080595,144,48
+all,within-site,top10,Structure & MSA,0.2559505174142196,288,48
+all,within-site,top25,MSA,0.24092201853215167,641,50
+all,within-site,top25,Single sequence,0.21056072552264193,750,50
+all,within-site,top25,Single sequence & Structure,0.29194473277582456,350,50
+all,within-site,top25,"Single sequence, Structure & Function annotations",0.25885321764187963,50,50
+all,within-site,top25,Structure,0.20521076695597634,150,50
+all,within-site,top25,Structure & MSA,0.33027431814608627,300,50
+all,within-site,top50,MSA,0.3261271573794305,654,51
+all,within-site,top50,Single sequence,0.2914801602207731,765,51
+all,within-site,top50,Single sequence & Structure,0.36583813055563835,357,51
+all,within-site,top50,"Single sequence, Structure & Function annotations",0.3371328810782437,51,51
+all,within-site,top50,Structure,0.2516858685750722,153,51
+all,within-site,top50,Structure & MSA,0.4111311180243214,306,51
+high,global,all,MSA,0.31175900905917175,602,47
+high,global,all,Single sequence,0.2778179285106369,705,47
+high,global,all,Single sequence & Structure,0.37665604933786767,329,47
+high,global,all,"Single sequence, Structure & Function annotations",0.3971862901879203,47,47
+high,global,all,Structure,0.30285005986742686,141,47
+high,global,all,Structure & MSA,0.3790206423275055,282,47
+high,global,top10,MSA,-0.030175358497703784,357,28
+high,global,top10,Single sequence,-0.03447591381994393,420,28
+high,global,top10,Single sequence & Structure,-0.01950241717925942,196,28
+high,global,top10,"Single sequence, Structure & Function annotations",-0.03392186274135646,28,28
+high,global,top10,Structure,0.038345007889463475,84,28
+high,global,top10,Structure & MSA,-0.023287685531557044,168,28
+high,global,top25,MSA,-0.030731555714095398,459,36
+high,global,top25,Single sequence,-0.015651333066503164,540,36
+high,global,top25,Single sequence & Structure,0.044894428629773254,252,36
+high,global,top25,"Single sequence, Structure & Function annotations",0.05124270278019108,36,36
+high,global,top25,Structure,0.10058908154600185,108,36
+high,global,top25,Structure & MSA,-0.00569032747773189,216,36
+high,global,top50,MSA,0.020581402670379806,524,41
+high,global,top50,Single sequence,0.04364924538516958,615,41
+high,global,top50,Single sequence & Structure,0.12699717846317762,287,41
+high,global,top50,"Single sequence, Structure & Function annotations",0.15762527424950187,41,41
+high,global,top50,Structure,0.15810229669633702,123,41
+high,global,top50,Structure & MSA,0.06511053280048074,246,41
+high,within-site,all,MSA,0.31175900905917175,602,47
+high,within-site,all,Single sequence,0.2778179285106369,705,47
+high,within-site,all,Single sequence & Structure,0.37665604933786767,329,47
+high,within-site,all,"Single sequence, Structure & Function annotations",0.3971862901879203,47,47
+high,within-site,all,Structure,0.30285005986742686,141,47
+high,within-site,all,Structure & MSA,0.3790206423275055,282,47
+high,within-site,top10,MSA,0.23063036548377225,396,31
+high,within-site,top10,Single sequence,0.24207281648306628,465,31
+high,within-site,top10,Single sequence & Structure,0.36212950678030525,217,31
+high,within-site,top10,"Single sequence, Structure & Function annotations",0.36889916981022175,31,31
+high,within-site,top10,Structure,0.3442180404197403,93,31
+high,within-site,top10,Structure & MSA,0.3498441249846288,186,31
+high,within-site,top25,MSA,0.22595928201722187,524,41
+high,within-site,top25,Single sequence,0.2105752798831837,615,41
+high,within-site,top25,Single sequence & Structure,0.3489413884415303,287,41
+high,within-site,top25,"Single sequence, Structure & Function annotations",0.36018542413341575,41,41
+high,within-site,top25,Structure,0.31903238023886354,123,41
+high,within-site,top25,Structure & MSA,0.3316028091350304,246,41
+high,within-site,top50,MSA,0.3075243190741572,563,44
+high,within-site,top50,Single sequence,0.2719471039775615,660,44
+high,within-site,top50,Single sequence & Structure,0.388175744151645,308,44
+high,within-site,top50,"Single sequence, Structure & Function annotations",0.4045414414837696,44,44
+high,within-site,top50,Structure,0.3466474285354204,132,44
+high,within-site,top50,Structure & MSA,0.3866419792719822,264,44
