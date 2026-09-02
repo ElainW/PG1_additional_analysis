@@ -26,7 +26,7 @@ supplementary link.
 > fine-tune — the standard recipe (highest **Spearman** or **NDCG@10** in the
 > assay category) barely predicts which model is actually useful, because it
 > measures **global** rank correlation while optimization lives in **within-site**
-> ranking of substitutions at **high-fitness** positions.
+> ranking of substitutions at **functionally important** positions.
 
 We generalize and mechanize the Spinner et al. observation (selection metrics
 don't correlate with enzyme function) across 217 DMS assays × 97 zero-shot
