@@ -41,8 +41,8 @@ def main():
     cand = pd.read_csv(p("results/generalization_candidate_proteins.csv"))
     wt = pd.read_csv(p("data/DMS_wt_score.csv"))
 
-    # by UniProt_ID: conformational_switch, taxon
-    ann = cand[["UniProt_ID", "conformational_switch", "taxon"]].drop_duplicates("UniProt_ID")
+    # by UniProt_ID: taxon
+    ann = cand[["UniProt_ID", "taxon"]].drop_duplicates("UniProt_ID")
     out = base.merge(ann, on="UniProt_ID", how="left")
 
     # by UniProt_ID: curated selected PDB(s)
@@ -55,7 +55,7 @@ def main():
     )
 
     cols = ["UniProt_ID", "DMS_index", "DMS_id", "coarse_selection_type", "taxon",
-            "conformational_switch", "selected_pdb", "MSA_Neff_L", "MSA_perc_cov",
+            "selected_pdb", "MSA_Neff_L", "MSA_perc_cov",
             "seq_len", "DMS_wt_score"]
     out = out[cols]
     dst = p("results/assay_selection/selected_assays_annotated.csv")
@@ -68,8 +68,7 @@ def main():
     print(f"  selected_pdb populated: {n_pdb}/{len(out)} rows "
           f"({out.loc[out['selected_pdb'] != '', 'UniProt_ID'].nunique()} proteins)")
     print(f"  DMS_wt_score populated: {n_wt}/{len(out)} rows")
-    print(f"  taxon missing: {out['taxon'].isna().sum()}; "
-          f"conformational_switch missing: {out['conformational_switch'].isna().sum()}")
+    print(f"  taxon missing: {out['taxon'].isna().sum()}")
 
 
 if __name__ == "__main__":
