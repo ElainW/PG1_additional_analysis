@@ -42,6 +42,7 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | # | Figure | Section | Main / appx | Source |
 |---|--------|---------|-------------|--------|
 | F1 | Schematic: optimization-as-scoring-function + global-vs-within-site axes | §1–§2 | main | new (schematic) |
+| F0 | **Within-site disagreement computation flow** (rank ~19 subs per model → pairwise Spearman every model pair → 1 − mean = disagreement) — the basis of all analyses | §2 | main | `render_within_site_flow.py` → `figures/within_site_disagreement_flow.pdf` (exists) |
 | F16 | Functional enrichment: disagreement near binding/active-site residues, per protein (10/13, pooled p=5e-13) | §3.1 | main | `15` `generalization_functional_disagreement_per_protein.csv` |
 | F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §3.1 | appx | `23` `fig_<gene>_structure_map.png`; allostery `26` |
 | F2 | Global Spearman vs within-site Spearman per model, with P53-Giacomelli breakdown highlighted | §3.2 | main | new cut of `03`/`spearman_long` |
@@ -59,9 +60,9 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F14 | GCK 3-D: disagreement vs ligand distance (1-D annotation signal fails in 3-D) | §4.5 | appx | `17`/`19` |
 | F15 | Boundary: `MSA_Neff_L` distribution + both-tails degradation | §5 | appx | `02`/`28` |
 
-Schematic diagrams (F1) and the within-site-disagreement flow
-(`figures/within_site_disagreement_flow.pdf`, `render_within_site_flow.py`) can be
-reused.
+F0 already exists as a rendered vector export
+(`figures/within_site_disagreement_flow.pdf`, `render_within_site_flow.py`); F1 is
+a new schematic to draw.
 
 ---
 
@@ -115,10 +116,14 @@ reused.
   mutation here?" asks). Optimization lives on the second.
 - **Within-site disagreement = 1 − mean pairwise Spearman** across models
   (decision rule: agree → any model works; disagree → need to know which is right).
+  Computed per site: rank each model's scores over the ~19 substitutions → Spearman
+  between every model pair → mean pairwise Spearman = consensus → disagreement =
+  1 − that. **This pipeline is the basis of every analysis in the paper (F0).**
 - Controlled comparison: multi-assay proteins, shared coordinates, different
   `coarse_selection_type` → separates *model wrong* from *model measures a
   different phenotype*.
-- **Figs:** F1 (shared with §1).
+- **Figs:** F0 (within-site disagreement computation flow — the foundational
+  method figure), F1 (shared with §1).
 
 ## 3. The recipe fails  *(element #3 — core, ordered as an argument)*
 
