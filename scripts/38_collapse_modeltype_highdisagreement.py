@@ -120,6 +120,10 @@ def main():
     for i, (split, _) in enumerate(SPLITS):
         ax = axes[i]
         for site_set in SITE_SETS:
+            # within-site split: too few high-disagreement sites for a reliable
+            # within-site quartile pool -> show all-sites only
+            if split == "within-site" and site_set == "high":
+                continue
             for t in mtypes:
                 tt = (agg[(agg.split == split) & (agg.site_set == site_set) & (agg.model_type == t)]
                       .set_index("subset").reindex([s for s, _ in SUBSETS]))
