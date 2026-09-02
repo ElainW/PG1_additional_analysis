@@ -311,21 +311,3 @@ P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,14,L14,19,S
 P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,14,L14,19,Single sequence & Structure,ProSST-2048,-0.07894736842105264,34.74,21.19
 P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,14,L14,19,Structure & MSA,AIDO.Protein-RAG-16B,-0.057894736842105256,34.74,21.19
 P53_HUMAN,P53_HUMAN_Giacomelli_2018_Null_Etoposide,OrganismalFitness,14,L14,19,"Single sequence, Structure & Function annotations",ESM3,-0.24736842105263157,34.74,21.19
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,134,F134,5,MSA,PoET,0.3,79.96,-66.03
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,134,F134,5,Single sequence,VespaG,-0.7,79.96,-66.03
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,134,F134,5,Structure,ESM-IF1,-0.6,79.96,-66.03
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,134,F134,5,Single sequence & Structure,ProSST-2048,0.7,79.96,-66.03
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,134,F134,5,Structure & MSA,AIDO.Protein-RAG-16B,0.3,79.96,-66.03
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,134,F134,5,"Single sequence, Structure & Function annotations",ESM3,-0.7999999999999999,79.96,-66.03
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,258,E258,7,MSA,PoET,0.21428571428571433,79.96,-52.19
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,258,E258,7,Single sequence,VespaG,-0.39285714285714296,79.96,-52.19
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,258,E258,7,Structure,ESM-IF1,-0.5357142857142858,79.96,-52.19
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,258,E258,7,Single sequence & Structure,ProSST-2048,0.10714285714285716,79.96,-52.19
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,258,E258,7,Structure & MSA,AIDO.Protein-RAG-16B,0.07142857142857144,79.96,-52.19
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,258,E258,7,"Single sequence, Structure & Function annotations",ESM3,0.28571428571428575,79.96,-52.19
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,140,T140,5,MSA,PoET,-0.3,79.96,7.54
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,140,T140,5,Single sequence,VespaG,0.09999999999999999,79.96,7.54
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,140,T140,5,Structure,ESM-IF1,-0.6,79.96,7.54
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,140,T140,5,Single sequence & Structure,ProSST-2048,-0.19999999999999998,79.96,7.54
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,140,T140,5,Structure & MSA,AIDO.Protein-RAG-16B,-0.09999999999999999,79.96,7.54
-P53_HUMAN,P53_HUMAN_Kotler_2018,OrganismalFitness,140,T140,5,"Single sequence, Structure & Function annotations",ESM3,-0.19999999999999998,79.96,7.54

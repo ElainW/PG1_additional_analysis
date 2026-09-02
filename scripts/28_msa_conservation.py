@@ -19,7 +19,8 @@ Coordinate alignment (the crux)
     (unmodeled) columns.
   * target_seq index k (1-based, counting non-gap focus residues) is exactly the
     standardized `mutant` position in the score files -- verified match=1.000
-    across all 53 assays, INCLUDING the three with a non-null raw_mut_offset
+    across all 52 assays (was 53 before the P53 Kotler R72P exclusion; see
+    common.EXCLUDE_DMS), INCLUDING the three with a non-null raw_mut_offset
     (HSP82 Cote-Hammarlof=290, Q53Z42 McShan=25, RPC1 Li=18): ProteinGym has
     already folded raw_mut_offset into the standardized mutant column, so we do
     NOT re-apply it here.

@@ -42,6 +42,25 @@ NON_MODEL_COLS = {"mutant", "mutated_sequence", "DMS_score", "DMS_score_bin"}
 # Stable display order for the taxa
 TAXA = ["Human", "Eukaryote", "Prokaryote", "Virus"]
 
+# ---------------------------------------------------------------------------
+# Assays excluded from every cross-assay / conservation / disagreement-site
+# analysis. P53_HUMAN_Kotler_2018 sits on a DIFFERENT target_seq than the three
+# P53 Giacomelli assays -- they are identical except codon 72 (Giacomelli R72,
+# Kotler P72, the TP53 R72P polymorphism) -- so its positions are NOT in the same
+# coordinate frame and it must not be pooled with the Giacomelli assays when
+# counting shared high-disagreement sites, correlating disagreement vs MSA
+# conservation, or building the P53 structure/colocalization panels. Filtered at
+# the master-site-table source (15) so it propagates to every downstream reader
+# (23/25/27/28/30/31/32/33/34-45); the hardcoded P53 assay lists in 40/46 drop it
+# directly. Kotler may still be scored in single-assay/global-217 contexts (e.g.
+# 01 spearman), where it is not pooled with Giacomelli.
+EXCLUDE_DMS = {"P53_HUMAN_Kotler_2018"}
+
+
+def drop_excluded_dms(df, col="DMS_id"):
+    """Remove EXCLUDE_DMS rows from a frame keyed on a DMS_id column."""
+    return df[~df[col].isin(EXCLUDE_DMS)].copy()
+
 # Canonical colour per assay category (coarse_selection_type). Matches the fig9
 # barplot's default-cycle order (categories sorted: Activity, Binding, Expression,
 # OrganismalFitness, Stability -> tab10 C0..C4) so every by-category figure agrees.
