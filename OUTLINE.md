@@ -351,6 +351,15 @@ P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
   assay-specific sites, not just pooled.
 - **F9 (new):** pooled within-site DMS range & |mean−WT| vs disagreement across
   assays — the generalization of the tolerance/compression explanation beyond P53.
+- **Pick panels from `figures/h2_persite_spearman_density/` (H2 / §4.4):** choose
+  which per-site-Spearman-by-model-class panels to include (main vs appx) — e.g.
+  `fig_shared_highcons_persite_spearman_panel.png` (seq+MSA > structure at conserved
+  P53 sites) vs `fig_shared_lowcons_persite_spearman_panel.png` (all classes ≈0 at
+  variable sites), plus `fig_p53_highcons_classwise.png`,
+  `fig_assayspecific_modelclass_best_panel.png`,
+  `fig_assayspecific_rank_tiers*.png`. These are the visual evidence for the H2
+  class-gap / conservation-null story (§4.4) and the assay-specific rank-tier point
+  (§4.2). *[User to select.]*
 - **Recombine `figures/conservation_dms_panels/` into a 3-regime figure:** compose
   a single panel showing the **three conservation levels of high-disagreement
   sites** — conserved (e.g. P53 Giacomelli), variable (e.g. PTEN, HXK4), and
