@@ -63,6 +63,7 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F2 | **Aggregate** per-site (within-site) Spearman vs overall Spearman, across assays × models — within-site sits far below the diagonal (much harder than global) | §3.2 | `figures/persite_vs_global/aggregate_persite_vs_global.pdf` (exists) |
 | F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
 | F8 | **HXK4 winners collapse, high- vs low-agreement sites** (activity/abundance; 23-model subset): ρ vs fitness subset all→top-50/25/10% — collapses to ≈0 on the high-fitness tail in **both** agreement classes (agreement doesn't rescue the collapse). *Complements F3 rather than duplicating it: different dataset (HXK4 only, 23-model subset) and a different axis (high- vs low-**agreement** sites), where F3 is model_type × global-vs-within-site pooled across assays. Decision: F3 stays the main-text winners-collapse figure, F8 stays in the appendix.* | §3.3 | `14` `hxk4_quartile_by_agreement*` (exists) |
+| F21 | **Both metric-selected models degrade at high-disagreement sites (H2):** per-site accuracy of the category-top-Spearman and category-top-NDCG@10 models at assay-specific high-disagreement sites (2 panels; whole-assay ρ≈0.36 → per-site ρ≈0.09) | §4.2 | `34` `figures/h2_persite_spearman_density/fig_assayspecific_category_best_{spearman,ndcg}_panel.png` (exist) |
 | F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (53-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
 | F5 | Spearman vs NDCG@10 rank–rank scatter — broadly correlated across the full ranking, but the rank-1 model differs by metric in all 5 categories (see T2) | §3.5 | `29` leaderboard |
 | F6b | Full **high**-disagreement co-localization forest, all 20 proteins (obs vs 95% null band, red=BH q<0.05) | §4.1 | `33` `fig_colocalization_forest.png` (exists) |
@@ -265,13 +266,22 @@ measurement issues (→ §5 DMS caveat). **Spine result:** where (i) holds, *whi
 model wins is still poorly predicted by leaderboard rank (pooled ρ ≈ −0.05…−0.15,
 `29`); per-site oracle far exceeds any tier → the recipe can't identify the right
 chooser even where model choice matters.
+- **Both metric-selected top models degrade here (tested in H2).** The
+  category-top-**Spearman** *and* category-top-**NDCG@10** models both fall from a
+  whole-assay median ρ ≈ **0.36** to a per-site median ρ ≈ **0.09** at these
+  assay-specific high-disagreement sites (`34` / `results/MSA_conservation/H2/
+  h2_assayspecific_persite_spearman_by_site{,_ndcg}.csv`, baseline in
+  `h2_assayspecific_rank_tiers.csv`) — so selecting by either metric doesn't
+  protect you at exactly the sites that matter. Consistent with fig9/F4's
+  high-vs-low-disagreement tiers.
 - **Caveat / to-run:** `29` is **pooled over all high-disagreement sites, not
   split A vs B**. The sharper claim (rank↔usefulness fails *specifically at
   assay-specific sites*) needs a re-run of `29` restricted to Category-B sites
   (partition by the `32` co-localization output). Flag as planned; don't
   over-claim from the pooled number.
 - **Figs:** F4 (fig9 — the ≈flat rank tiers at high-disagreement sites; appx,
-  shared with §3.4).
+  shared with §3.4); F21 (appx — H2 per-site accuracy of the Spearman- and
+  NDCG-selected models at assay-specific high-disagreement sites).
 
 **4.3 What intrinsic site property *does* explain assay-specific disagreement:
 the DMS-score structure at the position.** Across the many assays with
@@ -390,6 +400,13 @@ P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
   assay-specific sites, not just pooled.
 - **F9 (new):** pooled within-site DMS range & |mean−WT| vs disagreement across
   assays — the generalization of the tolerance/compression explanation beyond P53.
+- **(Optional) clean degradation plot (§4.2):** the "both metric-selected models
+  degrade at high-disagreement sites" result is already in H2 (F21) + fig9 (F4), but
+  a single purpose-built figure — whole-assay baseline ρ vs per-site ρ at
+  high-disagreement sites, Spearman-selected and NDCG-selected side by side — would
+  state it most cleanly. Data ready in `h2_assayspecific_rank_tiers.csv` +
+  `h2_assayspecific_persite_spearman_by_site{,_ndcg}.csv`. Make only if a crisper
+  figure is wanted.
 - **F16 regeneration (later, §3.1):** re-run `15` (functional enrichment) with the
   updated ClinVar/UniProt annotations (`23`/`25`) and the expanded allosteric map
   (`26`), then refresh the 10/13 · p=5e-13 numbers. *Deferred — do not run now.*
