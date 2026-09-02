@@ -1,2 +1,2 @@
 n_proteins,pooled_union_sites,pooled_colocalized_sites,pooled_frac_colocalized,ci95_lo,ci95_hi,n_boot
-20,263,110,0.4183,0.3313,0.507,10000
+20,256,110,0.4297,0.3345,0.5367,10000

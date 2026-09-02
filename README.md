@@ -343,7 +343,7 @@ disagreement and the binding/disease/disorder annotations.
   `RPC1_LAMBD` (−0.59/−0.58), `RL40A_YEAST`, `CP2C9_HUMAN`, `OXDA_RHOTO`,
   `S22A1_HUMAN`. Positive (disagreement higher at *conserved* sites): all three
   `P53_HUMAN` Giacomelli assays (+0.39…+0.42), `HSP82_YEAST` Mishra (+0.29),
-  `P53_HUMAN` Kotler (+0.29). Pooling these opposing signals is what flattens the
+  `P53_HUMAN` [to add: assay and +? value]. Pooling these opposing signals is what flattens the
   global correlation — report per assay.
 - **Annotations behave correctly under weighting.** Binding/disease/functional
   sites are more conserved (disease 0.51 vs 0.37; functional 0.51 vs 0.36;
@@ -503,7 +503,7 @@ deleteriousness).
   **The seq/MSA-reads-conserved-signal gap is real but assay-specific:** it holds cleanly in
   the two P53 **Null** selection assays (Giacomelli Null_Etoposide seq/MSA **0.224** vs struct
   **0.109**; Null_Nutlin **0.157** vs **0.052**) but **reverses** in WT_Nutlin (0.263 vs
-  **0.332**) and is a wash in Kotler (0.121 vs 0.143, only n=3 sites). So `34`'s "disagree-at-
+  **0.332**) and is a wash in [to add: assay ? vs ?, at n=? sites]. So `34`'s "disagree-at-
   conserved = a real seq/MSA vs structure class gap" is driven by the Null-selection P53 arms,
   not a uniform P53 property. `45` also writes `highcons_all` (every conserved site) and
   `allsites` control tables/figures.
@@ -539,7 +539,7 @@ at these sites?
   their **whole-assay** within-site median, pick the top / rank-23 / lowest, and plot each at the
   assay-specific hard sites (dotted mark = the ranking basis). **The whole-assay ranking breaks
   down at these sites:** even the assay's #1 within-site model collapses far below its own typical
-  median (CP2C9-abundance top 0.09 vs assay median 0.57; P53-Kotler top **−0.39** vs 0.54) and
+  median (CP2C9-abundance top 0.09 vs assay median 0.57; [to add: assay top ? vs ?]) and
   does **not** reliably beat the middle/bottom tiers — confirming these sites are hard for *every*
   model, not just the poor ones. Output: `h2_assayspecific_rank_tiers.csv`.
 - **`44` — per-site category leaderboard (all 217 assays).** The within-site analogue of `29`'s

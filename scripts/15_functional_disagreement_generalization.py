@@ -106,6 +106,11 @@ def site_disagreement(dms_id, chosen):
 def main():
     chosen, _, _ = fam.build_family_best()
     ref = C.load_reference()
+    # Drop coordinate-frame-incompatible assays (e.g. P53 Kotler on a different
+    # target_seq) before enumerating per-protein assay groups, so they never enter
+    # the master site table or the shared-coordinate 'seqmap' offset. See
+    # common.EXCLUDE_DMS.
+    ref = C.drop_excluded_dms(ref)
     seqmap = ref.groupby("UniProt_ID")["target_seq"].first()
     multi = ref.groupby("UniProt_ID")["DMS_id"].apply(list)
     multi = multi[multi.apply(len) >= 2]

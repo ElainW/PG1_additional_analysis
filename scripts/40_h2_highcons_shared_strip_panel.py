@@ -43,10 +43,11 @@ HIGH_PCT = 80
 MIN_SUBS = 5
 
 PROT_ASSAYS = {
+    # Kotler_2018 excluded: different target_seq (R72P) than the Giacomelli assays,
+    # so it is not on the shared P53 coordinate frame. See common.EXCLUDE_DMS.
     "P53_HUMAN": ["P53_HUMAN_Giacomelli_2018_Null_Etoposide",
                   "P53_HUMAN_Giacomelli_2018_Null_Nutlin",
-                  "P53_HUMAN_Giacomelli_2018_WT_Nutlin",
-                  "P53_HUMAN_Kotler_2018"],
+                  "P53_HUMAN_Giacomelli_2018_WT_Nutlin"],
     "HXK4_HUMAN": ["HXK4_HUMAN_Gersing_2022_activity",
                    "HXK4_HUMAN_Gersing_2023_abundance"],
 }
@@ -140,13 +141,18 @@ def main():
     M = float(df.dms_pct_diff_from_wt.abs().max())
     norm = Normalize(vmin=-M, vmax=M)          # symmetric, 0 -> white
 
-    # P53 fills the first two columns (both rows); HXK4 fills the third column
+    # P53 panels first (row-major), then HXK4, in a 3-column grid. Built
+    # dynamically so the layout tracks the number of P53 assays (3 after the
+    # Kotler R72P exclusion; see common.EXCLUDE_DMS) rather than assuming 4.
     p53, hxk4 = PROT_ASSAYS["P53_HUMAN"], PROT_ASSAYS["HXK4_HUMAN"]
-    placement = {
-        (0, 0): p53[0], (0, 1): p53[1], (0, 2): hxk4[0],
-        (1, 0): p53[2], (1, 1): p53[3], (1, 2): hxk4[1],
-    }
-    fig, axes = plt.subplots(2, 3, figsize=(16, 9.5), sharey=True)
+    panel_assays = list(p53) + list(hxk4)
+    NCOL = 3
+    nrow = -(-len(panel_assays) // NCOL)   # ceil division
+    placement = {(i // NCOL, i % NCOL): dms for i, dms in enumerate(panel_assays)}
+    fig, axes = plt.subplots(nrow, NCOL, figsize=(16, 4.75 * nrow),
+                             sharey=True, squeeze=False)
+    for i in range(len(panel_assays), nrow * NCOL):   # blank any unused cells
+        axes[i // NCOL, i % NCOL].axis("off")
     for (r, c), dms_id in placement.items():
         ax = axes[r, c]
         d = df[df.DMS_id == dms_id]

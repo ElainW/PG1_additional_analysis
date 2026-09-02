@@ -1,0 +1,53 @@
+structure,protein,het_code,name,role,chain,on_target_chain
+1V4T,HXK4 / GCK,SO4,sulfate,ion/additive,A,True
+1V4T,HXK4 / GCK,SO4,sulfate,ion/additive,A,True
+1V4T,HXK4 / GCK,NA,sodium ion,ion/additive,A,True
+1V4S,HXK4 / GCK,GLC,alpha-D-glucose,substrate,A,True
+1V4S,HXK4 / GCK,NA,sodium ion,ion/additive,A,True
+1V4S,HXK4 / GCK,MRK,GCK allosteric activator (MRK-compound),allosteric,A,True
+3VEV*,HXK4 / GCK,GLC,alpha-D-glucose,substrate,A,True
+3VEV*,HXK4 / GCK,0H4,GCK allosteric activator (0H4),allosteric,A,True
+3VEV*,HXK4 / GCK,NA,sodium ion,ion/additive,A,True
+1R9O,CP2C9,HEM,heme (protoporphyrin IX + Fe),cofactor,A,True
+1R9O,CP2C9,FLP,flurbiprofen (substrate/drug),substrate,A,True
+1R9O,CP2C9,GOL,glycerol (cryoprotectant),ion/additive,A,True
+1D5R,PTEN,TLA,L(+)-tartrate (substrate-analog),substrate,A,True
+2SRC,SRC,PTR,O-phosphotyrosine (regulatory PTM),modification,A,True
+2SRC,SRC,ANP,AMP-PNP (non-hydrolyzable ATP analog),nucleotide,A,True
+1Y57,SRC,SO4,sulfate,ion/additive,A,True
+1Y57,SRC,SO4,sulfate,ion/additive,A,True
+1Y57,SRC,SO4,sulfate,ion/additive,A,True
+1Y57,SRC,SO4,sulfate,ion/additive,A,True
+1Y57,SRC,SO4,sulfate,ion/additive,A,True
+1Y57,SRC,MPZ,ATP-competitive inhibitor (purine),inhibitor,A,True
+6WVH,VKOR1,CRO,GFP-fusion chromophore,modification,A,True
+6WVH,VKOR1,CRO,GFP-fusion chromophore,modification,B,False
+6WVH,VKOR1,UA7,brodifacoum (anticoagulant inhibitor),inhibitor,A,True
+6WVH,VKOR1,OLC,monoolein (LCP lipid),lipid,A,True
+6WVH,VKOR1,OLC,monoolein (LCP lipid),lipid,A,True
+6WVH,VKOR1,UA7,brodifacoum (anticoagulant inhibitor),inhibitor,B,False
+6VJJ,RASK / KRAS,MG,magnesium ion,metal,A,True
+6VJJ,RASK / KRAS,GNP,GppNHp / GMPPNP (non-hydrolyzable GTP analog),nucleotide,A,True
+6VJJ,RASK / KRAS,CL,chloride ion,ion/additive,A,True
+6VJJ,RASK / KRAS,CL,chloride ion,ion/additive,A,True
+6VJJ,RASK / KRAS,CL,chloride ion,ion/additive,A,True
+6VJJ,RASK / KRAS,EDO,ethylene glycol (cryo),ion/additive,A,True
+6VJJ,RASK / KRAS,MPD,"2-methyl-2,4-pentanediol (cryo)",ion/additive,A,True
+6VJJ,RASK / KRAS,EDO,ethylene glycol (cryo),ion/additive,B,False
+5O2S,RASK / KRAS,GDP,GDP,nucleotide,A,True
+5O2S,RASK / KRAS,MG,magnesium ion,metal,A,True
+5O2S,RASK / KRAS,GDP,GDP,nucleotide,C,False
+5O2S,RASK / KRAS,MG,magnesium ion,metal,C,False
+5O2S,RASK / KRAS,GDP,GDP,nucleotide,E,False
+5O2S,RASK / KRAS,MG,magnesium ion,metal,E,False
+5O2S,RASK / KRAS,GDP,GDP,nucleotide,G,False
+5O2S,RASK / KRAS,MG,magnesium ion,metal,G,False
+1NVW,RASK / H-Ras,MG,magnesium ion,metal,Q,False
+1NVW,RASK / H-Ras,PO4,phosphate,ion/additive,Q,False
+1NVW,RASK / H-Ras,PO4,phosphate,ion/additive,Q,False
+1NVW,RASK / H-Ras,GNP,GppNHp / GMPPNP (non-hydrolyzable GTP analog),nucleotide,Q,False
+1NVW,RASK / H-Ras,PO4,phosphate,ion/additive,R,True
+1NVW,RASK / H-Ras,PO4,phosphate,ion/additive,S,False
+1NVW,RASK / H-Ras,PO4,phosphate,ion/additive,S,False
+1NVW,RASK / H-Ras,PO4,phosphate,ion/additive,S,False
+1NVW,RASK / H-Ras,PO4,phosphate,ion/additive,S,False

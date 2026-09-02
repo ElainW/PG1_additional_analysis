@@ -57,7 +57,9 @@ TARGET_ASSAYS = [
     "P53_HUMAN_Giacomelli_2018_Null_Etoposide",
     "P53_HUMAN_Giacomelli_2018_Null_Nutlin",
     "P53_HUMAN_Giacomelli_2018_WT_Nutlin",
-    "P53_HUMAN_Kotler_2018",
+    # Kotler_2018 dropped from the P53 target set: different target_seq (R72P) than
+    # the Giacomelli assays; see common.EXCLUDE_DMS. (The 217-assay aggregate scatter
+    # is unaffected -- it is a global cloud, not a P53-pooled comparison.)
     "HXK4_HUMAN_Gersing_2022_activity",
     "HXK4_HUMAN_Gersing_2023_abundance",
     "CP2C9_HUMAN_Amorosi_2021_abundance",
