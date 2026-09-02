@@ -41,9 +41,36 @@ structure per partner (Fig 4/5 legends):
 > "Binding interface is defined by indicated binding partner distance < 5 Å. PDB IDs:
 > **RAF1, 6VJJ**; PIK3CG, 1HE8; RALGDS, 1LFD; SOS1, 1NVW; DARPin K27, 5O2S; DARPin K55, 5O2T."
 
+The concrete KRAS structure choices for this repo — one per nucleotide state (ON/OFF/apo),
+the modified per-state coordinate files, and the PyMOL comparison script — are recorded in
+[`../data/structures/pdb/KRAS/README.md`](../data/structures/pdb/KRAS/README.md).
+
 State matters here too: effectors (RAF1 → 6VJJ) bind **GTP-active** KRAS, while "the DARPin
 K27 specifically recognizes **inactive GDP-bound KRAS**" (Fig 5b panels `KRAS-GTP/RAF1` vs
 `KRAS-GDP/DARPin K27`). So **6VJJ = the KRAS–RAF1 effector complex** (GTP/active state).
+
+**1NVW is a mixed-state structure — use the right Ras chain.** The Sondermann et al. 2004
+(*Cell*) SOS structure ("feedback activation by RasGTP") carries **two H-Ras copies on one
+SOS** (chain S, RasGEF fragment res 566–1046), each in a *different* nucleotide state
+(verified against the coordinates; both Ras copies are full-length res 1–166, all 166 Cα
+modeled):
+- **chain Q** (mmCIF `label_asym_id` A) — **GNP + Mg²⁺ bound → 3P/GTP-active**, sitting at
+  SOS's **allosteric/distal (Rem-domain)** site. This is the "RasGTP" that allosterically
+  activates SOS, and it is the *only* source of the GNP that RCSB's entry-level
+  `nonpolymer_bound_components` reports — which makes the whole entry *look* like 3P.
+- **chain R** (mmCIF `label_asym_id` B) — **no nucleotide, no Mg (only PO₄/waters) → 0P /
+  nucleotide-free**, sitting at SOS's **catalytic (Cdc25-domain)** site. This is the actual
+  nucleotide-exchange substrate and **the canonical SOS–Ras GEF interface**, so **1NVW is
+  correctly classified 0P for the SOS binding phenotype — but only via chain R.**
+
+  → For the SOS interface (<5 Å to partner) compute contacts against **chain R**, *not* chain
+  Q; the chain-Q/GNP interface is the allosteric site, a different biological contact. PyMOL
+  gotcha: on `fetch 1nvw` (mmCIF) chains are the `auth_asym_id`s **Q/R/S** only while
+  `cif_use_auth` is on (the default); if it is off (or an older build) the chains appear as
+  their `label_asym_id`s **A/B/C** and "chain R" selects nothing — chain R's atoms are then
+  under **chain B**. Check with `print(cmd.get_chains("1nvw"))`; force the legacy IDs with
+  `fetch 1nvw, type=pdb` or `set cif_use_auth, 1`. Chain R is present in the biological
+  assembly (assembly 1), so it is not an assembly-filtering issue.
 
 ## The selection logic, generalized (priority order)
 
@@ -52,11 +79,21 @@ K27 specifically recognizes **inactive GDP-bound KRAS**" (Fig 5b panels `KRAS-GT
    (GCK glucose, PTEN tartrate, DHFR folate), nucleotide for kinases/GTPases (AMP-PNP,
    GTP-analog), effector/peptide for a **binding** phenotype (KRAS–RAF1, MHC–peptide). This
    is stronger than "any ligand" — it must be the **orthosteric** ligand or the **partner**.
-2. **State.** If the protein is a conformational switch (kinase active/inactive; GTPase
-   GDP/GTP; transporter in/out; channel open/closed; allosteric enzyme T/R), pick **one
-   canonical structure per relevant state** and compare their contacts (active-only /
-   inactive-only / swapping). Match the state to the phenotype (GTP for effector binding,
-   GDP for a GDP-state binder).
+2. **State — and, for a switch, multiple conformations in *both* bound and unbound forms.**
+   If the protein is a conformational switch (kinase active/inactive; GTPase GDP/GTP;
+   transporter in/out; channel open/closed; allosteric enzyme T/R), pick **one canonical
+   structure per relevant state** and compare their contacts (active-only / inactive-only /
+   swapping). Match the state to the phenotype (GTP for effector binding, GDP for a GDP-state
+   binder). **This requires more than one structure of the same protein: for each relevant
+   state you want both the *bound* (holo co-complex / ligand-bound) form and the matched
+   *unbound* (apo) form.** The bound form defines the functional site; the unbound form is the
+   reference the contact/state comparison is made against (apo→holo and state→state). A set of
+   bound co-complexes alone (as in the KRAS partner list below) cannot support the switch
+   comparison without matched apo/unbound conformers. For KRAS these apo + per-state conformers
+   are enumerated by the **rascore** tables in
+   `data/structures/pdb/kras_rascore/KRAS_{0P,2P,3P}.tsv` (0P = nucleotide-free/apo, 2P =
+   GDP/inactive-OFF, 3P = GTP-analog/active-ON), which the six partner complexes above do
+   **not** appear in — they are all holo.
 3. **Coverage + quality.** Must cover the mutated region; prefer good resolution, correct
    species/ortholog, and the biological oligomeric assembly.
 4. **Canonical / reference.** Prefer the field-standard structure used in prior mechanistic

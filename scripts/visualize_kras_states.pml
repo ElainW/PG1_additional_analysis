@@ -12,10 +12,18 @@ bg_color white
 set ray_shadows, 0
 set cartoon_transparency, 0.0
 
-# --- fetch (legacy PDB guarantees chain IDs A/E/R) ---
-fetch 6vjj, type=pdb, async=0
-fetch 5o2s, type=pdb, async=0
-fetch 1nvw, type=pdb, async=0
+# --- load local copies from data/structures/pdb/KRAS/ (legacy PDB, chains A/E/R) ---
+#     locate the KRAS dir whether PyMOL was launched from the repo root or scripts/
+python
+import os
+_cands = ["data/structures/pdb/KRAS",
+          "../data/structures/pdb/KRAS",
+          os.path.expanduser("~/Desktop/MarksLab/PG2/analysis/data/structures/pdb/KRAS")]
+_KRAS = next((p for p in _cands if os.path.isdir(p)), _cands[0])
+cmd.load(os.path.join(_KRAS, "6VJJ.pdb"), "6vjj")
+cmd.load(os.path.join(_KRAS, "5O2S.pdb"), "5o2s")
+cmd.load(os.path.join(_KRAS, "1NVW.pdb"), "1nvw")
+python end
 
 # --- put OFF and apo into 6VJJ's frame, fitting on the G-domain core ---
 #     (align auto-rejects the moving switch loops as outliers)
@@ -32,6 +40,14 @@ delete 1nvw
 
 # --- strip all waters ---
 remove solvent
+
+# --- save the modified (aligned, water-stripped, single-chain) structures ---
+#     back into data/structures/pdb/KRAS/ under the state-named nomenclature
+python
+cmd.save(os.path.join(_KRAS, "6VJJ_ON_3P.pdb"),  "6VJJ_ON_3P")
+cmd.save(os.path.join(_KRAS, "5O2S_OFF_2P.pdb"), "5O2S_OFF_2P")
+cmd.save(os.path.join(_KRAS, "1NVW_APO_0P.pdb"), "1NVW_APO_0P")
+python end
 
 hide everything
 show cartoon, 6VJJ_ON_3P or 5O2S_OFF_2P or 1NVW_APO_0P

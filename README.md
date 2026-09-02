@@ -832,7 +832,13 @@ Generalization: `generalization_functional_disagreement_{sites,per_protein}.csv`
 `generalization_candidate_proteins.csv` (24 multi-assay proteins + RCSB PDB
 options, for choosing a protein/structure to extend the analysis — `21`; includes
 `conformational_switch`, `literature_pdb`, `recommended_pdb` per the structure-
-selection framework in `papers/pdb_selection_framework.md`).
+selection framework in `papers/pdb_selection_framework.md`). **For a conformational
+switch (e.g. KRAS GDP/GTP) the framework requires multiple conformations of the same
+protein — the *bound* (holo co-complex) form of each relevant state *and* the matched
+*unbound* (apo) form** — not just bound co-complexes; the KRAS paper's six partner
+complexes (RAF1 6VJJ, PIK3CG 1HE8, RALGDS 1LFD, SOS1 1NVW, DARPin K27 5O2S, K55 5O2T)
+are all holo, so the apo/per-state conformers come from the rascore tables
+`data/structures/pdb/kras_rascore/KRAS_{0P,2P,3P}.tsv` (0P apo / 2P GDP-OFF / 3P GTP-ON).
 MSA conservation (redundancy-reduced, `28`) — all under `results/MSA_conservation/`:
 `msa_conservation_by_site.csv` (per assay × match column: `occupancy`,
 `entropy_bits`, weighted `conservation`, `conservation_percentile`,
