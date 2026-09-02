@@ -95,7 +95,7 @@ annotations), **F20** (assemble selected panels from F10/F12 +
 
 | # | Table | Section | Source |
 |---|-------|---------|--------|
-| T1 | **All assays selected for this study** — 52 DMS substitution assays across 23 multi-assay proteins (the controlled-comparison set of §2): columns `UniProt_ID`, `DMS_id`, `coarse_selection_type`, `MSA_Neff_L`, `MSA_perc_cov`, `seq_len`. Spans 4 assay categories (Activity / Binding / Expression / OrganismalFitness) and the full Neff/L range (0.0 → 337), which is what the §5 MSA-depth boundary condition draws on | appendix | `results/assay_selection/assay_position_overlap_selected_assays.csv` (exists) |
+| T1 | **All assays selected for this study** — 52 DMS substitution assays across 23 multi-assay proteins (the controlled-comparison set of §2). Columns: `UniProt_ID`, `DMS_id`, `coarse_selection_type`, `taxon`, `conformational_switch`, `selected_pdb`, `MSA_Neff_L`, `MSA_perc_cov`, `seq_len`, `DMS_wt_score`. Spans 4 assay categories (Activity / Binding / Expression / OrganismalFitness), 4 taxa, and the full Neff/L range (0.0 → 337 — what the §5 MSA-depth boundary draws on). *Coverage caveats:* `selected_pdb` populated only for the 6 proteins with a curated experimental structure (HXK4/RASK/CP2C9/PTEN/SRC/VKOR1 — per-state for switches); `DMS_wt_score` populated for the 11 assays present in `DMS_wt_score.csv` (P53/PTEN/RASK/CP2C9/HXK4) | appendix | `results/assay_selection/selected_assays_annotated.csv` (exists; built by `36_selected_assay_table.py` joining `assay_position_overlap_selected_assays.csv` + `generalization_candidate_proteins.csv` + PDB README selected structures + `data/DMS_wt_score.csv`) |
 
 ---
 
