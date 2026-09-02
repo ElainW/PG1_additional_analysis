@@ -333,13 +333,24 @@ structure-robust) — disagreement isn't reducible to a single simple feature.
 ## 5. Boundary conditions & actionable takeaways  *(element #4)*
 
 **Boundary conditions:**
-1. Datasets mostly **single** substitutions; real task is **multi-mutant**
-   (within-site conclusions transfer only if epistasis is mild).
-2. MSA-dependent models confounded by depth (both tails of `MSA_Neff_L` hurt).
-3. Analyses skew to **well-studied human proteins**.
-4. **Range restriction** attenuates every tail Spearman — read comparisons, not
+1. **We score one site at a time from WT, not sequential mutations conditioned on
+   previously-accepted ones.** Our data are mostly **single** substitutions, so a
+   within-site ranking is evaluated against the wild-type background; the real
+   optimization mutates one site per step but each step is **conditioned on the
+   mutations already fixed** (the Gibbs/search loop of §1). Single-substitution DMS
+   cannot capture that conditioning — within-site conclusions transfer only if
+   epistasis is mild.
+2. **Fixing the scoring metric does not, by itself, resolve optimization.** Even
+   with a well-chosen model, the **samplers themselves fail to elicit sequences
+   that are high pseudo-likelihood under their own models** (a separate search/
+   inference failure, not a scoring failure) — this paper does not address that.
+3. **We are not addressing how models select *which* sites to mutate** — only how
+   they rank substitutions at a given site. Site selection is out of scope.
+4. MSA-dependent models confounded by depth (both tails of `MSA_Neff_L` hurt).
+5. Analyses skew to **well-studied human proteins**.
+6. **Range restriction** attenuates every tail Spearman — read comparisons, not
    absolute tail values.
-5. **DMS treated as ground truth but isn't a clean fitness readout** —
+7. **DMS treated as ground truth but isn't a clean fitness readout** —
    detection/selection bias (missing-not-at-random dropouts) + heterogeneous assay
    quality (dynamic range, replicate noise, coverage). Inseparable from §4.3: a
    compressed within-site range can be real site biology **or** an assay
