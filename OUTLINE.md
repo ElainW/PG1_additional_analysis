@@ -106,8 +106,8 @@ annotations), **F20** (assemble selected panels from F10/F12 +
 ## 1. Introduction & biological problem  *(element #1)*
 
 - **Goal:** use the ProteinGym (PG) models for protein optimization — sample amino
-  acids at a given position from a PG model's *pseudo-likelihood* as the scoring
-  function, whether within a Gibbs-sampling framework (Spinner et al.) or other
+  acids at a given position from a PG model's *pseudo-likelihood*, whether within
+  a Gibbs-sampling framework (Spinner et al.) or other
   search-based algorithms (McCarter et al., arXiv 2026), to build up multi-mutant
   sequences. Cheaper than one-mutation-at-a-time lab loops, respects epistasis,
   avoids stacking deleterious mutations; ML-designed multi-mutants tend to work.
