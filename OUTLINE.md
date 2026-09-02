@@ -34,7 +34,10 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 
 ---
 
-## Figure budget (main text ≈ 5–6; rest to appendix)
+## Figure budget (main text 3–4; rest to appendix)
+
+> **Main/appx column is provisional — user to specify the exact 3–4 main-text
+> figures next.** Current tags are a first-pass suggestion, not the final cut.
 
 | # | Figure | Section | Main / appx | Source |
 |---|--------|---------|-------------|--------|
