@@ -1,0 +1,4 @@
+protein,active_struct,inactive_struct,n_residues,active,inactive,nonspecific,swapping
+HXK4_HUMAN,1V4S,1V4T,278,62,43,70,103
+SRC_HUMAN,1Y57,2SRC,293,32,55,105,101
+RASK_HUMAN,6VJJ,5O2S,104,17,9,40,38
