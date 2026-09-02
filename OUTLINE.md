@@ -50,7 +50,7 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §3.1 | appx | `23` `fig_<gene>_structure_map.png`; allostery `26` |
 | F2 | **Aggregate** per-site (within-site) Spearman vs overall Spearman, across assays × models — within-site sits far below the diagonal (much harder than global) | §3.2 | appx | `figures/persite_vs_global/aggregate_persite_vs_global.pdf` (exists) |
 | F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | appx | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
-| F3 | Winners collapse: ρ vs fitness quantile (overall → top-25% → top-10%) | §3.3 | main | `14`/`16`; external-claim table |
+| F3 | **Winners collapse by model_type, global vs within-site split** (2×2: activity/abundance × global/within-site; ρ vs fitness subset all→top-50/25/10%). Global row collapses to ≈0 on the top quartile; within-site row collapses far more gently (retains ≈0.14–0.38); Structure bold = doesn't collapse worse | §3.3 | main | `16` `collapse_modeltype_withinsite` (exists) |
 | F4 | Oracle vs category tiers: within-site ρ for top-1/top-3/all vs per-site oracle | §3.4 | main | `29` `fig9_*` |
 | F5 | Spearman vs NDCG@10 redundancy (rank–rank scatter / correlation) | §3.5 | appx | `29` leaderboard |
 | F6 | Co-localization forest, high vs low tail (obs vs null band, per protein) | §4.1 | main | `33` `fig_colocalization_forest*.png` |
@@ -181,7 +181,12 @@ or a broken-within-site assay, and the new-protein setting gives no way to check
 (ESM3 0.49→0.04→−0.01 at top-25%/10%; reproduces the CP2C9 cytochrome case;
 generalizes across 209 assays). Models are good *filters of deleterious variants,
 poor prioritizers of winners* — and optimization is exactly the winner regime.
-- **Figs:** F3.
+**Two things F3 makes visible:** (i) the collapse is a property of the **global**
+fitness definition — under a **within-site** winners split it is far gentler
+(retains ≈0.14–0.38 vs ≈0 globally), so much of the collapse is the global
+definition mixing in across-position signal (cf. §4); (ii) it holds across
+**model types**, and Structure-only models (bold) do **not** collapse worse.
+- **Figs:** F3 (main — winners collapse by model_type, global vs within-site).
 
 **3.4 Headline: category-level selection barely helps.** Better-ranked models win
 at high-disagreement sites only weakly (ρ(rank, within-site) ≈ **−0.05 to
