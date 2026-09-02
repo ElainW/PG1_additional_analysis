@@ -333,8 +333,8 @@ structure-robust) — disagreement isn't reducible to a single simple feature.
 ## 5. Boundary conditions & actionable takeaways  *(element #4)*
 
 **Boundary conditions:**
-1. **We score one site at a time from WT, not sequential mutations conditioned on
-   previously-accepted ones.** Our data are mostly **single** substitutions, so a
+1. **We score one site at a time from WT, not sequentially conditioned mutations.**
+   Our data are mostly **single** substitutions, so a
    within-site ranking is evaluated against the wild-type background; the real
    optimization mutates one site per step but each step is **conditioned on the
    mutations already fixed** (the Gibbs/search loop of §1). Single-substitution DMS
