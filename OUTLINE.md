@@ -64,7 +64,7 @@ models, and diagnose *why* the recipe fails and what (little) can be done instea
 | F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
 | F8 | **HXK4 winners collapse, high- vs low-agreement sites** (activity/abundance; 23-model subset): ρ vs fitness subset all→top-50/25/10% — collapses to ≈0 on the high-fitness tail in **both** agreement classes (agreement doesn't rescue the collapse). *Complements F3 rather than duplicating it: different dataset (HXK4 only, 23-model subset) and a different axis (high- vs low-**agreement** sites), where F3 is model_type × global-vs-within-site pooled across assays. Decision: F3 stays the main-text winners-collapse figure, F8 stays in the appendix.* | §3.3 | `14` `hxk4_quartile_by_agreement*` (exists) |
 | F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (53-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
-| F5 | Spearman vs NDCG@10 redundancy (rank–rank scatter / correlation) | §3.5 | `29` leaderboard |
+| F5 | Spearman vs NDCG@10 rank–rank scatter — broadly correlated across the full ranking, but the rank-1 model differs by metric in all 5 categories (see T2) | §3.5 | `29` leaderboard |
 | F6b | Full **high**-disagreement co-localization forest, all 20 proteins (obs vs 95% null band, red=BH q<0.05) | §4.1 | `33` `fig_colocalization_forest.png` (exists) |
 | F6c | Full **low**-disagreement co-localization forest, all 20 proteins (control — the easy tail co-localizes too, but less) | §4.1 | `33` `fig_colocalization_forest_low.png` (exists) |
 | F7 | Co-localization summary: pooled fraction + bootstrap CI, high vs low | §4.1 | `32` `colocalization_pooled_ci.csv` |
@@ -96,7 +96,7 @@ annotations), **F20** (assemble selected panels from F10/F12 +
 | # | Table | Section | Source |
 |---|-------|---------|--------|
 | T1 | **All assays selected for this study** — 52 DMS substitution assays across 23 multi-assay proteins (the controlled-comparison set of §2). Columns: `UniProt_ID`, `DMS_id`, `coarse_selection_type`, `taxon`, `conformational_switch`, `selected_pdb`, `MSA_Neff_L`, `MSA_perc_cov`, `seq_len`, `DMS_wt_score`. Spans 4 assay categories (Activity / Binding / Expression / OrganismalFitness), 4 taxa, and the full Neff/L range (0.0 → 337 — what the §5 MSA-depth boundary draws on). *Coverage caveats:* `selected_pdb` populated only for the 6 proteins with a curated experimental structure (HXK4/RASK/CP2C9/PTEN/SRC/VKOR1 — per-state for switches); `DMS_wt_score` populated for the 11 assays present in `DMS_wt_score.csv` (P53/PTEN/RASK/CP2C9/HXK4). **Footnote — deliberate exclusion:** `P53_HUMAN_Kotler_2018` is *not* in this set because it sits on a **different `target_seq`** than the three P53 Giacomelli assays, so its positions are not in the same coordinate frame; the selection (`10`) requires every kept assay for a protein to share one identical `target_seq` (enforced by assertion), which the paired within-site comparison depends on. Kotler is still used in single-assay analyses (it has a `DMS_wt_score` of −2.4 and appears in the P53 co-localization panel) — only the paired/shared-coordinate set excludes it | appendix | `results/assay_selection/selected_assays_annotated.csv` (exists; built by `36_selected_assay_table.py` joining `assay_position_overlap_selected_assays.csv` + `generalization_candidate_proteins.csv` + PDB README selected structures + `data/DMS_wt_score.csv`) |
-| T2 | **Per-category model leaderboard** (45 family-best models × 5 `coarse_selection_type` categories = 225 rows): `family`, `model`, `n_assays`, `mean_spearman`, `mean_ndcg10`, `spearman_rank`, `ndcg_rank`. This is the "recipe" leaderboard — the category rank that F4/fig9 tests against within-site accuracy. Computed over **all** assays in each category (incl. Stability, 66 assays — hence 5 categories even though the multi-assay set has none). Category leaders: Activity → AIDO.Protein-RAG-16B (ρ 0.522), Binding → VenusREM (0.456), Expression → VenusREM (0.533), OrganismalFitness → AIDO.Protein-RAG-16B (0.497), Stability → ProSST-2048 (0.653). Also shows Spearman-rank ≈ NDCG-rank (the §3.5 redundancy point). *Main text can carry a condensed top-3-per-category cut; full 225-row table in appendix.* | appendix | `results/persite_analysis/family_best_category_leaderboard.csv` (exists; `29`) |
+| T2 | **Per-category "recipe" leaderboard — top models.** For each of the 5 `coarse_selection_type` categories, the rank-1 model by **mean Spearman** and the rank-1 by **mean NDCG@10** (45 family-best models; 10 rows), annotated with **model class** (`model_type`). Columns: `coarse_selection_type`, `top_by`, `model_type`, `family`, `model`, `n_assays`, `mean_spearman`, `mean_ndcg10`, `spearman_rank`, `ndcg_rank`. **Key result: the top-Spearman and top-NDCG model differ in all 5/5 categories** — e.g. Expression top-Spearman VenusREM is only NDCG-rank **28**; Activity top-Spearman AIDO.Protein-RAG-16B is NDCG-rank **11** — so which model the recipe "selects" depends on the metric (sharpens §3.4/§3.5: the two metrics broadly correlate across the full ranking yet pick different winners). Top-Spearman picks are almost all **Structure & MSA** (AIDO/VenusREM; Stability→ProSST, Single seq & Structure); top-NDCG picks are mixed (ESM3 seq+struct+func, Protriever/TranceptEVE MSA). Rank is over **all** assays per category (incl. Stability, 66 assays). | main | `results/persite_analysis/family_best_category_leaderboard_top.csv` (top cut, `37`) ← full 225-row `family_best_category_leaderboard.csv` (appendix, `29`) |
 
 ---
 
@@ -226,9 +226,17 @@ site-specific choice would help far more.
 - **Figs:** F4 (fig9 — category-rank tiers ≈flat at high- vs low-disagreement
   sites; appx). The per-site oracle number is quoted in text.
 
-**3.5 Spearman and NDCG@10 are redundant, not complementary.** Neither captures
-within-site or winner ranking; they rank models near-identically.
-- **Figs:** F5 (appx).
+**3.5 Spearman and NDCG@10 disagree on the winner — and neither is the right
+axis.** Across the full per-category ranking the two metrics broadly correlate, but
+they select **different rank-1 models in all 5/5 categories** (T2; e.g. Expression's
+top-Spearman VenusREM is NDCG-rank **28**, Activity's top-Spearman AIDO is NDCG-rank
+**11**). So the recipe is ambiguous at the selection step — "best by Spearman" and
+"best by NDCG@10" name different models — and, more fundamentally, **neither metric
+captures within-site or winner ranking** (§3.2–3.4). Whichever you pick, you're
+selecting on the wrong axis. (Top-Spearman picks are almost all Structure & MSA;
+top-NDCG picks are mixed — see T2.)
+- **Figs:** F5 (appx — rank–rank scatter: broadly correlated but top picks differ).
+  **Table:** T2 (top Spearman/NDCG model per category, with model class).
 
 ## 4. Failure-cause diagnostics  *(element #4)*
 

@@ -1,0 +1,11 @@
+coarse_selection_type,top_by,model_type,family,model,n_assays,mean_spearman,mean_ndcg10,spearman_rank,ndcg_rank
+Activity,ndcg,Structure & MSA,ESCOTT,ESCOTT,43,0.5028198434549177,0.7978211577186145,5,1
+Activity,spearman,Structure & MSA,AIDO.Protein-RAG-16B,AIDO.Protein-RAG-16B,43,0.5220993035446864,0.7918538131951136,1,11
+Binding,ndcg,"Single sequence, Structure & Function annotations",ESM3,ESM3,13,0.3903650726476901,0.730218132662681,8,1
+Binding,spearman,Structure & MSA,VenusREM,VenusREM,13,0.4558659015516089,0.7190246277205147,1,4
+Expression,ndcg,MSA,Protriever,Protriever,15,0.4958118699637495,0.8082844998290891,4,1
+Expression,spearman,Structure & MSA,VenusREM,VenusREM,18,0.5328357283125851,0.7795369870130955,1,28
+OrganismalFitness,ndcg,MSA,TranceptEVE,TranceptEVE_L,77,0.4658905630138319,0.7735593409593151,8,1
+OrganismalFitness,spearman,Structure & MSA,AIDO.Protein-RAG-16B,AIDO.Protein-RAG-16B,77,0.4967732173017469,0.7650424607477972,1,8
+Stability,ndcg,"Single sequence, Structure & Function annotations",ESM3,ESM3,66,0.6406004318686592,0.8721053911531241,3,1
+Stability,spearman,Single sequence & Structure,ProSST,ProSST-2048,66,0.6526110902728011,0.8712919911794176,1,2
