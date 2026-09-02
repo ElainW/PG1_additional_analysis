@@ -134,7 +134,13 @@ annotations), **F20** (assemble selected panels from F10/F12 +
   where measurement noise/detection bias caps the achievable correlation
   (§3.2, §4.3, §5). So the disconnect is a property of the *evaluation*, not just
   of any one model.
-- Cite **Spinner et al.** as precedent; we generalize + diagnose.
+- **Position vs Spinner et al.:** cite as precedent, but we don't over-generalize
+  from it — we broaden the empirical setting (more protein families, more
+  high-performing PG-benchmarked models) and, distinctively, focus on **proteins
+  measured by multiple types of DMS assays** (the same residues scored under
+  different phenotypes — abundance vs activity vs binding), which lets us separate
+  model error from phenotype. And rather than reusing their in-silico descriptors,
+  we propose **new sequence/structure metrics** to explain the failure modes.
 - **Stakes (why the hard sites are the ones that matter):** the sites where model
   selection fails — the high-disagreement sites — are **enriched for functional
   importance** (binding / active / allosteric residues; §3.1). In a real
