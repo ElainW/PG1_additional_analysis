@@ -91,6 +91,14 @@ annotations), **F20** (assemble selected panels from F10/F12 +
 
 ---
 
+## Planned tables
+
+| # | Table | Section | Source |
+|---|-------|---------|--------|
+| T1 | **All assays selected for this study** — 52 DMS substitution assays across 23 multi-assay proteins (the controlled-comparison set of §2): columns `UniProt_ID`, `DMS_id`, `coarse_selection_type`, `MSA_Neff_L`, `MSA_perc_cov`, `seq_len`. Spans 4 assay categories (Activity / Binding / Expression / OrganismalFitness) and the full Neff/L range (0.0 → 337), which is what the §5 MSA-depth boundary condition draws on | appendix | `results/assay_selection/assay_position_overlap_selected_assays.csv` (exists) |
+
+---
+
 ## 1. Introduction & biological problem  *(element #1)*
 
 - **Goal:** optimize a protein for a property by sampling multi-mutant sequences
@@ -146,7 +154,8 @@ annotations), **F20** (assemble selected panels from F10/F12 +
   1 − that. **This pipeline is the basis of every analysis in the paper (F0).**
 - Controlled comparison: multi-assay proteins, shared coordinates, different
   `coarse_selection_type` → separates *model wrong* from *model measures a
-  different phenotype*.
+  different phenotype*. The selected set is **52 assays across 23 proteins**
+  (tabulated in **T1**, appendix).
 - **Figs:** F0 (within-site disagreement computation flow — the foundational
   method figure; optionally combined with F0b, the GCK disagreement distribution,
   into one method panel), F1 (shared with §1). Appendix support: F18 (model-type
@@ -356,7 +365,8 @@ triage by within-site DMS range, and honest accounting of DMS measurement limits
 
 ## Appendix
 
-Directionality validation (`00`); model subsets (23 / 45 / 97); co-localization
+Selected-assay table (**T1**); directionality validation (`00`); model subsets
+(23 / 45 / 97); co-localization
 stats (`32`/`33`); DMS-score-structure detail (`34` H1); conservation null +
 P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
 (`17`/`18`/`20`); GoF/LoF (`22`); per-protein disagreement maps (`23`/`27`);
