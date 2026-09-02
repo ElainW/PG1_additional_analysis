@@ -14,20 +14,11 @@ ROOT = os.path.dirname(HERE)
 
 
 def main():
-    rows = [{"order": i + 1, "model": d, "csv_column": c, "model_type": t}
-            for i, (d, c, t) in enumerate(sub.SUBSET)]
-    out = pd.DataFrame(rows)
-
-    # overall mean Spearman-vs-DMS (across all assays) from directionality QC
-    dc = pd.read_csv(os.path.join(ROOT, "results/qc_directionality/directionality_check.csv"))
-    sp = dict(zip(dc["model"], dc["mean_spearman_vs_DMS"]))
-    out["overall_mean_spearman"] = out["csv_column"].map(sp).round(3)
-
+    out = pd.DataFrame([{"model": d, "model_type": t} for d, _, t in sub.SUBSET])
     dst = os.path.join(ROOT, "results/persite_analysis/subset_23_models.csv")
     out.to_csv(dst, index=False)
     print(f"wrote {dst} ({len(out)} models)")
     print(f"  model_types: {out['model_type'].value_counts().to_dict()}")
-    print(f"  overall_mean_spearman missing: {out['overall_mean_spearman'].isna().sum()}")
 
 
 if __name__ == "__main__":

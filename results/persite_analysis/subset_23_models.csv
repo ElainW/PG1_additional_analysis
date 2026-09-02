@@ -1,24 +1,24 @@
-order,model,csv_column,model_type,overall_mean_spearman
-1,Site_Independent,Site_Independent,MSA,0.369
-2,EVmutation,EVmutation,MSA,0.418
-3,EVE_ensemble,EVE_ensemble,MSA,0.46
-4,MSA_Transformer_ensemble,MSA_Transformer_ensemble,MSA,0.453
-5,ESM2_650M,ESM2_650M,Single sequence,0.438
-6,GEMME,GEMME,MSA,0.474
-7,VespaG,VespaG,Single sequence,0.482
-8,Tranception_L_no_retrieval,Tranception_L_no_retrieval,Single sequence,0.385
-9,Tranception_L,Tranception_L,MSA,0.45
-10,TranceptEVE_L,TranceptEVE_L,MSA,0.474
-11,ESM-IF1_142M,ESM-IF1,Structure,0.437
-12,ProteinMPNN,ProteinMPNN,Structure,0.295
-13,SaProt_650M_AF2,SaProt_650M_AF2,Single sequence & Structure,0.473
-14,PoET,PoET,MSA,0.49
-15,ESCOTT,ESCOTT,Structure & MSA,0.499
-16,VenusREM,VenusREM,Structure & MSA,0.536
-17,ProSST-2048,ProSST-2048,Single sequence & Structure,0.523
-18,RSALOR,RSALOR,Structure & MSA,0.485
-19,S3F,S3F,Single sequence & Structure,0.489
-20,S3F_MSA,S3F_MSA,Structure & MSA,0.515
-21,ESM3_1.4B_open,ESM3,"Single sequence, Structure & Function annotations",0.483
-22,Progen3_3B,Progen3_3b,Single sequence,0.411
-23,AIDO.Protein-RAG-16B,AIDO.Protein-RAG-16B,Structure & MSA,0.542
+model,model_type
+Site_Independent,MSA
+EVmutation,MSA
+EVE_ensemble,MSA
+MSA_Transformer_ensemble,MSA
+ESM2_650M,Single sequence
+GEMME,MSA
+VespaG,Single sequence
+Tranception_L_no_retrieval,Single sequence
+Tranception_L,MSA
+TranceptEVE_L,MSA
+ESM-IF1_142M,Structure
+ProteinMPNN,Structure
+SaProt_650M_AF2,Single sequence & Structure
+PoET,MSA
+ESCOTT,Structure & MSA
+VenusREM,Structure & MSA
+ProSST-2048,Single sequence & Structure
+RSALOR,Structure & MSA
+S3F,Single sequence & Structure
+S3F_MSA,Structure & MSA
+ESM3_1.4B_open,"Single sequence, Structure & Function annotations"
+Progen3_3B,Single sequence
+AIDO.Protein-RAG-16B,Structure & MSA
