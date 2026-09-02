@@ -875,6 +875,47 @@ structure maps (`23`, one `fig_<gene>_structure_map.png` per multi-assay protein
 under `figures/site_disagreement/`. The exact labelled high-disagreement sites behind
 those maps are tabulated per protein (`27`) in `results/high_disagreement_sites/`.
 
+## Structure features (`48`–`54`)
+Structure-derived features for the DMS-benchmark proteins (HXK4/GCK, RASK/KRAS,
+CP2C9, PTEN, SRC, VKOR1), computed on curated experimental PDB structures — one
+per conformational state for the switches. Runs in a dedicated toolchain
+(FreeSASA CLI, PyMOL, VMD-python + GetContacts); see
+[`scripts/README.md`](scripts/README.md) for install and run order.
+
+**Guides & interpretation**
+- [`data/structures/pdb/README.md`](data/structures/pdb/README.md) — structure
+  selection, cleaning, ligands, numbering offsets, and special cases (6WVH GFP
+  fusion, 1NVW mixed-state, Src +3 offset, KRAS file-per-analysis rule).
+- [`results/structure_features/README.md`](results/structure_features/README.md)
+  — what each output holds **and the Results & interpretation** (rSASA burial,
+  secondary-structure composition, state-specific contact counts, and the
+  active/inactive residue classification with the biological reading).
+- [`scripts/README.md`](scripts/README.md) — environment install + scripts `48`–`54`.
+
+**Outputs** — all under [`results/structure_features/`](results/structure_features/):
+- Ligand/substrate inventory: [`ligands_by_structure.md`](results/structure_features/ligands_by_structure.md)
+  (+ `.csv`, `_long.csv`) — functional ligand vs apo, chain-aware (`48`).
+- rSASA (FreeSASA `-n 20 --format=rsa --radii=naccess`, protein-only):
+  [`rsasa/`](results/structure_features/rsasa/) — per-structure `<id>.rsa` +
+  [`rsasa_all.csv`](results/structure_features/rsasa/rsasa_all.csv) (`51`).
+- Secondary structure from UniProt (helix/strand/turn/loop):
+  [`secondary_structure/`](results/structure_features/secondary_structure/) —
+  per-UniProt `*_ss.tsv` + `secondary_structure_{all,summary}.csv` (`52`).
+- Contacts (GetContacts after PyMOL `h_add`, `--itypes all`):
+  [`contacts/`](results/structure_features/contacts/) — raw `<id>_contacts.tsv`
+  (all), [`contacts_itype_summary.csv`](results/structure_features/contacts/contacts_itype_summary.csv),
+  and [`4types/`](results/structure_features/contacts/4types/) (salt bridge,
+  π-cation, sc–sc / sc–bb H-bond) for the multi-state proteins (`53`).
+- Active/inactive residue classification (active/inactive/nonspecific/swapping,
+  UniProt numbering): [`contacts/classification/`](results/structure_features/contacts/classification/)
+  — per-protein `*_residue_classes.csv`,
+  [`classification_summary.csv`](results/structure_features/contacts/classification/classification_summary.csv),
+  and `RASK_apo_contacts_note.csv` (KRAS apo 3rd state) (`54`).
+
+Processed structures (cleaned, single-chain, functional ligands kept) live in
+[`data/structures/pdb/`](data/structures/pdb/) as `<id>_cleaned.pdb` (+ the KRAS
+`*_*P.pdb` per-state set and `6WVH_cleaned_chainA.pdb`).
+
 ## Version control
 Repo scoped to `analysis/` only; remote
 `https://github.com/ElainW/PG1_additional_analysis.git`. Figures and large
