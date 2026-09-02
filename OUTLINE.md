@@ -340,7 +340,8 @@ structure-robust) — disagreement isn't reducible to a single simple feature.
    mutations already fixed** (the Gibbs/search loop of §1). Single-substitution DMS
    cannot capture that conditioning — within-site conclusions transfer only if
    epistasis is mild.
-2. **Fixing the scoring metric does not, by itself, resolve optimization.** Even
+2. **Improving the model selection metric does not, by itself, resolve
+   optimization.** Even
    with a well-chosen model, the **samplers themselves fail to elicit sequences
    that are high pseudo-likelihood under their own models** (a separate search/
    inference failure, not a scoring failure) — this paper does not address that.
