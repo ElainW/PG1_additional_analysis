@@ -266,14 +266,19 @@ structure-robust) — disagreement isn't reducible to a single simple feature.
    catastrophically on some assays (§3.2), collapses on the winners tail (§3.3),
    and barely predicts which model is right at disagreement sites (§4.2); the
    per-site oracle dwarfs every tier.
-2. **Report within-site ranking and top-quartile ("winners") accuracy as
-   first-class selection metrics** — the axes optimization uses; Spearman/NDCG@10
-   are redundant to each other on both.
+2. **Choose the metric from the goal, not a one-number leaderboard.** Report a
+   *suite* of task-aligned metrics — **within-site ranking** and **top-quartile
+   ("winners") accuracy** for optimization, in addition to global Spearman/NDCG@10
+   for the deleterious-filter use case — and pick by objective. Spearman and
+   NDCG@10 are redundant to each other and don't stand in for the optimization
+   axes. (Constructive counterpart to the §1 premise: better ProteinGym numbers
+   don't transfer to design because the reported metric doesn't match the goal.)
 3. **Treat low within-site DMS range as a red flag that the position is
    unrankable.** Where substitutions cluster near WT (tolerated) or span a
    below-average range (hard to distinguish), disagreement reflects the assay's
-   resolving power, not model quality — no model and no better metric will fix it;
-   route these sites to lab measurement.
+   resolving power, not model quality — no model and no better metric will fix it.
+   Route these sites to a **higher-resolution assay**, not more replicates of the
+   same low-resolution one.
 4. **Don't expect conservation to tell you which model to trust** — high
    conservation ⇒ sequence/MSA wins does **not** generalize (§4.4); a per-protein
    case, not a selection rule.
@@ -281,7 +286,15 @@ structure-robust) — disagreement isn't reducible to a single simple feature.
    Agree → any model; disagree → first check within-site DMS range (takeaway 3)
    before asking *which* model, because much disagreement is unrankable rather
    than resolvable. Consensus↔accuracy is real but capped (~0.3–0.4).
-6. **The ceiling worth chasing is the per-site oracle** — site-adaptive model
+6. **Use disagreement to assess assays and budget experiments, not just models.**
+   The same signals run in reverse: positions where models disagree *and*
+   within-site DMS range is compressed flag where the **assay** (not the model) is
+   uninformative. This gives a data-driven read on **how reliable a DMS is as a
+   training/evaluation yardstick** and **where extra experimental spend is (or
+   isn't) worth it** — invest in higher-resolution readouts at the unrankable,
+   functionally important sites rather than blanket re-measurement. (Realizes §1
+   goal 1: think critically about the experimental assays themselves.)
+7. **The ceiling worth chasing is the per-site oracle** — site-adaptive model
    choice and better within-site-resolved assays, not a better global leaderboard.
 - **Figs:** F15 (appx — Neff_L).
 
