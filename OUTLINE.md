@@ -75,6 +75,16 @@ reused.
 - **Thesis (the "I can't believe it's not better"):** No — the selection metric
   is computed on a quantity (global rank correlation) that isn't the quantity
   optimization needs (within-site ranking of substitutions at winners).
+- **The broader premise — ProteinGym is treated as the gold standard, but the
+  leaderboard doesn't transfer to design.** The field defaults to "higher
+  ProteinGym Spearman/NDCG@10 ⇒ better model," yet **higher ProteinGym performance
+  does not necessarily correlate with a better success rate in actual protein
+  design/optimization.** We argue this gap stems from **biases baked into the
+  current evaluation metrics** — they reward the wrong axis (global vs within-site,
+  §2) and are scored against DMS labels of **limited experimental resolution**,
+  where measurement noise/detection bias caps the achievable correlation
+  (§3.2, §4.3, §5). So the disconnect is a property of the *evaluation*, not just
+  of any one model.
 - Cite **Spinner et al.** as precedent; we generalize + diagnose.
 - **Stakes (why the hard sites are the ones that matter):** the sites where model
   selection fails — the high-disagreement sites — are **enriched for functional
@@ -82,6 +92,15 @@ reused.
   optimization task you are *working on exactly these positions*, so the recipe
   fails precisely where the task lives. This is what makes the negative result
   consequential rather than academic.
+- **Goal / contribution (what a better evaluation buys):** the constructive aim
+  behind the negative result is to **mitigate — ideally resolve — the biases in
+  current computational-model evaluation**, which in turn lets the field:
+  1. **think critically about the experimental assays themselves** (e.g. DMS) —
+     *how much to spend* on them and *how reliable* they are for training and
+     evaluating computational predictors (limited resolution ⇒ a noisy yardstick);
+  2. **guide method choice by goal** — a suite of better, task-aligned metrics
+     (within-site ranking, winners, site-level triage) so users pick a model for
+     *their* optimization objective rather than for leaderboard rank.
 - **Figs:** F1 (schematic + two axes).
 
 ## 2. Setup, metrics & approach  *(elements #1–#2)*
