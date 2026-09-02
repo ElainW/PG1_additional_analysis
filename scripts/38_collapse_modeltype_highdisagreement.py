@@ -1,9 +1,9 @@
-"""Winners-collapse by model_type, generalized to ALL high-disagreement sites
+"""Models fail to rank high-fitness variants, by model_type, generalized to ALL high-disagreement sites
 (pooled across the multi-assay proteins) — companion to `16` (which is HXK4-only).
 
 For every multi-assay assay that has labelled high-disagreement sites
 (results/high_disagreement_sites/*.tsv), pool substitutions and compute the
-'winners collapse': mean Spearman(model, DMS) vs experiment across fitness
+high-fitness-variant ranking: mean Spearman(model, DMS) vs experiment across fitness
 subsets (all / top50 / top25 / top10), under a GLOBAL and a WITHIN-SITE fitness
 split, averaged by model_type (45 family-best models).
 
@@ -151,7 +151,7 @@ def main():
     fig.add_artist(leg1)
     fig.legend(handles=set_handles, loc="upper center", ncol=2, fontsize=9,
                bbox_to_anchor=(0.5, 0.955))
-    fig.suptitle("Winners-collapse by model_type — ALL high-disagreement sites pooled "
+    fig.suptitle("Models fail to rank high-fitness variants (by model_type) — ALL high-disagreement sites pooled "
                  "(solid) vs all sites (dashed); Structure = bold", y=1.10, fontsize=13)
     plt.tight_layout()
     figdir = os.path.join(C.FIGURES, "persite_analysis")

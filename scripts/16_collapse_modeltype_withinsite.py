@@ -1,11 +1,11 @@
 """
-'Winners collapse' by model_TYPE, pooled across ALL substitution assays.
+Models fail to rank high-fitness variants, by model_TYPE, pooled across ALL substitution assays.
 
 For every assay we compute Spearman(model, DMS) over each fitness subset
 (all / top50 / top25 / top10) under two fitness-split definitions:
   - GLOBAL      : percentile of a substitution's DMS score across the whole assay
   - WITHIN-SITE : percentile among the substitutions at its own position (so the
-                  "winners" are the best substitution per position, spread over all
+                  high-fitness variants are the best substitution per position, spread over all
                   positions, rather than the globally most-fit variants).
 Per-(assay, model) Spearmans are then averaged by model_type. Pooling gives each
 assay equal weight, so each coarse_selection_type category contributes in
@@ -114,7 +114,7 @@ def main():
             ax.set_ylabel("mean Spearman vs experiment")
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="upper center", ncol=6, fontsize=8, bbox_to_anchor=(0.5, 1.0))
-    fig.suptitle("Winners-collapse by model_type — pooled across all assays "
+    fig.suptitle("Models fail to rank high-fitness variants (by model_type) — pooled across all assays "
                  "(weighted by #assays per category); Structure = bold", y=1.045, fontsize=13)
     plt.tight_layout()
     figdir = os.path.join(C.FIGURES, "persite_analysis")

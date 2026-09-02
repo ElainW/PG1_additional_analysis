@@ -1,11 +1,11 @@
 """
-Fitness-quartile ("winners") analysis, restricted to the within-site set
+Fitness-quartile (high-fitness-variant) analysis, restricted to the within-site set
 (HXK4_HUMAN both assays, sites with >=5 subs, 23 subset models), split by whether
 the SITE is high- vs low-agreement (agreement terciles from 13_agreement_vs_accuracy).
 
 Question: models lose ranking power on the top-fitness tail (the "poor prioritizer
-of winners" effect). Is that collapse different at high-agreement vs low-agreement
-sites?
+of high-fitness variants" effect). Is that collapse different at high-agreement vs
+low-agreement sites?
 
 For each assay, agreement group (low / high), and model we compute Spearman(model,
 DMS) over: all variants in the group, then the top-50/25/10% by DMS_score within
@@ -100,7 +100,7 @@ def main():
         ax.set_title(key, fontsize=11)
         ax.legend(fontsize=9)
     axes[0].set_ylabel("mean Spearman vs experiment\n(23 subset models)")
-    fig.suptitle("HXK4_HUMAN: 'winners' collapse on the high-fitness tail, high- vs low-agreement sites",
+    fig.suptitle("HXK4_HUMAN: models fail to rank high-fitness variants on the high-fitness tail, high- vs low-agreement sites",
                  fontsize=12)
     plt.tight_layout()
     figdir = os.path.join(C.FIGURES, "GCK_pilot_analysis")
