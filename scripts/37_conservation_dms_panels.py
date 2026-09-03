@@ -29,7 +29,7 @@ are still produced by script 35; this script only draws the merged figures and a
 residue percentile/spread summary.
 
 Outputs:
-  figures/conservation_dms_panels/<DMS_id>.png   the 2x2 four-panel figure.
+  figures/conservation_dms_panels/<DMS_id>.pdf   the 2x2 four-panel figure.
   results/conservation_dms_panels/dms_percentile_summary.csv
       per (assay, category): n residues, mean/median/min/max residue DMS percentile,
       and mean/median per-residue percentile spread.
@@ -271,8 +271,8 @@ def plot_assay(d, df, dms_sub, dms_res, shared_high, shared_low):
     fig.suptitle(d, y=1.0, fontsize=12)
     fig.tight_layout()
     os.makedirs(FIGDIR, exist_ok=True)
-    p = os.path.join(FIGDIR, f"{d}.png")
-    fig.savefig(p, dpi=140, bbox_inches="tight")
+    p = os.path.join(FIGDIR, f"{d}.pdf")
+    fig.savefig(p, bbox_inches="tight")
     plt.close(fig)
     return p, catpos
 
