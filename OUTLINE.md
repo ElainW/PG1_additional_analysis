@@ -70,7 +70,6 @@ what to do instead.
 | F21 | **Both metric-selected models degrade at high-disagreement sites (H2):** per-site accuracy of the category-top-Spearman and category-top-NDCG@10 models at assay-specific high-disagreement sites (2 panels; whole-assay ρ≈0.36 → per-site ρ≈0.09) | §4.2 | `34` `figures/h2_persite_spearman_density/fig_assayspecific_category_best_{spearman,ndcg}_panel.png` (exist) |
 | F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (52-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
 | F6b | Full **high**-disagreement co-localization forest, all 20 proteins (obs vs 95% null band, red=BH q<0.05) | §4.1 | `33` `fig_colocalization_forest.png` (exists) |
-| F6c | Full **low**-disagreement co-localization forest, all 20 proteins (control — the easy tail co-localizes too, but less) — **optional** | §4.1 | `33` `fig_colocalization_forest_low.png` (exists) |
 
 ### Others — optional 4th-slot candidates & conditional (in section order)
 
@@ -283,8 +282,7 @@ artifact. **Control:** low-disagreement tail also recurs but **less** — 110/25
 repeats"). Cause: intrinsically ill-posed positions; disagreement here is *not*
 selectable-away.
 - **Figs:** F6 (main — 2-panel excerpt, P53 significant vs VKOR1 n.s.); F6b (appx
-  — full high-disagreement forest, 20 proteins), F6c (appx, optional — full
-  low-disagreement forest control).
+  — full high-disagreement forest, 20 proteins).
 
 **4.2 Category B — assay-specific high-disagreement sites (one assay only).**
 Two candidate causes: (i) genuine model-performance spread, (ii) assay-specific
