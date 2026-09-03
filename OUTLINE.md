@@ -414,28 +414,23 @@ and why* models fail.
    NDCG@10 are redundant to each other and don't stand in for the optimization
    axes. (Constructive counterpart to the §1 premise: better ProteinGym numbers
    don't transfer to design because the reported metric doesn't match the goal.)
-3. **Treat low within-site DMS range as a red flag that the position is
-   unrankable.** Where substitutions cluster near WT (tolerated) or span a
-   below-average range (hard to distinguish), disagreement reflects the assay's
-   resolving power, not model quality — no model and no better metric will fix it.
-   Route these sites to a **higher-resolution assay**, not more replicates of the
-   same low-resolution one.
-4. **Don't expect conservation to tell you which model to trust** — high
-   conservation ⇒ sequence/MSA wins does **not** generalize (§4.4); a per-protein
-   case, not a selection rule.
+3. **DMS assays may sometimes not be able to resolve differences in mutation
+   fitness and lead to lower model performance.** Where substitutions cluster near
+   WT (tolerated) or span a below-average range (hard to distinguish), disagreement
+   reflects the assay's resolving power, not model quality — no model and no better
+   metric will fix it. When this happens, try out **higher-resolution DMS assays**,
+   not more replicates of the same low-resolution one.
+4. **Use sequence conservation to identify where models struggle, not which
+   models to trust.** All models tend to struggle at sites with low sequence
+   conservation in natural sequences. It is unclear whether models using sequence
+   and/or MSA win at higher-conservation sites (§4.4) — the P53 class gap is a
+   single-protein case, not a generalizable selection rule.
 5. **Use model disagreement as site-level triage, with realistic expectations.**
    Agree → any model; disagree → first check within-site DMS range (takeaway 3)
-   before asking *which* model, because much disagreement is unrankable rather
-   than resolvable. Consensus↔accuracy is real but capped (~0.3–0.4).
-6. **Use disagreement to assess assays and budget experiments, not just models.**
-   The same signals run in reverse: positions where models disagree *and*
-   within-site DMS range is compressed flag where the **assay** (not the model) is
-   uninformative. This gives a data-driven read on **how reliable a DMS is as a
-   training/evaluation yardstick** and **where extra experimental spend is (or
-   isn't) worth it** — invest in higher-resolution readouts at the unrankable,
-   functionally important sites rather than blanket re-measurement. (Realizes §1
-   goal 1: think critically about the experimental assays themselves.)
-7. **The ceiling worth chasing is the per-site oracle** — site-adaptive model
+   and sequence conservation (takeaway 4) before asking *which* model, because much
+   disagreement is unrankable rather than resolvable. Consensus↔accuracy is real
+   but capped (~0.3–0.4).
+6. **The ceiling worth chasing is the per-site oracle** — site-adaptive model
    choice and better within-site-resolved assays, not a better global leaderboard.
 - **Figs:** none (MSA_Neff_L boundary is a textual point).
 
