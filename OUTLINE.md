@@ -44,10 +44,9 @@ what to do instead.
 
 > **Main-text figures:** **F0** (method flow), **F3** (models fail to rank high-fitness variants), **F6**
 > (co-localization 2-panel — *may instead go to appendix as a table if space is
-> tight*), and **F20** (mechanism panel assembled from selected F10 + F12 panels).
-> That is 3–4 depending on F6. **4th-slot candidates** if a slot frees up: **F1**
-> (intro schematic), **F9** (DMS-range explainer), **F11** (conservation null).
-> Everything else →
+> tight*), and **F20** (mechanism panel from selected H1 relfrac + H2
+> class-accuracy panels). That is 3–4 depending on F6. **4th-slot candidate** if a
+> slot frees up: **F9** (DMS-range explainer). Everything else →
 > appendix. F0b may fold into F0 (one method panel) or drop to appendix.
 
 ### Confirmed main-text figures (in main-text order)
@@ -57,7 +56,7 @@ what to do instead.
 | F0 | **Within-site disagreement computation flow** (rank ~19 subs per model → pairwise Spearman every model pair → 1 − mean = disagreement) — the basis of all analyses | §2 | `render_within_site_flow.py` → `figures/within_site_disagreement_flow.pdf` (exists) |
 | F3 | **Models fail to rank high-fitness variants — by model_type, pooled across all 216 assays** (each assay equal weight ⇒ weighted by #assays per category), global vs within-site split; ρ vs fitness subset all→top-50/25/10%. Global panel collapses to ≈0 on the top decile; within-site panel far gentler (retains ≈0.15–0.27); Structure in bold (mid-pack within-site, among the least-bad on the global tail) | §3.3 | `16` `collapse_modeltype_withinsite` (exists; fig `figures/persite_analysis/fig_collapse_modeltype_pooled.png`) |
 | F6 | **Co-localization forest — 2-panel excerpt:** P53_HUMAN (obs overlap ≫ null band, strongly significant) vs VKOR1_HUMAN (obs ≈ null, n.s.) — the co-localization contrast in one figure. *Space permitting; if tight, move to appendix and present the co-localization stats as a compact table instead.* | §4.1 | `33` `fig_colocalization_forest.png` (excerpt these two panels) |
-| F20 | **Mechanism panel — selected from F10 + F12:** within-site DMS relfrac (H1) + per-site class accuracy by conservation regime (H2) — compressed within-site signal at conserved high-disagreement sites that seq+MSA models read but structure-only don't. Full sets stay in appendix (F10, F12) | §4.3–§4.4 | `34` H1/H2 + `figures/h2_persite_spearman_density/` (select panels — see to-do) |
+| F20 | **Mechanism panel:** selected within-site DMS relfrac (H1) + per-site class accuracy by conservation regime (H2) panels — compressed within-site signal at conserved high-disagreement sites that seq+MSA models read but structure-only don't | §4.3–§4.4 | `34` H1/H2 + `figures/h2_persite_spearman_density/` (select panels — see to-do) |
 
 ### Confirmed appendix figures (in section order)
 
@@ -65,7 +64,6 @@ what to do instead.
 |---|--------|---------|--------|
 | F18 | Within-site rank agreement between **model types** (MSA↔Structure&MSA highest ≈0.70–0.73; pure Structure the outliers ≈0.37–0.44) | §2 | `03` `persite_modeltype_agreement_matrix.csv` (exists as heatmap) |
 | F19 | Within-site rank agreement matrix, **23-model subset** (labelled per-model heatmap) | §2 | `04` `figures/persite_analysis/Fig5_subset.pdf` (exists) |
-| F17 | Per-protein disagreement structure map exemplar (GCK) with binding/disease/allostery overlay | §3.1 | `23` `fig_<gene>_structure_map.png`; allostery `26` |
 | F2 | **Aggregate** per-site (within-site) Spearman vs overall Spearman, across assays × models — within-site sits far below the diagonal (much harder than global) | §3.2 | `figures/persite_vs_global/aggregate_persite_vs_global.pdf` (exists) |
 | F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
 | F22 | **Models fail to rank high-fitness variants (by model_type) — high-disagreement sites vs all ≥5-sub sites** (50 multi-assay assays with labelled high-disagreement sites; 45 family-best). Adds the high-vs-all contrast that F3 (pooled, all sites) doesn't carry. 2 panels (global / within-site split), model_type lines. **Global panel** shows both site sets (solid = high-disagreement, dashed = all): both collapse to ≈0 on the top decile (high starts lower, ~0.34 vs 0.42; Structure holds up best on the global tail). **Within-site panel** shows **all sites only** (dashed) — deliberately omits the high-disagreement lines because there are too few high-disagreement sites for a reliable within-site quartile pool; the all-sites within-site collapse is gentle (0.42→0.19). *Caveat: within-site split is pooled across positions (reintroduces across-position signal), not the per-site accuracy of §4.2/F21.* | §3.3 | `38` `figures/persite_analysis/fig_collapse_modeltype_highdisagreement.png` (exists) |
@@ -73,25 +71,19 @@ what to do instead.
 | F21 | **Both metric-selected models degrade at high-disagreement sites (H2):** per-site accuracy of the category-top-Spearman and category-top-NDCG@10 models at assay-specific high-disagreement sites (2 panels; whole-assay ρ≈0.36 → per-site ρ≈0.09) | §4.2 | `34` `figures/h2_persite_spearman_density/fig_assayspecific_category_best_{spearman,ndcg}_panel.png` (exist) |
 | F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (52-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
 | F6b | Full **high**-disagreement co-localization forest, all 20 proteins (obs vs 95% null band, red=BH q<0.05) | §4.1 | `33` `fig_colocalization_forest.png` (exists) |
-| F6c | Full **low**-disagreement co-localization forest, all 20 proteins (control — the easy tail co-localizes too, but less) | §4.1 | `33` `fig_colocalization_forest_low.png` (exists) |
-| F10 | Per-site within-site DMS relfrac, high- vs low-disagreement sites | §4.3 | `34` H1 relfrac tables |
-| F12 | Per-site class accuracy (seq/MSA vs structure) by conservation regime — P53 as case, non-generalization | §4.4 | `34` H2 tables |
-| F13 | Physchem baseline + partial-correlation control (abundance) — **optional** | §4.5 | `12` `fig_abundance_physchem.png` |
+| F6c | Full **low**-disagreement co-localization forest, all 20 proteins (control — the easy tail co-localizes too, but less) — **optional** | §4.1 | `33` `fig_colocalization_forest_low.png` (exists) |
 
 ### Others — optional 4th-slot candidates & conditional (in section order)
 
 | # | Figure | Section | Status | Source |
 |---|--------|---------|--------|--------|
-| F1 | Schematic: optimization-as-scoring-function + global-vs-within-site axes | §1–§2 | 4th-slot candidate | new (schematic; only new one to draw) |
 | F0b | GCK per-site within-site disagreement **distribution**, both assays, high/low tails + 0.5 boundary + median — the metric on a real protein | §2 | fold into F0, else appx | `31` `figures/site_disagreement/distribution/HXK4_HUMAN.*` (exists) |
 | F9 | Within-site DMS range & |mean−WT| vs disagreement, pooled across assays | §4.3 | 4th-slot candidate | new (from `O2/20250613` + disagreement tables) |
-| F11 | Conservation null: pooled ρ(disagreement, conservation) unweighted vs weighted; per-assay ρ spread (−0.59…+0.42) | §4.4 | 4th-slot candidate | `28` `conservation_disagreement_spearman_by_assay.csv` |
 
 **Regenerability / work needed:** most figures already exist on disk
 (F0/F0b/F18/F19 and the co-localization/collapse/fig9 renders — `31`/`03`/`04`/
-`33`/`16`/`29`). Still to do (**later, not now**): **F1** (new schematic),
-**F9** (new cut), **F20** (assemble selected panels from F10/F12 +
-`h2_persite_spearman_density/`).
+`33`/`16`/`29`). Still to do (**later, not now**): **F9** (new cut), **F20**
+(assemble selected panels from `h2_persite_spearman_density/`).
 
 ---
 
@@ -162,7 +154,7 @@ what to do instead.
   2. **guide method choice by goal** — a suite of better, task-aligned metrics
      (within-site ranking, high-fitness-variant ranking, site-level triage) so users pick a model for
      *their* optimization objective rather than for leaderboard rank.
-- **Figs:** F1 (schematic + two axes; appx / 4th-slot candidate).
+- **Figs:** none (the optimization setup + two axes are described in text).
 
 ## 2. Setup, metrics & approach  *(elements #1–#2)*
 
@@ -182,7 +174,7 @@ what to do instead.
   (tabulated in **T1**, appendix).
 - **Figs:** F0 (within-site disagreement computation flow — the foundational
   method figure; optionally combined with F0b, the GCK disagreement distribution,
-  into one method panel), F1 (shared with §1). Appendix support: F18 (model-type
+  into one method panel). Appendix support: F18 (model-type
   within-site agreement — Structure models are the outliers), F19 (23-model
   within-site agreement matrix).
 
@@ -225,8 +217,7 @@ models disagree, so the recipe fails where the task lives:
     survive as a physical-pocket-proximity effect in real 3-D (`17`), though a few
     hotspots (R63, Y214, Q287) do contact ligand. Frame as "enriched at
     functionally *annotated* residues."
-- **Figs:** F17 (appx — GCK structure-map exemplar with allostery overlay).
-  **Table 1** (main)
+- **Table 1** (main)
   characterizes the high-disagreement sites structurally/functionally (GCK 82.6%
   functional, etc.) — the concrete backing for this stakes claim.
 
@@ -294,8 +285,8 @@ artifact. **Control:** low-disagreement tail also recurs but **less** — 110/25
 repeats"). Cause: intrinsically ill-posed positions; disagreement here is *not*
 selectable-away.
 - **Figs:** F6 (main — 2-panel excerpt, P53 significant vs VKOR1 n.s.); F6b (appx
-  — full high-disagreement forest, 20 proteins), F6c (appx — full low-disagreement
-  forest control).
+  — full high-disagreement forest, 20 proteins), F6c (appx, optional — full
+  low-disagreement forest control).
 
 **4.2 Category B — assay-specific high-disagreement sites (one assay only).**
 Two candidate causes: (i) genuine model-performance spread, (ii) assay-specific
@@ -337,8 +328,7 @@ is little within-site signal to rank:
   no leaderboard rank reliably wins there (§4.2). Ties to §5 DMS caveat: low
   within-site range is where assay noise dominates.
 - **Figs:** F20 (main — selected relfrac panels, shared with §4.4); F9 (appx,
-  4th-slot candidate — range & |mean−WT| vs disagreement, pooled), F10 (appx —
-  full relfrac high vs low).
+  4th-slot candidate — range & |mean−WT| vs disagreement, pooled).
 
 **4.4 Conservation does *not* cleanly explain who wins (null result).** We tested
 whether MSA-based, redundancy-reduced conservation (`28`) predicts where
@@ -351,14 +341,13 @@ sequence/MSA models beat structure-only models. It does not hold up:
   seq/MSA wins."
 - ICBINB-worthy negative: the intuitive feature (conservation) is *not* the
   diagnostic; the DMS-score structure (4.3) is.
-- **Figs:** F20 (main — selected class-accuracy panels, shared with §4.3); F11
-  (appx, 4th-slot candidate — conservation null), F12 (appx — full P53 class case;
-  see also H2 panels to-do).
+- **Figs:** F20 (main — selected class-accuracy panels, shared with §4.3; see also
+  H2 panels to-do).
 
 **4.5 Ruling out other trivial reductions.** Physicochemistry (hydro+charge ~13%)
 and 3-D pocket proximity (1-D binding-site signal fails in real 3-D, Pearson-0.996
 structure-robust) — disagreement isn't reducible to a single simple feature.
-- **Figs:** F13 (appx, optional).
+- **Figs:** none (physchem control described in text / results only).
 
 **4.6 New sequence/structure metrics for the failure modes (our contribution — not
 Spinner's in-silico descriptors).** Rather than reusing generic descriptors, we
@@ -490,7 +479,7 @@ contacts / contact-state classes, `48`–`54`); **allosteric-map enrichment** (`
   `h2_assayspecific_persite_spearman_by_site{,_ndcg}.csv`. Make only if a crisper
   figure is wanted.
 - **F20 assembly (later, §4.3–§4.4):** compose the main mechanism figure from
-  selected F10 (H1 relfrac) + F12 (H2 class-accuracy) panels — overlaps the
+  selected H1 relfrac + H2 class-accuracy panels — overlaps the
   `h2_persite_spearman_density/` panel-selection to-do below.
 - **Pick panels from `figures/h2_persite_spearman_density/` (H2 / §4.4):** choose
   which per-site-Spearman-by-model-class panels to include (main vs appx) — e.g.
