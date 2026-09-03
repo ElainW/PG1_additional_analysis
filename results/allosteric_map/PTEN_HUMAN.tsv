@@ -1,0 +1,153 @@
+# PTEN (phosphatase and tensin homolog) orthosteric-site residue atlas.
+# Numbering: PTEN_HUMAN / UniProt P60484 (403 aa). Residue identities read from the P60484 sequence.
+# Source: Xiaotian Liao & Ben Lehner 2026, Nat Commun. Orthosteric sites manually curated from the literature (refs 99-105).
+# NOTE: allosteric sites were NOT curated for PTEN in this source -- this file contains only orthosteric (substrate / membrane / cofactor) sites.
+# Orthosteric annotations: catalytic loops (arginine loop 35-49; WPD loop 88-98; P loop 123-130; TI loop 159-171),
+#   calcium-binding regions (200-212, 226-238, 258-268), Calpha2 loop (327-335), membrane-binding helix (151-174),
+#   PI(4,5)P2-binding motif / PBM (1-15). Positions 159-171 fall in both the TI loop (catalytic) and the membrane-binding helix.
+# site_class: orthosteric for all rows (no allosteric sites curated). direction blank = structural site annotation only.
+# pockets: functional pocket/interface the residue belongs to (catalytic | membrane | calcium | PI(4,5)P2/PBM). region: named loop/element ('|' joins overlapping elements).
+# ALLOSTERIC additions (Liao & Lehner 2026, Fig2E): three-star (expert-reviewed) ClinVar PATHOGENIC variants that reside OUTSIDE orthosteric sites,
+#   plotted as black triangles in Fig2E and labeled; the paper infers these are loss-of-function via allosteric mechanisms (functional effect not explained by fold destabilization).
+#   site_class=allosteric, region=non-orthosteric, direction=inhibitory (LoF). Orthosteric (catalytic/membrane/PBM) rows are unchanged. NOTE: active-site variants C124R & R130G (Fig2C) are ORTHOSTERIC, not added here.
+# A 'variant' column has been added (after residue) to record the specific substitution(s); it is blank for structural site rows.
+UniProt_ID	position	wt_aa	residue	variant	site_class	direction	region	pockets	evidence	notes
+PTEN_HUMAN	1	M	M1		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	2	T	T2		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	3	A	A3		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	4	I	I4		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	5	I	I5		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	6	K	K6		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	7	E	E7		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	8	I	I8		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	9	V	V9		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	10	S	S10		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	11	R	R11		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	12	N	N12		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	13	K	K13		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	14	R	R14		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	15	R	R15		orthosteric		PBM_PI(4,5)P2_binding_motif	PI(4,5)P2/PBM	LiaoLehner2026	N-terminal PI(4,5)P2-binding motif (PBM); membrane targeting
+PTEN_HUMAN	20	G	G20	G20V	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	22	D	D22	D22H	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	23	L	L23	L23V	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	27	Y	Y27	Y27C	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	35	M	M35		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	36	G	G36		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	37	F	F37		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	38	P	P38		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	39	A	A39		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	40	E	E40		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	41	R	R41		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	42	L	L42		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	43	E	E43		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	44	G	G44		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	45	V	V45		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	46	Y	Y46		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	47	R	R47		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	48	N	N48		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	49	N	N49		orthosteric		arginine_loop	catalytic	LiaoLehner2026	catalytic arginine loop (phosphatase active site)
+PTEN_HUMAN	50	I	I50	I50T	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	57	L	L57	L57W	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	61	H	H61	H61D;H61R	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	88	Y	Y88		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	89	P	P89		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	90	F	F90		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	91	E	E91		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	92	D	D92		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	93	H	H93		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	94	N	N94		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	95	P	P95		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	96	P	P96		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	97	Q	Q97		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	98	L	L98		orthosteric		WPD_loop	catalytic	LiaoLehner2026	catalytic WPD loop (phosphatase active site)
+PTEN_HUMAN	107	D	D107	D107Y;D107V	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	111	W	W111	W111R	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	123	H	H123		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	124	C	C124		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	125	K	K125		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	126	A	A126		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	127	G	G127		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	128	K	K128		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	129	G	G129		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	130	R	R130		orthosteric		P_loop	catalytic	LiaoLehner2026	catalytic P loop / signature motif (phosphatase active site)
+PTEN_HUMAN	131	T	T131	T131I	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	136	C	C136	C136W	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	141	H	H141	H141P	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	151	A	A151		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	152	L	L152		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	153	D	D153		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	154	F	F154		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	155	Y	Y155		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	156	G	G156		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	157	E	E157		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	158	V	V158		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	159	R	R159		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	160	T	T160		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	161	R	R161		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	162	D	D162		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	163	K	K163		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	164	K	K164		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	165	G	G165		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	166	V	V166		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	167	T	T167		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	168	I	I168		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	169	P	P169		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	170	S	S170		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	171	Q	Q171		orthosteric		TI_loop|membrane_binding_helix	catalytic;membrane	LiaoLehner2026	catalytic TI loop (phosphatase active site); membrane-binding helix
+PTEN_HUMAN	172	R	R172		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	173	R	R173		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	174	Y	Y174		orthosteric		membrane_binding_helix	membrane	LiaoLehner2026	membrane-binding helix
+PTEN_HUMAN	181	L	L181	L181P	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	200	F	F200		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	201	E	E201		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	202	T	T202		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	203	I	I203		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	204	P	P204		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	205	M	M205		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	206	F	F206		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	207	S	S207		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	208	G	G208		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	209	G	G209		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	210	T	T210		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	211	C	C211		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	212	N	N212		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	226	S	S226		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	227	S	S227		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	228	N	N228		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	229	S	S229		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	230	G	G230		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	231	P	P231		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	232	T	T232		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	233	R	R233		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	234	R	R234		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	235	E	E235		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	236	D	D236		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	237	K	K237		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	238	F	F238		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	241	F	F241	F241S	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	246	P	P246	P246L	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	252	D	D252	D252G	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	258	F	F258		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	259	H	H259		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	260	K	K260		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	261	Q	Q261		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	262	N	N262		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	263	K	K263		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	264	M	M264		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	265	L	L265		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	266	K	K266		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	267	K	K267		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	268	D	D268		orthosteric		calcium_binding_region_CBR	calcium/membrane	LiaoLehner2026	calcium-binding region (C2 domain, membrane binding)
+PTEN_HUMAN	277	T	T277	T277R	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	316	L	L316	L316P	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	320	L	L320	L320S	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
+PTEN_HUMAN	327	K	K327		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	328	A	A328		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	329	N	N329		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	330	K	K330		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	331	D	D331		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	332	K	K332		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	333	A	A333		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	334	N	N334		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	335	R	R335		orthosteric		Calpha2_loop	membrane	LiaoLehner2026	C-alpha-2 (Calpha2) loop (C2 domain, membrane binding)
+PTEN_HUMAN	345	L	L345	L345P	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF acting via inferred allosteric mechanism
