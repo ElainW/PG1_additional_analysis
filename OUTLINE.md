@@ -69,16 +69,14 @@ what to do instead.
 | F2 | **Aggregate** per-site (within-site) Spearman vs overall Spearman, across assays × models — within-site sits far below the diagonal (much harder than global) | §3.2 | `figures/persite_vs_global/aggregate_persite_vs_global.pdf` (exists) |
 | F2b | **Example within-site breakdown outlier:** P53_HUMAN_Giacomelli_2018_WT_Nutlin — overall ρ≈0.4–0.5 yet per-site Spearman ≈0 for *all* models (Pearson 0.02, ρ=−0.17, n=23) | §3.2 | `figures/persite_vs_global/P53_HUMAN_Giacomelli_2018_WT_Nutlin.*` (exists) |
 | F22 | **Models fail to rank high-fitness variants (by model_type) — high-disagreement sites vs all ≥5-sub sites** (50 multi-assay assays with labelled high-disagreement sites; 45 family-best). Adds the high-vs-all contrast that F3 (pooled, all sites) doesn't carry. 2 panels (global / within-site split), model_type lines. **Global panel** shows both site sets (solid = high-disagreement, dashed = all): both collapse to ≈0 on the top decile (high starts lower, ~0.34 vs 0.42; Structure holds up best on the global tail). **Within-site panel** shows **all sites only** (dashed) — deliberately omits the high-disagreement lines because there are too few high-disagreement sites for a reliable within-site quartile pool; the all-sites within-site collapse is gentle (0.42→0.19). *Caveat: within-site split is pooled across positions (reintroduces across-position signal), not the per-site accuracy of §4.2/F21.* | §3.3 | `38` `figures/persite_analysis/fig_collapse_modeltype_highdisagreement.png` (exists) |
-| F8 | **HXK4 — high-fitness-variant ranking, high- vs low-agreement sites** (activity/abundance; 23-model subset): ρ vs fitness subset all→top-50/25/10% — collapses to ≈0 on the high-fitness tail in **both** agreement classes (agreement doesn't rescue the collapse). *Complements F3 rather than duplicating it: different dataset (HXK4 only, 23-model subset) and a different axis (high- vs low-**agreement** sites), where F3 is model_type × global-vs-within-site pooled across assays. Decision: F3 stays the main-text high-fitness-variant figure, F8 stays in the appendix.* | §3.3 | `14` `hxk4_quartile_by_agreement*` (exists) |
+| F8 | **HXK4 — high-fitness-variant ranking, high- vs low-agreement sites** (activity/abundance; 23-model subset): ρ vs fitness subset all→top-50/25/10% — collapses to ≈0 on the high-fitness tail in **both** agreement classes (agreement doesn't rescue the collapse). *Complements F3 rather than duplicating it: different dataset (HXK4 only, 23-model subset) and a different axis (high- vs low-**agreement** sites), where F3 is model_type × global-vs-within-site pooled across assays. **Optional — may not be necessary** given F3 already carries the main high-fitness-variant story; keep only if the agreement-doesn't-rescue point is worth a dedicated appendix panel.* | §3.3 | `14` `hxk4_quartile_by_agreement*` (exists) |
 | F21 | **Both metric-selected models degrade at high-disagreement sites (H2):** per-site accuracy of the category-top-Spearman and category-top-NDCG@10 models at assay-specific high-disagreement sites (2 panels; whole-assay ρ≈0.36 → per-site ρ≈0.09) | §4.2 | `34` `figures/h2_persite_spearman_density/fig_assayspecific_category_best_{spearman,ndcg}_panel.png` (exist) |
 | F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (52-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
-| F5 | Spearman vs NDCG@10 rank–rank scatter — broadly correlated across the full ranking, but the rank-1 model differs by metric in all 5 categories (see T2) | §3.5 | `29` leaderboard |
 | F6b | Full **high**-disagreement co-localization forest, all 20 proteins (obs vs 95% null band, red=BH q<0.05) | §4.1 | `33` `fig_colocalization_forest.png` (exists) |
 | F6c | Full **low**-disagreement co-localization forest, all 20 proteins (control — the easy tail co-localizes too, but less) | §4.1 | `33` `fig_colocalization_forest_low.png` (exists) |
-| F7 | Co-localization summary: pooled fraction + bootstrap CI, high vs low | §4.1 | `32` `colocalization_pooled_ci.csv` |
 | F10 | Per-site within-site DMS relfrac, high- vs low-disagreement sites | §4.3 | `34` H1 relfrac tables |
 | F12 | Per-site class accuracy (seq/MSA vs structure) by conservation regime — P53 as case, non-generalization | §4.4 | `34` H2 tables |
-| F13 | Physchem baseline + partial-correlation control (abundance) | §4.5 | `12` `fig_abundance_physchem.png` |
+| F13 | Physchem baseline + partial-correlation control (abundance) — **optional** | §4.5 | `12` `fig_abundance_physchem.png` |
 
 ### Others — optional 4th-slot candidates & conditional (in section order)
 
@@ -111,7 +109,7 @@ what to do instead.
 |---|-------|---------|--------|
 | T1 | **All assays selected for this study** — 52 DMS substitution assays across 23 multi-assay proteins (the controlled-comparison set of §2). Columns: `UniProt_ID`, `DMS_id`, `coarse_selection_type`, `taxon`, `selected_pdb`, `MSA_Neff_L`, `MSA_perc_cov`, `seq_len`, `DMS_wt_score`. Spans 4 assay categories (Activity / Binding / Expression / OrganismalFitness), 4 taxa, and the full Neff/L range (0.0 → 337 — what the §5 MSA-depth boundary draws on). *Coverage caveats:* `selected_pdb` populated only for the 6 proteins with a curated experimental structure (HXK4/RASK/CP2C9/PTEN/SRC/VKOR1 — per-state for switches); `DMS_wt_score` populated for the 11 assays present in `DMS_wt_score.csv` (P53/PTEN/RASK/CP2C9/HXK4). **Footnote — deliberate exclusion:** `P53_HUMAN_Kotler_2018` is *not* in this set because it sits on a **different `target_seq`** than the three P53 Giacomelli assays, so its positions are not in the same coordinate frame; the selection (`10`) requires every kept assay for a protein to share one identical `target_seq` (enforced by assertion), which the paired within-site comparison depends on. **Kotler is now excluded from *all* cross-assay analyses** (the R72P `target_seq` difference means it is not on the shared P53 coordinate frame) via `common.EXCLUDE_DMS`, filtered at the master-site-table source (`15`): the co-localization / shared high-disagreement (`32`/`33`), MSA-conservation (`28`, `34`–`45`), and P53 structure-map (`23`) panels are all built from the three Giacomelli assays only. It survives only in **non-pooled, global/single-assay** contexts (e.g. the 217-assay Spearman leaderboard; its own `DMS_wt_score` of −2.4) where it is never mixed with the Giacomelli coordinate frame | appendix | `results/assay_selection/selected_assays_annotated.csv` (exists; built by `36_selected_assay_table.py` joining `assay_position_overlap_selected_assays.csv` + `generalization_candidate_proteins.csv` + PDB README selected structures + `data/DMS_wt_score.csv`) |
 | T2 | **Per-category "recipe" leaderboard — top models.** For each of the 5 `coarse_selection_type` categories, the rank-1 model by **mean Spearman** and the rank-1 by **mean NDCG@10** (45 family-best models; 10 rows), annotated with **model class** (`model_type`). Columns: `coarse_selection_type`, `top_by`, `model_type`, `family`, `model`, `n_assays`, `mean_spearman`, `mean_ndcg10`, `spearman_rank`, `ndcg_rank`. **Key result: the top-Spearman and top-NDCG model differ in all 5/5 categories** — e.g. Expression top-Spearman VenusREM is only NDCG-rank **28**; Activity top-Spearman AIDO.Protein-RAG-16B is NDCG-rank **11** — so which model the recipe "selects" depends on the metric (sharpens §3.4/§3.5: the two metrics broadly correlate across the full ranking yet pick different top models). Top-Spearman picks are almost all **Structure & MSA** (AIDO/VenusREM; Stability→ProSST, Single seq & Structure); top-NDCG picks are mixed (ESM3 seq+struct+func, Protriever/TranceptEVE MSA). Rank is over **all** assays per category (incl. Stability, 66 assays). | appendix | `results/persite_analysis/family_best_category_leaderboard_top.csv` (top cut, `37`) ← full 225-row `family_best_category_leaderboard.csv` (appendix, `29`) |
-| T3 | **The 23-model representative subset** — the hand-curated panel used in the within-site / labelled-heatmap figures (F0b/F18/F19/F5-family, W99, `09`/`12`/`13`/`14`). Columns: `model`, `model_type`. Composition: MSA 8, Structure & MSA 5, Single sequence 4, Single seq & Structure 3, Structure 2, seq+struct+func 1. Documents which models the 23-model figures show (distinct from the 45 family-best set used for leaderboard/collapse work). | appendix | `results/persite_analysis/subset_23_models.csv` (exists; `39`, from `04_subset_figs.SUBSET` + directionality QC) |
+| T3 | **The 23-model representative subset** — the hand-curated panel used in the within-site / labelled-heatmap figures (F0b/F18/F19, W99, `09`/`12`/`13`/`14`). Columns: `model`, `model_type`. Composition: MSA 8, Structure & MSA 5, Single sequence 4, Single seq & Structure 3, Structure 2, seq+struct+func 1. Documents which models the 23-model figures show (distinct from the 45 family-best set used for leaderboard/collapse work). | appendix | `results/persite_analysis/subset_23_models.csv` (exists; `39`, from `04_subset_figs.SUBSET` + directionality QC) |
 | T4 | **Multiple-conformation confound — high-disagreement sites in switch proteins** (GCK, KRAS, SRC). Each labelled high-disagreement site classified by its role across conformational states — `class` (active-only vs **swapping** interactions), `ss` (secondary structure), `functional` (bool), `functional_source` (allosteric / clinvar / disease / uniprot_binding). Shows many **swapping** high-disagreement sites are functional/allosteric (e.g. GCK W99 = swapping + allosteric + disease; KRAS 65/68 allosteric; SRC 387 allosteric) — supporting the multiple-conformation hypothesis that structure-based models mishandle residues whose interactions change between active/inactive states. | appendix | `results/multiconformation_confound/switch_high_disagreement_functional.csv` (exists; structure-feature analyses) |
 
 ---
@@ -255,8 +253,8 @@ across **model types**, and Structure-only models (bold) do **not** collapse wor
 (among the least-bad on the global tail).
 - **Figs:** F3 (main — high-fitness-variant ranking by model_type, global vs within-site,
   pooled across all assays); F22 (appx — the high-disagreement-vs-all-sites contrast
-  on the multi-assay subset); F8 (appx — HXK4 collapse, high- vs low-agreement
-  sites: agreement doesn't rescue).
+  on the multi-assay subset); F8 (appx, optional — HXK4 collapse, high- vs
+  low-agreement sites: agreement doesn't rescue).
 
 **3.4 Headline: category-level selection barely helps.** Better-ranked models win
 at high-disagreement sites only weakly (ρ(rank, within-site) ≈ **−0.05 to
@@ -275,8 +273,8 @@ top-Spearman VenusREM is NDCG-rank **28**, Activity's top-Spearman AIDO is NDCG-
 captures within-site or high-fitness-variant ranking** (§3.2–3.4). Whichever you pick, you're
 selecting on the wrong axis. (Top-Spearman picks are almost all Structure & MSA;
 top-NDCG picks are mixed — see T2.)
-- **Figs:** F5 (appx — rank–rank scatter: broadly correlated but top picks differ).
-  **Table:** T2 (appendix — top Spearman/NDCG model per category, with model class).
+- **Table:** T2 (appendix — top Spearman/NDCG model per category, with model class;
+  shows the two metrics pick different top models in all 5/5 categories).
 
 ## 4. Failure-cause diagnostics  *(element #4)*
 
@@ -297,7 +295,7 @@ repeats"). Cause: intrinsically ill-posed positions; disagreement here is *not*
 selectable-away.
 - **Figs:** F6 (main — 2-panel excerpt, P53 significant vs VKOR1 n.s.); F6b (appx
   — full high-disagreement forest, 20 proteins), F6c (appx — full low-disagreement
-  forest control), F7 (appx — pooled fraction + bootstrap CI).
+  forest control).
 
 **4.2 Category B — assay-specific high-disagreement sites (one assay only).**
 Two candidate causes: (i) genuine model-performance spread, (ii) assay-specific
@@ -360,7 +358,7 @@ sequence/MSA models beat structure-only models. It does not hold up:
 **4.5 Ruling out other trivial reductions.** Physicochemistry (hydro+charge ~13%)
 and 3-D pocket proximity (1-D binding-site signal fails in real 3-D, Pearson-0.996
 structure-robust) — disagreement isn't reducible to a single simple feature.
-- **Figs:** F13 (appx).
+- **Figs:** F13 (appx, optional).
 
 **4.6 New sequence/structure metrics for the failure modes (our contribution — not
 Spinner's in-silico descriptors).** Rather than reusing generic descriptors, we
