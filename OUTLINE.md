@@ -268,7 +268,7 @@ captures within-site or high-fitness-variant ranking** (§3.2–3.4). Whichever 
 selecting on the wrong axis. (Top-Spearman picks are almost all Structure & MSA;
 top-NDCG picks are mixed — see T2.)
 - **Figs:** F5 (appx — rank–rank scatter: broadly correlated but top picks differ).
-  **Table:** T2 (top Spearman/NDCG model per category, with model class).
+  **Table:** T2 (appendix — top Spearman/NDCG model per category, with model class).
 
 ## 4. Failure-cause diagnostics  *(element #4)*
 
