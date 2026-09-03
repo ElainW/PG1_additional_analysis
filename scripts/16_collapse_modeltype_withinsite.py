@@ -93,7 +93,7 @@ def main():
     print("assays per category:",
           per.drop_duplicates("DMS_id")["category"].value_counts().to_dict())
 
-    # ---- figure: 2 panels (split), model_type lines, Structure bold ----
+    # ---- figure: 2 panels (split), model_type lines (uniform weight) ----
     palette = dict(zip(C.MODEL_TYPE_ORDER, sns.color_palette("tab10", len(C.MODEL_TYPE_ORDER))))
     x = np.arange(len(SUBSETS))
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
@@ -102,10 +102,8 @@ def main():
         sub = agg[agg.split == split]
         for t in mtypes:
             tt = sub[sub.model_type == t].set_index("subset").reindex([s for s, _ in SUBSETS])
-            lw = 3.0 if t == "Structure" else 1.6
             ax.plot(x, tt["mean_spearman"].values, marker="o", color=palette[t],
-                    lw=lw, label=t if i == 0 else None,
-                    zorder=5 if t == "Structure" else 3)
+                    lw=1.8, label=t if i == 0 else None)
         ax.axhline(0, color="gray", lw=0.6)
         ax.set_xticks(x); ax.set_xticklabels(["all", "top 50%", "top 25%", "top 10%"])
         ax.set_title(f"{split} fitness split", fontsize=12)
@@ -115,12 +113,12 @@ def main():
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="upper center", ncol=6, fontsize=8, bbox_to_anchor=(0.5, 1.0))
     fig.suptitle("Models fail to rank high-fitness variants (by model_type) — pooled across all assays "
-                 "(weighted by #assays per category); Structure = bold", y=1.045, fontsize=13)
+                 "(weighted by #assays per category)", y=1.045, fontsize=13)
     plt.tight_layout()
     figdir = os.path.join(C.FIGURES, "persite_analysis")
     os.makedirs(figdir, exist_ok=True)
-    out = os.path.join(figdir, "fig_collapse_modeltype_pooled.png")
-    plt.savefig(out, dpi=150, bbox_inches="tight")
+    out = os.path.join(figdir, "fig_collapse_modeltype_pooled.pdf")
+    plt.savefig(out, bbox_inches="tight")
     plt.close()
     print(f"saved {out}")
 
