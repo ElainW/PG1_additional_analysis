@@ -1,43 +1,5 @@
 # Planned analyses
 
-## Multiple-conformation confound at high-disagreement sites
-
-**Scope.** For every mapped protein above with **more than one conformation** —
-**HXK4_HUMAN** (3 states: super-open/open/closed), **RASK_HUMAN**, **SRC_HUMAN**
-(3 states) — test whether
-within-site model disagreement is driven by the models not accounting for
-**multiple conformations**.
-
-**Motivation / hypothesis.** These proteins have different active states associated
-with different conformations. **None** of our structure-based models here considers
-multiple conformations, so residues that behave differently across active vs
-inactive states should be systematically mishandled by structure-only models.
-The signature to look for: high-disagreement residues involved in **long-range
-side-chain↔side-chain interactions** — salt bridges, pi-cation interactions,
-side-chain–side-chain bonds, side-chain–backbone H-bonds — that are present in the
-**active-only** conformation and in **swapping** residues (interactions that change
-partner/state between conformations). Sequence models (or any model that ingests
-sequence — sequence-only, or multimodal sequence+structure / sequence+structure+
-functional-annotation; consider whether an MSA is required) are expected to
-circumvent this problem because they are not tied to a single input conformation.
-
-**Steps.**
-1. Enumerate the candidate sites: residues in long-range side-chain↔side-chain
-   interactions that are active-only or swapping across the conformations (per
-   protein: HXK4 3-state, RASK, SRC 3-state).
-2. For all such sites, check whether we see **some level** of within-site model
-   disagreement — it need not be in the absolute-highest tier, but should be
-   somewhat elevated relative to baseline.
-3. Where such disagreement is present, test whether **sequence models or
-   multimodal models that include sequence** (sequence+structure, or
-   sequence+structure+functional-annotation) **outperform structure-based
-   models** at those sites.
-
-**Ties to:** `results/allosteric_map/` (per-protein conformation/interaction
-annotations), `28_msa_conservation.py` + H2 findings (model-class within-site
-accuracy by class), `16_collapse_modeltype_withinsite.py` (model-type structure),
-`results/qc_directionality/directionality_check.csv` (`model_type` classes).
-
 ## Sequence/structure features as a trust signal (or direct predictor) for model calls
 
 **Question.** Can sequence and structural features tell us **how much to trust** the

@@ -202,10 +202,19 @@ models disagree, so the recipe fails where the task lives:
   **10/13 proteins** (pooled p=**5×10⁻¹³**, `15`); on GCK specifically the 1-D
   binding-site enrichment holds in both assays (activity p=0.005, abundance
   p=0.018, `08`).
-- **Allostery (being expanded).** Curated allosteric-site atlases (currently
-  SRC_HUMAN, `26`; HXK4/RASK/CP2C9/PTEN/VKOR1 in progress per NEXT_STEPS) let us
-  test whether disagreement also concentrates at **allosteric/distal** functional
-  sites that conservation-based models miss. *[User to add.]*
+- **Allosteric-map & structural characterization — now done (`55`/`56`), and it
+  refines the claim.** (a) A *discrete* enrichment test of high-disagreement sites
+  against curated allosteric/binding maps for the 5 structure-annotated proteins
+  (CYP2C9, GCK, KRAS, PTEN, SRC; `55`) finds **no pooled categorical enrichment**
+  under any definition (allosteric map, allosteric-class-only, UniProt binding ±2,
+  ClinVar, or their union — the one hint, SRC allosteric-class OR≈2.5 p≈0.05, does
+  not generalize); the robust signal is a modest **continuous** elevation of
+  disagreement at functional sites. (b) The per-protein characterization (`56`,
+  **Table 1**) shows how the high-disagreement sites distribute over functional /
+  terminal / loop-turn / core regions — **GCK 82.6% functional**, but this varies
+  widely by protein (SRC 42% core, CYP2C9 43% loop-turn). So "functionally
+  important" is best stated as a *continuous tendency + per-protein characterization*,
+  not a clean categorical enrichment.
 - **Honest scope caveats (state up front):**
   - Functional annotations (ClinVar P/LP + UniProt binding/GoF supplement) are
     high-quality for only a **few well-characterized human proteins with decent
@@ -355,6 +364,28 @@ and 3-D pocket proximity (1-D binding-site signal fails in real 3-D, Pearson-0.9
 structure-robust) — disagreement isn't reducible to a single simple feature.
 - **Figs:** F13 (appx).
 
+**4.6 New sequence/structure metrics for the failure modes (our contribution — not
+Spinner's in-silico descriptors).** Rather than reusing generic descriptors, we
+compute structure-derived features on curated experimental PDBs (one per
+conformational state for switches; scripts `48`–`54`): **rSASA burial**,
+**secondary structure**, **long-range side-chain↔side-chain contacts**, and — for
+the multi-state proteins — an active/inactive/**swapping** contact-state
+classification. These are the sequence/structure metrics we use to *explain where
+and why* models fail.
+- **Multiple-conformation confound (`57`) — tested; a *negative* for the naive
+  hypothesis.** On the three two-state switches (GCK/KRAS/SRC), swapping-contact
+  residues carry elevated within-site disagreement in KRAS (p=5×10⁻⁴) and SRC
+  (p=1.5×10⁻³) but **not** GCK; and although sequence-ingesting models beat
+  structure-only models at these sites (pooled paired Wilcoxon p=2×10⁻¹⁴), the
+  advantage is **not** conformation-specific — the interaction test is null and the
+  seq−struct gap *negatively* tracks disagreement (ρ=−0.15). So the structure
+  deficit is a general property of these proteins, not a targeted single-conformation
+  blind spot. What *does* hold: swapping residues that reach the high-disagreement
+  tail are functional/allosteric (6/9; GCK 99/287, KRAS 65/68, SRC 387).
+- **Tables/data:** **T4** (appx — switch-residue functional labelling);
+  structure-feature outputs under `results/structure_features/` (`48`–`54`) and
+  `results/multiconformation_confound/` (`57`).
+
 ## 5. Boundary conditions & actionable takeaways  *(element #4)*
 
 **Boundary conditions:**
@@ -436,12 +467,15 @@ triage by within-site DMS range, and honest accounting of DMS measurement limits
 
 ## Appendix
 
-Selected-assay table (**T1**); directionality validation (`00`); model subsets
-(23 / 45 / 97); co-localization
-stats (`32`/`33`); DMS-score-structure detail (`34` H1); conservation null +
-P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
-(`17`/`18`/`20`); GoF/LoF (`22`); per-protein disagreement maps (`23`/`27`);
-`MSA_Neff_L` boundary (`02`/`28`).
+Appendix tables (**T1** selected assays, **T2** leaderboard, **T3** 23-model
+subset, **T4** switch-residue functional labelling); directionality validation
+(`00`); model subsets (23 / 45 / 97); co-localization stats (`32`/`33`);
+DMS-score-structure detail (`34` H1); conservation null + P53 class case (`28`/`34`
+H2); physchem control (`12`); 3-D robustness (`17`/`18`/`20`); GoF/LoF (`22`);
+per-protein disagreement maps (`23`/`27`); **structure features** (rSASA / SS /
+contacts / contact-state classes, `48`–`54`); **allosteric-map enrichment** (`55`)
++ **site characterization** (`56`, Table 1); **multiple-conformation confound**
+(`57`, T4); `MSA_Neff_L` boundary (`02`/`28`).
 
 ---
 
@@ -483,7 +517,8 @@ P53 class case (`28`/`34` H2); physchem control (`12`); 3-D robustness
   conservation null). Candidate appendix figure for §4.4.
 - Confirm which figs are regenerable vs need new scripts (F2, F9 appear to need
   new cuts).
-- **Allostery expansion (§3.1):** extend the allosteric-site atlas beyond
-  SRC_HUMAN (HXK4/RASK/CP2C9/PTEN/VKOR1, per NEXT_STEPS) and test whether
-  high-disagreement sites concentrate at allosteric/distal functional residues —
-  strengthens the "functionally important sites" stakes. *[User adding info.]*
+- **Allostery expansion (§3.1) — DONE (`55`/`56`/`57`).** The allosteric map now
+  covers CYP2C9/GCK/KRAS/PTEN/SRC; the enrichment test (`55`) found no discrete
+  categorical enrichment (only a continuous elevation), the site characterization
+  (`56`) is Table 1, and the multiple-conformation confound (`57`) is Table T4. §3.1
+  and §4.6 updated accordingly.
