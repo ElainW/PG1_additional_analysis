@@ -930,6 +930,40 @@ env off tracked outputs; see [`scripts/README.md`](scripts/README.md) (section 3
   — descriptive paper table (`56`): the fraction of high-disagreement sites landing
   in functional / beginning-end / loop-turn / structured-core regions, per protein.
 
+## Multiple-conformation confound at high-disagreement sites (`57`)
+Tests the NEXT_STEPS hypothesis that our structure-based models each ingest a
+**single conformation**, so residues whose side-chain↔side-chain contacts change
+between the active and inactive states should be (a) harder (elevated within-site
+disagreement) and (b) specifically mishandled by **structure-only** models vs
+models that also read **sequence**. Uses the three two-state switches with a
+contact-state classification (`54`): **HXK4/GCK** (1V4S closed vs 1V4T super-open),
+**RASK/KRAS** (6VJJ ON vs 5O2S OFF), **SRC** (1Y57 active vs 2SRC inactive); all
+UniProt-numbered so positions join directly to the `15` site table and the DMS
+scores. Candidate sites = residues in long-range contacts classified **active-only**
+or **swapping** across the two states. Runs in the base `pg2` env off tracked
+outputs (`54` classification + `15`/`27`/`56` tables + `O2/20250613` scores).
+
+- [`results/multiconformation_confound/README.md`](results/multiconformation_confound/README.md)
+  — full tables + interpretation. **Findings:** (1) *partial* disagreement
+  elevation — swapping candidates are elevated in **KRAS** (median z +0.14 vs −0.35,
+  p=5×10⁻⁴) and **SRC** (+0.09 vs −0.20, p=1.5×10⁻³) but **not GCK** (p=0.93, whole-
+  domain glucose closure rewires too many residues); the signal sits in the
+  **swapping** class, not active-only. (2) Sequence-ingesting models do beat
+  structure-only models at candidate sites (pooled paired Wilcoxon p=2×10⁻¹⁴), **but
+  not via the hypothesised mechanism** — the advantage is not candidate-specific
+  (interaction null) and the seq−struct gap *negatively* tracks disagreement (pooled
+  ρ=−0.15, p=7×10⁻¹²), so the structure deficit is a general property of these
+  proteins, not a targeted blind spot at conformation-changing residues. (3)
+  **Switch residues that reach the strict high-disagreement tail are functional/
+  allosteric** — swapping 6/9 functional, 5 of them allosteric (GCK 99, 287; KRAS
+  65, 68; SRC 387), vs active-only 2/5 (disease only).
+- Key outputs: `candidate_sites.csv` (`54` classes + `is_candidate`),
+  `disagreement_{by_class,tests}.csv` (step 2), `model_class_persite_spearman.csv` /
+  `model_class_tests.csv` / `gap_vs_disagreement_tests.csv` (step 3),
+  `high_disagreement_candidate_counts.csv` +
+  `switch_high_disagreement_functional.csv` (step 4 — the latter is the paper's
+  appendix Table T4).
+
 ## Version control
 Repo scoped to `analysis/` only; remote
 `https://github.com/ElainW/PG1_additional_analysis.git`. Figures and large
