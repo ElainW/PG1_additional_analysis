@@ -81,3 +81,26 @@ Inputs are the curated structures in
 cleaning, and numbering offsets); outputs go to
 [`../results/structure_features/`](../results/structure_features/) (see its README for
 what each file holds and how to read the results).
+
+## 3. High-disagreement × functional-region analyses (scripts `55`–`56`)
+
+Run under the base `pg2` env; they read tracked outputs only (the disagreement
+pool from `15`, the tail from `27`, the allosteric maps from `26`/`47`, ClinVar
+from `data/clinvar/`, and the secondary structure from `52`), so no structural
+tools are needed.
+
+```bash
+conda activate pg2
+python scripts/55_high_disagreement_allosteric_enrichment.py   # enrichment test (exploratory)
+python scripts/56_high_disagreement_site_characterization.py   # paper table: where the tail lands
+```
+
+- `55` — for the five allosteric-map proteins (CYP2C9, GCK, KRAS, PTEN, SRC),
+  tests whether the high-disagreement tail is enriched in functional regions
+  (allosteric map / UniProt binding±2 / dir2 ClinVar / their union) vs the rest
+  of the assayed sites (one-sided Fisher, per protein + pooled). Exploratory —
+  finds no enrichment; kept for the record. -> `results/high_disagreement_allosteric_enrichment/`
+- `56` — descriptive characterization for the paper: per protein, the number of
+  high-disagreement sites and the fraction landing in terminal (beginning/end),
+  loop/turn, functional, or structured-core regions (mutually exclusive, plus raw
+  non-exclusive flags). -> `results/high_disagreement_site_characterization/`
