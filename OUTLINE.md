@@ -46,8 +46,8 @@ what to do instead.
 > (co-localization 2-panel — *may instead go to appendix as a table if space is
 > tight*), and **F20** (mechanism panel assembled from selected F10 + F12 panels).
 > That is 3–4 depending on F6. **4th-slot candidates** if a slot frees up: **F1**
-> (intro schematic), **F16** (functional-enrichment stakes — needs regeneration),
-> **F9** (DMS-range explainer), **F11** (conservation null). Everything else →
+> (intro schematic), **F9** (DMS-range explainer), **F11** (conservation null).
+> Everything else →
 > appendix. F0b may fold into F0 (one method panel) or drop to appendix.
 
 ### Confirmed main-text figures (in main-text order)
@@ -86,15 +86,13 @@ what to do instead.
 |---|--------|---------|--------|--------|
 | F1 | Schematic: optimization-as-scoring-function + global-vs-within-site axes | §1–§2 | 4th-slot candidate | new (schematic; only new one to draw) |
 | F0b | GCK per-site within-site disagreement **distribution**, both assays, high/low tails + 0.5 boundary + median — the metric on a real protein | §2 | fold into F0, else appx | `31` `figures/site_disagreement/distribution/HXK4_HUMAN.*` (exists) |
-| F16 | Functional enrichment: disagreement near binding/active/**allosteric** + disease residues, per protein | §3.1 | 4th-slot candidate — **REGENERATE** | `15` re-run with updated ClinVar/UniProt annotations (`23`/`25`) + allosteric map (`26`, expanding); current 10/13 p=5e-13 render is stale |
 | F9 | Within-site DMS range & |mean−WT| vs disagreement, pooled across assays | §4.3 | 4th-slot candidate | new (from `O2/20250613` + disagreement tables) |
 | F11 | Conservation null: pooled ρ(disagreement, conservation) unweighted vs weighted; per-assay ρ spread (−0.59…+0.42) | §4.4 | 4th-slot candidate | `28` `conservation_disagreement_spearman_by_assay.csv` |
 
 **Regenerability / work needed:** most figures already exist on disk
 (F0/F0b/F18/F19 and the co-localization/collapse/fig9 renders — `31`/`03`/`04`/
 `33`/`16`/`29`). Still to do (**later, not now**): **F1** (new schematic),
-**F9** (new cut), **F16** (re-run `15` with updated ClinVar/UniProt + allosteric
-annotations), **F20** (assemble selected panels from F10/F12 +
+**F9** (new cut), **F20** (assemble selected panels from F10/F12 +
 `h2_persite_spearman_density/`).
 
 ---
@@ -229,8 +227,8 @@ models disagree, so the recipe fails where the task lives:
     survive as a physical-pocket-proximity effect in real 3-D (`17`), though a few
     hotspots (R63, Y214, Q287) do contact ligand. Frame as "enriched at
     functionally *annotated* residues."
-- **Figs:** F16 (appx, 4th-slot candidate — cross-protein binding enrichment),
-  F17 (appx — GCK structure-map exemplar with allostery overlay). **Table 1** (main)
+- **Figs:** F17 (appx — GCK structure-map exemplar with allostery overlay).
+  **Table 1** (main)
   characterizes the high-disagreement sites structurally/functionally (GCK 82.6%
   functional, etc.) — the concrete backing for this stakes claim.
 
@@ -493,9 +491,6 @@ contacts / contact-state classes, `48`–`54`); **allosteric-map enrichment** (`
   state it most cleanly. Data ready in `h2_assayspecific_rank_tiers.csv` +
   `h2_assayspecific_persite_spearman_by_site{,_ndcg}.csv`. Make only if a crisper
   figure is wanted.
-- **F16 regeneration (later, §3.1):** re-run `15` (functional enrichment) with the
-  updated ClinVar/UniProt annotations (`23`/`25`) and the expanded allosteric map
-  (`26`), then refresh the 10/13 · p=5e-13 numbers. *Deferred — do not run now.*
 - **F20 assembly (later, §4.3–§4.4):** compose the main mechanism figure from
   selected F10 (H1 relfrac) + F12 (H2 class-accuracy) panels — overlaps the
   `h2_persite_spearman_density/` panel-selection to-do below.
