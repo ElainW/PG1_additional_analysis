@@ -11,12 +11,12 @@ Outputs (results/persite_analysis/):
   persite_spearman_by_assay.csv        (217 assays x 45 models: mean_persite_spearman)
   persite_category_leaderboard.csv     (category x model: mean_persite_spearman, rank)
 
-Part 2 (figure, side-by-side companion to fig_assayspecific_rank_tiers.png). Same
+Part 2 (figure, side-by-side companion to fig_assayspecific_rank_tiers.pdf). Same
 3-box/strip layout, but the top / rank-23 / lowest models are chosen from the
 CATEGORY per-site leaderboard (not the individual assay's own within-site rank).
 Each box = the chosen model's per-site Spearman at that assay's assay-specific
 high-disagreement sites; dotted line = the model's category mean per-site Spearman.
-Output: figures/h2_persite_spearman_density/fig_assayspecific_rank_tiers_bycategory.png
+Output: figures/h2_persite_spearman_density/fig_assayspecific_rank_tiers_bycategory.pdf
 """
 import os
 import importlib.util
@@ -189,7 +189,7 @@ def figure(lb):
                  "model's category mean per-site Spearman)", fontsize=11, y=1.0)
     plt.tight_layout(rect=(0, 0.05, 1, 0.95))
     out = os.path.join(C.FIGURES, "h2_persite_spearman_density",
-                       "fig_assayspecific_rank_tiers_bycategory.png")
+                       "fig_assayspecific_rank_tiers_bycategory.pdf")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print("saved", out)

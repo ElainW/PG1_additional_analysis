@@ -20,9 +20,9 @@ line marks the assay's own-category top model's TYPICAL median per-site Spearman
 whether these hard sites sit below the model's usual within-site accuracy.
 
 Three figures (figures/h2_persite_spearman_density/):
-  fig_assayspecific_category_best_spearman_panel.png       5 boxes = top model per category by Spearman
-  fig_assayspecific_category_best_ndcg_panel.png  5 boxes = top model per category by NDCG@10
-  fig_assayspecific_modelclass_best_panel.png     6 boxes = best model per model_type (by Spearman)
+  fig_assayspecific_category_best_spearman_panel.pdf       5 boxes = top model per category by Spearman
+  fig_assayspecific_category_best_ndcg_panel.pdf  5 boxes = top model per category by NDCG@10
+  fig_assayspecific_modelclass_best_panel.pdf     6 boxes = best model per model_type (by Spearman)
 Tables (results/MSA_conservation/H2/):
   h2_assayspecific_persite_spearman_by_site.csv           (category-Spearman)
   h2_assayspecific_persite_spearman_by_site_ndcg.csv      (category-NDCG@10)
@@ -288,7 +288,7 @@ def main():
                  "h2_assayspecific_persite_spearman_by_site.csv")
     _panels(tabA, make_layout(tabA),
             "Assay-SPECIFIC high-disagreement sites — top model per assay category (by Spearman)",
-            os.path.join(figdir, "fig_assayspecific_category_best_spearman_panel.png"),
+            os.path.join(figdir, "fig_assayspecific_category_best_spearman_panel.pdf"),
             "eval_category", CATEGORIES5, {cc: palette_cat[cc] for cc in CATEGORIES5},
             xtick_cat, cat_legend(ct, "Spearman"),
             "box = top model for this assay category (model class, overall ρ)  ·  bold x-tick "
@@ -313,7 +313,7 @@ def main():
             for g in CATEGORIES5]
     _panels(tabAn, make_layout(tabAn),
             "Assay-SPECIFIC high-disagreement sites — top model per assay category (by NDCG@10)",
-            os.path.join(figdir, "fig_assayspecific_category_best_ndcg_panel.png"),
+            os.path.join(figdir, "fig_assayspecific_category_best_ndcg_panel.pdf"),
             "eval_category", CATEGORIES5, {cc: palette_cat[cc] for cc in CATEGORIES5},
             xtick_cat_n, legn,
             "box = top-NDCG@10 model for this assay category (model class, overall ρ)  ·  bold "
@@ -347,7 +347,7 @@ def main():
     _panels(tabC, make_layout(tabC),
             "Assay-SPECIFIC high-disagreement sites — best model in each MODEL CLASS "
             "(by Spearman for the assay's category; 7 assays)",
-            os.path.join(figdir, "fig_assayspecific_modelclass_best_panel.png"),
+            os.path.join(figdir, "fig_assayspecific_modelclass_best_panel.pdf"),
             "model_type", order_mt, {t: palette_mt[t] for t in order_mt},
             xtick_mc, leg_mc, "box colour = model_type class", base,
             bottom_text="\n".join(tbl), legend_ncol=3, rect_bottom=0.20)

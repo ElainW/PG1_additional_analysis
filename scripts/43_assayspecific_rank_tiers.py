@@ -15,7 +15,7 @@ within-site accuracy on that assay.
 
 Outputs:
   results/MSA_conservation/H2/h2_assayspecific_rank_tiers.csv
-  figures/h2_persite_spearman_density/fig_assayspecific_rank_tiers.png
+  figures/h2_persite_spearman_density/fig_assayspecific_rank_tiers.pdf
 """
 import os
 import importlib.util
@@ -146,7 +146,7 @@ def main():
                  "whole-assay within-site median)", fontsize=11, y=1.0)
     plt.tight_layout(rect=(0, 0.05, 1, 0.95))
     out = os.path.join(C.FIGURES, "h2_persite_spearman_density",
-                       "fig_assayspecific_rank_tiers.png")
+                       "fig_assayspecific_rank_tiers.pdf")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print("saved", out)

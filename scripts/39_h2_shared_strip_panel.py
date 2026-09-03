@@ -10,7 +10,7 @@ signal sits from wild-type: |median(site substitution DMS percentiles) - WT DMS
 percentile|, percentiles taken over the assay's entire DMS range. White = site
 median at the WT percentile (close to WT), black = farthest. One shared colourbar.
 
-Output: figures/h2_persite_spearman_density/fig_shared_lowcons_persite_spearman_panel.png
+Output: figures/h2_persite_spearman_density/fig_shared_lowcons_persite_spearman_panel.pdf
 """
 import os
 import numpy as np
@@ -123,7 +123,7 @@ def main():
                title="box colour = model_type class "
                      "(best-in-class model, overall Spearman over 217 assays)")
     out = os.path.join(C.FIGURES, "h2_persite_spearman_density",
-                       "fig_shared_lowcons_persite_spearman_panel.png")
+                       "fig_shared_lowcons_persite_spearman_panel.pdf")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print("saved", out)

@@ -15,7 +15,7 @@ far). Columns = UniProt (P53 | HXK4); rows = that protein's assays.
 
 Outputs:
   results/MSA_conservation/H2/h2_highcons_shared_persite_spearman_by_site.csv
-  figures/h2_persite_spearman_density/fig_shared_highcons_persite_spearman_panel.png
+  figures/h2_persite_spearman_density/fig_shared_highcons_persite_spearman_panel.pdf
 """
 import os
 import importlib.util
@@ -213,7 +213,7 @@ def main():
                title="box colour = model_type class "
                      "(best-in-class model, overall Spearman over 217 assays)")
     out = os.path.join(C.FIGURES, "h2_persite_spearman_density",
-                       "fig_shared_highcons_persite_spearman_panel.png")
+                       "fig_shared_highcons_persite_spearman_panel.pdf")
     plt.savefig(out, dpi=150, bbox_inches="tight")
     plt.close()
     print("saved", out)

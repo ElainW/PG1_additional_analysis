@@ -13,7 +13,7 @@ a single model can't form a box; its value is printed for reference.
 
 Outputs:
   results/MSA_conservation/H2/h2_p53_highcons_classwise_persite.csv
-  figures/h2_persite_spearman_density/fig_p53_highcons_classwise.png
+  figures/h2_persite_spearman_density/fig_p53_highcons_classwise.pdf
 """
 import os
 import importlib.util
@@ -147,17 +147,17 @@ def main():
     hc = build("highcons")
     hc.to_csv(os.path.join(H2DIR, "h2_p53_highcons_classwise_persite.csv"), index=False)
     plot(hc, "high-cons shared sites (pct>80)",
-         os.path.join(figdir, "fig_p53_highcons_classwise.png"))
+         os.path.join(figdir, "fig_p53_highcons_classwise.pdf"))
 
     hca = build("highcons_all")
     hca.to_csv(os.path.join(H2DIR, "h2_p53_highcons_all_classwise_persite.csv"), index=False)
     plot(hca, "all highly-conserved sites (pct>80)",
-         os.path.join(figdir, "fig_p53_highcons_all_classwise.png"))
+         os.path.join(figdir, "fig_p53_highcons_all_classwise.pdf"))
 
     allp = build("allsites")
     allp.to_csv(os.path.join(H2DIR, "h2_p53_allsites_classwise_persite.csv"), index=False)
     plot(allp, "all ≥5-sub positions",
-         os.path.join(figdir, "fig_p53_allsites_classwise.png"))
+         os.path.join(figdir, "fig_p53_allsites_classwise.pdf"))
 
 
 if __name__ == "__main__":
