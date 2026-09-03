@@ -1,0 +1,96 @@
+# GCK (glucokinase / hexokinase-4) orthosteric + allosteric residue atlas.
+# Numbering: GCK_HUMAN / UniProt P35557 (465 aa, pancreatic beta-cell isoform 1). All residue identities validated against the P35557 sequence.
+# Sources: Liu et al. 2012 JBC 287:13598-13610 'Insights into Mechanism of Glucokinase Activation' (Fig1A glucose+ATP site, Fig1C wide-open glucose site, Fig1D allosteric GKA site);
+#   Kamata et al. 2004 Structure 12:429-438 (Fig4A active/glucose site, Fig4B allosteric site, GKRP interface Glu51~Glu52 & His141~Leu144); Liao & Lehner 2026 Nat Commun (orthosteric residue-range definitions);
+#   Gersing et al. & Heredia et al. (variant activity effects).
+# site_class: glucose_site / ATP_site = orthosteric (substrate) pockets; allosteric_activator_site = GKA-binding pocket (small+large domain hinge, helix C); helixC_apo = Arg447-Asp205 apo salt bridge; GKRP_site = allosteric-inhibitor (GKRP) interface.
+# variant: characterized amino-acid substitution(s) at this position (';'-separated). direction: activating (GoF/hypoglycemia) vs inhibitory (LoF/MODY2) mutational effect; dual = opposing effects reported; blank = structural site annotation only.
+# pockets: ligand/pocket the residue lines (glucose | ATP | GKA | GKRP). evidence: paper_figure tokens. NOTE: Liu Fig1 legend prints 'Arg477' -> recorded as Arg447 (see that row).
+# ALLOSTERIC additions (Liao & Lehner 2026, Fig2E): three-star (expert-reviewed) ClinVar PATHOGENIC variants residing OUTSIDE orthosteric sites
+#   (black triangles in Fig2E), inferred loss-of-function via allosteric mechanisms. site_class=allosteric, region=non-orthosteric, direction=inhibitory. R191Q merged into the existing R191 row.
+UniProt_ID	position	wt_aa	residue	variant	site_class	direction	region	pockets	evidence	notes
+GCK_HUMAN	44	G	G44	G44S		inhibitory	N-terminal_region		Gersing;disease	disease-linked, reduced activity (lower growth in complementation assay); LoF
+GCK_HUMAN	51	E	E51		GKRP_site	inhibitory	N-terminal_region	GKRP	Kamata2004	GKRP (glucokinase regulatory protein) allosteric-inhibitor contact; Glu51~Glu52 patch
+GCK_HUMAN	52	E	E52		GKRP_site	inhibitory	N-terminal_region	GKRP	Kamata2004	GKRP allosteric-inhibitor contact; Glu51~Glu52 patch
+GCK_HUMAN	62	V	V62	V62M	allosteric_activator_site	inhibitory	interdomain_loop_60-72	GKA	Kamata2004_Fig4B;Gersing	GKA-pocket lining; V62M known pathogenic LoF (not detected in Gersing assay)
+GCK_HUMAN	63	R	R63		allosteric_activator_site	activating	interdomain_loop_60-72	GKA	Kamata2004_Fig4B;Liu2011_Fig1D	GKA-pocket residue (Arg63) contacting bound activators
+GCK_HUMAN	65	T	T65	T65I	allosteric_activator_site	dual	interdomain_loop_60-72	GKA	Liu2011_Fig1D;Heredia;Gersing	Thr65 on loop linking small & large domains at allosteric site; T65I reported both GoF (mild hypoglycemia, Liu/Heredia) and LoF (Gersing) - opposing effects; LoF not captured in ClinVar
+GCK_HUMAN	72	G	G72	G72R	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	78	D	D78		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	79	L	L79		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	80	G	G80		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	81	G	G81		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	82	T	T82		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	83	N	N83		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	84	F	F84		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	85	R	R85		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	99	W	W99	W99R		activating	large_domain		Heredia;Gersing;ClinVar	GoF/activating (Heredia); switches between closed and super-open states; also listed among ClinVar variants (Gersing)
+GCK_HUMAN	122	L	L122	L122F	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	137	H	H137	H137R		activating	large_domain		Gersing	known pathogenic GoF (mid effect); not detected in Gersing assay
+GCK_HUMAN	141	H	H141		GKRP_site	inhibitory	loop_141-144	GKRP	Kamata2004	GKRP allosteric-inhibitor contact; His141~Leu144 segment (His141)
+GCK_HUMAN	142	K	K142		GKRP_site	inhibitory	loop_141-144	GKRP	Kamata2004	GKRP allosteric-inhibitor contact; His141~Leu144 segment
+GCK_HUMAN	143	K	K143		GKRP_site	inhibitory	loop_141-144	GKRP	Kamata2004	GKRP allosteric-inhibitor contact; His141~Leu144 segment
+GCK_HUMAN	144	L	L144		GKRP_site	inhibitory	loop_141-144	GKRP	Kamata2004	GKRP allosteric-inhibitor contact; His141~Leu144 segment (Leu144)
+GCK_HUMAN	150	F	F150	F150S		inhibitory	small_domain		Gersing;ClinVar	ClinVar disease variant, LoF; adjacent to glucose-site Ser151
+GCK_HUMAN	151	S	S151		glucose_site		small_domain	glucose	Kamata2004_Fig4A;Liu2011_Fig1A;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	152	F	F152		glucose_site		small_domain	glucose	Liu2011_Fig1A;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	153	P	P153		glucose_site		small_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	157	E	E157			inhibitory	small_domain		user-provided	Glu157 reported LoF upon mutation
+GCK_HUMAN	161	K	K161			inhibitory	small_domain		user-provided	Lys161 reported LoF upon mutation
+GCK_HUMAN	168	T	T168		glucose_site		small_domain	glucose	Kamata2004_Fig4A;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	169	K	K169		glucose_site		small_domain	glucose	Kamata2004_Fig4A;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	189	I	I189	I189M	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	191	R	R191	R191W;R191Q		inhibitory	large_domain		Gersing;ClinVar;LiaoLehner2026_Fig2E	ClinVar disease variant, LoF (R191W); R191Q also a 3-star ClinVar pathogenic variant residing outside orthosteric sites (Fig2E), inferred allosteric LoF
+GCK_HUMAN	192	R	R192	R192Q	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	201	A	A201	A201S	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	204	N	N204		glucose_site		connecting_region_II	glucose	Kamata2004_Fig4A;Liu2011_Fig1A/C;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	205	D	D205	D205H	glucose_site	inhibitory	connecting_region_II	glucose	Kamata2004_Fig4A;Liu2011_Fig1A/C;LiaoLehner2026;Gersing	glucose-binding orthosteric residue (Asp205, connecting region II); D205H catalytically dead / LoF (Gersing); in apo form Asp205 salt-bridges helix-C Arg447 instead of glucose (Liu)
+GCK_HUMAN	206	T	T206		glucose_site		connecting_region_II	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	210	M	M210		allosteric_activator_site	activating	large_domain	GKA	Kamata2004_Fig4B	GKA-pocket lining (Met210)
+GCK_HUMAN	211	I	I211		allosteric_activator_site	activating	large_domain	GKA	Kamata2004_Fig4B;Liu2011_Fig1D	GKA-pocket lining (Ile211)
+GCK_HUMAN	214	Y	Y214	Y214A;Y214C	allosteric_activator_site	activating	large_domain	GKA	Kamata2004_Fig4B;Liu2011_Fig1D;Heredia	Tyr214 sits centrally in the activator pocket and contacts all known GKAs (Liu); GoF variants Y214A (severe hyperinsulinemic hypoglycemia) and Y214C (Heredia); switches between closed and super-open states; Y214C aggregation-prone
+GCK_HUMAN	215	Y	Y215	Y215A	allosteric_activator_site	activating	large_domain	GKA	Kamata2004_Fig4B;Heredia	GKA-pocket residue (Tyr215); GoF variant Y215A (Heredia)
+GCK_HUMAN	223	G	G223	G223S		inhibitory	large_domain		Gersing;ClinVar	ClinVar disease variant, LoF; immediately N-terminal to glucose loop 225-231
+GCK_HUMAN	225	I	I225		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	226	V	V226		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	227	G	G227		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	228	T	T228		glucose_site		large_domain	glucose	Liu2011_Fig1A;LiaoLehner2026	glucose-site loop (Liao set 225-231); backbone of Thr228/Gly229 also anchors ATP gamma-phosphate for catalysis (Liu Fig1A)
+GCK_HUMAN	229	G	G229		glucose_site		large_domain	glucose	Liu2011_Fig1A;LiaoLehner2026	glucose-site loop (Liao set 225-231); backbone of Thr228/Gly229 also anchors ATP gamma-phosphate for catalysis (Liu Fig1A)
+GCK_HUMAN	230	C	C230		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	231	N	N231		glucose_site		large_domain	glucose	Liu2011_Fig1A;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	235	M	M235		allosteric_activator_site	activating	large_domain	GKA	Kamata2004_Fig4B;Liu2011_Fig1D	GKA-pocket lining (Met235)
+GCK_HUMAN	254	N	N254		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	255	T	T255		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	256	E	E256		glucose_site		large_domain	glucose	Kamata2004_Fig4A;Liu2011_Fig1A/C;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	257	W	W257		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	258	G	G258		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	261	G	G261	G261R		inhibitory	large_domain		Gersing;ClinVar;disease	ClinVar disease variant, LoF; disease-linked lower growth
+GCK_HUMAN	275	R	R275	R275P	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	287	Q	Q287		glucose_site		large_domain	glucose	LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	290	E	E290		glucose_site		large_domain	glucose	Kamata2004_Fig4A;Liu2011_Fig1A/C;LiaoLehner2026	glucose-binding orthosteric residue (Liao&Lehner set 151-153,168-169,204-206,225-231,254-258,287,290)
+GCK_HUMAN	295	G	G295		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	296	K	K296		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	299	G	G299	G299R		inhibitory	large_domain		disease	disease-linked, lower growth / LoF
+GCK_HUMAN	300	E	E300	E300K		activating	large_domain		disease;literature	well-established GoF/activating (hypoglycemia); appears among disease-linked lower-growth variants in complementation assay
+GCK_HUMAN	315	L	L315	L315H		inhibitory	large_domain		disease	disease-linked, lower growth / LoF
+GCK_HUMAN	331	E	E331		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	332	T	T332		ATP_site		large_domain	ATP	Liu2011_Fig1A;LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	333	R	R333		ATP_site		large_domain	ATP	Liu2011_Fig1A;LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	336	S	S336		ATP_site		large_domain	ATP	Liu2011_Fig1A;LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	344	D	D344	D344Y	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	348	I	I348	I348F	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	352	L	L352	L352R	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	371	C	C371	C371W	allosteric	inhibitory	non-orthosteric		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism
+GCK_HUMAN	410	G	G410		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	411	S	S411		ATP_site		large_domain	ATP	Liu2011_Fig1A;LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	412	V	V412		ATP_site		large_domain	ATP	Liu2011_Fig1A;LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	413	Y	Y413		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	414	K	K414		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	415	L	L415		ATP_site		large_domain	ATP	Liu2011_Fig1A;LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	416	H	H416		ATP_site		large_domain	ATP	LiaoLehner2026	ATP-binding orthosteric residue (Liao&Lehner set 78-85,295-296,331-333,336,410-416)
+GCK_HUMAN	447	R	R447		helixC_apo		helix_C		Liu2011_Fig1_legend	helix-C arginine (Arg447) that forms a salt bridge with Asp205 in the APO conformation; Liu Fig1 legend prints 'Arg477' but P35557 is 465 aa -> corrected to Arg447
+GCK_HUMAN	451	L	L451		allosteric_activator_site	activating	helix_C	GKA	Liu2011_Fig1D	GKA-pocket lining on helix C (Leu451)
+GCK_HUMAN	452	V	V452		allosteric_activator_site	activating	helix_C	GKA	Kamata2004_Fig4B;Liu2011_Fig1D	GKA-pocket lining on helix C (Val452)
+GCK_HUMAN	454	A	A454	A454E	allosteric	inhibitory	helix_C		LiaoLehner2026_Fig2E	three-star ClinVar pathogenic variant(s) residing outside orthosteric sites (Fig2E, black triangle); LoF via inferred allosteric mechanism; Ala454 lies in helix C between the GKA allosteric residues Val452 and Val455
+GCK_HUMAN	455	V	V455	V455M	allosteric_activator_site	activating	helix_C	GKA	Kamata2004_Fig4B;Liu2011_Fig1D;Heredia	helix-C residue; V455M GoF (activating, hyperinsulinemic hypoglycemia); switches between closed and super-open states
+GCK_HUMAN	456	A	A456	A456V	allosteric_activator_site	activating	helix_C	GKA	Kamata2004_Fig4B;Liu2011_Fig1D;Heredia	helix-C residue; A456V GoF (activating, hyperinsulinemic hypoglycemia); switches between closed and super-open states

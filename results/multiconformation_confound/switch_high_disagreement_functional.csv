@@ -1,0 +1,15 @@
+protein,class,up_pos,ss,functional,functional_source
+GCK,active,345,strand,True,disease
+GCK,active,349,helix,True,disease
+GCK,swapping,47,turn,False,
+GCK,swapping,99,strand,True,allosteric;clinvar;disease
+GCK,swapping,287,loop,True,allosteric;disease
+GCK,swapping,342,strand,True,disease
+KRAS,active,2,loop,False,
+KRAS,swapping,65,loop,True,allosteric;clinvar
+KRAS,swapping,68,helix,True,allosteric
+SRC,active,333,loop,False,
+SRC,active,504,loop,False,
+SRC,swapping,387,loop,True,allosteric;uniprot_binding
+SRC,swapping,418,helix,False,
+SRC,swapping,509,loop,False,

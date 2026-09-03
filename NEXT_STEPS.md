@@ -1,36 +1,5 @@
 # Planned analyses
 
-## Expand the allosteric map beyond Src
-
-**Plan.** Generate the allosteric map for **HXK4_HUMAN, RASK_HUMAN, CP2C9_HUMAN,
-PTEN_HUMAN, VKOR1_HUMAN** — in addition to **SRC_HUMAN**, already in
-`results/allosteric_map/` (`SRC_HUMAN.tsv`). These proteins were selected because
-(a) there are existing allostery-mapping papers to source/curate site annotations
-from, (b) they have a large number of DMS mutations, and (c) their MSA has a
-suitable Neff/L (`MSA_Neff_L`).
-
-**Structure / conformation selection (PDB IDs).** Per protein, the conformational
-states and the PDB structures collected so far (`?` = state exists but structure not
-yet selected):
-
-| Protein | Conformations | PDB IDs collected |
-| --- | --- | --- |
-| HXK4_HUMAN | 3 states: super-open, open, closed | super-open `1V4T`, open `?`, closed `1V4S` |
-| RASK_HUMAN | ≥2 (need ≥2 structures) | active (RAF1+GTP-bound) `6VJJ`; second `?` |
-| SRC_HUMAN | 3 states (only 2 collected) | inactive `2SRC`, active `1Y57`; third state `?` |
-| CP2C9_HUMAN | — | `1R9O` |
-| PTEN_HUMAN | — | `1D5R` |
-| VKOR1_HUMAN | — | `6WVH` (Claude-selected, extrapolated from other literature structures) |
-
-**Open gaps to resolve before mapping.** (1) HXK4 **open**-state PDB; (2) RASK
-**second** structure (e.g. an inactive/GDP-bound state to pair with active `6VJJ`);
-(3) SRC **third** conformational state (a third PDB beyond `2SRC`/`1Y57`). Note VKOR1
-`6WVH` is an extrapolated pick and should be double-checked against the literature.
-
-**Ties to:** `results/allosteric_map/` (per-protein atlases),
-"Conservation vs allosteric / active sites (Src)" section below (the Src template
-this generalizes), `28_msa_conservation.py` (`MSA_Neff_L` for MSA-suitability screen).
-
 ## Multiple-conformation confound at high-disagreement sites
 
 **Scope.** For every mapped protein above with **more than one conformation** —
@@ -96,7 +65,8 @@ sites?
 (a) do they explain where models are untrustworthy (trust signal), and (b) how far a
 feature-only predictor gets on its own vs the DL/ML models.
 
-**Ties to:** the two sections above (allosteric maps + multiple-conformation sites),
+**Ties to:** the multiple-conformation section above, `results/allosteric_map/`
+(finished per-protein atlases),
 Src kinase allosteric-landscape paper (structural-feature/contact quantification),
 `17_gck_3d_distances.py` (catalytic/ligand distance template),
 `28_msa_conservation.py` (conservation feature, per-site disagreement).
@@ -150,93 +120,6 @@ Gersing assays ourselves and treat it as an independent map (label it as such, n
 **Ties to:** `22_disease_gof_lof.py` (undercalled LoF set), `17_gck_3d_distances.py`
 (1V4S distances), `papers/pdb_selection_framework.md` (1V4S = orthosteric-ligand
 structure), Liao & Lehner 2026 (activity–abundance residual method).
-
-## Conservation vs allosteric / active sites (Src)
-
-**Motivation.** We now have redundancy-reduced per-column conservation (`28`,
-theta-reweighted) and a curated Src allosteric-site atlas
-(`results/allosteric_map/SRC_HUMAN.tsv`, from Beltran, Naqvi, Faure & Lehner 2026).
-Test whether evolutionary conservation distinguishes **active-site** from
-**allosteric** positions, and whether within-site model disagreement relates to
-conservation *differently* across these mechanistic classes — i.e. whether
-conservation captures orthosteric/active-site importance but misses allosteric,
-distal function (a candidate explanation for where MSA-based models fail).
-
-**Data / join.** The atlas `position` is UniProt P12931 numbering = our `up_pos`
-for `SRC_HUMAN`. Join to `results/MSA_conservation/msa_conservation_by_site.csv`
-on (`UniProt_ID=SRC_HUMAN`, `up_pos`) for the three Src assays (Ahler_2019,
-Nguyen_2022, Chakraborty_2023_binding-DAS_25uM). Atlas fields: `site_class`
-(active_site=7, allosteric=26, allosteric_second_shell=15, other/blank),
-`direction` (inhibitory / activating), `pockets`, `region`.
-
-**Hypotheses.**
-1. Active-site residues are the most conserved (highest weighted `conservation`
-   and within-assay `conservation_percentile`); allosteric second-shell
-   intermediate; bare allosteric sites *less* conserved despite being functional.
-2. Activating (GoF, ddGa<0) sites are less conserved than inhibitory (LoF) sites.
-3. High-disagreement Src sites (`26`, `27`; `per_protein_conservation/src_high_disagreement_conservation.tsv`)
-   are enriched for **allosteric** rather than active-site class, and tend to be
-   conserved-but-allosteric or variable — where sequence/MSA models lack the signal.
-
-**Steps.**
-1. Join the Src atlas to per-assay conservation and to the disagreement sites.
-2. Compare `conservation` / `conservation_percentile` across `site_class`
-   (Kruskal–Wallis + pairwise Mann–Whitney; active_site vs allosteric the key test).
-3. Split by `direction` (inhibitory vs activating) and test conservation difference.
-4. Cross with per-site disagreement: does Spearman(disagreement, conservation)
-   differ by `site_class`? Are the labelled high-disagreement Src sites allosteric,
-   and are they high- or low-conservation?
-5. If a signal holds, frame it as: conservation encodes active-site constraint but
-   under-represents allosteric/distal function → mechanistic account of MSA-model
-   blind spots. Extend to other proteins if/when more allosteric maps are curated.
-
-**Caveat.** Only Src has an allosteric atlas so far (~48 annotated positions, one
-protein) — treat as a case study, not a generalization; small per-class n limits
-power (7 active-site residues).
-
-**Ties to:** `28_msa_conservation.py` (conservation),
-`26_src_allosteric_sites.py` + `results/allosteric_map/SRC_HUMAN.tsv` (atlas),
-`results/MSA_conservation/per_protein_conservation/src_high_disagreement_conservation.tsv` (labelled sites),
-Beltran, Naqvi, Faure & Lehner 2026 (Src allosteric landscape).
-
-## Mechanism of the per-assay disagreement ↔ conservation sign
-
-**Motivation.** Script `28` shows the sign of Spearman(within-site disagreement,
-conservation) is protein-specific (−0.59 to +0.42): in some proteins (P53, HSP82,
-VKOR1) models disagree most at the **most-conserved** sites, in others (NPC1, PTEN,
-RL40A, RPC1, CCDB) at the **least-conserved**. Why? Two hypotheses.
-
-**H1 (DMS-score spread) — DONE, rejected. H2 (model-class performance) — DONE,
-supported.** The full findings, numbers, and the threshold caveat now live in the
-README (§"Site conservation vs disagreement", the two-hypotheses subsection);
-outputs are `results/MSA_conservation/H1/H1_*` and `H2/H2_*` from script `34`. In brief:
-H1's premise (conserved ⇒ wider within-site DMS spread ⇒ disagreement) fails — the
-opposite holds, high-disagreement sites carry a *compressed* within-site DMS signal
-(relfrac ≈46 vs ≈62 at the low-disagreement sites, robust to the conservation
-split); **note** the "conserved-site baseline" is threshold-sensitive (≈68–69 at
-50/50, ≈59–62 at 80/20, ≈46–52 at 90/10), so always state the split. H2 holds under
-the strict split: at P53's conserved high-disagreement sites seq+MSA models beat
-structure-only (0.144 vs 0.040), whereas at PTEN/HXK4's variable sites all classes
-are uninformative (0.069 vs 0.035). What **remains** is the generalization beyond
-P53/PTEN/HXK4 (the Steps below).
-
-**Steps (remaining generalization work).**
-1. Compute per-site, per-model within-site rank accuracy for all assays; summarise
-   by `model_type` and by conservation tertile (extend the P53/PTEN probe to all 53).
-2. Decompose the disagreement metric itself: is high disagreement driven by
-   *between-class* divergence (MSA vs single-seq vs structure) or *within-class*
-   spread? Correlate the between-class component with conservation per assay.
-3. Test H2 directly: per assay, does (mean MSA-class accuracy − mean single-seq
-   accuracy) *increase with conservation* more in positive-sign proteins than
-   negative-sign ones? And is disagreement at low-conservation sites explained by
-   uniformly low accuracy (all classes near 0)?
-4. Relate the per-assay sign to MSA depth (`MSA_Neff_L`) and taxon — is
-   "disagree-at-variable" the low-information / shallow-MSA regime?
-
-**Ties to:** `28_msa_conservation.py` (conservation, per-assay ρ, high/low tails),
-`results/qc_directionality/directionality_check.csv` (model_type classes),
-`O2/20250613/*.csv` (per-model scores + `DMS_score`), `16_collapse_modeltype_withinsite.py`
-(model-type within-site structure).
 
 ## Synonymous-variant baseline for the DMS percentile/spread plots (script 37)
 

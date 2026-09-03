@@ -1,0 +1,25 @@
+# CYP2C9 (cytochrome P450 2C9) heme/substrate & variant residue atlas.
+# Numbering: CYP2C9 / UniProt P11712 (490 aa). Residue identities validated against the P11712 sequence.
+# Source: Amorosi et al. 2021, Am J Hum Genet (VAMP-seq / H-D exchange study of CYP2C9 abundance & activity).
+# site_class: heme_binding / heme_coordinating (axial Cys) / heme_binding_core_stabilizing (ExxR); substrate_binding (active-site substrate contact). blank = variant-only row.
+# direction: inhibitory = loss-of-function / destabilizing variant; blank = structural site annotation only.
+# pockets: heme | substrate. Heme-binding motif spans residues 428-437 (FxxGxxxCxG); Cys435 is the axial heme-iron ligand.
+# Variants: p.Arg335Trp (destabilized); CYP2C9*2 p.Arg144Cys and *3 p.Ile359Leu (reduced labeling); p.Cys435His (catalytically inactive, background labeling).
+UniProt_ID	position	wt_aa	residue	site_class	direction	region	pockets	evidence	notes
+CYP2C9_HUMAN	97	R	R97	heme_binding		heme_pocket_BC-loop	heme	Amorosi2021	heme-binding residue (Arg97)
+CYP2C9_HUMAN	108	R	R108	substrate_binding		active_site_SRS1	substrate	Amorosi2021	Arg108 binds negatively charged substrates (e.g. flurbiprofen)
+CYP2C9_HUMAN	144	R	R144		inhibitory	SRS1	substrate	Amorosi2021	CYP2C9*2 variant p.Arg144Cys: decreasing levels of H/D-exchange labeling (Amorosi Fig1B/1D); reduced-function star allele
+CYP2C9_HUMAN	335	R	R335		inhibitory			Amorosi2021	known destabilized variant p.Arg335Trp (loss of abundance)
+CYP2C9_HUMAN	354	E	E354	heme_binding_core_stabilizing		K-helix_ExxR_motif	heme	Amorosi2021	heme-binding and core-stabilizing residue (Glu354); ExxR salt-bridge stabilizes the fold
+CYP2C9_HUMAN	357	R	R357	heme_binding_core_stabilizing		K-helix_ExxR_motif	heme	Amorosi2021	heme-binding and core-stabilizing residue (Arg357); ExxR salt-bridge stabilizes the fold
+CYP2C9_HUMAN	359	I	I359		inhibitory	SRS5	substrate	Amorosi2021	CYP2C9*3 variant p.Ile359Leu: decreasing levels of H/D-exchange labeling (Amorosi Fig1B/1D); reduced-function star allele
+CYP2C9_HUMAN	428	F	F428	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding motif residue (428-437; FxxGxxxCxG Cys-pocket)
+CYP2C9_HUMAN	429	S	S429	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding motif residue (428-437; FxxGxxxCxG Cys-pocket)
+CYP2C9_HUMAN	430	A	A430	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding motif residue (428-437; FxxGxxxCxG Cys-pocket)
+CYP2C9_HUMAN	431	G	G431	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding residue (Gly431)
+CYP2C9_HUMAN	432	K	K432	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding motif residue (428-437; FxxGxxxCxG Cys-pocket)
+CYP2C9_HUMAN	433	R	R433	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding residue (Arg433)
+CYP2C9_HUMAN	434	I	I434	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding motif residue (428-437; FxxGxxxCxG Cys-pocket)
+CYP2C9_HUMAN	435	C	C435	heme_coordinating	inhibitory	heme-binding_motif_428-437	heme	Amorosi2021	heme-coordinating axial cysteine (Cys435); catalytically essential; inactive variant p.Cys435His shows background-level H/D labeling (Amorosi Fig1B/1D)
+CYP2C9_HUMAN	436	V	V436	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding motif residue (428-437; FxxGxxxCxG Cys-pocket)
+CYP2C9_HUMAN	437	G	G437	heme_binding		heme-binding_motif_428-437	heme	Amorosi2021	heme-binding residue (Gly437)
