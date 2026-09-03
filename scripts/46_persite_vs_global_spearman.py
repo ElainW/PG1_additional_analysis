@@ -24,8 +24,8 @@ Scores are used as-is (already higher = fitter; see 00_check_directionality.py).
 Outputs
   results/persite_vs_global/persite_vs_global_long.csv     (per assay x model)
   results/persite_vs_global/persite_vs_global_summary.csv  (per-assay correlations)
-  figures/persite_vs_global/aggregate_persite_vs_global.png/.pdf
-  figures/persite_vs_global/<DMS_id>.png                   (one per target assay)
+  figures/persite_vs_global/aggregate_persite_vs_global.pdf
+  figures/persite_vs_global/<DMS_id>.pdf                   (one per target assay)
 """
 import os
 import sys
@@ -346,7 +346,6 @@ def main():
     ax.legend(fontsize=7.5, loc="center left", bbox_to_anchor=(1.02, 0.5),
               framealpha=0.95, title="model type / fit", borderaxespad=0)
     fig.tight_layout()
-    fig.savefig(os.path.join(OUTFIG, "aggregate_persite_vs_global.png"), dpi=200, bbox_inches="tight")
     fig.savefig(os.path.join(OUTFIG, "aggregate_persite_vs_global.pdf"), bbox_inches="tight")
     plt.close(fig)
     print(f"aggregate: Pearson r={r:.3f}, Spearman rho={rho:.3f}, n={n}")
@@ -374,7 +373,7 @@ def main():
                   bbox_to_anchor=(1.02, 0.5), framealpha=0.95,
                   title="model type", borderaxespad=0)
         fig.tight_layout()
-        fig.savefig(os.path.join(OUTFIG, f"{dms_id}.png"), dpi=200, bbox_inches="tight")
+        fig.savefig(os.path.join(OUTFIG, f"{dms_id}.pdf"), bbox_inches="tight")
         plt.close(fig)
         print(f"assay fig: {dms_id}")
 
