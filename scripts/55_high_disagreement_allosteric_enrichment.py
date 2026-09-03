@@ -18,6 +18,10 @@ Functional region is defined from the three source directories the question
 names, kept separate so each is testable on its own and then combined:
   ALLOSTERIC -- position in results/allosteric_map/<gene>.tsv (dir1). The curated
                 orthosteric/allosteric atlas; the definition the question asks about.
+  ALLOSTERIC_ONLY -- the subset of the atlas whose site_class contains "allosteric"
+                (allosteric / allosteric_second_shell / allosteric_activator_site /
+                binding_interface;allosteric), i.e. drops the orthosteric / active-
+                site / binding-interface residues. CYP2C9 has none of these.
   UNIPROT    -- UniProt binding/active-site +-2 (dir3). Taken from the pool's own
                 `near_binding` column (15 builds it from the UniProt Binding/Active
                 site/Site/Metal features, window +-2). Structural only, no disease.
@@ -70,7 +74,7 @@ PROTEINS = [
     ("PTEN",   "PTEN_HUMAN",  "PTEN_HUMAN.tsv",   "pten_high_disagreement.tsv",   "PTEN.tsv"),
     ("SRC",    "SRC_HUMAN",   "SRC_HUMAN.tsv",    "src_high_disagreement.tsv",    "SRC.tsv"),
 ]
-DEFS = ["ALLOSTERIC", "UNIPROT", "CLINVAR", "UNION"]
+DEFS = ["ALLOSTERIC", "ALLOSTERIC_ONLY", "UNIPROT", "CLINVAR", "UNION"]
 
 ALLO_DIR = os.path.join(C.RESULTS, "allosteric_map")
 CLINVAR_DIR = os.path.join(C.DATA_DIR, "clinvar")
@@ -127,6 +131,14 @@ def allosteric_positions(map_file):
     return set(df["position"].astype(int))
 
 
+def allosteric_only_positions(map_file):
+    """Positions whose site_class contains 'allosteric' -- the allosteric subset of
+    the atlas (drops orthosteric / active-site / binding-interface residues)."""
+    df = pd.read_csv(os.path.join(ALLO_DIR, map_file), sep="\t", comment="#")
+    sc = df["site_class"].fillna("").str.lower()
+    return set(df.loc[sc.str.contains("allosteric"), "position"].astype(int))
+
+
 def fisher_row(a, b, c, d):
     """One-sided (greater) Fisher on [[a,b],[c,d]] with OR 95% CI. a/b = high in/out
     of functional; c/d = rest in/out of functional."""
@@ -163,10 +175,12 @@ def main():
         seq = seqmap.get(upid, "")
 
         allo = allosteric_positions(map_file)
+        allo_only = allosteric_only_positions(map_file)
         uniprot = set(u.loc[u["near_binding"] == True, "up_pos"])           # noqa: E712
         clinvar = clinvar_positions(clinvar_file, seq) | uniprot_gof_supplement(upid)
         defs = {
             "ALLOSTERIC": allo,
+            "ALLOSTERIC_ONLY": allo_only,
             "UNIPROT": uniprot,
             "CLINVAR": clinvar,
             "UNION": allo | uniprot | clinvar,

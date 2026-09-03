@@ -97,9 +97,12 @@ python scripts/56_high_disagreement_site_characterization.py   # paper table: wh
 
 - `55` — for the five allosteric-map proteins (CYP2C9, GCK, KRAS, PTEN, SRC),
   tests whether the high-disagreement tail is enriched in functional regions
-  (allosteric map / UniProt binding±2 / dir2 ClinVar / their union) vs the rest
-  of the assayed sites (one-sided Fisher, per protein + pooled). Exploratory —
-  finds no enrichment; kept for the record. -> `results/high_disagreement_allosteric_enrichment/`
+  (allosteric map, allosteric-class-only, UniProt binding±2, dir2 ClinVar, or
+  their union) vs the rest of the assayed sites (one-sided Fisher, per protein +
+  pooled). Exploratory — no pooled enrichment under any definition; the only hint
+  is SRC's allosteric-class sites (OR 2.49, p≈0.05, borderline), which does not
+  generalise. See the folder README for the positive/negative per-protein
+  breakdown. -> `results/high_disagreement_allosteric_enrichment/`
 - `56` — descriptive characterization for the paper: per protein, the number of
   high-disagreement sites and the fraction landing in terminal (beginning/end),
   loop/turn, functional, or structured-core regions (mutually exclusive, plus raw
