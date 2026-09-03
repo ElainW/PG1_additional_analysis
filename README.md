@@ -916,6 +916,20 @@ Processed structures (cleaned, single-chain, functional ligands kept) live in
 [`data/structures/pdb/`](data/structures/pdb/) as `<id>_cleaned.pdb` (+ the KRAS
 `*_*P.pdb` per-state set and `6WVH_cleaned_chainA.pdb`).
 
+## High-disagreement × functional regions (`55`–`56`)
+For the five allosteric-map proteins (CYP2C9, GCK, KRAS, PTEN, SRC), do the
+high-disagreement sites (`27`) fall in functional regions? Runs in the base `pg2`
+env off tracked outputs; see [`scripts/README.md`](scripts/README.md) (section 3).
+- [`results/high_disagreement_allosteric_enrichment/README.md`](results/high_disagreement_allosteric_enrichment/README.md)
+  — enrichment test (`55`) against the allosteric map, its allosteric-class-only
+  subset, UniProt binding±2, dir2 ClinVar, and their union. **Finding:** no pooled
+  enrichment under any definition (the only hint is SRC's allosteric-class sites,
+  OR 2.49 / p≈0.05, which does not generalise); the one robust signal is a modest
+  *continuous* elevation of disagreement at functional sites.
+- [`results/high_disagreement_site_characterization/README.md`](results/high_disagreement_site_characterization/README.md)
+  — descriptive paper table (`56`): the fraction of high-disagreement sites landing
+  in functional / beginning-end / loop-turn / structured-core regions, per protein.
+
 ## Version control
 Repo scoped to `analysis/` only; remote
 `https://github.com/ElainW/PG1_additional_analysis.git`. Figures and large
