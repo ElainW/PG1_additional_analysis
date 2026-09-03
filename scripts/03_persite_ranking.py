@@ -25,7 +25,7 @@ Outputs:
   results/persite_dms_agreement_long.csv          (per assay: model within-site corr w/ DMS)
   results/persite_dms_agreement_by_modeltype_taxon.csv
   figures/persite_analysis/fig5_persite_model_agreement_clustermap.png
-  figures/persite_analysis/fig6_persite_modeltype_agreement_heatmap.png
+  figures/persite_analysis/fig6_persite_modeltype_agreement_heatmap.pdf
   figures/persite_analysis/fig7_persite_dms_agreement_by_model.png
   figures/persite_analysis/fig8_persite_dms_agreement_modeltype_taxon.png
 """
@@ -177,7 +177,7 @@ def main():
     ax.set_xticklabels(lab, fontsize=7, rotation=30, ha="right")
     ax.set_yticklabels(lab, fontsize=7, rotation=0)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIGDIR, "fig6_persite_modeltype_agreement_heatmap.png"), dpi=150)
+    plt.savefig(os.path.join(FIGDIR, "fig6_persite_modeltype_agreement_heatmap.pdf"), bbox_inches="tight")
     plt.close()
 
     # Fig 7: per-model within-site agreement with DMS, colored by model_type
