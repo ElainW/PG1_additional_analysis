@@ -1,0 +1,495 @@
+\documentclass{article}
+
+% The authors should use the "dblblindworkshop" option for the Workshop with double-blind reviewing
+\usepackage[dblblindworkshop]{neurips_2026}
+\usepackage{placeins}
+
+% After being accepted, the authors should uncomment the following line to compile a camera-ready version.
+% \usepackage[dblblindworkshop, final]{neurips_2026}
+
+\workshoptitle{I Can't Believe It's Not Better (ICBINB): Failure Modes of AI in Biology}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{longtable}
+
+\title{Good Filters, Poor Optimizers: Why ProteinGym Leaderboard Rankings Don't Tell You Which Model to Trust for Protein Optimization}
+
+\author{%
+  Anonymous Author(s) \\
+  Affiliation \\
+  Address \\
+  \texttt{email}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Zero-shot fitness models scored on ProteinGym are increasingly used not just to rank known variants but to \emph{sample} amino acids at a position --- via Gibbs sampling or other search procedures over a model's pseudo-likelihood --- for protein optimization. The standard recipe for picking one model for this task is to take the model with the best Spearman correlation, or NDCG@10, in the relevant ProteinGym assay category. We showed this recipe is a poor guide to optimization usefulness. Using 217 deep mutational scanning (DMS) assays and 97 zero-shot models, and a controlled multi-assay design across 23 proteins measured under multiple phenotypes, we found that (i) global rank correlation and within-site ranking of substitutions are only loosely coupled, and the gap is catastrophic on some assays even for globally strong models; (ii) all models lose essentially all ranking power on the high-fitness tail, the exact regime optimization operates in; (iii) picking the top-ranked model by category Spearman or NDCG@10 barely predicts which model is actually best at the sites where models disagree, while a per-site oracle would dwarf any single-model choice; and (iv) the two standard selection metrics themselves disagree on which model is best in every assay category we tested. We further showed that the sites where models disagree most are disproportionately functionally important --- binding, active, and allosteric residues --- so the recipe fails exactly where an optimization campaign would spend its budget. We diagnosed two exploitable regularities (compressed within-site DMS signal, and low sequence conservation) that partially explain \emph{where} models struggle, without fully explaining \emph{which} model to trust there. We concluded with boundary conditions on this analysis and concrete, actionable recommendations for model and metric selection in real optimization settings.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+A natural use of ProteinGym-benchmarked zero-shot fitness models~\citep{notin_proteingym_2023} is not just to rank a fixed panel of variants, but to \emph{drive} protein optimization: sample amino acids at a given position from a model's pseudo-likelihood, either within a Gibbs-sampling framework~\citep{spinner_unified_2026} or other search-based algorithms~\citep{mccarter_how_2026}, to build up multi-mutant sequences. This is attractive relative to one-mutation-at-a-time lab screening: it is cheaper, it can respect epistasis, and it avoids blindly stacking deleterious mutations, and machine-learning-designed multi-mutants tend to outperform naive combination.
+
+The realistic setting for this workflow is a \emph{new} protein: no site-saturation deep mutational scanning (DMS), no solved structure, no budget to fine-tune. The practitioner must pick one model off the shelf and trust it. The standard recipe for doing so is to consult the ProteinGym leaderboard --- 97 zero-shot models scored on hundreds of DMS assays --- and pick the model with the best Spearman correlation, or NDCG@10, within the relevant assay category (e.g., ``Activity'' or ``Binding''). \textbf{Does that recipe solve model selection for optimization?}
+
+Our central finding is no. The recipe optimizes a quantity --- global rank correlation on a fixed, mostly single-mutant benchmark --- that is not the quantity optimization actually needs: the \emph{within-site} ranking of substitutions at functionally important positions. The field increasingly treats ProteinGym as a gold-standard proxy for design usefulness, but higher ProteinGym performance does not necessarily translate to a better success rate in actual protein optimization. We argued this disconnect stems from biases in the evaluation itself --- it rewards the wrong axis (global rather than within-site ranking, Section~\ref{sec:setup}) and is scored against DMS labels of limited experimental resolution, which caps the achievable correlation regardless of model quality (Sections~\ref{sec:global-vs-withinsite},~\ref{sec:dms-structure}, and~\ref{sec:boundary}) --- not just a property of any one model.
+
+\citet{spinner_unified_2026} previously showed that a battery of \emph{in silico} sequence, structure, and biochemical/biophysical descriptors do not correlate well with model performance or downstream enzyme function. We took a related but distinct route. Empirically, we broadened their setting --- more protein families and more of the high-performing fitness predictors benchmarked on ProteinGym (217 DMS assays $\times$ 97 zero-shot models) --- without claiming a sweeping generalization from a single enzyme case. Distinctively, we focused on proteins measured by \emph{multiple types} of DMS assay (the same residues scored under different phenotypes: abundance vs.\ activity vs.\ binding), which let us separate site-specific from assay-specific failure modes. And rather than reusing generic \emph{in silico} descriptors, we proposed new sequence- and structure-based diagnostics --- within-site DMS-score structure, sequence conservation, and 3-D proximity to a bound ligand --- to explain \emph{where and why} zero-shot models fail, and what that implies for what to do instead.
+
+\paragraph{Why this matters.} The sites where model selection fails most --- the high-disagreement sites --- are disproportionately the functionally important ones: binding, active, and allosteric residues (Section~\ref{sec:stakes}). In a real optimization campaign, these are exactly the positions under active consideration, so the recipe's failure is not academic: it fails precisely where the task lives.
+
+\paragraph{Contribution.} Our aim is not only to document the failure but to make the evaluation itself more trustworthy. Better evaluation practice lets the field (1) think critically about the experimental assays used for training and evaluation --- how much to invest in higher-resolution DMS, and how reliable a given assay is as a yardstick --- and (2) choose a computational method by \emph{task-aligned} metrics rather than by leaderboard rank, matching the metric to the actual optimization objective. Section~\ref{sec:setup} defines our setup and metrics; Section~\ref{sec:results} presents the negative results; Section~\ref{sec:diagnostics} diagnoses their causes; Section~\ref{sec:boundary} states boundary conditions and actionable takeaways; Section~\ref{sec:conclusion} concludes.
+
+\section{Setup and Approach}
+\label{sec:setup}
+
+\paragraph{Data.} We used 217 DMS substitution assays and 97 zero-shot fitness models from ProteinGym~\citep{notin_proteingym_2023}. All model scores were directionality-normalized so that higher always denotes higher predicted fitness. For the controlled multi-assay comparisons in Sections~\ref{sec:stakes} and~\ref{sec:diagnostics}, we selected the 23 proteins with $\geq 2$ DMS assays that share a common coordinate frame (identical \texttt{target\_seq}), spanning 52 assays across four assay categories (Activity, Binding, Expression, OrganismalFitness) and four taxa (summarized in Table~\ref{tab:t1} in the Appendix). This included assays on glucokinase/GCK~\citep{gersing_comprehensive_2023,gersing_characterizing_2024}, PTEN~\citep{matreyek_integrating_2021,mighell_saturation_2018}, TP53~\citep{giacomelli_mutational_2018,kotler_systematic_2018}, CYP2C9~\citep{amorosi_massively_2021}, VKORC1~\citep{chiasson_multiplexed_2020}, and Src~\citep{ahler_integrated_2019,chakraborty_profiling_2024,nguyen_molecular_2023}, among others. When a protein had an assay whose mutant coordinate frame did not match the others (e.g., \texttt{P53\_HUMAN\_Kotler\_2018} sits on a different \texttt{target\_seq} than the three Giacomelli assays), we excluded it from the paired, coordinate-shared comparisons while retaining it in single-assay analyses.
+
+\paragraph{Two evaluation axes.} The ProteinGym leaderboard reports \emph{global} rank correlation (Spearman, or NDCG@10 over the top 10\%) between a model's scores and the DMS readout, computed over \emph{all} variants in an assay. Optimization, however, needs \emph{within-site} ranking: at a fixed position, which of the $\sim$19 possible substitutions does the model rank highest? This is what a Gibbs sampler or search procedure actually consults at each step.
+
+\paragraph{Within-site disagreement.} Because global scores are on different scales across models, we quantified agreement by rank. For each site with $\geq 5$ substitutions, we ranked every model's scores over that site's substitutions, computed the Spearman correlation between every pair of models' within-site rankings, and averaged over all model pairs to obtain a consensus score. We defined
+\begin{equation}
+  \text{disagreement} = 1 - \overline{\rho}_{\text{pairwise}},
+\end{equation}
+so that disagreement is low when models agree on the local ordering (any one of them can be trusted) and high when they do not (it matters which model you pick). Figure~\ref{fig:f0} illustrates this pipeline, which underlies every subsequent analysis.
+
+\paragraph{Controlled comparison.} A central design element was pairing assays measured on the \emph{same} protein but under \emph{different} phenotypes (e.g., GCK activity vs.\ abundance). Because the residues and coordinate frame are identical, this let us separate \emph{model error} from \emph{model measuring the wrong phenotype} --- a model that tracks abundance but not catalytic activity is not necessarily ``wrong,'' it may simply be answering a different question.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.6\linewidth]{figures/f0_flow.pdf}
+  \caption{The within-site disagreement pipeline used throughout this paper: rank each model's scores over the substitutions at a site, compute pairwise Spearman correlation between every model pair, average to a consensus score, and take one minus that as the disagreement.}
+  \label{fig:f0}
+\end{figure}
+
+We used two model subsets throughout: a \emph{45-model family-best} set (one model per model family, chosen by overall Spearman, used to avoid inflating agreement statistics with near-duplicate model variants) and a hand-curated \emph{23-model representative subset} spanning all model classes (used for readable per-model figures; Table~\ref{tab:t3}). Within-site agreement between model \emph{types} is far from uniform: MSA-based and Structure\&MSA models agree most with each other ($\approx$0.70--0.73), while pure Structure models are consistent outliers ($\approx$0.37--0.44 agreement with other classes; Figure~\ref{fig:f18} in the Appendix).
+
+\section{The Recipe Fails}
+\label{sec:results}
+
+\subsection{Why these sites matter: high-disagreement sites are functionally important}
+\label{sec:stakes}
+
+Before detailing the failures, we established their stakes. Across our multi-assay proteins, within-site disagreement is elevated near annotated binding and active-site residues in 10 of 13 testable proteins (pooled Mann--Whitney $p = 5\times10^{-13}$); on GCK specifically this 1-D annotation-based enrichment holds in both the activity assay ($p=0.005$) and the abundance assay ($p=0.018$).
+
+To characterize this more directly, we curated allosteric-site, binding-site, and disease-variant annotations (UniProt binding/active sites $\pm 2$ residues, ClinVar Pathogenic/Likely-Pathogenic variants, and literature allosteric maps) for the five proteins with a solved structure and an existing allosteric-site literature: CYP2C9, GCK, KRAS, PTEN, and Src~\citep{beltran_allosteric_2026,weng_energetic_2024,liu_insights_2012}. Table~\ref{tab:t1-main} shows how each protein's high-disagreement sites distribute over functional, terminal, loop/turn, and buried-core regions. GCK's high-disagreement sites are 82.6\% functional; the pattern varies substantially by protein (Src 41.7\% buried core, CYP2C9 42.9\% loop/turn), so ``functionally important'' is best read as a real but protein-specific tendency rather than a universal categorical enrichment.
+
+\begin{table}[t]
+  \caption{High-disagreement sites are functionally and structurally distinctive. Per-protein characterization of labeled high-disagreement sites (percentages of that protein's high-disagreement sites falling in each region; rows need not sum to 100 as a site can be labeled functional and also near a terminus).}
+  \label{tab:t1-main}
+  \centering
+  \small
+  \begin{tabular}{lrrrrr}
+    \toprule
+    Protein & \# sites & \% functional & \% terminus & \% loop/turn & \% buried core \\
+    \midrule
+    GCK (HXK4)   & 23 & 82.6 & 13.0 & 4.3  & 0.0  \\
+    KRAS (RASK)  & 9  & 33.3 & 44.4 & 11.1 & 11.1 \\
+    PTEN         & 29 & 31.0 & 27.6 & 31.0 & 10.3 \\
+    Src (SRC)    & 12 & 25.0 & 0.0  & 33.3 & 41.7 \\
+    CYP2C9       & 21 & 4.8  & 14.3 & 42.9 & 38.1 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+We further tested a specific structural mechanism: whether a residue's role across multiple protein conformations predicts disagreement. On the three two-state conformational switches in our set --- GCK, KRAS, and Src, each with $\geq 2$ solved structural states~\citep{liu_insights_2012,weng_energetic_2024,beltran_allosteric_2026} --- residues whose long-range side-chain contacts \emph{swap} between conformational states carry elevated within-site disagreement in KRAS ($p=5\times10^{-4}$) and Src ($p=1.5\times10^{-3}$), though not in GCK. Swapping-contact residues that reach the high-disagreement tail are disproportionately functional or allosteric (6 of 9; Table~\ref{tab:t4} in the Appendix), consistent with structure-based models, which each condition on a single input conformation, being systematically blind to residues whose local environment depends on conformational state.
+
+\paragraph{Scope caveats.} These functional annotations were curated by hand and are only available for a small number of well-characterized human proteins with adequate multiple sequence alignments (MSAs). Not every functional signal generalizes: disease-variant and disordered-region enrichment do not replicate across proteins (disordered regions trend toward \emph{lower}, not higher, disagreement in P53 and Hsp82), and disease-annotation saturation in some proteins (e.g.\ 412/465 residues in GCK) makes a combined ``functional'' flag unreliable, so we tested binding, disease, and disorder signals separately rather than as one composite label.
+
+\subsection{Global rank correlation mostly tracks within-site ranking --- until it doesn't}
+\label{sec:global-vs-withinsite}
+
+For most models on most assays, global and within-site Spearman correlation are themselves correlated, so the leaderboard is not uniformly uninformative. The failure mode is assay-specific and, when it occurs, severe: on some assays, within-site signal collapses to essentially zero even for models that are globally strong. The clearest example is \texttt{P53\_HUMAN\_Giacomelli\_2018\_WT\_Nutlin}, where models with overall Spearman of 0.4--0.5 achieve within-site Spearman near zero for every model tested (Figure~\ref{fig:f2b} in the Appendix; aggregate pattern across all assays and models in Figure~\ref{fig:f2}). Critically, one cannot tell from a model's global leaderboard score alone whether it sits on a well-behaved assay or a broken-within-site one --- and in the realistic new-protein setting, there is no ground truth available to check.
+
+\subsection{Models fail to rank high-fitness variants}
+\label{sec:high-fitness}
+
+Ranking power on the high-fitness tail is a known weak point of zero-shot models~\citep{woolley_overestimating_2026}; we confirmed and extended this within our setting (ESM3 Spearman fell $0.49\rightarrow0.04\rightarrow-0.01$ from all variants to the top 25\% to the top 10\%, generalizing across 209 assays with $\geq 200$ single mutants). Models are, in this sense, good filters of deleterious variants but poor prioritizers of the high-fitness variants that optimization actually seeks.
+
+Figure~\ref{fig:f3} pools this analysis over all 216 substitution assays (each assay weighted equally, so each ProteinGym assay category contributes in proportion to its number of assays), broken down by model type and by whether the fitness split used to define ``high-fitness'' is computed \emph{globally} or \emph{within-site} (best substitution at each position, pooled over positions, rather than the globally most-fit variants). Two things stand out. First, the collapse is substantially a property of the \emph{global} fitness definition: under the within-site split it is far gentler (retaining Spearman $\approx$0.15--0.27 at the top decile, versus $\approx$0 globally), indicating that much of the apparent collapse reflects the global definition mixing in across-position signal rather than models becoming uninformative per se. Second, the pattern holds broadly across model types; Structure-only models do not collapse noticeably worse than other classes, and are in fact among the least-degraded classes on the global tail.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.98\linewidth]{figures/f3_collapse.pdf}
+  \caption{Models fail to rank high-fitness variants, by model type, pooled across all 216 assays. Left: global fitness split. Right: within-site fitness split. The collapse under the global split is far more severe than under the within-site split, indicating that a substantial part of the ``winners collapse'' reflects the global definition of high-fitness mixing in across-position signal.}
+  \label{fig:f3}
+\end{figure}
+
+\subsection{Category-level model selection barely helps}
+\label{sec:category-selection}
+
+The natural response to disagreement is: pick the category-leading model. We tested this directly on the 45-model family-best set: within a ProteinGym assay category, does a model's rank by category-mean Spearman or NDCG@10 predict its within-site accuracy specifically at high-disagreement sites? It barely does. The correlation between category rank and within-site accuracy at these sites is weak, $\rho(\text{rank}, \text{within-site accuracy}) \approx -0.05$ to $-0.15$ (Figure~\ref{fig:f4} in the Appendix; near-flat tiers from Top-1 to All models kept), while the \emph{per-site oracle} --- always choosing, in hindsight, whichever model happens to be best at that specific site --- achieves within-site Spearman of 0.56--0.73, dwarfing every category-rank tier. Picking the top model by Spearman or NDCG@10 in the assay category does not solve model selection; site-specific choice would help far more than any global ranking improvement could.
+
+\subsection{Spearman and NDCG@10 disagree on the top model --- and neither is the right axis}
+\label{sec:metric-disagreement}
+
+Even setting aside within-site ranking, the two standard selection metrics are not interchangeable at the point that matters most: picking a single ``best'' model. Across the full per-category ranking the two metrics broadly correlate, but they select \emph{different} rank-1 models in all five ProteinGym assay categories we tested (Table~\ref{tab:t2} in the Appendix). For example, in the Expression category the top-Spearman model (VenusREM) is only NDCG-rank 28; in Activity, the top-Spearman model (AIDO.Protein-RAG-16B) is NDCG-rank 11. So the recipe is ambiguous even before within-site considerations enter: ``best by Spearman'' and ``best by NDCG@10'' name different models. More fundamentally, neither metric captures within-site or high-fitness-variant ranking (Sections~\ref{sec:global-vs-withinsite}--\ref{sec:high-fitness}), so whichever metric one picks, the selection is made on the wrong axis for optimization.
+
+\section{Failure-Cause Diagnostics}
+\label{sec:diagnostics}
+
+Why do models disagree, and is that disagreement exploitable for better selection? We split high-disagreement sites into two categories and tested what, if anything, predicts which model to trust.
+
+\subsection{Category A: shared high-disagreement sites}
+\label{sec:shared-sites}
+
+We first asked whether disagreement is a property of the \emph{position} rather than of a particular assay's measurement noise. High-disagreement sites recur strongly across a protein's different assays: 131 of 241 (54\%) union high-disagreement sites are shared by $\geq 2$ assays of the same protein (cluster-bootstrap 95\% CI 41--68\%; 18 of 20 proteins reach BH $q<0.05$; large fold-enrichment over a permutation null, e.g.\ P53 observed 40 shared sites vs.\ a null 95\% band of $[0,5]$). As a control, low-disagreement sites also recur, but less: 110 of 263 (42\%, CI 33--51\%, 16/20 significant). Hard sites recur \emph{more} than easy sites, so this is not simply ``any extreme of the metric repeats'' --- disagreement at these sites is intrinsic to the position and is not something model selection alone can fix. Figure~\ref{fig:f6} illustrates the contrast with two proteins: P53, where the observed overlap sits far above the null band (strongly significant), versus VKORC1, where observed overlap is indistinguishable from chance.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f6_coloc_selected.pdf}
+  \caption{High-disagreement sites co-localize across a protein's assays --- but not uniformly. Two-panel excerpt: P53\_HUMAN (observed overlap far exceeds the permutation-null band; strongly significant) versus VKOR1\_HUMAN (observed overlap is indistinguishable from the null). The full 20-protein panel is in the Appendix (Figure~\ref{fig:f6b}).}
+  \label{fig:f6}
+\end{figure}
+
+\subsection{Category B: assay-specific high-disagreement sites}
+\label{sec:assay-specific}
+
+Sites where disagreement appears in only one of a protein's assays could reflect (i) genuine model-performance spread at that site, or (ii) an assay-specific measurement issue (Section~\ref{sec:boundary}). Where the disagreement is real, we asked whether it is at least resolvable by picking the leaderboard-selected model. It is not: both the category-top-Spearman model and the category-top-NDCG@10 model fall from a whole-assay median within-site Spearman of $\approx$0.36 to $\approx$0.09 specifically at these assay-specific high-disagreement sites (Figure~\ref{fig:f21} in the Appendix), consistent with the flat rank-vs-accuracy tiers of Section~\ref{sec:category-selection}. Selecting by either standard metric fails to protect model accuracy exactly at the sites where model choice would matter most.
+
+\subsection{What does explain assay-specific disagreement: within-site DMS-score structure}
+\label{sec:dms-structure}
+
+Across the many assays with assay-specific high-disagreement sites (not only P53), we found models disagree where there is little within-site signal to rank. Two related patterns recur: (1) \emph{tolerated} sites, where substitution scores cluster near the wild-type score, so fine-grained ordering is dominated by measurement noise; and (2) \emph{hard-to-distinguish} sites, where the range of DMS scores across a site's substitutions is compressed relative to the assay average (e.g.\ relative-fraction spread $\approx$46 at high-disagreement sites vs.\ $\approx$62 at low-disagreement sites), so that even at a uniformly deleterious position, the substitutions are near-indistinguishable and the fine ranking is effectively unrankable. This points to disagreement at these sites reflecting the \emph{assay's} resolving power at that position rather than model quality --- consistent with the observation that no model, and no leaderboard rank, reliably wins there (Section~\ref{sec:assay-specific}). Figure~\ref{fig:f20} (left panel) shows this relationship between DMS-score spread and disagreement.
+
+\begin{figure}[t]
+  \centering
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{figures/f20a_dms_conservation.pdf}
+    \caption{Within-site DMS-score structure vs.\ disagreement.}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}{0.49\linewidth}
+    \includegraphics[width=\linewidth]{figures/f20b_h2_selected.pdf}
+    \caption{Per-site model-class accuracy at conserved, shared high-disagreement sites.}
+  \end{subfigure}
+  \caption{Mechanism panel. \emph{Left}: compressed within-site DMS-score spread accompanies elevated disagreement --- a candidate explanation for assay-specific disagreement (Section~\ref{sec:dms-structure}). \emph{Right}: at conserved, shared high-disagreement sites, sequence/MSA-aware models retain more within-site accuracy than structure-only models, but this class gap is a case study, not a general rule (Section~\ref{sec:conservation}).}
+  \label{fig:f20}
+\end{figure}
+
+\subsection{Sequence conservation identifies where models struggle, not which model to trust}
+\label{sec:conservation}
+
+We next tested whether evolutionary conservation --- computed per-column from each assay's own MSA with redundancy-reduced (theta-reweighted) sequence weighting --- predicts where sequence- and MSA-aware models outperform structure-only models. The global link between raw conservation and disagreement largely disappears after redundancy reduction (pooled Spearman $0.18\rightarrow0.06$; the naive signal was substantially a homolog-redundancy artifact), and the per-assay relationship is protein-specific, ranging from $-0.59$ to $+0.42$. All model classes tend to perform poorly at low-conservation sites; among shared high-disagreement sites, higher conservation does not consistently translate into better model performance across model classes (Figure~\ref{fig:f20}, right panel; Figure~\ref{fig:f23} in the Appendix). One case does show a real class gap --- at P53's conserved, shared high-disagreement sites, sequence/MSA models outperform structure-only models (within-site Spearman 0.139 vs.\ 0.027) --- but this does not generalize into a rule that ``conserved $\Rightarrow$ sequence/MSA models win.'' The more reliable use of conservation is thus as a diagnostic for \emph{where} models are likely to struggle (low-conservation sites), combined with the within-site DMS-score structure of Section~\ref{sec:dms-structure}, rather than as a rule for \emph{which} model class to trust.
+
+\subsection{Ruling out simpler explanations}
+\label{sec:trivial}
+
+We checked two more direct candidate explanations for disagreement and found neither sufficient. First, physicochemical features (change in hydrophobicity and net charge) explain only a small share of model behavior on the abundance assay we tested ($\approx$13\% of raw model--DMS correlation survives partialling out these features). Second, we tested whether disagreement literally reflects 3-D proximity to a bound functional ligand, using the curated experimental structures for the six proteins in our set with a genuine bound ligand (glucose/activator for GCK, heme/substrate for CYP2C9, a substrate analog for PTEN, ATP-analog for Src, an inhibitor for VKORC1, and GTP-analog/Mg for KRAS; Table~\ref{tab:t5} in the Appendix). At a strict 5\,\text{\AA} contact-distance threshold, sites within 5\,\text{\AA} of the bound ligand do show elevated disagreement, pooled across proteins (mean $z$-scored disagreement difference $+0.21$, one-sided Mann--Whitney $p=4.3\times10^{-6}$), but only 3 of 6 proteins individually reach significance and one (CYP2C9) trends in the opposite direction, so this too is a real but partial, protein-specific signal rather than a clean, unifying explanation.
+
+\section{Boundary Conditions and Actionable Takeaways}
+\label{sec:boundary}
+
+\subsection{Boundary conditions}
+
+\begin{enumerate}
+  \item \textbf{We scored one site at a time from wild type, not sequentially conditioned mutations.} Our DMS data are mostly single substitutions, so within-site ranking was evaluated against the wild-type background, whereas real multi-mutant optimization conditions each step on the mutations already fixed (the Gibbs-sampling or search loop of Section~\ref{sec:intro}). Single-substitution DMS cannot directly capture that conditioning.
+  \item \textbf{We evaluated by rank, but sampling uses probabilities.} We ranked substitutions to compare models on a common scale despite differing output magnitudes. Actual optimization samples from a model's calibrated pseudo-likelihood, so the magnitudes --- not only the order --- drive which variants are proposed; a model that ranks well can still be miscalibrated as a sampling distribution, which our rank-based analysis did not capture.
+  \item \textbf{Improving the model-selection metric does not, by itself, resolve optimization.} Even with a well-chosen model, samplers can fail to elicit sequences that are themselves high-pseudo-likelihood under their own scoring model --- a search/inference failure distinct from the scoring failure we studied here.
+  \item \textbf{We did not address how models select \emph{which} sites to mutate}, only how they rank substitutions at a given site; site selection was out of scope.
+  \item MSA-dependent models benchmarked here may not use the most optimized possible MSA input for a given target.
+  \item Our analyses skew toward well-studied human proteins with existing structural and functional annotation.
+  \item \textbf{DMS is treated as ground truth but is not a clean fitness readout}: detection/selection bias (missing-not-at-random dropouts) and heterogeneous assay quality (dynamic range, replicate noise, coverage) both matter. This is inseparable from Section~\ref{sec:dms-structure}: a compressed within-site score range can reflect real site biology \emph{or} an assay resolving-power limit, and the two are not always distinguishable from the data alone.
+\end{enumerate}
+
+\subsection{Actionable takeaways}
+
+\begin{enumerate}
+  \item \textbf{Do not select a single model by category-level Spearman or NDCG@10 for optimization.} Global rank mostly tracks within-site ranking but breaks catastrophically on some assays (Section~\ref{sec:global-vs-withinsite}), collapses on the high-fitness tail (Section~\ref{sec:high-fitness}), and barely predicts which model is right at disagreement sites (Section~\ref{sec:assay-specific}); the per-site oracle dwarfs every category-rank tier.
+  \item \textbf{Choose the reported metric from the goal, not a single leaderboard number.} Report a suite of task-aligned metrics --- within-site ranking and top-quartile (high-fitness-variant) accuracy for optimization, alongside global Spearman/NDCG@10 for the deleterious-filtering use case --- and select by objective; Spearman and NDCG@10 are largely redundant with each other and neither stands in for the optimization-relevant axes.
+  \item \textbf{Low within-site DMS resolution can look like low model performance, but it is a property of the assay.} Where substitutions cluster near wild type or span a below-average score range, disagreement reflects the assay's resolving power at that position, not model quality; no model and no better metric will fix this. When this happens, favor a higher-resolution DMS assay over more replicates of the same low-resolution one.
+  \item \textbf{Use sequence conservation to flag where models are likely to struggle, not which model to trust.} All model classes tend to perform poorly at low-conservation sites; whether sequence/MSA-aware models specifically outperform structure-only models at high-conservation sites is unclear from our data --- the one class gap we observed (P53) is a single-protein case, not a generalizable selection rule.
+  \item \textbf{Use model disagreement as site-level triage, with realistic expectations.} When models agree, any one is likely fine; when they disagree, first check within-site DMS range (takeaway 3) and sequence conservation (takeaway 4) before asking which specific model to trust, since much disagreement is unrankable rather than resolvable by better model choice. Consensus-vs-accuracy is a real but bounded signal ($\rho\approx0.25$--0.38, capped around 0.3--0.4).
+  \item \textbf{If a target protein has multiple known conformations, use multiple representative structures as input to structure-based models}, rather than a single conformation, given the elevated disagreement we observed at conformation-swapping contact residues (Section~\ref{sec:stakes}).
+  \item \textbf{The ceiling worth chasing is the per-site oracle}: site-adaptive model choice and higher within-site resolution in the underlying assays, not incremental improvement of a single global leaderboard number.
+\end{enumerate}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+We revisited the observation of \citet{spinner_unified_2026} that commonly used \emph{in silico} selection metrics do not strongly track experimental function, extending it across more protein families and more ProteinGym-benchmarked models, and mechanizing it: the recipe fails because it optimizes global rank correlation on data of limited resolution, when optimization needs within-site ranking of high-fitness variants at exactly the functionally important, high-disagreement positions the recipe is least equipped to resolve. Constructively, we pointed toward optimization-relevant \emph{in silico} metrics (within-site and high-fitness-variant ranking), site-level triage using within-site DMS-score structure and conservation, and an honest accounting of DMS measurement limits as the more productive path forward, rather than continued incremental gains on a single global leaderboard number.
+
+\paragraph{Code and data availability.} All analysis code, intermediate results, and figure-generation scripts are available at an anonymized repository: \url{https://anonymous.4open.science/r/PG1_additional_analysis-6513/README.md}.
+
+\begin{ack}
+Funding sources and competing interests will be disclosed in the camera-ready version, in accordance with NeurIPS policy.
+\end{ack}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+
+\section{Appendix}
+
+\subsection{Selected assay set (Table~\ref{tab:t1})}
+
+\small
+\begin{longtable}{llllrrrr}
+  \caption{Per-assay summary of the 52-assay, 23-protein controlled-comparison set used throughout.}
+  \label{tab:t1} \\
+  \toprule
+  DMS ID & Category & Taxon & Structure(s) & MSA Neff/L & \%Cov & Len & WT score \\
+  \midrule
+  \endfirsthead
+  \toprule
+  DMS ID & Category & Taxon & Structure(s) & MSA Neff/L & \%Cov & Len & WT score \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+  \texttt{\scriptsize A0A2Z5U3Z0\_9INFA\_Doud\_2016} & OrganismalFitness & Virus & {\scriptsize --} & 16.01 & 0.968 & 565 & -- \\
+  \texttt{\scriptsize A0A2Z5U3Z0\_9INFA\_Wu\_2014} & OrganismalFitness & Virus & {\scriptsize --} & 16.01 & 0.968 & 565 & -- \\
+  \texttt{\scriptsize BLAT\_ECOLX\_Deng\_2012} & OrganismalFitness & Prokaryote & {\scriptsize --} & 177.98 & 0.752 & 286 & -- \\
+  \texttt{\scriptsize BLAT\_ECOLX\_Firnberg\_2014} & OrganismalFitness & Prokaryote & {\scriptsize --} & 177.98 & 0.752 & 286 & -- \\
+  \texttt{\scriptsize BLAT\_ECOLX\_Jacquier\_2013} & OrganismalFitness & Prokaryote & {\scriptsize --} & 177.98 & 0.752 & 286 & -- \\
+  \texttt{\scriptsize BLAT\_ECOLX\_Stiffler\_2015} & OrganismalFitness & Prokaryote & {\scriptsize --} & 177.98 & 0.752 & 286 & -- \\
+  \texttt{\scriptsize CAR11\_HUMAN\_Meitlis\_2020\_gof} & OrganismalFitness & Human & {\scriptsize --} & 0.04 & 0.998 & 1154 & -- \\
+  \texttt{\scriptsize CAR11\_HUMAN\_Meitlis\_2020\_lof} & OrganismalFitness & Human & {\scriptsize --} & 0.04 & 0.998 & 1154 & -- \\
+  \texttt{\scriptsize CCDB\_ECOLI\_Adkar\_2012} & Activity & Prokaryote & {\scriptsize --} & 168.82 & 0.851 & 101 & -- \\
+  \texttt{\scriptsize CCDB\_ECOLI\_Tripathi\_2016} & OrganismalFitness & Prokaryote & {\scriptsize --} & 168.82 & 0.851 & 101 & -- \\
+  \texttt{\scriptsize CP2C9\_HUMAN\_Amorosi\_2021\_abundance} & Expression & Human & {\scriptsize 1R9O} & 165.48 & 0.886 & 490 & 1.0 \\
+  \texttt{\scriptsize CP2C9\_HUMAN\_Amorosi\_2021\_activity} & Binding & Human & {\scriptsize 1R9O} & 165.48 & 0.886 & 490 & 1.0 \\
+  \texttt{\scriptsize DYR\_ECOLI\_Nguyen\_2023} & OrganismalFitness & Prokaryote & {\scriptsize --} & 337.1 & 0.969 & 159 & -- \\
+  \texttt{\scriptsize DYR\_ECOLI\_Thompson\_2019} & OrganismalFitness & Prokaryote & {\scriptsize --} & 77.51 & 0.981 & 159 & -- \\
+  \texttt{\scriptsize HSP82\_YEAST\_Cote-Hammarlof\_2020\_growth-H2O2} & OrganismalFitness & Eukaryote & {\scriptsize --} & 6.47 & 0.917 & 709 & -- \\
+  \texttt{\scriptsize HSP82\_YEAST\_Flynn\_2019} & OrganismalFitness & Eukaryote & {\scriptsize --} & 5.45 & 0.862 & 709 & -- \\
+  \texttt{\scriptsize HSP82\_YEAST\_Mishra\_2016} & OrganismalFitness & Eukaryote & {\scriptsize --} & 5.45 & 0.862 & 709 & -- \\
+  \texttt{\scriptsize HXK4\_HUMAN\_Gersing\_2022\_activity} & OrganismalFitness & Human & {\scriptsize 1V4T (super-open); 1V4S (closed); open state unassigned} & 4.99 & 1.0 & 465 & 1.0 \\
+  \texttt{\scriptsize HXK4\_HUMAN\_Gersing\_2023\_abundance} & Expression & Human & {\scriptsize 1V4T (super-open); 1V4S (closed); open state unassigned} & 5.38 & 0.966 & 465 & 1.0 \\
+  \texttt{\scriptsize KCNE1\_HUMAN\_Muhammad\_2023\_expression} & Expression & Human & {\scriptsize --} & 1.74 & 0.969 & 129 & -- \\
+  \texttt{\scriptsize KCNE1\_HUMAN\_Muhammad\_2023\_function} & Activity & Human & {\scriptsize --} & 1.74 & 0.969 & 129 & -- \\
+  \texttt{\scriptsize KCNJ2\_MOUSE\_Coyote-Maestas\_2022\_function} & Activity & Eukaryote & {\scriptsize --} & 5.28 & 0.86 & 428 & -- \\
+  \texttt{\scriptsize KCNJ2\_MOUSE\_Coyote-Maestas\_2022\_surface} & Expression & Eukaryote & {\scriptsize --} & 5.28 & 0.86 & 428 & -- \\
+  \texttt{\scriptsize NPC1\_HUMAN\_Erwood\_2022\_HEK293T} & Activity & Human & {\scriptsize --} & 0.67 & 0.987 & 1278 & -- \\
+  \texttt{\scriptsize NPC1\_HUMAN\_Erwood\_2022\_RPE1} & Activity & Human & {\scriptsize --} & 0.67 & 0.987 & 1278 & -- \\
+  \texttt{\scriptsize OXDA\_RHOTO\_Vanella\_2023\_activity} & Activity & Eukaryote & {\scriptsize --} & 271.28 & 0.876 & 364 & -- \\
+  \texttt{\scriptsize OXDA\_RHOTO\_Vanella\_2023\_expression} & Expression & Eukaryote & {\scriptsize --} & 271.28 & 0.876 & 364 & -- \\
+  \texttt{\scriptsize P53\_HUMAN\_Giacomelli\_2018\_Null\_Etoposide} & OrganismalFitness & Human & {\scriptsize --} & 0.39 & 0.858 & 393 & 0.0 \\
+  \texttt{\scriptsize P53\_HUMAN\_Giacomelli\_2018\_Null\_Nutlin} & OrganismalFitness & Human & {\scriptsize --} & 0.39 & 0.858 & 393 & 0.0 \\
+  \texttt{\scriptsize P53\_HUMAN\_Giacomelli\_2018\_WT\_Nutlin} & OrganismalFitness & Human & {\scriptsize --} & 0.39 & 0.858 & 393 & 0.0 \\
+  \texttt{\scriptsize PTEN\_HUMAN\_Matreyek\_2021} & Expression & Human & {\scriptsize 1D5R} & 3.72 & 0.752 & 403 & 1.0 \\
+  \texttt{\scriptsize PTEN\_HUMAN\_Mighell\_2018} & Activity & Human & {\scriptsize 1D5R} & 3.72 & 0.752 & 403 & 0.0 \\
+  \texttt{\scriptsize Q53Z42\_HUMAN\_McShan\_2019\_binding-TAPBPR} & Binding & Human & {\scriptsize --} & 13.24 & 0.986 & 365 & -- \\
+  \texttt{\scriptsize Q53Z42\_HUMAN\_McShan\_2019\_expression} & Expression & Human & {\scriptsize --} & 13.24 & 0.986 & 365 & -- \\
+  \texttt{\scriptsize RASK\_HUMAN\_Weng\_2022\_abundance} & Expression & Human & {\scriptsize KRAS set: 6VJJ (ON/RAF1), 5O2S (DARPin K27), 1NVW (SOS)} & 146.37 & 0.888 & 188 & 0.0 \\
+  \texttt{\scriptsize RASK\_HUMAN\_Weng\_2022\_binding-DARPin\_K55} & Binding & Human & {\scriptsize KRAS set: 6VJJ (ON/RAF1), 5O2S (DARPin K27), 1NVW (SOS)} & 146.37 & 0.888 & 188 & 0.0 \\
+  \texttt{\scriptsize RL40A\_YEAST\_Mavor\_2016} & OrganismalFitness & Eukaryote & {\scriptsize --} & 30.52 & 0.695 & 128 & -- \\
+  \texttt{\scriptsize RL40A\_YEAST\_Roscoe\_2013} & OrganismalFitness & Eukaryote & {\scriptsize --} & 30.52 & 0.695 & 128 & -- \\
+  \texttt{\scriptsize RL40A\_YEAST\_Roscoe\_2014} & Activity & Eukaryote & {\scriptsize --} & 30.52 & 0.695 & 128 & -- \\
+  \texttt{\scriptsize RPC1\_LAMBD\_Li\_2019\_high-expression} & Activity & Virus & {\scriptsize --} & 121.45 & 0.886 & 237 & -- \\
+  \texttt{\scriptsize RPC1\_LAMBD\_Li\_2019\_low-expression} & Activity & Virus & {\scriptsize --} & 121.45 & 0.886 & 237 & -- \\
+  \texttt{\scriptsize S22A1\_HUMAN\_Yee\_2023\_abundance} & Expression & Human & {\scriptsize --} & 62.71 & 0.807 & 553 & -- \\
+  \texttt{\scriptsize S22A1\_HUMAN\_Yee\_2023\_activity} & Activity & Human & {\scriptsize --} & 62.71 & 0.807 & 553 & -- \\
+  \texttt{\scriptsize SPG1\_STRSG\_Olson\_2014} & Binding & Prokaryote & {\scriptsize --} & 0.0 & 0.913 & 448 & -- \\
+  \texttt{\scriptsize SPG1\_STRSG\_Wu\_2016} & Binding & Prokaryote & {\scriptsize --} & 1.34 & 1.0 & 448 & -- \\
+  \texttt{\scriptsize SPIKE\_SARS2\_Starr\_2020\_binding} & Binding & Virus & {\scriptsize --} & 1.06 & 0.998 & 1273 & -- \\
+  \texttt{\scriptsize SPIKE\_SARS2\_Starr\_2020\_expression} & Expression & Virus & {\scriptsize --} & 1.06 & 0.998 & 1273 & -- \\
+  \texttt{\scriptsize SRC\_HUMAN\_Ahler\_2019} & Activity & Human & {\scriptsize 2SRC (inactive); 1Y57 (active)} & 2.75 & 0.808 & 536 & -- \\
+  \texttt{\scriptsize SRC\_HUMAN\_Chakraborty\_2023\_binding-DAS\_25uM} & Activity & Human & {\scriptsize 2SRC (inactive); 1Y57 (active)} & 3.38 & 0.869 & 536 & -- \\
+  \texttt{\scriptsize SRC\_HUMAN\_Nguyen\_2022} & OrganismalFitness & Human & {\scriptsize 2SRC (inactive); 1Y57 (active)} & 3.38 & 0.869 & 536 & -- \\
+  \texttt{\scriptsize VKOR1\_HUMAN\_Chiasson\_2020\_abundance} & Expression & Human & {\scriptsize 6WVH} & 29.05 & 0.779 & 163 & -- \\
+  \texttt{\scriptsize VKOR1\_HUMAN\_Chiasson\_2020\_activity} & Activity & Human & {\scriptsize 6WVH} & 29.05 & 0.779 & 163 & -- \\
+\end{longtable}
+\normalsize
+\raggedright\footnotesize \texttt{MSA\_Neff\_L} spans the full observed range (0.0 to 337), which motivates the MSA-depth boundary condition in Section~\ref{sec:boundary}. \texttt{P53\_HUMAN\_Kotler\_2018} is deliberately excluded from this paired set: it sits on a different \texttt{target\_seq} than the three Giacomelli assays on the same protein, so its positions are not in the shared coordinate frame the within-site comparisons require; it is retained in single-assay, non-pooled analyses.
+
+\FloatBarrier
+\subsection{Per-category leaderboard: Spearman and NDCG@10 disagree (Table~\ref{tab:t2})}
+
+\begin{table}[h]
+  \caption{The top-ranked model by mean Spearman and by mean NDCG@10 differ in every ProteinGym assay category (45-model family-best set; rank computed over all assays in that category, including Stability). Model-type abbreviations: MSA; Seq = Single sequence; Str = Structure; Seq+Str = Single sequence \& Structure; Str+MSA = Structure \& MSA; Seq+Str+F = Single sequence, Structure \& Function annotations.}
+  \label{tab:t2}
+  \centering
+  \footnotesize
+  \begin{tabular}{llllrrrr}
+    \toprule
+    Category & By & Type & Model & \# assays & mean $\rho$ & mean NDCG@10 & $\rho$-rank / NDCG-rank \\
+    \midrule
+    Activity & NDCG & Str+MSA & ESCOTT & 43 & 0.503 & 0.798 & 5 / 1 \\
+    Activity & $\rho$ & Str+MSA & AIDO.Protein-RAG-16B & 43 & 0.522 & 0.792 & 1 / 11 \\
+    Binding & NDCG & Seq+Str+F & ESM3 & 13 & 0.390 & 0.730 & 8 / 1 \\
+    Binding & $\rho$ & Str+MSA & VenusREM & 13 & 0.456 & 0.719 & 1 / 4 \\
+    Expression & NDCG & MSA & Protriever & 15 & 0.496 & 0.808 & 4 / 1 \\
+    Expression & $\rho$ & Str+MSA & VenusREM & 18 & 0.533 & 0.780 & 1 / 28 \\
+    OrganismalFitness & NDCG & MSA & TranceptEVE\_L & 77 & 0.466 & 0.774 & 8 / 1 \\
+    OrganismalFitness & $\rho$ & Str+MSA & AIDO.Protein-RAG-16B & 77 & 0.497 & 0.765 & 1 / 8 \\
+    Stability & NDCG & Seq+Str+F & ESM3 & 66 & 0.641 & 0.872 & 3 / 1 \\
+    Stability & $\rho$ & Seq+Str & ProSST-2048 & 66 & 0.653 & 0.871 & 1 / 2 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{The 23-model representative subset (Table~\ref{tab:t3})}
+
+\begin{table}[h]
+  \caption{The hand-curated 23-model subset used in within-site heatmap figures (Figures~\ref{fig:f18},~\ref{fig:f19}), spanning all model classes: MSA (8), Structure \& MSA (5), Single sequence (4), Single sequence \& Structure (3), Structure (2), Single sequence/Structure/Function annotations (1).}
+  \label{tab:t3}
+  \centering
+  \footnotesize
+  \begin{tabular}{llll}
+    \toprule
+    Model & Type & Model & Type \\
+    \midrule
+    Site\_Independent & MSA & PoET & MSA \\
+    EVmutation & MSA & ESCOTT & Structure \& MSA \\
+    EVE\_ensemble & MSA & VenusREM & Structure \& MSA \\
+    MSA\_Transformer\_ensemble & MSA & ProSST-2048 & Seq \& Structure \\
+    ESM2\_650M & Single sequence & RSALOR & Structure \& MSA \\
+    GEMME & MSA & S3F & Seq \& Structure \\
+    VespaG & Single sequence & S3F\_MSA & Structure \& MSA \\
+    Tranception\_L\_no\_retrieval & Single sequence & ESM3\_1.4B\_open & Seq, Struct \& Func \\
+    Tranception\_L & MSA & Progen3\_3B & Single sequence \\
+    TranceptEVE\_L & MSA & AIDO.Protein-RAG-16B & Structure \& MSA \\
+    ESM-IF1\_142M & Structure & & \\
+    ProteinMPNN & Structure & & \\
+    SaProt\_650M\_AF2 & Seq \& Structure & & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{Multiple-conformation confound (Table~\ref{tab:t4})}
+
+\begin{table}[h]
+  \caption{High-disagreement sites in the three two-state conformational switches (GCK, KRAS, Src), classified by conformational role (active-only vs.\ swapping side-chain contacts), secondary structure, and functional annotation.}
+  \label{tab:t4}
+  \centering
+  \footnotesize
+  \begin{tabular}{lllll}
+    \toprule
+    Protein & Class & Position & Secondary structure & Functional (source) \\
+    \midrule
+    GCK  & active   & 345 & strand & yes (disease) \\
+    GCK  & active   & 349 & helix  & yes (disease) \\
+    GCK  & swapping & 47  & turn   & no \\
+    GCK  & swapping & 99  & strand & yes (allosteric; ClinVar; disease) \\
+    GCK  & swapping & 287 & loop   & yes (allosteric; disease) \\
+    GCK  & swapping & 342 & strand & yes (disease) \\
+    KRAS & active   & 2   & loop   & no \\
+    KRAS & swapping & 65  & loop   & yes (allosteric; ClinVar) \\
+    KRAS & swapping & 68  & helix  & yes (allosteric) \\
+    Src  & active   & 333 & loop   & no \\
+    Src  & active   & 504 & loop   & no \\
+    Src  & swapping & 387 & loop   & yes (allosteric; UniProt binding) \\
+    Src  & swapping & 418 & helix  & no \\
+    Src  & swapping & 509 & loop   & no \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{3-D distance to bound ligand and disagreement (Table~\ref{tab:t5})}
+
+\begin{table}[h]
+  \caption{Disagreement at sites within 5\,\text{\AA} (heavy-atom) of a bound functional ligand vs.\ farther away, per protein and pooled. $\Delta z$ is the mean $z$-scored within-site disagreement, near minus far; $p$ is a one-sided Mann--Whitney test (near $>$ far).}
+  \label{tab:t5}
+  \centering
+  \small
+  \begin{tabular}{lrrrrrl}
+    \toprule
+    Protein & $n$ near & $n$ far & $n$ sites & $\Delta z$ & $p$ & Positive \& significant \\
+    \midrule
+    HXK4 (GCK)  & 76  & 816  & 892  & 0.410  & $1.86\times10^{-4}$ & Y \\
+    CP2C9       & 83  & 754  & 837  & $-$0.147 & $9.63\times10^{-1}$ & N \\
+    PTEN        & 27  & 554  & 581  & 0.635  & $2.19\times10^{-4}$ & Y \\
+    SRC         & 66  & 606  & 672  & 0.105  & $6.41\times10^{-2}$ & N \\
+    VKOR1       & 42  & 178  & 220  & 0.174  & $1.10\times10^{-1}$ & N \\
+    RASK (KRAS) & 61  & 260  & 321  & 0.385  & $2.18\times10^{-4}$ & Y \\
+    \midrule
+    \textbf{Pooled (6 proteins)} & \textbf{355} & \textbf{3168} & \textbf{3523} & \textbf{0.210} & $\mathbf{4.27\times10^{-6}}$ & \textbf{Y} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\FloatBarrier
+
+\subsection{Supplementary figures}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f18_modeltype_heatmap.pdf}
+  \caption{Within-site mutation-ranking agreement between model types (23-model subset; diagonal = within-type agreement, self excluded). Structure models are consistent outliers.}
+  \label{fig:f18}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f19_subset_heatmap.pdf}
+  \caption{Within-site rank agreement matrix, 23-model representative subset (labeled per-model heatmap).}
+  \label{fig:f19}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f2_aggregate.pdf}
+  \caption{Aggregate per-site (within-site) Spearman vs.\ overall Spearman, across assays and models. Within-site performance sits far below the diagonal, i.e.\ within-site ranking is systematically harder than global ranking.}
+  \label{fig:f2}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f2b_p53_outlier.pdf}
+  \caption{Example within-site breakdown outlier: \texttt{P53\_HUMAN\_Giacomelli\_2018\_WT\_Nutlin}. Overall Spearman $\approx$0.4--0.5 for many models, yet per-site Spearman $\approx$0 for essentially all of them (aggregate Pearson $r=0.02$, Spearman $\rho=-0.17$, $n=23$ models).}
+  \label{fig:f2b}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f6b_coloc_full.pdf}
+  \caption{Full high-disagreement site co-localization forest, all 20 testable proteins: observed overlap (diamond) vs.\ permutation-null 95\% band (whisker); red diamonds indicate BH $q<0.05$.}
+  \label{fig:f6b}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f8_hxk4_quartile.png}
+  \caption{HXK4 (GCK) high-fitness-variant ranking, high- vs.\ low-agreement sites (activity/abundance; 23-model subset). Ranking power collapses toward zero on the high-fitness tail in both agreement classes: agreement does not rescue the collapse.}
+  \label{fig:f8}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f4_fig9_high.pdf}
+  \caption{Do better-ranked models win at high-disagreement sites? Within-site Spearman vs.\ category-rank tier (Top~1/3/5/10/All models kept), by category-Spearman and category-NDCG@10 ranking, by assay category (45-model family-best set, high-disagreement sites only). Tiers are approximately flat (Top~1 $\approx$ All): category rank barely predicts within-site accuracy.}
+  \label{fig:f4}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f21_cp2c9_degradation.pdf}
+  \caption{Both metric-selected top models degrade at assay-specific high-disagreement sites: per-site accuracy of the category-top-Spearman and category-top-NDCG@10 models, whole-assay median $\rho\approx0.36$ falling to per-site median $\rho\approx0.09$.}
+  \label{fig:f21}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f22_conservation_dms.pdf}
+  \caption{Per-site Spearman at shared high-disagreement sites, split by high vs.\ low conservation, for the top model in each model class (\texttt{HXK4\_HUMAN\_Gersing\_2022\_activity}).}
+  \label{fig:f22}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{figures/f23_highcons_selected.pdf}
+  \caption{At high-conservation, shared high-disagreement sites, different model classes behave differently across assays: no single model class consistently benefits from high conservation.}
+  \label{fig:f23}
+\end{figure}
+
+\end{document}

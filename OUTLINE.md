@@ -53,10 +53,10 @@ what to do instead.
 
 | # | Figure | Section | Source |
 |---|--------|---------|--------|
-| F0 | **Within-site disagreement computation flow** (rank ~19 subs per model → pairwise Spearman every model pair → 1 − mean = disagreement) — the basis of all analyses | §2 | `render_within_site_flow.py` → `figures/within_site_disagreement_flow.pdf` (exists) |
+| F0 | **Within-site disagreement computation flow** (rank ~19 subs per model → pairwise Spearman every model pair → 1 − mean = disagreement) — the basis of all analyses | §2 | `render_within_site_flow.py` → `figures/within_site_disagreement_flow_trim.pdf` (exists) |
 | F3 | **Models fail to rank high-fitness variants — by model_type, pooled across all 216 assays** (each assay equal weight ⇒ weighted by #assays per category), global vs within-site split; ρ vs fitness subset all→top-50/25/10%. Global panel collapses to ≈0 on the top decile; within-site panel far gentler (retains ≈0.15–0.27); Structure in bold (mid-pack within-site, among the least-bad on the global tail) | §3.3 | `16` `collapse_modeltype_withinsite` (exists; fig `figures/persite_analysis/fig_collapse_modeltype_pooled.png`) |
 | F6 | **Co-localization forest — 2-panel excerpt:** P53_HUMAN (obs overlap ≫ null band, strongly significant) vs VKOR1_HUMAN (obs ≈ null, n.s.) — the co-localization contrast in one figure. *Space permitting; if tight, move to appendix and present the co-localization stats as a compact table instead.* | §4.1 | `33` `figures/agreement_site_colocalization/fig_colocalization_forest_selected.pdf` (excerpt these two panels) |
-| F20 | **Mechanism panel:** selected within-site DMS relfrac (H1) + per-site class accuracy by conservation regime (H2) panels — compressed within-site signal at conserved high-disagreement sites that seq+MSA models read but structure-only don't | §4.3–§4.4 | `34` H1/H2 + `figures/conservation_dms_panels/fig_conservation_dms_score_by_agreement.pdf` and `figures/h2_persite_spearman_density/` |
+| F20 | **Mechanism panel:** selected within-site DMS relfrac (H1) + per-site class accuracy by conservation regime (H2) panels — compressed within-site signal at conserved high-disagreement sites that seq+MSA models read but structure-only don't | §4.3–§4.4 | `34` H1/H2 + `figures/conservation_dms_panels/fig_conservation_dms_score_by_agreement.pdf` and `figures/h2_persite_spearman_density/fig_shared_highcons_persite_spearman_panel_selected.pdf` |
 
 ### Confirmed appendix figures (in section order)
 
@@ -70,7 +70,7 @@ what to do instead.
 | F21 | **Both metric-selected models degrade at high-disagreement sites (H2):** per-site accuracy of the category-top-Spearman and category-top-NDCG@10 models at assay-specific high-disagreement sites (2 panels; whole-assay ρ≈0.36 → per-site ρ≈0.09) | §4.2 | `34` `figures/h2_persite_spearman_density/fig_CP2C9_HUMAN_assayspecific_category.pdf` (exists) |
 | F4 | **fig9 — do better-ranked models win at high- vs low-disagreement sites** (45 family-best): within-site Spearman vs category-rank tier (Top1/3/5/10/All) × {category Spearman, NDCG@10} × {high, low} disagreement, by assay category. Tiers ≈flat (Top1≈All) ⇒ category rank barely predicts within-site accuracy | §3.4 & §4.2 | `29` `fig9_*` (exists). **Dataset:** 45 family-best models; rank from full per-category leaderboard (all category assays); within-site sites from `27`/`30` (52-assay / 23-multi-assay-protein set, no Stability); pooled over all high-disagreement sites (A/B not split) |
 | F6b | Full **high**-disagreement co-localization forest, all 20 proteins (obs vs 95% null band, red=BH q<0.05) | §4.1 | `33` `figures/agreement_site_colocalization/fig_colocalization_forest.pdf` (exists) |
-| F22 | **Per-site spearman at shared high-disagreement high- vs low-conservation sites:** Top model for each model class in HXK4_HUMAN_Gersing_2022_activity | §4.4 | `figures/h2_persite_spearman_density/fig_conservation_dms_score_by_agreement.pdf` (exists) |
+| F22 | **Per-site spearman at shared high-disagreement high- vs low-conservation sites:** Top model for each model class in HXK4_HUMAN_Gersing_2022_activity | §4.4 | `figures/h2_persite_spearman_density/fig_HXK4_HUMAN_highlowcons_persite_spearman.pdf` (exists) |
 | F23 | **High conservation shared high-disagreement sites by different model classes (2 scenario):** Does high conservation help models that use MSA? | §4.4 | `figures/h2_persite_spearman_density/fig_shared_highcons_persite_spearman_panel_selected.pdf` (exists) |
 
 ### Others — optional 4th-slot candidates & conditional (in section order)
@@ -293,12 +293,12 @@ chooser even where model choice matters.
 - **Both metric-selected top models degrade here (tested in H2).** The
   category-top-**Spearman** *and* category-top-**NDCG@10** models both fall from a
   whole-assay median ρ ≈ **0.36** to a per-site median ρ ≈ **0.09** at these
-  assay-specific high-disagreement sites (F22) — so selecting by either metric doesn't
+  assay-specific high-disagreement sites (F21) — so selecting by either metric doesn't
   protect you at exactly the sites that matter. Consistent with fig9/F4's
   high-vs-low-disagreement tiers.
 - **Figs:** F4 (fig9 — the ≈flat rank tiers at high-disagreement sites; appx,
   shared with §3.4); F21 (appx — H2 per-site accuracy of the Spearman- and
-  NDCG-selected models at assay-specific high-disagreement sites); F22
+  NDCG-selected models at assay-specific high-disagreement sites)
 
 **4.3 What intrinsic site property *does* explain assay-specific disagreement:
 the DMS-score structure at the position.** Across the many assays with
