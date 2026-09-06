@@ -1,0 +1,4 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	n_subs	dms_range	site_std	assay_std	relative_std	is_noise
+CP2C9_HUMAN	CP2C9_HUMAN_Amorosi_2021_activity	478	S	9	0.7197	0.2807	0.3649	0.7694	False
+CP2C9_HUMAN	CP2C9_HUMAN_Amorosi_2021_activity	490	V	19	0.9725	0.3228	0.3649	0.8848	False
+CP2C9_HUMAN	CP2C9_HUMAN_Amorosi_2021_activity	289	N	12	0.8985	0.2462	0.3649	0.6747	False

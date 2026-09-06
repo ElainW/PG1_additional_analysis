@@ -94,6 +94,8 @@ def main():
           per.drop_duplicates("DMS_id")["category"].value_counts().to_dict())
 
     # ---- figure: 2 panels (split), model_type lines (uniform weight) ----
+    plt.rcParams.update({"font.size": 12})
+    sns.set_style("white")  # undo whitegrid pulled in via 05_fig6_familybest's module-level sns.set_style
     palette = dict(zip(C.MODEL_TYPE_ORDER, sns.color_palette("tab10", len(C.MODEL_TYPE_ORDER))))
     x = np.arange(len(SUBSETS))
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
@@ -104,16 +106,14 @@ def main():
             tt = sub[sub.model_type == t].set_index("subset").reindex([s for s, _ in SUBSETS])
             ax.plot(x, tt["mean_spearman"].values, marker="o", color=palette[t],
                     lw=1.8, label=t if i == 0 else None)
+        ax.grid(False)
         ax.axhline(0, color="gray", lw=0.6)
-        ax.set_xticks(x); ax.set_xticklabels(["all", "top 50%", "top 25%", "top 10%"])
-        ax.set_title(f"{split} fitness split", fontsize=12)
-        ax.set_xlabel("fitness subset")
+        ax.set_xticks(x); ax.set_xticklabels(["all", "top 50%", "top 25%", "top 10%"], fontsize=12)
+        ax.tick_params(axis="both", labelsize=12)
+        ax.set_xlabel("fitness percentile", fontsize=12)
         if i == 0:
-            ax.set_ylabel("mean Spearman vs experiment")
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="upper center", ncol=6, fontsize=8, bbox_to_anchor=(0.5, 1.0))
-    fig.suptitle("Models fail to rank high-fitness variants (by model_type) — pooled across all assays "
-                 "(weighted by #assays per category)", y=1.045, fontsize=13)
+            ax.set_ylabel("mean Spearman vs experiment", fontsize=12)
+    axes[0].legend(loc="best", ncol=1, fontsize=12)
     plt.tight_layout()
     figdir = os.path.join(C.FIGURES, "persite_analysis")
     os.makedirs(figdir, exist_ok=True)

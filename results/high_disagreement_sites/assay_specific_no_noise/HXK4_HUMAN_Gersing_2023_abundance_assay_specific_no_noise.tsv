@@ -1,0 +1,8 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	n_subs	dms_range	site_std	assay_std	relative_std	is_noise
+HXK4_HUMAN	HXK4_HUMAN_Gersing_2023_abundance	5	R	19	0.7471	0.1849	0.3552	0.5204	False
+HXK4_HUMAN	HXK4_HUMAN_Gersing_2023_abundance	287	Q	17	1.1743	0.2642	0.3552	0.7439	False
+HXK4_HUMAN	HXK4_HUMAN_Gersing_2023_abundance	47	L	19	0.8393	0.2443	0.3552	0.6878	False
+HXK4_HUMAN	HXK4_HUMAN_Gersing_2023_abundance	464	G	18	0.8559	0.1938	0.3552	0.5456	False
+HXK4_HUMAN	HXK4_HUMAN_Gersing_2023_abundance	465	Q	16	0.99	0.2301	0.3552	0.6477	False
+HXK4_HUMAN	HXK4_HUMAN_Gersing_2023_abundance	336	S	19	0.7739	0.2148	0.3552	0.6048	False
+HXK4_HUMAN	HXK4_HUMAN_Gersing_2023_abundance	359	P	19	1.682	0.4156	0.3552	1.17	False

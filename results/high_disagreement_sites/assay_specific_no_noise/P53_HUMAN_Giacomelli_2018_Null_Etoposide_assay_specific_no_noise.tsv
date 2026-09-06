@@ -1,0 +1,2 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	n_subs	dms_range	site_std	assay_std	relative_std	is_noise
+P53_HUMAN	P53_HUMAN_Giacomelli_2018_Null_Etoposide	177	P	19	2.9154	0.9213	0.9784	0.9416	False

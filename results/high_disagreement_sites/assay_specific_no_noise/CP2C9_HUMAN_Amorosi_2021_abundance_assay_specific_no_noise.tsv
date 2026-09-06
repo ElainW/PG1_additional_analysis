@@ -1,0 +1,5 @@
+UniProt_ID	DMS_id	up_pos	wt_aa	n_subs	dms_range	site_std	assay_std	relative_std	is_noise
+CP2C9_HUMAN	CP2C9_HUMAN_Amorosi_2021_abundance	24	S	7	0.635	0.2173	0.3274	0.6637	False
+CP2C9_HUMAN	CP2C9_HUMAN_Amorosi_2021_abundance	73	P	6	0.5351	0.1875	0.3274	0.5727	False
+CP2C9_HUMAN	CP2C9_HUMAN_Amorosi_2021_abundance	105	R	6	0.4938	0.1803	0.3274	0.5509	False
+CP2C9_HUMAN	CP2C9_HUMAN_Amorosi_2021_abundance	435	C	9	0.7387	0.2678	0.3274	0.8179	False
