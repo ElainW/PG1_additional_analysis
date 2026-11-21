@@ -30,7 +30,8 @@ from importlib import import_module
 R31 = import_module("31_gck_2d_render")
 PDB, CSV, OUT, OUT3D = R31.PDB, R31.CSV, R31.OUT, R31.OUT3D
 MUST = [99]
-MIN_PIX = 50     # sites with < MIN_PIX visible pixels (0.12 A/px) are treated as buried / not labelled
+EDGE_PX = 5       # outline thickness in pixels (0.12 A/px)
+MIN_PIX = 125    # sites with < MIN_PIX visible pixels (0.12 A/px) are treated as buried / not labelled
 VDW = {"C": 1.7, "N": 1.55, "O": 1.52, "S": 1.8}
 
 
@@ -107,7 +108,7 @@ def render(d, xyz, rad, resn, targets, absent, suffix, name="high-disagreement")
     ]
     os.makedirs(OUT, exist_ok=True); os.makedirs(OUT3D, exist_ok=True)
     hot_mask = np.isin(ID, shown)
-    edge = hot_mask & ~binary_erosion(hot_mask, iterations=2)
+    edge = hot_mask & ~binary_erosion(hot_mask, iterations=EDGE_PX)
     ext = (x0, x0 + ID.shape[1] * res, y0, y0 + ID.shape[0] * res)
     for key, col, label, lo, hi, fname0 in panels:
         fname = fname0.replace('.png', suffix + '.png')
@@ -124,15 +125,18 @@ def render(d, xyz, rad, resn, targets, absent, suffix, name="high-disagreement")
         fig, ax = plt.subplots(figsize=(8, 7.5))
         ax.imshow(img, origin="lower", extent=ext, interpolation="bilinear")
         cx, cy = (ext[0] + ext[1]) / 2, (ext[2] + ext[3]) / 2
+        pts = [(ext[0], ext[2]), (ext[1], ext[3])]
         for p in shown:
             yy, xx = np.nonzero(ID == p)
             px, py = x0 + (xx.mean() + 0.5) * res, y0 + (yy.mean() + 0.5) * res
             v = np.array([px - cx, py - cy]); v /= np.linalg.norm(v) + 1e-9
+            pts.append((px + v[0] * 12, py + v[1] * 12))
             ax.annotate(f"{d.loc[p,'wt']}{p}", (px, py), xytext=(px + v[0] * 12, py + v[1] * 12),
                         fontsize=11 if p in MUST else 9, fontweight="bold" if p in MUST else "normal",
                         ha="center", va="center", arrowprops=dict(arrowstyle="-", color="black", lw=0.7),
                         bbox=dict(boxstyle="round,pad=0.15", fc="white", ec="none", alpha=0.85))
-        ax.set_xlim(ext[0] - 14, ext[1] + 14); ax.set_ylim(ext[2] - 14, ext[3] + 14)
+        pts = np.array(pts)     # limits hug the structure + labels (no dead space above the colorbar)
+        ax.set_xlim(pts[:, 0].min() - 6, pts[:, 0].max() + 6); ax.set_ylim(pts[:, 1].min() - 6, pts[:, 1].max() + 6)
         ax.set_aspect("equal"); ax.axis("off")
         multi = len(targets) > 1
         what = (f"outlined = {name} sites (n={len(shown)}"
@@ -140,11 +144,13 @@ def render(d, xyz, rad, resn, targets, absent, suffix, name="high-disagreement")
                 + ("; buried here: " + ", ".join(hidden) if hidden else "") + ")") if multi else "W99 outlined"
         ax.set_title(f"GCK (1V4S) surface — {label}\nHXK4_HUMAN_Gersing_2022_activity; all residues coloured; {what}", fontsize=10)
         sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(lo, hi))
-        cb = fig.colorbar(sm, ax=ax, orientation="horizontal", shrink=0.5, pad=0.03)
+        plt.tight_layout()
+        ax.apply_aspect(); pos = ax.get_position()
+        cax = fig.add_axes([pos.x0 + 0.25 * pos.width, pos.y0 - 0.035, 0.5 * pos.width, 0.022])
+        cb = fig.colorbar(sm, cax=cax, orientation="horizontal")
         cb.set_label(label)
         if key == "model_vs_dms":
             cb.set_ticks(np.arange(-0.5, 1.01, 0.25))
-        plt.tight_layout()
         for o in (OUT, OUT3D):
             out = os.path.join(o, fname)
             plt.savefig(out, dpi=200, bbox_inches="tight")
