@@ -4,9 +4,9 @@ Space-filling ("surface") 2-D renders of GCK (1V4S_cleaned.pdb), same two panels
 heavy atom as a vdW sphere, z-buffered + Lambert-shaded).
 
 Every residue is coloured by the panel's value. Two versions per panel:
-  *_surface_<panel>_w99.png        only W99 outlined/labelled (view chosen to expose W99)
-  *_surface_<panel>_highsites.png  all high-disagreement sites (rule of 23/27) outlined/labelled
-  *_surface_<panel>_lowsites.png   high among-model-agreement sites = low-disagreement tail (rule of 23/30) Panels:
+  *_surface_<panel>_w99.pdf        only W99 outlined/labelled (view chosen to expose W99)
+  *_surface_<panel>_highsites.pdf  all high-disagreement sites (rule of 23/27) outlined/labelled
+  *_surface_<panel>_lowsites.pdf   high among-model-agreement sites = low-disagreement tail (rule of 23/30) Panels:
   (a) model disagreement = 1 - among_model_agreement          (PuOr_r, 0..1, white at 0.5)
   (b) mean per-model Spearman with DMS (mean_model_vs_dms)     (PuOr, -0.5..1, white at 0.25; low=orange, high=purple)
 The viewing direction is searched to maximise the exposed surface area of the high-disagreement sites
@@ -102,16 +102,16 @@ def render(d, xyz, rad, resn, targets, absent, suffix, name="high-disagreement")
 
     panels = [
         ("disagreement", "disagreement", "Model disagreement  (1 − among-model agreement)", 0, 1,
-         "fig_gck_2d_surface_disagreement.png"),
+         "fig_gck_2d_surface_disagreement.pdf"),
         ("model_vs_dms", "mean_model_vs_dms", "Mean per-model Spearman with DMS", -0.5, 1.0,
-         "fig_gck_2d_surface_model_vs_dms.png"),
+         "fig_gck_2d_surface_model_vs_dms.pdf"),
     ]
     os.makedirs(OUT, exist_ok=True); os.makedirs(OUT3D, exist_ok=True)
     hot_mask = np.isin(ID, shown)
     edge = hot_mask & ~binary_erosion(hot_mask, iterations=EDGE_PX)
     ext = (x0, x0 + ID.shape[1] * res, y0, y0 + ID.shape[0] * res)
     for key, col, label, lo, hi, fname0 in panels:
-        fname = fname0.replace('.png', suffix + '.png')
+        fname = fname0.replace('.pdf', suffix + '.pdf')
         # white at the midpoint: 0.5 (disagreement, high=orange) / 0.25 (Spearman, high=purple)
         cmap = plt.get_cmap("PuOr" if key == "model_vs_dms" else "PuOr_r")
         base = np.full(ID.shape + (3,), 0.80)            # residues without data stay grey
@@ -153,7 +153,7 @@ def render(d, xyz, rad, resn, targets, absent, suffix, name="high-disagreement")
             cb.set_ticks(np.arange(-0.5, 1.01, 0.25))
         for o in (OUT, OUT3D):
             out = os.path.join(o, fname)
-            plt.savefig(out, dpi=200, bbox_inches="tight")
+            plt.savefig(out, bbox_inches="tight")
             print("Saved", out)
         plt.close()
 
